@@ -5,10 +5,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title> 판매 글 등록 </title>
+<style>
+
+</style>
+
+<script>
+
+</script>
 </head>
 <body>
-	<div>
-		
-	</div>
+	<input type="button" id="product_add" value="판매 제품 등록">
 </body>
 </html>
