@@ -1,0 +1,79 @@
+package semi.dto;
+
+public class BoardDTO {
+	private int board_seq;
+	private String seller_id;
+	private String title;
+	private String contents;
+	private String write_date;
+	private String sell_type;
+	private String sell_status;
+	private String end_date;
+	
+	public BoardDTO() {
+		super();
+	}
+	
+	public BoardDTO(int board_seq, String seller_id, String title, String contents, String write_date, String sell_type,
+			String sell_status, String end_date) {
+		super();
+		this.board_seq = board_seq;
+		this.seller_id = seller_id;
+		this.title = title;
+		this.contents = contents;
+		this.write_date = write_date;
+		this.sell_type = sell_type;
+		this.sell_status = sell_status;
+		this.end_date = end_date;
+	}
+	public int getBoard_seq() {
+		return board_seq;
+	}
+	public void setBoard_seq(int board_seq) {
+		this.board_seq = board_seq;
+	}
+	public String getSeller_id() {
+		return seller_id;
+	}
+	public void setSeller_id(String seller_id) {
+		this.seller_id = seller_id;
+	}
+	public String getTitle() {
+		return title;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+	public String getWrite_date() {
+		return write_date;
+	}
+	public void setWrite_date(String write_date) {
+		this.write_date = write_date;
+	}
+	public String getSell_type() {
+		return sell_type;
+	}
+	public void setSell_type(String sell_type) {
+		this.sell_type = sell_type;
+	}
+	public String getSell_status() {
+		return sell_status;
+	}
+	public void setSell_status(String sell_status) {
+		this.sell_status = sell_status;
+	}
+	public String getEnd_date() {
+		return end_date;
+	}
+	public void setEnd_date(String end_date) {
+		this.end_date = end_date;
+	}
+	
+	
+}
