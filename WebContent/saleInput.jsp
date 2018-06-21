@@ -10,18 +10,8 @@
 </style>
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-	$(document).ready(function(){
-		$("#product_add").click(function(){
-			$.ajax({
-				url:"product.do",
-				type:"get",
-				success:function(response){					
-					$("#product_add").attr(type,"hidden");
-				}
-			})
-		})	
-	})
 	
+
 </script>
 </head>
 <body>
@@ -32,7 +22,7 @@
         <br> 내 용 :
         <input type="textarea" id="contents" name="contents" placeholder="내용을 입력해주세요"><br>
         <br> 
-        <input type="url" name="page" placeholder="http://">
+        <input type="button" id="product_add" name="product_add" value="판매 제품 등록">
 
     </fieldset>
 </body>
