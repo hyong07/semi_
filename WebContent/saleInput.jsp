@@ -259,6 +259,9 @@
 			<option value="문화">문화</option>
 			<option value="뷰티">뷰티</option>
 			</select>
+			세부 카테고리 : <select>
+			
+			</select>
 			</div>
 			<div id="sell_board">
 				<h3></h3>
