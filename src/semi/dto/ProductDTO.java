@@ -9,7 +9,7 @@ public class ProductDTO {
 	private String sell_count;
 	
 	public ProductDTO() {
-		
+		super();
 	}
 	
 	public ProductDTO(int board_no, int product_seq, String category, String detail_category, String sell_price,

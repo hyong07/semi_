@@ -5,7 +5,7 @@ public class CategoryDTO {
 	private String sub_category;
 	
 	public CategoryDTO() {
-		
+		super();
 	}
 	
 	public CategoryDTO(String main_category, String sub_category) {
