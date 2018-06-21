@@ -28,6 +28,11 @@
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
 
+	 
+
+
+
+
 
 	body{
 		
@@ -157,7 +162,7 @@
 	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
 	     <ul class="navbar-nav">
 	       <li class="nav-item">
-	          <a class="nav-link" href="#">
+	          <a class="nav-link" href="login.jsp">
 	            <i class="fa fa-user fa-fw" ></i> Login</a>
 	       </li>
 	       <li class="nav-item">
@@ -201,8 +206,7 @@
 			
 			
 		<div id="headerright">
-		
-		
+				      
 		
 
 			
@@ -252,7 +256,7 @@
 	</div>
 	
 	
-	<div id="bottomwrapper">
+	<div id="bottomwrapper" class="bg-secondary">
 		
 		<div id="footer">
 		
