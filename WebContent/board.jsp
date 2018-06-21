@@ -35,7 +35,7 @@
 
 /* 전체적인 틀 css*/
 div {
-	border: 1px solid black;
+	border: 0px solid black;
 	box-sizing: border-box;
 }
 
