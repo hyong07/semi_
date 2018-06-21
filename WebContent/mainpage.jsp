@@ -10,8 +10,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-
- <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 <html>
 <head>
@@ -27,6 +27,11 @@
 /*   success: #28a745, */
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
+
+	 
+
+
+
 
 
 	body{
@@ -157,7 +162,7 @@
 	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
 	     <ul class="navbar-nav">
 	       <li class="nav-item">
-	          <a class="nav-link" href="#">
+	          <a class="nav-link" href="login.jsp">
 	            <i class="fa fa-user fa-fw" ></i> Login</a>
 	       </li>
 	       <li class="nav-item">
@@ -201,8 +206,7 @@
 			
 			
 		<div id="headerright">
-		
-		
+				      
 		
 
 			
@@ -252,7 +256,7 @@
 	</div>
 	
 	
-	<div id="bottomwrapper">
+	<div id="bottomwrapper" class="bg-secondary">
 		
 		<div id="footer">
 		
