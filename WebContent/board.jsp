@@ -35,7 +35,7 @@
 
 /* 전체적인 틀 css*/
 div {
-	border: 0px solid black;
+	border: 1px solid black;
 	box-sizing: border-box;
 }
 
@@ -120,6 +120,17 @@ div {
 	text-align: right;
 }
 /* Mypage css 끝*/
+
+#left-board {
+width:20%;
+height:100%;
+}
+
+#center-board {
+width:60%;
+height:100%;
+}
+	
 </style>
 </head>
 <body>
@@ -163,7 +174,9 @@ div {
 		</div>
 		<div id="centerwrapper">
 			<div id="content">
-			<div id=left_category>
+			<div id=left_board>
+			</div>
+			<div id=center_board>
 			
 			</div>
 			
