@@ -172,6 +172,7 @@
 	     </ul>  
 	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
 	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+	         <span class="navbar-toggler-icon" ></span>
      </div>
    
    </nav>
@@ -219,7 +220,7 @@
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
 				</li> 
 					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="#">
+				    <a class="nav-link  text-secondary" id="menubtn" href="CommunityController.do">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
 				</li> 
 					 <li class="nav-item">
@@ -234,6 +235,8 @@
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
 				 </li> 
+				 
+			
 			</nav>
 		</div>
 	
