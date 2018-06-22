@@ -140,6 +140,10 @@ div {
 	height: 100%;
 	width: 100%;
 }
+
+table td{
+	width:300px;
+}
 </style>
 
 
@@ -246,13 +250,12 @@ div {
 								<div class="form-row">
 									<div class="col-md-5">
 										<img class="img-fluid d-block"
-											src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+											src="note.jpg">
 									</div>
 									<div class="col-md-7">
 										<h3>
 											판매 정보 :
-											<!--main_category -->
-											<i>전자 제품 > <!--sub_category-->노트북
+											<!--main_category --><i>전자 제품 > <!--sub_category-->노트북</i>
 											</i>
 										</h3>
 											<div class="container">
@@ -260,27 +263,28 @@ div {
 													<div class="col-md-12">
 														<table class="table">
 															<thead>
-																<tr>
+																<!-- <tr>
 																	<th>#</th>
 																	<th>First Name</th>
 																	<th>Last Name</th>
-																</tr>
+																</tr> -->
 															</thead>
 															<tbody>
-																<tr>
-																	<td>1</td>
-																	<td>Mark</td>
-																	<td>Otto</td>
+															<tr>
+																<td> 물품명  </td>
+																<td> LG전자 올뉴그램 14ZD980-GX30K <!-- 상품명 (product_name) --></td>
+															</tr>
+																<tr>																	
+																	<td>가격  </td>
+																	<td>1,200,000 원<!-- sell_price --></td>
 																</tr>
-																<tr>
-																	<td>2</td>
-																	<td>Jacob</td>
-																	<td>Thornton</td>
+																<tr>																	
+																	<td>수량  </td>
+																	<td> 3 E A<!-- sell_count --></td>
 																</tr>
-																<tr>
-																	<td>3</td>
-																	<td>Larry</td>
-																	<td>the Bird</td>
+																<tr>																	
+																	<td>현재 구매신청 수  </td>
+																	<td> 4 건 <!-- Buyer count(*) --></td>
 																</tr>
 															</tbody>
 														</table>
@@ -290,8 +294,7 @@ div {
 									</div>
 								</div>
 								<div class="col-md-12 mb-2 text-center">
-									<a href="#" class="btn btn-primary">구매 신청</a>
-									<a href="#" class="btn btn-primary">취 소</a>
+									<a href="#" class="btn btn-danger">구매 신청</a>									
 								</div>
 							</div>
 
@@ -299,7 +302,7 @@ div {
 
 
 						<div class="card-footer text-right">
-							<a href="#" class="btn btn-primary">목록으로</a>
+							<a href="mypage.jsp" class="btn btn-secondary">목록으로</a>
 						</div>
 					</div>
 

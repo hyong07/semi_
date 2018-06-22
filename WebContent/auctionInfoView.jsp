@@ -140,6 +140,10 @@ div {
 	height: 100%;
 	width: 100%;
 }
+
+table td{
+	width:300px;
+}
 </style>
 
 
@@ -246,7 +250,7 @@ div {
 								<div class="form-row">
 									<div class="col-md-5">
 										<img class="img-fluid d-block"
-											src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg">
+											src="note.jpg">
 									</div>
 									<div class="col-md-7">
 										<h3>
@@ -259,28 +263,35 @@ div {
 												<div class="row">
 													<div class="col-md-12">
 														<table class="table">
-															<thead>
+															<!--  <thead>
 																<tr>
 																	<th>#</th>
 																	<th>First Name</th>
 																	<th>Last Name</th>
 																</tr>
 															</thead>
+															-->
 															<tbody>
-																<tr>
-																	<td>1</td>
-																	<td>Mark</td>
-																	<td>Otto</td>
+															<tr>
+																<td> 물품명  </td>
+																<td> LG전자 올뉴그램 14ZD980-GX30K <!-- 상품명 (product_name) --></td>
+															</tr>
+																<tr>																	
+																	<td> 경매 시작가  </td>
+																	<td> 1,000 원 <!-- sell_price --></td>
 																</tr>
 																<tr>
-																	<td>2</td>
-																	<td>Jacob</td>
-																	<td>Thornton</td>
+																	
+																	<td> 현재 경매가  </td>
+																	<td> 35,000 원 <!-- bid_price --></td>
+																</tr>
+																<tr>																	
+																	<td> 경매 마감 시각  </td>
+																	<td> 2018년 06월 27일 17:52<!-- write_date + 마감날짜 까지 기간 --></td>
 																</tr>
 																<tr>
-																	<td>3</td>
-																	<td>Larry</td>
-																	<td>the Bird</td>
+																	<td> 현재 입찰 수  </td>
+																	<td> 4 명 <!-- count(buyer) 참여 인원 --></td> 
 																</tr>
 															</tbody>
 														</table>
@@ -290,8 +301,7 @@ div {
 									</div>
 								</div>
 								<div class="col-md-12 mb-2 text-center">
-									<a href="#" class="btn btn-primary">구매 신청</a>
-									<a href="#" class="btn btn-primary">취 소</a>
+									<a href="#" class="btn btn-danger">입찰 신청</a>									
 								</div>
 							</div>
 
@@ -299,7 +309,7 @@ div {
 
 
 						<div class="card-footer text-right">
-							<a href="#" class="btn btn-primary">목록으로</a>
+							<a href="#" class="btn btn-secondary">목록으로</a>
 						</div>
 					</div>
 
