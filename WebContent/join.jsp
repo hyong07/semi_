@@ -833,7 +833,7 @@ input[type=password]:placeholder {
             <input type="text" id="sample6_address2" class="" name="address2" placeholder="Input Your Detailed Address" style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> 
             </div>
          
-          <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
