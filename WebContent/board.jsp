@@ -152,6 +152,10 @@ div {
 	top: auto;
 	margin-right: -720px;
 	text-align: center;
+<<<<<<< HEAD
+=======
+	width: 120px;
+>>>>>>> 희영_categoryView
 }
 </style>
 
@@ -627,12 +631,17 @@ div {
 									</div>
 									<div class="col-md-4 w-25 col-lg-1">
 		
+<<<<<<< HEAD
 										<div class="floating">
 										<p>광고</p>
 										<img src="다운로드.gif" width="100" height="200">
 										
 										</div>
 			
+=======
+										<div class="floating">광고코드</div>
+
+>>>>>>> 희영_categoryView
 									</div>
 								</div>
 								<div class="row"></div>
