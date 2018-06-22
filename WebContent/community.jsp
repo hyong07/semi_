@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -36,102 +35,91 @@
 
 	div{
 		border: 0px solid black;
-        box-sizing: border-box;
-              
+        box-sizing: border-box; 
 	}
 	
 	#topnavicontainer{
 		margin: 0px auto;
-		width:100%;
-		
+		width:100%;	
 	}
-	
 	#topnavbar{ 
-/* 	    position: fixed; */
 	 	width: 100%;
 	    height: 40px;
 	    font-size: 20px;   
 	    margin: 0px auto;   
 	    opacity: 0.9;
-	}
-	
+	}	
 	#allwrapper{
-/* 		opacity: 0.8; */
+
 		width:100%;
 		height:100%;
-		margin: 0px auto;
-		
+		margin: 0px auto;	
 	}
 	#headerwrapper{
-		height:21%;	
+		height:10%;	
 		width:100%;
 	}
 
 
 	#header{
-		height:75%;
+		height:100%;
 		width:100%;
-	}
-	
+	}	
 	#headerleft{
 		float:left;
 		height:100%;
 		width:15%;
 	}
-
 	#headercenter{
 		float:left;
 		height:100%;
-		width:65%;
+		width:70%;
 	}
-	
-	#search{
-		
+	#search{	
 		width:100%;
 		height:100%;
 	}
-	
 	#headerright{
 		float:left;
 		height:100%;
 		width:20%;
 	}
-	#centernavbar{
-		height:25%;
-		width:100%;	
-	}
-	
 	#menubtn{
 		background:#FFF8DC; 
 		box-shadow: 0;
 		border: 2px solid #7B68EE;
-		outline: none;
-  
+		outline: none;  
 	}
 	#centerwrapper{
-		height:64%;
-/* 		height:auto; */
+		height:65%;  
+/*  	height:auto; */
 		width:80%;
 		margin: 0px auto;
 		
-	}
-	
+	}	
 	#content{
-
 		height:100%;
 		width:100%;		
+	}	
+	.py-5{
+		
+		height:100%;
+		width:100%;
+	}	
+	#row{
+		height:500px;
 	}
-	
 	#bottomwrapper{
 		height:15%;
 		width:100%;
 	}
 	#footer{
 		height:100%;
-		width:100%;
-		
+		width:100%;		
 	}
 	
+ 
+
 </style>
 
 
@@ -148,32 +136,21 @@
 	     	<div id="logocontainer">
 	      	<a class="navbar-brand" href="#">Auction GO!</a>  
 	</div>
-	   
+	    
 	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
 	     <ul class="navbar-nav">
 	       <li class="nav-item">
-	         
-	       
-	    <c:choose>
-		<c:when test="${sessionScope.loginid != null}">
-		 <a class="nav-link" href="logout.mem">
-	            <i class="fa fa-user fa-fw" ></i> Logout</a>
-	              </c:when>
-	              <c:otherwise>
-	               <a class="nav-link" href="login.jsp">
-	               <i class="fa fa-user fa-fw" ></i> Login</a>
-	              </c:otherwise>
-     </c:choose>
+	          <a class="nav-link" href="login.jsp">
+	            <i class="fa fa-user fa-fw" ></i> Login</a>
 	       </li>
 	       <li class="nav-item">
-	           <a class="nav-link" href="join.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Sing up</a>
+	           <a class="nav-link" href="#">
+	            <i class="fa fa-user fa-fw" ></i> Sing in</a>
 	       </li> 
 	     </ul>  
 	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
 	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
      </div>
-   
    </nav>
   </div>
   
@@ -181,14 +158,15 @@
 	
 	<div id="headerwrapper">
 		<div id="header">
-			<div id="headerleft"></div>
+			<div id="headerleft">
+			</div>
 		
 		
 		<div id="headercenter">
 			<div class="py-5"  >  
 			    <div class="container" >
 			      <div class="row" > 
-			         <div class="col-md-12"> 
+			         <div class="col-md-12" > 
 			          <form class="form-inline" >
 			            <div class="input-group" id="search">
 			              <input type="search" class="form-control" placeholder="search">
@@ -204,44 +182,63 @@
 		</div>
 			
 			
-				
+			
+			
 		<div id="headerright">
-	
-		</div>
 	</div>
-
 		
 		
-		<div id="centernavbar">
-			<nav class="nav nav-pills nav-justified">
-				<li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				 </li> 
-			</nav>
+		
+		
 		</div>
-	
+
 	</div>	
 	
 	<div id="centerwrapper">
 		
 		<div id="content">
+		
+<body draggable="true">
+	<div class="py-5">
+		<div class="container">
+			<div class="row" id="row">
+				<div class="col-md-10">
+					<table class="table">
+						<thead>
+							<tr>
+								<th colspan="4">자유게시판</th>
+							</tr>
+							<tr>
+								<th colspan="1">제목</th>
+								<th >작성자</th>
+								<th >작성일</th>
+							</tr>
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${result.isEmpty()}">
+									<tr>
+										<td colspan=4 height="300" align=center>표시할내용이없습니다..</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="item" items="${result}">
+										<tr>
+											<td>${item.article_seq}
+											<td>${item.title}
+											<td>${item.writer}
+											<td>${item.writedate}
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+							
 		
 		</div>
 			
@@ -304,7 +301,14 @@
     </div>
   </div>
 		
-
+		
+		
+		
+		
+		
+		
+		
+		
 		</div>
 	
 	</div>
