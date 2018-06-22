@@ -46,6 +46,22 @@ public class Member_Controller extends HttpServlet {
 				session.invalidate();
 				dst = "mainpage.jsp";
 			}
+			else if(command.equals("/join.mem")) {
+				System.out.println("¤·?");
+				String id = request.getParameter("id");
+				String pw = request.getParameter("password");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				String address = request.getParameter("addresspost")+request.getParameter("address")+request.getParameter("address2");
+				int result = dao.insertMember(id, pw, name, email, phone, address);
+				
+				if(result > 0) {
+					dst = "login.jsp";
+				}
+				
+				
+			}
 			
 			if(isRedirect) {
 				response.sendRedirect(dst);
