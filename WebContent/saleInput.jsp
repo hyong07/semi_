@@ -131,6 +131,10 @@
 		
 	}
 	
+	#main_title{
+		height:10%;
+		width:100%;
+	}
  
 
 	
@@ -143,8 +147,7 @@
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
-	$(document).ready(function(){
-		console.log("1");
+	$(document).ready(function(){		
 		$("#main_category").change(function(){
 			console.log("1");
 			var test = $("#main_category option:selected").val();			
@@ -153,12 +156,13 @@
 				type:"get",
 				data:{test:test},
 				success:function(rep){
-					var result = rep;
-					console.log("1");
-					console.log(result);
-					console.log("세부카테고리 성공");
-				}
-						
+					if(rep.length>0){
+						$("#sub_category").empty();
+						for(i=0;i<rep.length;i++){
+							$("#sub_category").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+						}	
+					}					
+				}						
 			})
 		})
 
@@ -216,10 +220,7 @@
 			    </div>  
 			   </div>  
 		</div>
-			
-			
-			
-			
+		
 		<div id="headerright">
 		
 		
@@ -267,19 +268,21 @@
 	<div id="centerwrapper">
 		
 		<div id="content">
+			
 			<div id="sell_product">
 			<h1 align="center">판 매 글 등 록</h1>
 			<br><br>
 			<h3>판 매 제 품 등 록</h3><br>
-			카테고리 : <select id="main_category ">
+			카테고리 : <select id="main_category">
 			<option value=""> 선 택 </option>
 			<option value="패션">패션</option>
 			<option value="전자제품">전자제품</option>
 			<option value="리빙">리빙</option>
 			<option value="문화">문화</option>
 			<option value="뷰티">뷰티</option>
-			</select>
-	
+			</select>	
+			<br>
+			세부카테고리 : 
 					<select id="sub_category">
  					<!--  	<c:forEach var="i" begin="0" end="" step="1">
 							<option value="${result[i]}">${result[i]}</option>
