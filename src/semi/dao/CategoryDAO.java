@@ -9,9 +9,7 @@ import java.util.List;
 import semi.dbutils.DBUtils;
 import semi.dto.CategoryDTO;
 
-public class CategoryDAO {
-	
-	
+public class CategoryDAO {		
 	public List<String> main_categoryGet(String choice) throws Exception{
 		Connection con = DBUtils.getConnection();
 		String sql = "select sub_category from category where main_category=?";

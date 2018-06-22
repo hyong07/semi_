@@ -287,8 +287,11 @@
  					<!--  	<c:forEach var="i" begin="0" end="" step="1">
 							<option value="${result[i]}">${result[i]}</option>
  						</c:forEach>-->
-					</select>	
-				
+					</select>
+					<br>	
+			가격 : <input type="text" id="sell_price"> 
+			<br>
+			수량 : <input type="text" id="sell_count">
 					
 <!-- 						<c:forEach var="i" begin="0" end="${result.length()}" step="1">
 							<option value="${result[i]}">${result[i]}</option>
