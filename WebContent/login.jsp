@@ -12,7 +12,6 @@
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
 <html>
@@ -31,16 +30,8 @@
 /*   danger: #dc3545 */
 
 
-	 
-
-
-
-
-
-	
-
 	div{
-		border: 0px solid black;
+		border: 1px solid black;
         box-sizing: border-box;
 	}
 	
@@ -68,9 +59,9 @@
 	}
 
 	
-
 	#centerwrapper{
-		height:85%;
+/* 		height:85%;  */
+		height:auto; 
 		width:80%;
 		margin: 0px auto;
 		height:100%;
@@ -80,17 +71,15 @@
 	}
 	
 	#content{
-		padding:0;
-		margin:0;
-		
+/* 		padding:0; */
+/* 		margin:0; */
+		height:100%;
+		width:100%;
 		
 	}
-	
-	
-		
-		@import url('https://fonts.googleapis.com/css?family=Poppins');
+	@import url('https://fonts.googleapis.com/css?family=Poppins');
 
-/* BASIC */
+
 
 html {
   background-color: #56baed;
@@ -118,9 +107,6 @@ h2 {
   color: #cccccc;
 }
 
-
-
-/* STRUCTURE */
 
 .wrapper {
   display: flex;
@@ -156,9 +142,6 @@ h2 {
 }
 
 
-
-/* TABS */
-
 h2.inactive {
   color: #cccccc;
 }
@@ -168,9 +151,6 @@ h2.active {
   border-bottom: 2px solid #5fbae9;
 }
 
-
-
-/* FORM TYPOGRAPHY*/
 
 input[type=button], input[type=submit], input[type=reset]  {
   background-color: #56baed;
@@ -237,7 +217,6 @@ input[type=text]:placeholder {
 }
 
 
-
 input[type=password] {
   background-color: #f6f6f6;
   border: none;
@@ -268,11 +247,6 @@ input[type=password]:placeholder {
   color: #cccccc;
 }
 
-
-
-/* ANIMATIONS */
-
-/* Simple CSS3 Fade-in-down Animation */
 .fadeInDown {
   -webkit-animation-name: fadeInDown;
   animation-name: fadeInDown;
@@ -308,7 +282,7 @@ input[type=password]:placeholder {
   }
 }
 
-/* Simple CSS3 Fade-in Animation */
+
 @-webkit-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @-moz-keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
 @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
@@ -352,7 +326,7 @@ input[type=password]:placeholder {
   animation-delay: 1s;
 }
 
-/* Simple CSS3 Fade-in Animation */
+
 .underlineHover:after {
   display: block;
   left: 0;
@@ -372,10 +346,6 @@ input[type=password]:placeholder {
   width: 100%;
 }
 
-
-
-/* OTHERS */
-
 *:focus {
     outline: none;
 } 
@@ -388,37 +358,20 @@ input[type=password]:placeholder {
   box-sizing: border-box;
 }
 		
-		
-		
-		
-		
-		
 	
-	
-	#bottomwrapper{
+#bottomwrapper{
 		height:15%;
 		width:100%;
 	}
-	#footer{
+#footer{
 		height:100%;
 		width:100%;
 		
 	}
 	
- 
-
-	
-
-
-	
-	
 </style>
 
-
-
 <script>
-
-
 
 </script>
 </head>
@@ -436,8 +389,8 @@ input[type=password]:placeholder {
 	            <i class="fa fa-user fa-fw" ></i> Login</a>
 	       </li>
 	       <li class="nav-item">
-	           <a class="nav-link" href="#">
-	            <i class="fa fa-user fa-fw" ></i> Sing in</a>
+	           <a class="nav-link" href="join.jsp">
+	            <i class="fa fa-user fa-fw" ></i> Sing Up</a>
 	       </li> 
 	     </ul>  
 	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
@@ -447,23 +400,16 @@ input[type=password]:placeholder {
   </div>
   
 	<div id="allwrapper" >
-	
-	
 
-		
-		
-	
-	
 	<div id="centerwrapper">
 		
-<!-- 		<div id="content"> -->
+		<div id="content"> 
 		
-			
 		<div class="wrapper fadeInDown">
 			  <div id="formContent">
 			    <!-- Tabs Titles -->
 			   
-			    <h2 class="inactive underlineHover">Sign Up </h2>
+			    <h2 class="inactive underlineHover">Sign in</h2>
 			
 			    <!-- Icon -->
 			    <div class="fadeIn first">
@@ -471,7 +417,7 @@ input[type=password]:placeholder {
 			    </div>
 			
 			    <!-- Login Form -->
-			    <form>
+			  <form>
 			      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
 			      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
 			      <input type="submit" class="fadeIn fourth" value="Log In">
@@ -483,101 +429,81 @@ input[type=password]:placeholder {
 <!--           <a href="#" class="btn btn-lg btn-info btn-block">Kakao</a> -->
 <!--         </div>			     -->
 			    
-	 </form>
+	 		</form>
 			&nbsp;
 			    <!-- Remind Passowrd -->
 			    <div id="formFooter">
 			      <a class="underlineHover" href="#">Forgot Password?</a>
 			    </div>
-
-<!--   </div> -->
-</div>
-		    
-			
-		  </div>
-		</div>
-		
-		
-		
-		
-		
-		</div>
-			
-	
-	
+  			
+  				</div>
+			</div>
+		    	
+		 </div>
 	</div>
+</div>
+
 	
 	
 	<div id="bottomwrapper" class="bg-secondary">
 		
 		<div id="footer">
 		
-<div class="text-white bg-secondary" >
-    <div class="container">
-      <div class="row">
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4 text-white">Auctino GO!</h2>
-          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
-        </div>
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4 text-white">Mapsite</h2>
-          <ul class="list-unstyled">
-            <a href="#" class="text-white">Home</a>
-            <br>
-            <a href="#" class="text-white">About us</a>
-            <br>
-            <a href="#" class="text-white">Our services</a>
-            <br>
-            <a href="#" class="text-white">Stories</a>
-          </ul>
-        </div>
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4">Contact</h2>
-          <p>
-            <a href="tel:+246 - 542 550 5462" class="text-white">
-              <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
-          </p>
-          <p>
-            <a href="mailto:info@pingendo.com" class="text-white">
-              <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction Go.com</a>
-          </p>
-          <p>
-            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
-              <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
-          </p>
-        </div>
-        <div class="p-4 col-md-3">
-          <h2 class="mb-4 text-light">Subscribe</h2>
-          <form>
-            <fieldset class="form-group text-white">
-              <label for="exampleInputEmail1">Get our newsletter</label>
-              <input type="email" class="form-control" placeholder="Enter email"> </fieldset>
-            <button type="submit" class="btn btn-outline-secondary">Submit</button>
-          </form>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12 mt-3">
-          <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
-        </div>
-      </div>
-    </div>
-  </div>
-		
-		
-		
-		
-		
-		
-		
-		
+		<div class="text-white bg-secondary" >
+		    <div class="container">
+		      <div class="row">
+		        <div class="p-4 col-md-3">
+		          <h2 class="mb-4 text-white">Auctino GO!</h2>
+		          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
+		        </div>
+		        <div class="p-4 col-md-3">
+		          <h2 class="mb-4 text-white">Mapsite</h2>
+		          <ul class="list-unstyled">
+		            <a href="#" class="text-white">Home</a>
+		            <br>
+		            <a href="#" class="text-white">About us</a>
+		            <br>
+		            <a href="#" class="text-white">Our services</a>
+		            <br>
+		            <a href="#" class="text-white">Stories</a>
+		          </ul>
+		        </div>
+		        <div class="p-4 col-md-3">
+		          <h2 class="mb-4">Contact</h2>
+		          <p>
+		            <a href="tel:+246 - 542 550 5462" class="text-white">
+		              <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
+		          </p>
+		          <p>
+		            <a href="mailto:info@pingendo.com" class="text-white">
+		              <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction Go.com</a>
+		          </p>
+		          <p>
+		            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
+		              <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
+		          </p>
+		        </div>
+		        <div class="p-4 col-md-3">
+		          <h2 class="mb-4 text-light">Subscribe</h2>
+		          <form>
+		            <fieldset class="form-group text-white">
+		              <label for="exampleInputEmail1">Get our newsletter</label>
+		              <input type="email" class="form-control" placeholder="Enter email"> </fieldset>
+		            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+		          </form>
+		        </div>
+		      </div>
+		      <div class="row">
+		        <div class="col-md-12 mt-3">
+		          <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
+		        </div>
+		      </div>
+		    </div>
+		  </div>
 		
 		</div>
-	
 	</div>
-	
 </div>
-
 
 </body>
 </html>

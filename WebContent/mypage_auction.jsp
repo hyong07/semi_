@@ -110,7 +110,6 @@
 #content {
 	height: 100%;
 	width: 100%;
-	margin-bottom:40px;
 }
 
 #bottomwrapper {
@@ -130,22 +129,9 @@
 	width: 80%;
 }
 
-.card-group>.card+.card {
-	border-left: 1px solid rgba(0, 0, 0, 0.125);
+#productlist{
+	border: 1px solid rgba(0, 0, 0, 0.125);
 }
-
-#morebutton {
-	margin-top: 10px;
-}
-
-#buttondiv {
-	text-align: right;
-}
-
-#card {
-	cursor: pointer;
-}
-
 /* Mypage css 끝*/
 </style>
 
@@ -215,9 +201,6 @@
 					</div>
 				</div>
 
-
-
-
 				<div id="headerright"></div>
 			</div>
 
@@ -242,13 +225,13 @@
 						<div class="col-md-2">
 							<ul class="nav nav-pills flex-column">
 								<li class="nav-item"><a href="mypage.jsp"
-									class="active nav-link btn-secondary"> <i
+									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
 								<li class="nav-item"><a href="mypage_purchase.jsp"
 									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
-									class="nav-link text-secondary">경매신청내역</a></li>
+									class="active nav-link btn-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
@@ -256,95 +239,66 @@
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card mb-4">
-								<div class="card-header">구매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3"cursor:pointer;>
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3" id="card">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card" id="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary" id="morebutton">더보기
-											+</a>
-									</div>
-								</div>
-							</div>
-							<div class="card mb-4">
+							<div class="card">
 								<div class="card-header">경매신청내역</div>
 								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
+									<div class="py-1" id="productlist">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-4">
+													<img class="card-img-top" src="cap.jpg" alt="Card image cap">
+												</div>
+												<div class="col-md-8">
+													<h5>배트맨 모자</h5>
+													<p>가격 : 10000원</p>
+												</div>
 											</div>
 										</div>
 									</div>
-									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary" id="morebutton">더보기
-											+</a>
+									
+									<div class="py-1" id="productlist">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-4">
+													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
+												</div>
+												<div class="col-md-8">
+													<h5>배트맨 모자</h5>
+													<p>가격 : 10000원</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="py-1" id="productlist">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-4">
+													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
+												</div>
+												<div class="col-md-8">
+													<h5>배트맨 모자</h5>
+													<p>가격 : 10000원</p>
+												</div>
+											</div>
+										</div>
+									</div>
+									
+									<div class="py-1" id="productlist">
+										<div class="container">
+											<div class="row">
+												<div class="col-md-4">
+													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
+												</div>
+												<div class="col-md-8">
+													<h5>배트맨 모자</h5>
+													<p>가격 : 10000원</p>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">판매등록내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary" id="morebutton">더보기
-											+</a>
-									</div>
-								</div>
+								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
 							</div>
 						</div>
 					</div>
@@ -353,10 +307,9 @@
 			</div>
 		</div>
 
-
-		<div id="bottomwrapper">
+		<div id="bottomwrapper" class="bg-secondary">
 			<div id="footer">
-				<div class="text-white bg-secondary">
+				<div class="text-white">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -421,9 +374,5 @@
 		</div>
 
 	</div>
-
-
-
-
 </body>
 </html>

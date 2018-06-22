@@ -109,8 +109,8 @@
   
 	}
 	#centerwrapper{
-		height:64%;
-/* 		height:auto; */
+/* 		height:64%; */
+		height:auto;
 		width:80%;
 		margin: 0px auto;
 		
@@ -172,7 +172,6 @@
 	     </ul>  
 	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
 	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
-	         <span class="navbar-toggler-icon" ></span>
      </div>
    
    </nav>
@@ -235,8 +234,6 @@
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
 				 </li> 
-				 
-			
 			</nav>
 		</div>
 	
@@ -245,7 +242,55 @@
 	<div id="centerwrapper">
 		
 		<div id="content">
-		
+							
+							<body draggable="true" >
+	<div class="py-5" id="a">
+		<div class="container" >
+			<div class="row" id="row">
+				<div class="col-md-10" >
+					<table class="table" >
+						<thead>
+							<tr>
+								<th colspan="5"  width="400">자유게시판</th>
+							</tr>
+							<tr>
+								<th >글번호</th>
+								<th width="450" align=center width="400" align=center>제목</th>
+								<th >작성자</th>
+								<th >작성일</th>
+								<th >조회</th>
+							</tr>
+								
+						</thead>
+						<tbody>
+							<c:choose>
+								<c:when test="${result.isEmpty()}">
+									<tr>
+										<td colspan=4 height="300" align=center>표시할내용이없습니다..</td>
+									</tr>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="item" items="${result}">
+										
+										<tr>
+											<td>${item.seq}
+											<td>${item.title}
+											<td>${item.writer}
+											<td>${item.writedate}
+											<td>${item.viewcount}
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+							
+							
 		</div>
 			
 	</div>
