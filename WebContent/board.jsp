@@ -150,7 +150,10 @@
 
 
 
-<script>
+#bottomwrapper {
+	height: 15%;
+	width: 100%;
+}
 
 
 
@@ -224,39 +227,46 @@
 			</div>
 		</div>
 
-		
-		
-		<div id="centernavbar">
-			<nav class="nav nav-pills nav-justified">
-				<li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				 </li> 
-			</nav>
-		</div>
-	
-	</div>	
-	
-	<div id="centerwrapper">
-		
-		<div id="content">
-		 <div class="py-5">
+		<div id="centerwrapper">
+
+			<div id="contents">
+
+				<div id=category_board>
+				<div>
+				<h1>Category</h1></div>
+				<ul id="menu">
+<li class="active"> <a href="#">Menu 0 <span class="fa arrow"></span></a>
+<ul>
+<li><a href="#">item 0.1</a></li>
+<li><a href="#">item 0.2</a></li>
+<li><a href="#">item 0.3</a></li>
+<li><a href="#">item 0.4</a></li>
+</ul>
+</li>
+<li> <a href="#">Menu 1 <span class="glyphicon arrow"></span></a>
+<ul>
+<li><a href="#">item 1.1</a></li>
+<li><a href="#">item 1.2</a></li>
+
+<li><a href="#">item 1.4</a></li>
+
+</ul>
+</li>
+<li> <a href="#">Menu 2 <span class="glyphicon arrow"></span></a>
+<ul>
+<li><a href="#">item 2.1</a></li>
+<li><a href="#">item 2.2</a></li>
+<li><a href="#">item 2.3</a></li>
+<li><a href="#">item 2.4</a></li>
+</ul>
+</li>
+</ul>
+				
+				
+				</div>
+				<div id=center_board>
+					
+				 <div class="p-0 m-0">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -590,6 +600,10 @@
           </form>
         </div>
       </div>
+    </div>
+  </div>
+  <div class="p-0 m-0">
+    <div class="container">
       <div class="row">
         <div class="col-md-12 mt-3">
           <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
