@@ -36,15 +36,15 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public int insertMember(String id, String pw, String name, String phone, String email, String address) throws Exception{
+	public int insertMember(String id, String pw, String name, String email, String phone, String address) throws Exception{
 		Connection con = this.getConnection();
-		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?)";
+		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?,default)";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		pstat.setString(2, pw);
 		pstat.setString(3, name);
-		pstat.setString(4, phone);
 		pstat.setString(5, email);
+		pstat.setString(4, phone);
 		pstat.setString(6, address);
 		
 		int result = pstat.executeUpdate(); 
