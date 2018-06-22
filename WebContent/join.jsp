@@ -795,22 +795,23 @@ input[type=password]:placeholder {
         <br>
         <br>
         <br>
+        <form action="join.mem" method="post">
         <div id="formContent" class="">
           <!-- Tabs Titles -->
           <b>
             <!-- singup Form -->
-            <form>
+            
               <img src="사람.png" height="20" width="20">
               <label>I D</label>
-              <input type="text" id="login" class="fadeIn second filter-light" placeholder="Please enter your ID" name="id">
+              <input type="text" id="login" name="id" class="fadeIn second filter-light" placeholder="Please enter your ID" name="id">
               <br>
               <img src="pw2.png" height="20" width="20">
               <label>PW</label>
-              <input type="password" id="password" class="fadeIn third" name="password" placeholder="Input Your Password">
+              <input type="password" id="password" name="password" class="fadeIn third" name="password" placeholder="Input Your Password">
               <br>
               <img src="pw.png" height="20" width="20">
               <label>PW</label>
-              <input type="password" id="password" class="fadeIn third" placeholder="Input Your Password Agin"> </form>
+              <input type="password" id="password2" name="password2" class="fadeIn third" placeholder="Input Your Password Agin">
           </b>
         </div>
         <div id="formContent">
@@ -821,12 +822,12 @@ input[type=password]:placeholder {
           <br>
           <img src="전화.png" height="20" width="20">
           <label>PH</label>
-          <input type="text" id="Phone" class="fadeIn second" name="Phone" placeholder="Input Your Phone">
+          <input type="text" id="Phone" class="fadeIn second" name="phone" placeholder="Input Your Phone">
           <br>
           <div id="add" class="w-100 text-left px-2">
             <img src="주소.png" height="20" width="20">
             <label>ADD</label>
-            <input type="text" id="sample6_postcode" class="" name="address" placeholder="Input Your Address" style="width:60%">
+            <input type="text" id="sample6_postcode" class="" name="addresspost" placeholder="Input Your Address" style="width:60%">
              <button class="" id="post" style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;"onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
             <input type="text" id="sample6_address" class="" name="address" placeholder="Input Your Address" style="width: 85%; margin-left: 68px" draggable="true">
             <input type="text" id="sample6_address2" class="" name="address2" placeholder="Input Your Detailed Address" style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> 
@@ -867,9 +868,12 @@ input[type=password]:placeholder {
          
         </div>
         <div>
-          <input type="submit" class="fadeIn fourth" value="Sing up">
-          <input type="submit" class="fadeIn fourth" value="CANCEL"> </div>
+    
+          <input type="submit" class="fadeIn fourth" value="Sign up">
+          <input type="button" id = "cancle"class="fadeIn fourth" value="CANCEL"> </form></div>
         <a class="underlineHover" href="#">Action Go 회원가입 페이지 입니다.</a>
+        </form>
+        
       </div>
       <!--   </div> -->
     </div>
@@ -933,5 +937,12 @@ input[type=password]:placeholder {
       </div>
     </div>
   </b>
+  
+  <script>
+  document.getElementById("cancle").onclick = function(){
+	  loaction.href = "mainpage.jsp";
+  }
+  </script>
+  
 </body>
 </html>
