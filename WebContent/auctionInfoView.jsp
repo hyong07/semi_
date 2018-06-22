@@ -144,6 +144,28 @@ div {
 table td{
 	width:300px;
 }
+
+.card{
+	width:100%;
+	height:100%;
+}
+.card-header{
+	width:100%;
+	height:10%;
+}
+.card-body{
+	width:100%;
+	height:85%;
+	padding:0px;
+	margin-bottom:0;
+}
+.card-footer{
+	margin-top:110px;		
+}
+
+#container-info{
+	margin-top:5px;
+}
 </style>
 
 
@@ -245,7 +267,7 @@ table td{
 					<div class="card-header">경매글 정보</div>
 					<div class="card-body">
 
-						<div class="container">
+						<div class="container" id="container-info">
 							<div class="row">
 								<div class="form-row">
 									<div class="col-md-5">

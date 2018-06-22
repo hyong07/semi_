@@ -144,6 +144,25 @@ div {
 table td{
 	width:300px;
 }
+
+.card{
+	width:100%;
+	height:100%;
+}
+.card-header{
+	width:100%;
+	height:10%;
+}
+.card-body{
+	width:100%;
+	height:85%;
+	padding:0px;
+	margin-bottom:0;
+}
+.card-footer{
+	margin-top:110px;		
+}
+
 </style>
 
 
@@ -271,8 +290,12 @@ table td{
 															</thead>
 															<tbody>
 															<tr>
-																<td> 물품명  </td>
+																<td> 물품명  <!-- title --></td>
 																<td> LG전자 올뉴그램 14ZD980-GX30K <!-- 상품명 (product_name) --></td>
+															</tr>
+															<tr>
+																<td> 내용 <!-- contents --></td>
+																<td> 구매 한지 3일 되었고, A급 상태입니다. <!-- board_contents --></td>
 															</tr>
 																<tr>																	
 																	<td>가격  </td>

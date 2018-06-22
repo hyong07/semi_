@@ -58,9 +58,7 @@ public class Member_Controller extends HttpServlet {
 				
 				if(result > 0) {
 					dst = "login.jsp";
-				}
-				
-				
+				}				
 			}
 			
 			if(isRedirect) {
