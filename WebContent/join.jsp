@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -394,20 +394,7 @@ input[type=password]:placeholder {
 </script>
 </head>
 <body>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" crossorigin="anonymous" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script> &lt;%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%&gt;
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" crossorigin="anonymous" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M">
-  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-  <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css">
-  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" crossorigin="anonymous" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
   <title>Insert title here</title>
   <style>
     div {
@@ -775,6 +762,7 @@ input[type=password]:placeholder {
     }
   </style>
   <script>
+  window.onload
   </script>
   <div id="topnavicontainer">
     <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar">
@@ -838,9 +826,45 @@ input[type=password]:placeholder {
           <div id="add" class="w-100 text-left px-2">
             <img src="주소.png" height="20" width="20">
             <label>ADD</label>
-            <input type="text" id="address" class="" name="address" placeholder="Input Your Address" style="width:60%">
-            <button style="width: 160px; height: 50px; background-color:#4f70ce; color:white";class="" > 우편번호찾기 </button>
-          </div>
+            <input type="text" id="sample6_postcode" class="" name="address" placeholder="Input Your Address" style="width:60%">
+             <button class="" id="post" style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;"onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
+            <input type="text" id="sample6_address" class="" name="address" placeholder="Input Your Address" style="width: 85%; margin-left: 68px" draggable="true">
+            <input type="text" id="sample6_address2" class="" name="address2" placeholder="Input Your Detailed Address" style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> 
+            </div>
+         
+          <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+<script>
+    function sample6_execDaumPostcode() {
+        new daum.Postcode({
+            oncomplete: function(data) {
+
+                var fullAddr = ''; 
+                var extraAddr = '';
+
+                if (data.userSelectedType === 'R') {
+                    fullAddr = data.roadAddress;
+
+                } else {
+                    fullAddr = data.jibunAddress;
+                }
+                if(data.userSelectedType === 'R'){
+                    if(data.bname !== ''){
+                        extraAddr += data.bname;
+                    }
+                    if(data.buildingName !== ''){
+                        extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                    }
+                    fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                }
+                document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                document.getElementById('sample6_address').value = fullAddr;
+                document.getElementById('sample6_address2').focus();
+            }
+        }).open();
+    }
+    
+</script>  
+         
         </div>
         <div>
           <input type="submit" class="fadeIn fourth" value="Sing up">
