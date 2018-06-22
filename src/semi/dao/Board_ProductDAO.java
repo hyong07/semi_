@@ -24,28 +24,28 @@ public class Board_ProductDAO {
 		return result;		
 	}
 	
-	public List<BoardDTO> view_AucBoard(String board_no) throws Exception{
-		Connection con = DBUtils.getConnection();
-		String sql = "select from board where board_seq=?";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, board_no);
-		ResultSet rs = pstat.executeQuery();
-	}
-	
-	
-	
-	public List<BoardDTO> view_SellBoard(String board_no) throws Exception{
-		Connection con = DBUtils.getConnection();
-		String sql = "select from board where board_seq =?";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, board_no);
-		ResultSet rs = pstat.executeQuery();
-		List<BoardDTO> result = new ArrayList<>();
-		while(rs.next()) {
-			BoardDTO tmp = new BoardDTO();
-			
-		}
-	}
+//	public List<BoardDTO> view_AucBoard(String board_no) throws Exception{
+//		Connection con = DBUtils.getConnection();
+//		String sql = "select from board where board_seq=?";
+//		PreparedStatement pstat = con.prepareStatement(sql);
+//		pstat.setString(1, board_no);
+//		ResultSet rs = pstat.executeQuery();
+//	}
+//	
+//	
+//	
+//	public List<BoardDTO> view_SellBoard(String board_no) throws Exception{
+//		Connection con = DBUtils.getConnection();
+//		String sql = "select from board where board_seq =?";
+//		PreparedStatement pstat = con.prepareStatement(sql);
+//		pstat.setString(1, board_no);
+//		ResultSet rs = pstat.executeQuery();
+//		List<BoardDTO> result = new ArrayList<>();
+//		while(rs.next()) {
+//			BoardDTO tmp = new BoardDTO();
+//			
+//		}
+//	}
 	
 	public int addBoard() throws Exception{
 		Connection con = DBUtils.getConnection();
@@ -57,10 +57,7 @@ public class Board_ProductDAO {
 		return result;
 	}
 	
-	public int addProduct() throws Exception{
-		Connection con = DBUtils.getConnection();
-		String sql = "insert into board values()";
-	}
+	
 	
 	
 	

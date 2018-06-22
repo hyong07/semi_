@@ -238,7 +238,7 @@ div {
 
 			<div id="content">
 				<div class="card">
-					<div class="card-header">판매글 정보</div>
+					<div class="card-header">경매글 정보</div>
 					<div class="card-body">
 
 						<div class="container">
@@ -250,7 +250,7 @@ div {
 									</div>
 									<div class="col-md-7">
 										<h3>
-											판매 정보 :
+											경매 정보 :
 											<!--main_category -->
 											<i>전자 제품 > <!--sub_category-->노트북
 											</i>
