@@ -46,6 +46,9 @@ public class Member_Controller extends HttpServlet {
 				session.invalidate();
 				dst = "mainpage.jsp";
 			}
+			else if(command.equals("/join.mem")) {
+				
+			}
 			
 			if(isRedirect) {
 				response.sendRedirect(dst);
