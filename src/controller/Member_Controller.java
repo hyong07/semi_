@@ -32,6 +32,7 @@ public class Member_Controller extends HttpServlet {
 				boolean result = dao.idpwcheck(id, pw);
 				
 				
+				
 				if(result) {
 					request.getSession().setAttribute("loginid", id);
 					dst = "mainpage.jsp";
