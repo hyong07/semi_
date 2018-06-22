@@ -32,7 +32,6 @@ public class Member_Controller extends HttpServlet {
 				boolean result = dao.idpwcheck(id, pw);
 				
 				
-				
 				if(result) {
 					request.getSession().setAttribute("loginid", id);
 					dst = "mainpage.jsp";
@@ -46,6 +45,9 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/logout.mem")) {
 				session.invalidate();
 				dst = "mainpage.jsp";
+			}
+			else if(command.equals("/join.mem")) {
+				
 			}
 			
 			if(isRedirect) {
