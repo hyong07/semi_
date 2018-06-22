@@ -30,15 +30,6 @@
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
 
-
-	 
-
-
-
-
-
-	
-
 	div{
 		border: 0px solid black;
         box-sizing: border-box;
@@ -85,9 +76,7 @@
 		
 		
 	}
-	
-	
-		
+
 		@import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
@@ -387,14 +376,7 @@ input[type=password]:placeholder {
 * {
   box-sizing: border-box;
 }
-		
-		
-		
-		
-		
-		
-	
-	
+
 	#bottomwrapper{
 		height:15%;
 		width:100%;
@@ -404,21 +386,10 @@ input[type=password]:placeholder {
 		width:100%;
 		
 	}
-	
- 
 
-	
-
-
-	
-	
 </style>
 
-
-
 <script>
-
-
 
 </script>
 </head>
@@ -436,8 +407,8 @@ input[type=password]:placeholder {
 	            <i class="fa fa-user fa-fw" ></i> Login</a>
 	       </li>
 	       <li class="nav-item">
-	           <a class="nav-link" href="#">
-	            <i class="fa fa-user fa-fw" ></i> Sing in</a>
+	           <a class="nav-link" href="join.jsp">
+	            <i class="fa fa-user fa-fw" ></i> Sing Up</a>
 	       </li> 
 	     </ul>  
 	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
@@ -447,23 +418,16 @@ input[type=password]:placeholder {
   </div>
   
 	<div id="allwrapper" >
-	
-	
 
-		
-		
-	
-	
 	<div id="centerwrapper">
 		
 <!-- 		<div id="content"> -->
 		
-			
 		<div class="wrapper fadeInDown">
 			  <div id="formContent">
 			    <!-- Tabs Titles -->
 			   
-			    <h2 class="inactive underlineHover">Sign Up </h2>
+			    <h2 class="inactive underlineHover">Sign in</h2>
 			
 			    <!-- Icon -->
 			    <div class="fadeIn first">
@@ -471,9 +435,9 @@ input[type=password]:placeholder {
 			    </div>
 			
 			    <!-- Login Form -->
-			    <form>
-			      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-			      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+			    <form action="login.mem" method="post">
+			      <input type="text" id="login" class="fadeIn second" name="loginid" placeholder="login">
+			      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
 			      <input type="submit" class="fadeIn fourth" value="Log In">
 			    
 <!-- 					<div class="col-xs-6 col-sm-6 col-md-6"> -->
@@ -492,22 +456,14 @@ input[type=password]:placeholder {
 
 <!--   </div> -->
 </div>
-		    
 			
 		  </div>
 		</div>
 		
-		
-		
-		
-		
 		</div>
-			
-	
-	
+
 	</div>
-	
-	
+
 	<div id="bottomwrapper" class="bg-secondary">
 		
 		<div id="footer">
@@ -563,21 +519,9 @@ input[type=password]:placeholder {
       </div>
     </div>
   </div>
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		</div>
-	
 	</div>
-	
 </div>
-
 
 </body>
 </html>
