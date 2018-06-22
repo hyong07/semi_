@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -48,7 +49,7 @@
 /* 	    position: fixed; */
 	 	width: 100%;
 	    height: 40px;
-	    font-size: 20px;   
+	    font-length: 20px;   
 	    margin: 0px auto;   
 	    opacity: 0.9;
 	}
@@ -140,9 +141,28 @@
 </style>
 
 
-
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script>
+	$(document).ready(function(){
+		console.log("1");
+		$("#main_category").change(function(){
+			console.log("1");
+			var test = $("#main_category option:selected").val();			
+			$.ajax({
+				url:"category.bo",
+				type:"get",
+				data:{test:test},
+				success:function(rep){
+					var result = rep;
+					console.log("1");
+					console.log(result);
+					console.log("세부카테고리 성공");
+				}
+						
+			})
+		})
 
+	})
 
 
 </script>
@@ -251,7 +271,7 @@
 			<h1 align="center">판 매 글 등 록</h1>
 			<br><br>
 			<h3>판 매 제 품 등 록</h3><br>
-			카테고리 : <select>
+			카테고리 : <select id="main_category ">
 			<option value=""> 선 택 </option>
 			<option value="패션">패션</option>
 			<option value="전자제품">전자제품</option>
@@ -259,9 +279,20 @@
 			<option value="문화">문화</option>
 			<option value="뷰티">뷰티</option>
 			</select>
-			세부 카테고리 : <select>
+	
+					<select id="sub_category">
+ 					<!--  	<c:forEach var="i" begin="0" end="" step="1">
+							<option value="${result[i]}">${result[i]}</option>
+ 						</c:forEach>-->
+					</select>	
+				
+					
+<!-- 						<c:forEach var="i" begin="0" end="${result.length()}" step="1">
+							<option value="${result[i]}">${result[i]}</option>
+						</c:forEach> -->
+					
+				
 			
-			</select>
 			</div>
 			<div id="sell_board">
 				<h3></h3>
