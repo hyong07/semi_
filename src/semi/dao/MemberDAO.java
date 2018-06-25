@@ -28,16 +28,16 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public int insertMember(String id, String pw, String name, String email, String phone, String address) throws Exception{
+	public int insertMember(MemberDTO dto) throws Exception{
 		Connection con = DBUtils.getConnection();
 		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?,default)";
 		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, id);
-		pstat.setString(2, pw);
-		pstat.setString(3, name);
-		pstat.setString(5, email);
-		pstat.setString(4, phone);
-		pstat.setString(6, address);
+		pstat.setString(1, dto.getId());
+		pstat.setString(2, dto.getPw());
+		pstat.setString(3, dto.getName());
+		pstat.setString(4, dto.getEmail());
+		pstat.setString(5, dto.getPhone());
+		pstat.setString(6, dto.getAddress());
 		
 		int result = pstat.executeUpdate(); 
 		
@@ -49,6 +49,7 @@ public class MemberDAO {
 	}
 	
 	public boolean idpwcheck(String id, String pw) throws Exception {
+		System.out.println(id + " : " + pw);
 		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =? AND PW =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -61,7 +62,7 @@ public class MemberDAO {
 		rs.close();
 		con.close();
 		pstat.close();
-		
+		System.out.println(result);
 		return result;
 	}
 	

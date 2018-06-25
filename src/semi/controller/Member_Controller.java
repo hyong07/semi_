@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import semi.dao.MemberDAO;
+import semi.dto.MemberDTO;
 
 @WebServlet("*.mem")
 public class Member_Controller extends HttpServlet {
@@ -29,11 +30,14 @@ public class Member_Controller extends HttpServlet {
 			if(command.equals("/login.mem")){
 				String id = request.getParameter("loginid");
 				String pw = request.getParameter("password");
+			
 				boolean result = dao.idpwcheck(id, pw);
+				System.out.println(result);
 				
 				
 				if(result) {
 					request.getSession().setAttribute("loginid", id);
+					System.out.println(request.getSession().getAttribute("loginid"));
 					dst = "mainpage.jsp";
 				}
 				else {
@@ -54,7 +58,8 @@ public class Member_Controller extends HttpServlet {
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
 				String address = request.getParameter("addresspost")+request.getParameter("address")+request.getParameter("address2");
-				int result = dao.insertMember(id, pw, name, email, phone, address);
+				MemberDTO dto = new MemberDTO(id, pw, name, email, phone, address,"");
+				int result = dao.insertMember(dto);
 				
 				if(result > 0) {
 					dst = "login.jsp";

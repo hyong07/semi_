@@ -417,10 +417,11 @@ input[type=password]:placeholder {
 			    </div>
 			
 			    <!-- Login Form -->
-			  <form>
-			      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-			      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+			  <form action=login.mem method=post>
+			      <input type="text" id="login" class="fadeIn second" name="loginid" placeholder="login">
+			      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
 			      <input type="submit" class="fadeIn fourth" value="Log In">
+			      <input type="button" id=join class="fadeIn fourth" value="Join">
 			    
 <!-- 					<div class="col-xs-6 col-sm-6 col-md-6"> -->
 <!--           <a href="#" class="btn btn-lg btn-primary btn-block">Naver</a> -->
@@ -504,6 +505,13 @@ input[type=password]:placeholder {
 		</div>
 	</div>
 </div>
+
+<script>
+
+document.getElementById("join").onclick = function() {
+	location.href = "join.jsp";
+}
+</script>
 
 </body>
 </html>
