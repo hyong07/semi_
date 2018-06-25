@@ -812,7 +812,7 @@ input[type=password]:placeholder {
               <img src="pw.png" height="20" width="20">
               <label>PW</label>
               <input type="password" id="password2" name="password2" class="fadeIn third" placeholder="Input Your Password Agin">
-          </b>
+          </b> 
         </div>
         <div id="formContent">
           <label>*NAME</label>
@@ -832,8 +832,11 @@ input[type=password]:placeholder {
             <input type="text" id="sample6_address" class="" name="address" placeholder="Input Your Address" style="width: 85%; margin-left: 68px" draggable="true">
             <input type="text" id="sample6_address2" class="" name="address2" placeholder="Input Your Detailed Address" style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> 
             </div>
-         
-
+      
+      
+        <!-- 다음 API --> 
+        
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
