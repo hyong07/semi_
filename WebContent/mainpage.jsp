@@ -97,14 +97,18 @@
 		width:20%;
 	}
 	#centernavbar{
-		height:25%;
+		height:25%; 
 		width:100%;	
 	}
-	
+	     
+	#centernavbar li.nav-item {
+		 background:#FFF8DC; 
+	} 
+	    
 	#menubtn{
 		background:#FFF8DC; 
 		box-shadow: 0;
-		border: 2px solid #7B68EE;
+		margin: 0 20px;
 		outline: none;
   
 	}
@@ -129,9 +133,9 @@
 	#footer{
 		height:100%;
 		width:100%;
-		
+		 
 	}
-	
+
 </style>
 
 
@@ -210,11 +214,16 @@
 	
 		</div>
 	</div>
-
+  
 		
 		
 		<div id="centernavbar">
-			<nav class="nav nav-pills nav-justified">
+			<nav class="nav nav-pills nav-justified"> 
+	   
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					</a>
+				 </li>  
 				<li class="nav-item">
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
@@ -236,7 +245,28 @@
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
 				 </li> 
 				 
-			
+			  
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					</a>
+				 </li>   
+			    
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#" >
+					 상품등록</a> 
+				 </li>   
+			 
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					 커뮤니티</a>
+				 </li> 
+				  
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					</a>
+				 </li> 
+			    
+				  
 			</nav>
 		</div>
 	

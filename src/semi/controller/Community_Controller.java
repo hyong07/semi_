@@ -1,4 +1,4 @@
-package controller;
+package semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.dao.CommunityDAO;
-import semi.dao.CommunityDTO;
-import semi.dto.BoardDTO;
+import semi.dto.CommunityDTO;
 
 
 @WebServlet("*.do")
