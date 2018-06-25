@@ -418,8 +418,8 @@ input[type=password]:placeholder {
 			
 			    <!-- Login Form -->
 			  <form>
-			      <input type="text" id="login" class="fadeIn second" name="login" placeholder="login">
-			      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password">
+			      <input type="text" id="login" class="fadeIn second" name="loginid" placeholder="login">
+			      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
 			      <input type="submit" class="fadeIn fourth" value="Log In">
 			    
 <!-- 					<div class="col-xs-6 col-sm-6 col-md-6"> -->

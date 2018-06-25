@@ -47,7 +47,6 @@
 	}
 	
 	#topnavbar{ 
-/* 	    position: fixed; */
 	 	width: 100%;
 	    height: 40px;
 	    font-size: 20px;   
@@ -56,7 +55,6 @@
 	}
 	
 	#allwrapper{
-/* 		opacity: 0.8; */
 		width:100%;
 		height:100%;
 		margin: 0px auto;

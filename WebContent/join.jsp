@@ -828,7 +828,7 @@ input[type=password]:placeholder {
             <img src="주소.png" height="20" width="20">
             <label>ADD</label>
             <input type="text" id="sample6_postcode" class="" name="addresspost" placeholder="Input Your Address" style="width:60%">
-             <button class="" id="post" style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;"onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
+             <button class="" type="button" id="post" style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;"onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
             <input type="text" id="sample6_address" class="" name="address" placeholder="Input Your Address" style="width: 85%; margin-left: 68px" draggable="true">
             <input type="text" id="sample6_address2" class="" name="address2" placeholder="Input Your Detailed Address" style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> 
             </div>

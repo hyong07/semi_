@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import javafx.scene.control.Alert;
 import semi.dao.MemberDAO;
 
 @WebServlet("*.mem")
@@ -47,7 +48,6 @@ public class Member_Controller extends HttpServlet {
 				dst = "mainpage.jsp";
 			}
 			else if(command.equals("/join.mem")) {
-				System.out.println("¤·?");
 				String id = request.getParameter("id");
 				String pw = request.getParameter("password");
 				String name = request.getParameter("name");

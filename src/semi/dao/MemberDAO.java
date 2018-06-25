@@ -7,21 +7,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import semi.dbutils.DBUtils;
 import semi.dto.MemberDTO;
 
 public class MemberDAO {
-	// ======= DB Connection 
-	private Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String dbId = "kh";
-		String dbPw = "kh";
-		
-		return DriverManager.getConnection(url, dbId, dbPw);
-	}
 	
 	public boolean isIdExist(String id) throws Exception{
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBERS WHERE ID =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
@@ -37,7 +29,7 @@ public class MemberDAO {
 	}
 	
 	public int insertMember(String id, String pw, String name, String email, String phone, String address) throws Exception{
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?,default)";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
@@ -57,7 +49,7 @@ public class MemberDAO {
 	}
 	
 	public boolean idpwcheck(String id, String pw) throws Exception {
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =? AND PW =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
@@ -74,7 +66,7 @@ public class MemberDAO {
 	}
 	
 	public List<MemberDTO> selectMember() throws Exception{
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		ResultSet rs = pstat.executeQuery();
