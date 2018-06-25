@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -152,22 +153,17 @@ div {
 	top: auto;
 	margin-right: -720px;
 	text-align: center;
-<<<<<<< HEAD
-=======
 	width: 120px;
->>>>>>> 희영_categoryView
 }
 </style>
 
 
 
-<script>
 
-
-
-</script>
 </head>
 <body>
+
+
 	<div id="topnavicontainer">
 		<nav class="navbar navbar-expand-md navbar-dark bg-secondary"
 			id="topnavbar">
@@ -318,9 +314,9 @@ div {
 									<div class="col-md-4 w-75 col-lg-9">
 										<div class="row mx-1 py-2">
 											<div class="btn-group">
-												<a href="#" class="btn btn-secondary">All View</a> <a
-													href="#" class="btn btn-secondary">Auction</a> <a href="#"
-													class="btn btn-secondary">Buy It Now</a>
+												<a href="board.jsp" class="btn btn-secondary">All View</a> <a
+													href="ListView.jsp" class="btn btn-secondary">Auction</a> <a
+													href="board.jsp" class="btn btn-secondary">Buy It Now</a>
 											</div>
 											<div style="width: 400px"></div>
 											sort <select class="mx-2 text-muted">
@@ -332,312 +328,62 @@ div {
 										</div>
 										<div class="row px-4">251 result</div>
 										<div class="row px-4">.</div>
+
+									
+										<c:forEach var="item" items="${boardlist}">
+											<div class="row">					
+												<div class="col-md-3 m-0 p-0">
+													<div class="card">
+														<img class="card-img-top"
+															src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
+															alt="Card image cap"> <a href="#"
+															class="card-link text-left m-0 p-3">${item.title}</a>
+														<div class="card-body m-0 p-0">
+															<ul class="list-group list-group-flush">
+																<li class="list-group-item">${pricelist[0]}</li>
+																<li class="list-group-item">${item.seller_id}</li>
+																<li
+																	class="list-group-item d-flex justify-content-between align-items-center">${item.viewcount}
+																	<span class="badge badge-secondary p-1">${item.sell_status}</span>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+									</c:forEach>
+									
+
+
 										<div class="row">
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge p-1 badge-secondary">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
+									
+										</div>
+										<div class="row">
+										
 										</div>
 										<div class="row">
 											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
+										
 											</div>
 											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
+										
 											</div>
 											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
+											
 											</div>
 											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="row">
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
-											<div class="col-md-3 m-0 p-0">
-												<div class="card">
-													<img class="card-img-top"
-														src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-														alt="Card image cap"> <a href="#"
-														class="card-link text-left m-0 p-3">제목</a>
-													<div class="card-body m-0 p-0">
-														<ul class="list-group list-group-flush">
-															<li class="list-group-item">가격</li>
-															<li class="list-group-item">작성자</li>
-															<li
-																class="list-group-item d-flex justify-content-between align-items-center">조회수
-																<span class="badge badge-secondary p-1">상태</span>
-															</li>
-														</ul>
-													</div>
-												</div>
-											</div>
+										
 										</div>
 									</div>
 									<div class="col-md-4 w-25 col-lg-1">
-		
+
 
 										<div class="floating">
-										<p>광고</p>
-										<img src="다운로드.gif" width="100" height="200">
-										
+											<p>광고</p>
+											<img src="다운로드.gif" width="100" height="200">
+
 										</div>
-			
+
 
 										<div class="floating">광고코드</div>
 

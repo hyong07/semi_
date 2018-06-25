@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -139,12 +139,6 @@
 </style>
 
 
-
-<script>
-
-
-
-</script>
 </head>
 <body>
 	<div id="topnavicontainer">
@@ -225,24 +219,24 @@
 					</a>
 				 </li>  
 				<li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=패션">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 패션</a>
 				</li> 
 					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="CommunityController.do">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+				    <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=전자제품">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 전자제품</a>
 				</li> 
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=li">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 리빙</a>
 				</li> 
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=문화">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 문화</a>
 				</li> 
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=뷰티">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 뷰티</a>
 				 </li> 
 				 
 			  
@@ -252,12 +246,12 @@
 				 </li>   
 			    
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#" >
+					<a class="nav-link  text-secondary" id="menubtn" href="saleInput.jsp" >
 					 상품등록</a> 
 				 </li>   
 			 
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					<a class="nav-link  text-secondary" id="menubtn" href="community.jsp">
 					 커뮤니티</a>
 				 </li> 
 				  
