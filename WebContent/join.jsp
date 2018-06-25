@@ -20,7 +20,7 @@ pageEncoding="UTF-8"%>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	
+   
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -30,54 +30,54 @@ pageEncoding="UTF-8"%>
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
 
-	div{
-		border: 0px solid black;
+   div{
+      border: 0px solid black;
         box-sizing: border-box;
-	}
-	
-	#topnavicontainer{
-		margin: 0px auto;
-		width:100%;
-		
-	}
-	
-	#topnavbar{ 
-/* 	    position: fixed; */
-	 	width: 100%;
-	    height: 40px;
-	    font-size: 20px;   
-	    margin: 0px auto;   
-	    opacity: 0.9;
-	}
-	
-	#allwrapper{
-/* 		opacity: 0.8; */
-		width:100%;
-		height:100%;
-		margin: 0px auto;
-		
-	}
+   }
+   
+   #topnavicontainer{
+      margin: 0px auto;
+      width:100%;
+      
+   }
+   
+   #topnavbar{ 
+/*        position: fixed; */
+       width: 100%;
+       height: 40px;
+       font-size: 20px;   
+       margin: 0px auto;   
+       opacity: 0.9;
+   }
+   
+   #allwrapper{
+/*       opacity: 0.8; */
+      width:100%;
+      height:100%;
+      margin: 0px auto;
+      
+   }
 
-	
+   
 
-	#centerwrapper{
-		height:85%;
-		width:80%;
-		margin: 0px auto;
-		height:100%;
-		width:100%;
-		background : 	#F8F8FF;
-		
-	}
-	
-	#content{
-		padding:0;
-		margin:0;
-		
-		
-	}
+   #centerwrapper{
+      height:85%;
+      width:80%;
+      margin: 0px auto;
+      height:100%;
+      width:100%;
+      background :    #F8F8FF;
+      
+   }
+   
+   #content{
+      padding:0;
+      margin:0;
+      
+      
+   }
 
-		@import url('https://fonts.googleapis.com/css?family=Poppins');
+      @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 /* BASIC */
 
@@ -377,15 +377,15 @@ input[type=password]:placeholder {
   box-sizing: border-box;
 }
 
-	#bottomwrapper{
-		height:15%;
-		width:100%;
-	}
-	#footer{
-		height:100%;
-		width:100%;
-		
-	}
+   #bottomwrapper{
+      height:15%;
+      width:100%;
+   }
+   #footer{
+      height:100%;
+      width:100%;
+      
+   }
 
 </style>
 
@@ -408,7 +408,7 @@ input[type=password]:placeholder {
     }
 
     #topnavbar {
-      /* 	    position: fixed; */
+      /*        position: fixed; */
       width: 100%;
       height: 40px;
       font-size: 20px;
@@ -417,7 +417,7 @@ input[type=password]:placeholder {
     }
 
     #allwrapper {
-      /* 		opacity: 0.8; */
+      /*       opacity: 0.8; */
       width: 100%;
       height: 100%;
       margin: 0px auto;
@@ -787,7 +787,7 @@ input[type=password]:placeholder {
   </div>
   <div id="allwrapper">
     <div id="centerwrapper">
-      <!-- 		<div id="content"> -->
+      <!--       <div id="content"> -->
       <div class="wrapper fadeInDown">
         <h1 class="display-4">
           <b>Sing Up</b>
@@ -812,7 +812,7 @@ input[type=password]:placeholder {
               <img src="pw.png" height="20" width="20">
               <label>PW</label>
               <input type="password" id="password2" name="password2" class="fadeIn third" placeholder="Input Your Password Agin">
-          </b>
+          </b> 
         </div>
         <div id="formContent">
           <label>*NAME</label>
@@ -828,12 +828,15 @@ input[type=password]:placeholder {
             <img src="주소.png" height="20" width="20">
             <label>ADD</label>
             <input type="text" id="sample6_postcode" class="" name="addresspost" placeholder="Input Your Address" style="width:60%">
-             <button class="" id="post" style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;"onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
+             <button class="" type=button id="post" style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;"onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
             <input type="text" id="sample6_address" class="" name="address" placeholder="Input Your Address" style="width: 85%; margin-left: 68px" draggable="true">
             <input type="text" id="sample6_address2" class="" name="address2" placeholder="Input Your Detailed Address" style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> 
             </div>
-         
-
+      
+      
+        <!-- 다음 API --> 
+        
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
 <script>
     function sample6_execDaumPostcode() {
         new daum.Postcode({
@@ -870,7 +873,7 @@ input[type=password]:placeholder {
         <div>
     
           <input type="submit" class="fadeIn fourth" value="Sign up">
-          <input type="button" id = "cancle"class="fadeIn fourth" value="CANCEL"> </form></div>
+          <input type="button" id = "cancel" class="fadeIn fourth" value="CANCEL"> </form></div>
         <a class="underlineHover" href="#">Action Go 회원가입 페이지 입니다.</a>
         </form>
         
@@ -939,8 +942,8 @@ input[type=password]:placeholder {
   </b>
   
   <script>
-  document.getElementById("cancle").onclick = function(){
-	  loaction.href = "mainpage.jsp";
+  document.getElementById("cancel").onclick = function(){
+     location.href = "mainpage.jsp";
   }
   </script>
   

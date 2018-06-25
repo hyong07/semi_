@@ -1,4 +1,4 @@
-package semi.dao;
+package semi.dto;
 
 public class CommunityDTO {
 	private int seq;

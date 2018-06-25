@@ -12,11 +12,12 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import semi.dbutils.DBUtils;
+import semi.dto.CommunityDTO;
 
 
 public class CommunityDAO {
 
-	public List<CommunityDTO> CommunityData() throws Exception{
+	public List<CommunityDTO> CommunityOutputData() throws Exception{
 
 		Connection con = DBUtils.getConnection();
 		String sql = "select * from Community";
@@ -51,5 +52,31 @@ public class CommunityDAO {
 		return result;
 	}
 
+	
+	public int CommunityInputData(String title, String contents, String writer,  String ip) throws Exception{
+
+		Connection con = DBUtils.getConnection();
+		String sql = "insert into Community values(Community_seq.nextval,?,?,?,sysdate,default,?)";
+
+		PreparedStatement  pstat = con.prepareStatement(sql);
+		
+		
+		pstat.setString(1, title);
+		pstat.setString(2, contents);
+		pstat.setString(3, writer);	
+		pstat.setString(4, ip );
+
+
+		int result =  pstat.executeUpdate();
+
+		con.commit();	
+		pstat.close();	
+		con.close();
+
+		return result;
+	}
+
+	
+	
 	
 }

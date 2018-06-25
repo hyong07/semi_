@@ -1,4 +1,4 @@
-package controller;
+package semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,8 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import semi.dao.CommunityDAO;
-import semi.dao.CommunityDTO;
-import semi.dto.BoardDTO;
+import semi.dto.CommunityDTO;
 
 
 @WebServlet("*.do")
@@ -21,11 +20,13 @@ public class Community_Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			response.setCharacterEncoding("utf8");
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();	
 			String command = requestURI.substring(contextPath.length());
 
-			response.setCharacterEncoding("utf8");
+	
+			
 			PrintWriter out = response.getWriter();
 
 			System.out.println(requestURI+ contextPath + command);
@@ -37,14 +38,29 @@ public class Community_Controller extends HttpServlet {
 			String dst = null;
 
 			if(command.equals("/CommunityController.do")) {
-				List<CommunityDTO> result = dao.CommunityData();
+				List<CommunityDTO> result = dao.CommunityOutputData();
 				System.out.println(result.size());
 				request.setAttribute("result", result);
 				isRedirect = false;
 				dst = "community.jsp";
 
+			}else if(command.equals("/ComunityWrite.do")) {
+				
+			
+				String title = request.getParameter("title");
+				String contents = request.getParameter("contents");
+				String writer = request.getParameter("writer");
+			    String ip = request.getRemoteAddr();
+				
+				int result = dao.CommunityInputData(title, contents, writer, ip);
+				request.setAttribute("result", result);
+				isRedirect = false;
+				dst = "communityview.jsp";
+				
+				
+				
 			}
-
+//------------------------------------------------
 
 			
 			if(isRedirect) {
@@ -56,6 +72,7 @@ public class Community_Controller extends HttpServlet {
 			}
 
 		}catch(Exception e) {
+			e.printStackTrace();
 			response.sendRedirect("error.html");
 		}
 

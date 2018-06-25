@@ -33,19 +33,16 @@
 	body{
 		  
 	}
-
 	div{
 		border: 0px solid black;
         box-sizing: border-box;
               
-	}
-	
+	}	
 	#topnavicontainer{
 		margin: 0px auto;
 		width:100%;
 		
-	}
-	
+	}	
 	#topnavbar{ 
 /* 	    position: fixed; */
 	 	width: 100%;
@@ -53,38 +50,31 @@
 	    font-size: 20px;   
 	    margin: 0px auto;   
 	    opacity: 0.9;
-	}
-	
+	}	
 	#allwrapper{
 /* 		opacity: 0.8; */
 		width:100%;
 		height:100%;
-		margin: 0px auto;
-		
+		margin: 0px auto;		
 	}
 	#headerwrapper{
 		height:21%;	
 		width:100%;
 	}
-
-
 	#header{
 		height:75%;
 		width:100%;
-	}
-	
+	}	
 	#headerleft{
 		float:left;
 		height:100%;
 		width:15%;
 	}
-
 	#headercenter{
 		float:left;
 		height:100%;
 		width:65%;
-	}
-	
+	}	
 	#search{
 		
 		width:100%;
@@ -109,17 +99,18 @@
   
 	}
 	#centerwrapper{
-/* 		height:64%; */
-		height:auto;
+/*  		height:64%;  */
+ 		height:auto; 
 		width:80%;
 		margin: 0px auto;
-		
+	
 	}
 	
 	#content{
-
 		height:100%;
-		width:100%;		
+		width:100%;	
+		
+		
 	}
 	
 	#bottomwrapper{
@@ -132,6 +123,9 @@
 		
 	}
 	
+	th{
+		background :#F0FFFF;
+	}
 </style>
 
 
@@ -143,10 +137,13 @@
 </script>
 </head>
 <body>
+<%
+response.setCharacterEncoding("utf8");
+%>
 	<div id="topnavicontainer">
 		<nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
 	     	<div id="logocontainer">
-	      	<a class="navbar-brand" href="#">Auction GO!</a>  
+	      	<a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
 	</div>
 	   
 	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
@@ -218,6 +215,8 @@
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
 				</li> 
+				
+				
 					 <li class="nav-item">
 				    <a class="nav-link  text-secondary" id="menubtn" href="CommunityController.do">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
@@ -243,9 +242,9 @@
 		
 		<div id="content">
 							
-							<body draggable="true" >
-	<div class="py-5" id="a">
-		<div class="container" >
+<body draggable="true" >
+	<div class="py-5" >
+		<div class="container" id="a">
 			<div class="row" id="row">
 				<div class="col-md-10" >
 					<table class="table" >
@@ -268,6 +267,7 @@
 									<tr>
 										<td colspan=4 height="300" align=center>표시할내용이없습니다..</td>
 									</tr>
+									 
 								</c:when>
 								<c:otherwise>
 									<c:forEach var="item" items="${result}">
@@ -279,15 +279,25 @@
 											<td>${item.writedate}
 											<td>${item.viewcount}
 										</tr>
+										
+										
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>
 						</tbody>
 					</table>
+					    &nbsp;
+					 <div class="col-md-12 text-right" >
+					 	
+         				<a class="btn text-center text-light btn-secondary" href="communitywrite.jsp">Writing</a>
+        			</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	
+	
 	
 							
 							
