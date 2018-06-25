@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,13 +18,15 @@ public class Member_Controller extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
+			request.setCharacterEncoding("utf8");
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
 			MemberDAO dao = new MemberDAO();
 			boolean isRedirect = true;
 			String dst = "null";
-			
+			response.setCharacterEncoding("utf8");
+			PrintWriter out = response.getWriter();
 			HttpSession session = request.getSession();
 			
 			if(command.equals("/login.mem")){
@@ -47,7 +50,7 @@ public class Member_Controller extends HttpServlet {
 				dst = "mainpage.jsp";
 			}
 			else if(command.equals("/join.mem")) {
-				System.out.println("¤·?");
+		
 				String id = request.getParameter("id");
 				String pw = request.getParameter("password");
 				String name = request.getParameter("name");
@@ -61,6 +64,18 @@ public class Member_Controller extends HttpServlet {
 				}
 				
 				
+			}else if(command.equals("/idCheck.mem")) {
+				String checkId = request.getParameter("checkId");
+				
+				boolean result = dao.isIdExist(checkId);
+				
+				
+				if(result) {
+				out.println("0");
+				}else {
+					out.println("1");
+				}
+			return;
 			}
 			
 			if(isRedirect) {
