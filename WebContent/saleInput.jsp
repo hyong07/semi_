@@ -169,8 +169,7 @@
    
 
    $(document).ready(function() {
-
-	   
+	    
 	   	$("#main_category").change(function(){
 	   		var test = $("#main_category option:selected").val();
 	   		$.ajax({
@@ -186,26 +185,74 @@
 	   				}
 	   			} 
 	   		})
-	   	})		
+	   	})	
+	   	
+	   		$("input[name=sell_type]").click(function(){	   			
+	   			var test = $("#main_category option:selected").val();
+	   			$.ajax({
+	   				url:"category.bo",
+	   				type:"get",
+	   				data:{test:test},
+	   				success:function(rep){
+	   					if(rep.length>0){
+		   					$("select[name=sub_category]").empty();
+		   					for(i=0; i<rep.length;i++){
+		   						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+		   					}
+		   				}
+	   				}
+	   			})
+	   			
+	   			if(test != ""){
+	   				var sell_type = $("input[name=sell_type]:checked").val();		   			
+		   			$.ajax({
+		   				url:"sell_type.bo",
+		   				type:"get",
+		   				data:{sell_type:sell_type},
+		   				success:function(rep){
+		   					$("input[name=sell_type]").attr("style","display:none");
+		   					$("#test").text("");
+		   					if(rep == "a"){  								   						
+		   						$("#plusButton").attr("href","#auction_product");
+		   						$("#type_check").text("경매 판매를 선택하셨습니다.");
+		   					}
+		   					else if(rep == "s"){		   						
+		   						$("#plusButton").attr("href", "#plusproduct");
+		   						$("#type_check").text("일반 판매를 선택하셨습니다.");
+		   					}
+		   					
+		   					
+		   				}
+		   			})
+	   			}else{
+	   				alert("메인 카테고리를 선택해주세요.");
+	   			}
+	   			
+	   		})        
 	   		
-	   
-                  $("#productbt").click(function() {
-                	  			
-                                 var sub_category = $("#sub_category option:selected").val();
+	   		$("input[name=productButton]").click(function() {    
+	   							 var category = $("#main_category").val();	   							 
+                                 var sub_category = $("#sub_category").val();
                                  var product_name = $("#product_name").val();
-                                 var price = $("#productprice").val();
-                                 var num = $("#productnum").val();
-                                 if (sub_category == ""|| price == "" || num == "") {
-                                    alert("모두 입력해주세요.");
-                                 } else {$("#sub_category option:selected").prop("selected", false);
-                                    $("#productprice").val("");
-                                    $("#productnum").val("");
-                                    $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ price+ "<td>"+ num+ "<td><button onclick='deleteLine(this)'; class='btn btn-secondary' type='button'>삭제</button><tr>");
-                                 }
+                                 var sell_price = $("#productprice").val();
+                                 var sell_count = $("#productnum").val();
+                                 $.ajax({
+                                	 url:"productInfo.bo",
+                                	 type:"get",
+                                	 data:{category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,sell_count:sell_count},
+                                 	 success:function(rep){
+                                 		if (sub_category == ""|| sell_price == "" || sell_count == "") {
+                                            alert("모두 입력해주세요.");
+                                         } else {$("#sub_category option:selected").prop("selected", false);
+                                         	$("#product_name").val("");
+                                            $("#productprice").val("");
+                                            $("#productnum").val("");
+                                            $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                                         }
+                                 	 }
+                                 })                                 
                               })
-
                   $("#input_imgs").on("change", handleImgFileSelect);
-
                })
 
    function fileUploadAction() {
@@ -344,11 +391,11 @@
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2 ">판매 방법 :</div>
-							<div class="col-md-4"
-								>
-								 <input	type="radio"  id="option1" name="sell_type"	checked value="s"> 일반
-								<input type="radio" name="sell_type" id="option3"  value="a"> 경매
+							<div class="col-md-4" id="test">
+								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반
+								<input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								
 							</div>
+							<h id="type_check" color="red"></h>
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2">제품 등록 :</div>
@@ -357,7 +404,7 @@
 									<div class="panel-heading">
 										<h4 class="panel-title">
 											<a class="accordion-toggle" data-toggle="collapse"
-												data-parent="#accordion" href="#plusproduct"> <i
+												data-parent="#accordion" href="" id="plusButton"> <i
 												id="plusicon" class="fa fa-plus" aria-hidden="true"></i>
 											</a><i
 												class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
@@ -367,7 +414,7 @@
 										<div class="panel-body col-md-4">
 											<div class="form-row mb-3">
 												<div class="col-md-5">세부 카테고리 :</div>
-												<select id="sub_category" class="col-md-5 ml-1">
+												<select id="sub_category" name="sub_category" class="col-md-5 ml-1">
 
 												</select>
 											</div>
@@ -388,10 +435,39 @@
 													type="number" placeholder="" min=1 max=20>
 											</div>
 											<div class="form-row">
-												<input id="productbt" type="button"
+												<input id="productbt" type="button" name="productButton"
 													class="btn btn-secondary" value="등록">
 											</div>
 										</div>
+									</div>
+									<div id="auction_product" class="panel-collapse collapse form-row">
+										<div class="panel-body col-md-4">
+											<div class="form-row mb-3">
+												<div class="col-md-5">세부 카테고리 :</div>
+												<select id="sub_category" name="sub_category" class="col-md-5 ml-1">
+
+												</select>
+											</div>
+											<div class="form-row mb-3">
+												<div class="col-md-5">경매품명 :</div>
+												<input id="product_name" class="form-control col-md-5 ml-1"
+													type="text" placeholder=""> 
+											</div>
+											
+											<div class="form-row mb-3">
+												<div class="col-md-5">시작입찰가 :</div>
+												<input id="productprice" class="form-control col-md-5 ml-1"
+													type="number" placeholder="" min=1>
+											</div>
+											<div class="form-row mb-3">
+												<div class="col-md-5">경매 기간 :</div>
+												<input id="productnum" class="form-control col-md-5 ml-1"
+													type="number" placeholder="" min=1 max=20>
+											</div>
+											<div class="form-row">
+												<input id="productbt" type="button" name="productButton"
+													class="btn btn-secondary" value="등록">
+											</div>
 									</div>
 								</div>
 
@@ -401,8 +477,7 @@
 						<div class="col-md-12">
 							<table class="table">
 								<thead>
-									<tr>
-										
+									<tr>										
 										<th>세부카테고리</th>
 										<th>제품명</th>
 										<th>가격</th>
@@ -415,18 +490,18 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="form-row mb-3">
+						<div class="form-row mb-3 col-md-12">
 							<div class="col-md-2">제목 :</div>
 							<input type="text" name = "title" class="form-control col-md-8 ml-1">
 						</div>
 
-						<div class="form-row mb-3">
+						<div class="form-row mb-3  col-md-12">
 							<div class="col-md-2">내용 :</div>
 							<textarea id="textarea" name="contents" class="form-control col-md-8 ml-1"
 								rows="15" style="resize: none;"></textarea>
 						</div>
 
-						<div class="form-row mb-3">
+						<div class="form-row mb-3  col-md-12">
 							<div class="col-md-2">사진첨부 :</div>
 							<div class="form-row col-md-10">
 								<div class="input_wrap col-md-12">
@@ -443,7 +518,7 @@
 
 					</div>
 					<div class="card-footer text-right">
-						<a href="#" class="btn btn-secondary"><input type="submit" value="등록"></a>
+						<input type="submit" value="등록" class="btn btn-secondary">
 					</div>
 				</div>
 				</form>
@@ -554,14 +629,33 @@
       $('#accordion').on('hidden.bs.collapse', toggleChevron);
       $('#accordion').on('shown.bs.collapse', toggleChevron);
 
-      function deleteLine(obj) {
-         var result = confirm("삭제하시겠습니까 ?");
-         if (result == 1) {
-            var tr = $(obj).parent().parent();
-            //라인 삭제
-            tr.remove();
-         }
-      }
+       function deleteLine(obj) {     	  
+          var result = confirm("삭제하시겠습니까 ?");
+          if (result == 1) {
+             var tr = $(obj).parent().parent();
+             var td = tr.children();             
+             var tdArr = new Array();
+             td.each(function(i){
+            	 tdArr.push(td.eq(i).text());
+             })
+             var product_name = tdArr[1];
+             $.ajax({
+            	 url:"productInfoDelete.bo",
+            	 type:"get",
+            	 data:{product_name:product_name},
+            	 success:function(){
+            		 console.log("삭제 완료");
+            	 }
+             })
+             
+             console.log(tdArr[1]);
+             
+             //라인 삭제
+             
+             
+             
+          }
+       }
 
       function deleteImageAction(index) {
          sel_files.splice(index, 1);

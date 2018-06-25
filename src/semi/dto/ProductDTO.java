@@ -7,13 +7,14 @@ public class ProductDTO {
 	private String detail_category;
 	private String sell_price;
 	private String sell_count;
+	private String p_name;
 	
 	public ProductDTO() {
 		super();
 	}
 	
 	public ProductDTO(int board_no, int product_seq, String category, String detail_category, String sell_price,
-			String sell_count) {
+			String sell_count, String p_name) {
 		super();
 		this.board_no = board_no;
 		this.product_seq = product_seq;
@@ -22,6 +23,17 @@ public class ProductDTO {
 		this.sell_price = sell_price;
 		this.sell_count = sell_count;
 	}
+	
+	
+	
+	public String getP_name() {
+		return p_name;
+	}
+
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
 	public int getBoard_no() {
 		return board_no;
 	}
