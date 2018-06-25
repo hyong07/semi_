@@ -12,6 +12,7 @@ import javax.naming.InitialContext;
 import javax.sql.DataSource;
 
 import semi.dbutils.DBUtils;
+import semi.dto.CommunityDTO;
 
 
 public class CommunityDAO {
