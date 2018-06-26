@@ -27,6 +27,24 @@ public class MemberDAO {
 
       return result;
    }
+   public boolean findId(String name, String email) throws Exception{
+	   Connection con = DBUtils.getConnection();
+	   String sql = "select id from member where name=? and email=?";
+	   PreparedStatement pstat = con.prepareStatement(sql);
+	   pstat.setString(1, name);
+	   pstat.setString(2, email);
+	   ResultSet rs = pstat.executeQuery();
+	   
+	   boolean result = rs.next();
+	   
+	   con.commit();
+	   pstat.close();
+	   con.close();
+	   return result;
+	   
+	   
+   }
+   
    
    public int insertMember(MemberDTO dto) throws Exception{
       Connection con = DBUtils.getConnection();

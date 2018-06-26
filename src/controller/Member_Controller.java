@@ -84,7 +84,22 @@ public class Member_Controller extends HttpServlet {
 				}
 			return;
 			}
-         
+         else if(command.equals("/idFind.mem")){
+        	 	
+        	 
+ 
+     		String name = request.getParameter("name");
+     		String email = request.getParameter("email");
+     		boolean result = dao.findId(name, email);
+     		
+     		request.setAttribute("result",result);
+     		
+     		isRedirect = false;
+     		dst = "find.jsp";
+     		
+     		
+     		
+         }
          if(isRedirect) {
             response.sendRedirect(dst);
          }else {

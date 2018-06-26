@@ -433,7 +433,7 @@ input[type=password]:placeholder {
 			&nbsp;
 			    <!-- Remind Passowrd -->
 			    <div id="formFooter">
-			      <a class="underlineHover" href="#">Forgot Password?</a>
+			      <a class="underlineHover" href="find.jsp">Forgot Password?</a>
 			    </div>
   			
   				</div>
