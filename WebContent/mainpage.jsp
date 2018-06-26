@@ -164,7 +164,7 @@
      </c:choose>
 	       </li>
 	       <li class="nav-item">
-	           <a class="nav-link" href="join.jsp">
+	           <a class="nav-link" href="terms_of_use.jsp">
 	            <i class="fa fa-user fa-fw" ></i> Sing up</a>
 	       </li> 
 	     </ul>  
