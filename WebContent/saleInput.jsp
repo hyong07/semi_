@@ -198,8 +198,12 @@
 		   					$("select[name=sub_category]").empty();
 		   					for(i=0; i<rep.length;i++){
 		   						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+		   					
 		   					}
 		   				}
+	   				},
+	   				error:function(rep){
+	   				
 	   				}
 	   			})
 	   			
