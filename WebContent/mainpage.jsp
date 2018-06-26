@@ -165,7 +165,7 @@
 	       </li>
 	       <li class="nav-item">
 	           <a class="nav-link" href="terms_of_use.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Sing up</a>
+	            <i class="fa fa-user fa-fw" ></i> Sign up</a>
 	       </li> 
 	     </ul>  
 	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
@@ -227,7 +227,7 @@
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 전자제품</a>
 				</li> 
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=li">
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=리빙">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 리빙</a>
 				</li> 
 					 <li class="nav-item">

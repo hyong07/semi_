@@ -14,7 +14,7 @@ public class MemberDAO {
 	
 	public boolean isIdExist(String id) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "SELECT * FROM MEMBERS WHERE ID =?";
+		String sql = "SELECT * FROM MEMBER WHERE ID =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		ResultSet rs = pstat.executeQuery();
