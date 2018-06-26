@@ -62,6 +62,9 @@ public class Board_ProductContoller extends HttpServlet {
 
 			}
 			
+			
+			
+			
 			else if(command.equals("/category.bo")) {
 		     
 		         String main_category = request.getParameter("test");  
@@ -72,14 +75,20 @@ public class Board_ProductContoller extends HttpServlet {
 		         response.setContentType("application/json");   
 		         System.out.println("2");
 		         new Gson().toJson(result, response.getWriter());   
+		         
+		         return;
 		      }
+			
+			
 			
 			 else if(command.equals("/sell_type.bo")) {    
 		    	  System.out.println("3");
 		          String sell_type = request.getParameter("sell_type");         
 		          response.setCharacterEncoding("utf8");   
 		          response.setContentType("application/json");         
-		          new Gson().toJson(sell_type, response.getWriter());         
+		          new Gson().toJson(sell_type, response.getWriter());    
+		          
+		          return;
 		       }
 			
 			
