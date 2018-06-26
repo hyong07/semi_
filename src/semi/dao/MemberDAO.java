@@ -106,5 +106,21 @@ public class MemberDAO {
 		return result;
 	}
 	
+	public int changepw(String id,String pw) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET PW=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, pw);
+		pstat.setString(2, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
 	
 }

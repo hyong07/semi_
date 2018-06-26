@@ -246,8 +246,10 @@
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
 								<li class="nav-item"><a
-									class="active nav-link btn-secondary" href="mypage_info.mem">내
+									class="active nav-link btn-secondary" href="mypage_pwcheck.jsp">내
 										정보</a></li>
+								<li class="nav-item"><a
+									class="nav-link text-secondary" href="mypage_leave.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">

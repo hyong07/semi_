@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import semi.dao.MemberDAO;
 import semi.dto.MemberDTO;
 
@@ -97,7 +99,7 @@ public class Member_Controller extends HttpServlet {
 				
 				if(result) {
 					isRedirect = false;
-					dst = "mypage_modify.mem";
+					dst = "mypage_info.mem";
 				}
 			}
 			else if(command.equals("/member_modify.mem")) {
@@ -121,6 +123,36 @@ public class Member_Controller extends HttpServlet {
 					isRedirect = false;
 					dst = "error.html";
 				}
+			}
+			else if(command.equals("/currentpwcheck.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				response.setCharacterEncoding("utf8");
+				response.setContentType("application/json");
+				
+				new Gson().toJson(result,response.getWriter());
+				
+				return;
+				
+			}
+			
+			else if(command.equals("/pwchange.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				int result = dao.changepw(loginid, pw);
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				if(result > 0) {
+					request.setAttribute("result", result);
+					request.setAttribute("dto", dto);
+					isRedirect = false;
+					dst = "mypage_info.jsp";
+				}
+				
 			}
 			
 			if(isRedirect) {

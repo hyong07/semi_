@@ -143,10 +143,13 @@
 	text-align: right;
 }
 
-#card {
-	cursor: pointer;
+#cardbody{
+	margin-left:200px;
 }
 
+#mypage_bt{
+	margin-left:100px;
+}
 /* Mypage css 끝*/
 </style>
 
@@ -155,7 +158,11 @@
 <script>
 	$(document).ready(function(){
 		$("#modify_bt").click(function(){
-			location.href = "mypage_pwcheck.jsp";
+			location.href = "mypage_modify.mem";
+		})
+		
+		$("#changepw_bt").click(function(){
+			location.href = "mypage_changepw.jsp";
 		})
 	})
 </script>
@@ -264,12 +271,14 @@
 									href="mypage_sale.jsp">판매등록내역</a></li>
 								<li class="nav-item"><a class="active nav-link btn-secondary"
 									href="mypage_info.mem">내 정보</a></li>
+								<li class="nav-item"><a
+									class="nav-link text-secondary" href="mypage_leave.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
 							<div class="card">
 								<div class="card-header">내정보</div>
-								<div class="card-body">
+								<div class="card-body" id="cardbody">
 									<div class="form-row">
 										<div class="form-group col-md-8">
 											<label for="inputEmail4">Id</label> <input type="text"
@@ -301,8 +310,9 @@
 										</div>
 									</div>
 									<div class="form-row">
-										<div class="col-md-12 text-right">
-											<button type="button" id="modify_bt" class="btn btn-secondary">수정</button>
+										<div class="col-md-12" id="mypage_bt">
+											<button type="button" id="changepw_bt" class="btn btn-danger">비밀번호 변경</button>
+											<button type="button" id="modify_bt" class="btn btn-secondary">내정보수정</button>
 										</div>
 									</div>
 								</div>
