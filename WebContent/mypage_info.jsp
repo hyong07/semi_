@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -110,6 +111,7 @@
 #content {
 	height: 100%;
 	width: 100%;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -129,20 +131,43 @@
 	width: 80%;
 }
 
-#productlist{
-	border: 1px solid rgba(0, 0, 0, 0.125);
+.card-group>.card+.card {
+	border-left: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+#morebutton {
+	margin-top: 10px;
+}
+
+#buttondiv {
+	text-align: right;
+}
+
+#card {
+	cursor: pointer;
+}
+
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+	$(document).ready(function(){
+		$("#modify_bt").click(function(){
+			location.href = "mypage_pwcheck.jsp";
+		})
+	})
 </script>
 </head>
 <body>
-
+ 	<c:choose> 
+            <c:when test="${result == 1}"> 
+            		<script> 
+            		alert("수정이 완료되었습니다.");
+            		</script> 
+           </c:when>
+     </c:choose> 
 
 	<div id="topnavicontainer">
 		<nav class="navbar navbar-expand-md navbar-dark bg-secondary"
@@ -201,6 +226,9 @@
 					</div>
 				</div>
 
+
+
+
 				<div id="headerright"></div>
 			</div>
 
@@ -212,7 +240,7 @@
 						<div class="input-group-prepend">
 							<span><p class="lead mr-3">
 									<ion-icon name="person"></ion-icon>
-									이유림님
+									${sessionScope.loginid} 님
 								</p></span>
 						</div>
 						<p class="lead">
@@ -231,74 +259,53 @@
 								<li class="nav-item"><a href="mypage_purchase.jsp"
 									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
-									class="active nav-link btn-secondary">경매신청내역</a></li>
+									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
+								<li class="nav-item"><a class="active nav-link btn-secondary"
 									href="mypage_info.mem">내 정보</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
 							<div class="card">
-								<div class="card-header">경매신청내역</div>
+								<div class="card-header">내정보</div>
 								<div class="card-body">
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Id</label> <input type="text"
+												class="form-control" placeholder="${dto.id }" readonly>
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Name</label> <input type="text"
+												class="form-control" placeholder="${dto.name }" readonly>
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Email</label> <input type="text"
+												class="form-control" placeholder="${dto.email }" readonly>
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Phone</label> <input type="text"
+												class="form-control" placeholder="${dto.phone }" readonly>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputAddress">Address</label> <input type="text"
+											class="form-control" placeholder="${dto.address }" readonly>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 text-right">
+											<button type="button" id="modify_bt" class="btn btn-secondary">수정</button>
 										</div>
 									</div>
 								</div>
-								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
 							</div>
 						</div>
 					</div>
@@ -307,9 +314,10 @@
 			</div>
 		</div>
 
-		<div id="bottomwrapper" class="bg-secondary">
+
+		<div id="bottomwrapper">
 			<div id="footer">
-				<div class="text-white">
+				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -374,5 +382,9 @@
 		</div>
 
 	</div>
+
+
+
+
 </body>
 </html>

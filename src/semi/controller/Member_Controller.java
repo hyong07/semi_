@@ -65,6 +65,63 @@ public class Member_Controller extends HttpServlet {
 					dst = "login.jsp";
 				}				
 			}
+			else if(command.equals("/mypage_info.mem")) {
+				
+//				int result = Integer.parseInt(request.getParameter("result"));
+//				
+//				if(request.getParameter("result") != null) {
+//					result = Integer.parseInt(request.getParameter("result"));
+//				}
+//				
+				String loginid = (String) request.getSession().getAttribute("loginid");
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				request.setAttribute("dto", dto);
+				//request.setAttribute("result", result);
+				isRedirect = false;
+				dst = "mypage_info.jsp";
+			}
+			else if(command.equals("/mypage_modify.mem")) {
+				String loginid = (String) request.getSession().getAttribute("loginid");
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				request.setAttribute("dto", dto);
+				isRedirect = false;
+				dst = "mypage_modify.jsp";
+			}
+			else if(command.equals("/pwcheck.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				if(result) {
+					isRedirect = false;
+					dst = "mypage_modify.mem";
+				}
+			}
+			else if(command.equals("/member_modify.mem")) {
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				String address = request.getParameter("address");
+				
+				int result = dao.modifymember(id,name,email,phone,address);
+				
+				MemberDTO dto = dao.selectMember(id);
+				
+				if(result > 0) {
+					request.setAttribute("result", result);
+					request.setAttribute("dto", dto);
+					isRedirect = false;
+					dst = "mypage_info.jsp";
+				}else {
+					request.setAttribute("result", result);
+					isRedirect = false;
+					dst = "error.html";
+				}
+			}
 			
 			if(isRedirect) {
 				response.sendRedirect(dst);

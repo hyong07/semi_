@@ -110,6 +110,7 @@
 #content {
 	height: 100%;
 	width: 100%;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -129,16 +130,29 @@
 	width: 80%;
 }
 
-#productlist{
-	border: 1px solid rgba(0, 0, 0, 0.125);
+.card-group>.card+.card {
+	border-left: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+#morebutton {
+	margin-top: 10px;
+}
+
+#buttondiv {
+	text-align: right;
+}
+
+#card {
+	cursor: pointer;
+}
+
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+
 </script>
 </head>
 <body>
@@ -201,6 +215,9 @@
 					</div>
 				</div>
 
+
+
+
 				<div id="headerright"></div>
 			</div>
 
@@ -212,7 +229,7 @@
 						<div class="input-group-prepend">
 							<span><p class="lead mr-3">
 									<ion-icon name="person"></ion-icon>
-									이유림님
+									${sessionScope.loginid} 님
 								</p></span>
 						</div>
 						<p class="lead">
@@ -231,74 +248,55 @@
 								<li class="nav-item"><a href="mypage_purchase.jsp"
 									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
-									class="active nav-link btn-secondary">경매신청내역</a></li>
+									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
+								<li class="nav-item"><a class="active nav-link btn-secondary"
 									href="mypage_info.mem">내 정보</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
 							<div class="card">
-								<div class="card-header">경매신청내역</div>
+								<div class="card-header">내 정보 수정</div>
 								<div class="card-body">
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+								<form action="member_modify.mem" method="post" name=write_form onSubmit="return check_error()">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Id</label> <input type="text"
+												class="form-control"  name=id value="${dto.id }" readonly>
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Name</label> <input type="text"
+												class="form-control" name=name value="${dto.name }">
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Email</label> <input type="text"
+												class="form-control" name=email value="${dto.email }">
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Phone</label> <input type="text"
+												class="form-control" name=phone value="${dto.phone }">
 										</div>
 									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputAddress">Address</label> <input type="text"
+											class="form-control" name=address value="${dto.address }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 text-right">
+											<input type="submit" class="btn btn-secondary" value="수정하기">
+										</div>
+									</div>
+									</form>
 								</div>
-								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
 							</div>
 						</div>
 					</div>
@@ -307,9 +305,10 @@
 			</div>
 		</div>
 
-		<div id="bottomwrapper" class="bg-secondary">
+
+		<div id="bottomwrapper">
 			<div id="footer">
-				<div class="text-white">
+				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -374,5 +373,45 @@
 		</div>
 
 	</div>
+	<script>
+			function check_error() {
+			     var form = document.write_form;
+			     if(form.name.value == '') {
+
+			        alert('이름을 입력하세요');
+
+			        form.name.focus();
+
+			        return false;
+
+			     }
+			     else if(form.email.value == ''){
+			    	 alert('이메일을 입력하세요');
+
+				     form.email.focus();
+
+				     return false;
+			     }
+			     else if(form.phone.value == ''){
+			    	 alert('핸드폰 번호를 입력하세요');
+
+				     form.phone.focus();
+
+				     return false;
+			     }
+			     else if(form.address.value == ''){
+			    	 alert('주소를 입력하세요');
+
+				     form.address.focus();
+
+				     return false;
+			     }
+			     return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
+			   }
+
+	</script>
+
+
+
 </body>
 </html>

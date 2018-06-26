@@ -174,7 +174,7 @@
 	            <i class="fa fa-user fa-fw" ></i> Sing up</a>
 	       </li> 
 	     </ul>  
-	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
+	        <a class="btn navbar-btn ml-2 btn-secondary text-white" href="mypage.jsp">
 	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
 	         <span class="navbar-toggler-icon" ></span>
      </div>

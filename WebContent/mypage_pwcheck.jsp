@@ -34,9 +34,6 @@
 <style>
 
 /* 전체적인 틀 css 끝*/
-/* div{ */
-/* 	border : 1px solid black; */
-/* } */
 #topnavicontainer {
 	margin: 0px auto;
 	width: 100%;
@@ -110,6 +107,7 @@
 #content {
 	height: 100%;
 	width: 100%;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -127,10 +125,20 @@
 /* Mypage css*/
 #cardcontainer {
 	width: 80%;
+	height: 600px;
 }
 
-#productlist{
-	border: 1px solid rgba(0, 0, 0, 0.125);
+#card {
+	height: 100%;
+}
+
+#pwform{
+	 height:100px;
+	 margin-top:150px;
+}
+
+#pw {
+	margin-bottom : 10px;
 }
 /* Mypage css 끝*/
 </style>
@@ -201,6 +209,9 @@
 					</div>
 				</div>
 
+
+
+
 				<div id="headerright"></div>
 			</div>
 
@@ -212,7 +223,7 @@
 						<div class="input-group-prepend">
 							<span><p class="lead mr-3">
 									<ion-icon name="person"></ion-icon>
-									이유림님
+									${sessionScope.loginid} 님
 								</p></span>
 						</div>
 						<p class="lead">
@@ -231,74 +242,28 @@
 								<li class="nav-item"><a href="mypage_purchase.jsp"
 									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
-									class="active nav-link btn-secondary">경매신청내역</a></li>
+									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_info.mem">내 정보</a></li>
+								<li class="nav-item"><a
+									class="active nav-link btn-secondary" href="mypage_info.mem">내
+										정보</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card">
-								<div class="card-header">경매신청내역</div>
-								<div class="card-body">
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+							<div class="card text-center" id="card">
+								<div class="card-header">내정보</div>
+								<div class="card-body text-center">
+									<form id="pwform" name=write_form action="pwcheck.mem" method="post" onSubmit="return check_error()">
+										<label for="inputPassword4" class="col-md-12">Please Input Your Password</label>
+										<div class="text-center col-md-12">
+											<input type="password" class="col-md-4" id="pw" placeholder="Password" name="pw">
 										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+										<div class="text-center col-md-12">
+											<input type="submit" value="확인" class="btn btn-secondary">
 										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
+									</form>
 								</div>
-								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
 							</div>
 						</div>
 					</div>
@@ -307,9 +272,10 @@
 			</div>
 		</div>
 
-		<div id="bottomwrapper" class="bg-secondary">
+
+		<div id="bottomwrapper">
 			<div id="footer">
-				<div class="text-white">
+				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -374,5 +340,25 @@
 		</div>
 
 	</div>
+
+	<script>
+			function check_error() {
+			     var form = document.write_form;
+			     if(form.pw.value == '') {
+		
+			        alert('비밀번호를 입력하세요');
+
+			        form.pw.focus();
+
+			        return false;
+
+			     }else{
+			     	return true;
+			     }
+			   }
+
+	</script>
+
+
 </body>
 </html>
