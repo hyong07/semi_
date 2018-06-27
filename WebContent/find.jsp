@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
@@ -18,34 +18,44 @@
 </head>
 
 <body>
-
 <c:choose>
-		<c:when test="${not empty result}">
+		<c:when test="${result=='1'}">
 		<script>
-		alert(${result});
+		alert("아이디 메일전송 완료");
+		</script>
+		</c:when>
+		<c:when test="${result=='2'}">
+		<script>
+		alert("임시 번호 메일전송 완료");
+		</script>
+		</c:when>
+		<c:when test="${result=='3'}">
+		<script>
+		alert("실패")
 		</script>
 		</c:when>
 		</c:choose>
 
+
   <div class="py-5" >
     <div class="container">
       <div class="row">
-        <div class="col-md-6">
-          <h1 class="display-4">��й�ȣ ã��</h1>
-          <form class="findPw">
+        <div class="col-md-6" style="border-right:1px solid black">
+          <h1 class="display-4">비밀번호 찾기</h1>
+          <form action="pwFind.mem" method="post">
             <div class="form-group">
               <label>Email address</label>
-              <input type="email" class="form-control" placeholder="Enter email">
+              <input type="email" name="email" class="form-control" placeholder="Enter email">
               <small class="form-text text-muted">We'll never share your email with anyone else.</small>
             </div>
             <div class="form-group">
               <label>ID</label>
-              <input type="text" class="form-control" placeholder="Enter ID"> </div>
+              <input type="text" name="id" class="form-control" placeholder="Enter ID"> </div>
             <button type="submit" class="btn btn-primary">Submit</button>
           </form>
         </div>
-        <div class="col-md-6">
-          <h1 class="display-4">���̵� ã��</h1>
+        <div class="col-md-6" >
+          <h1 class="display-4">아이디 찾기</h1>
           <form action="idFind.mem" method="post">
             <div class="form-group">
               <label>Email address</label>
@@ -61,6 +71,7 @@
       </div>
     </div>
   </div>
+  
   
 </body>
 

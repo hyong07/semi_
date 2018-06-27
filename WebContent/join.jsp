@@ -27,6 +27,7 @@ pageEncoding="UTF-8"%>
     /*   dark: #151515, */
     /*   info: #ccc, */
     /*   success: #28a745, */
+    
     /*   warning: #ffc107, */
     /*   danger: #dc3545 */
 
