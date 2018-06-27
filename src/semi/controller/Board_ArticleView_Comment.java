@@ -37,9 +37,10 @@ public class Board_ArticleView_Comment extends HttpServlet {
 				String contents = request.getParameter("contents");
 				System.out.println(board_seq + " : " + contents);
 				int result = board_comment.insertBoard_Comment(id, board_seq,contents,ip);
+				request.setAttribute("seq",board_seq);
 
 				isRedirect = false;
-				dst = "saleView.jsp";
+				dst = "saleView.bo";
 				
 			}
 			

@@ -150,7 +150,7 @@ public class Board_ProductContoller extends HttpServlet {
 			      }
 			
 			  else if(command.equals("/saleView.bo")) {
-				  
+				  System.out.println("z_z");
 				  
 				  String seq = request.getParameter("seq");
 				  
@@ -171,10 +171,6 @@ public class Board_ProductContoller extends HttpServlet {
 				  dst = "saleView.jsp";
 
 			  }
-			
-			  
-		     
-		      
 
 			if(isRedirect) {
 				response.sendRedirect(dst);

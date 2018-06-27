@@ -158,12 +158,6 @@
    #main_text {
    margin-left: 1%;
    float:left;}
-   
-   #cotop {
-   display:inline-block;
-   }
-   
-   
 
 </style>
 
@@ -385,8 +379,9 @@
     <div class="text-center py-0">
       <img src="사람.png" height="20" width="20" class="my-3"> </div>
     <div class="media-body mx-2 text-left px-2">
-     <h5 class="mt-0 text-left p-0" >Commenter  날짜</h5>
-
+      <div id=cotop><h5 class="mt-0 text-left p-0" >Commenter</h5>
+ 					날짜
+      </div>
  Comment contents Comment contentsComment contentsComment contentsComment contentsComment contentsComment contents</div>
   </div>
   
