@@ -4,11 +4,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import semi.dbutils.DBUtils;
 import semi.dto.BoardDTO;
 
 public class BoardDAO { 
+	
 
 	public ArrayList<BoardDTO> boardForBoard(String category, String category2) throws Exception{
 		Connection con = DBUtils.getConnection();
@@ -83,6 +85,33 @@ public class BoardDAO {
 		      con.close();      
 		      return result;
 		   }
+	   
+	   public BoardDTO selectOneBoard(String seq) throws Exception{
+		
+		   Connection con = DBUtils.getConnection();
+		   String sql = "select * from board where board_seq=?";
+		   PreparedStatement pstat = con.prepareStatement(sql);
+		   pstat.setString(1, seq);
+		   ResultSet rs = pstat.executeQuery();
+		   BoardDTO dto = new BoardDTO();
+
+		   while(rs.next()) {
+	
+			
+			   dto.setBoard_seq(seq);
+			   dto.setSeller_id(rs.getString(2));
+			   dto.setTitle(rs.getString(3));
+			   dto.setContents(rs.getString(4));
+			   dto.setWrite_date(rs.getString(5));
+			   dto.setSell_type(rs.getString(6));
+			   dto.setSell_status(rs.getString(7));
+			   dto.setEnd_date(rs.getString(8));
+			   dto.setViewcount(rs.getString(9));
+ 
+		   }
+		   
+		   return dto;
+	   }
 
 
 }

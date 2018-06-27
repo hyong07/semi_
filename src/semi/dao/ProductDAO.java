@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.List;
 
 import semi.dbutils.DBUtils;
 import semi.dto.BoardDTO;
@@ -58,6 +59,31 @@ public class ProductDAO {
 		      
 		      return result;
 		   }
+	   
+	   public ProductDTO mainProduct(String seq) throws Exception{
+		   Connection con = DBUtils.getConnection();
+		   String sql = "select * from product where board_no=? and main_product = 'y'";
+		   PreparedStatement pstat = con.prepareStatement(sql);
+		   pstat.setString(1, seq);
+		   ResultSet rs = pstat.executeQuery();
+		   ProductDTO dto = new ProductDTO();
+		   
+		   while(rs.next()) {
+			  
+			   dto.setBoard_no(seq);
+			   dto.setProduct_seq(rs.getString(2));
+			   dto.setCategory(rs.getString(3));
+			   dto.setDetail_category(rs.getString(4));
+			   dto.setSell_price(rs.getString(5));
+			   dto.setSell_count(rs.getString(6));
+			   dto.setMain_product(rs.getString(7));
+			   dto.setP_name(rs.getString(8));
+
+		   }
+		
+		   return dto;
+	   }
+
 
 
 }

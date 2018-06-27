@@ -336,7 +336,7 @@ div {
 													<div class="card">
 														<img class="card-img-top"
 															src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-															alt="Card image cap"> <a href="#"
+															alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}"
 															class="card-link text-left m-0 p-3">${item.title}</a>
 														<div class="card-body m-0 p-0">
 															<ul class="list-group list-group-flush">

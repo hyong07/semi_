@@ -62,18 +62,16 @@ public class Board_ProductContoller extends HttpServlet {
 
 			}
 			
-			
-			
-			
+		
 			else if(command.equals("/category.bo")) {
 		     
 		         String main_category = request.getParameter("test");  
-		         System.out.println(main_category);     
+		           
 		         List<String> result = category_dao.main_categoryGet(main_category);
 		
 		         response.setCharacterEncoding("utf8");
 		         response.setContentType("application/json");   
-		         System.out.println("2");
+		      
 		         new Gson().toJson(result, response.getWriter());   
 		         
 		         return;
@@ -82,7 +80,7 @@ public class Board_ProductContoller extends HttpServlet {
 			
 			
 			 else if(command.equals("/sell_type.bo")) {    
-		    	  System.out.println("3");
+		    	
 		          String sell_type = request.getParameter("sell_type");         
 		          response.setCharacterEncoding("utf8");   
 		          response.setContentType("application/json");         
@@ -102,10 +100,12 @@ public class Board_ProductContoller extends HttpServlet {
 		         String end_date = request.getParameter("end_date");
 		         int insertBoard = boarddao.addBoard(board_no,id,title,contents,sell_type,end_date);
 		         //int insertProduct = boardProduct_dao.addProduct(board_no, category, detail_category, sell_price, sell_count);         
-		      }
+		      
+			 return;
+			 }
 			
 			 else if(command.equals("/productInfo.bo")) {
-		         System.out.println("나는 물품이다");
+		  
 		         String category = request.getParameter("category");
 		         String sub_category = request.getParameter("sub_category");
 		         String product_name = request.getParameter("product_name");
@@ -123,11 +123,14 @@ public class Board_ProductContoller extends HttpServlet {
 		         for(int i =0; i<product_info.size(); i++) {
 		            System.out.println(product_info.get(i).getP_name());
 		         }
+		         
+		         return;
 		      }
 			
 			  else if(command.equals("/productInfoDelete.bo")) {
 			         System.out.println("물품 삭제할꺼다");;
 			         String product_name = request.getParameter("product_name");
+			         System.out.println(product_name);
 			         boolean check = false;
 			         int count = 0;
 			         for(ProductDTO tmp :product_info) {
@@ -141,9 +144,35 @@ public class Board_ProductContoller extends HttpServlet {
 			               break;
 			            }
 			            count++;
-			         }         
+			         }     
+			         
+			         return;
 			      }
 			
+			  else if(command.equals("/saleView.bo")) {
+				  
+				  
+				  String seq = request.getParameter("seq");
+				  
+			
+				  BoardDTO bdto = new BoardDTO();
+				  bdto = boarddao.selectOneBoard(seq);
+				  ProductDTO pdto = new ProductDTO();
+				  pdto = productdao.mainProduct(seq);
+				  FileDTO fdto = new FileDTO();
+				  fdto = filedao.mainFile(seq);
+				  
+				  request.setAttribute("fdto", fdto);
+				  request.setAttribute("bdto",bdto);
+				  request.setAttribute("pdto", pdto);
+			
+				  isRedirect=false;
+		
+				  dst = "saleView.jsp";
+
+			  }
+			
+			  
 		     
 		      
 

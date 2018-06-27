@@ -891,7 +891,7 @@ $("document").ready(function(){
   </script>
               <!-- signup Form -->
               <img src="사람.png" height="20" width="20">
-              <label>I D</label>
+              <label>ID</label>
               <input type="text" id="id" name="id" required class="id" oninput="checkId()" class="fadeIn second filter-light" placeholder="Please enter your ID">
               <br>
               <img src="pw2.png" height="20" width="20">

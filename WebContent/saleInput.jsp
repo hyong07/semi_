@@ -169,6 +169,9 @@
    
 
    $(document).ready(function() {
+	   
+
+
 	    
 	   	$("#main_category").change(function(){
 	   		var test = $("#main_category option:selected").val();
@@ -234,6 +237,8 @@
 	   			
 	   		})        
 	   		
+	   		
+	   		
 	   		$("input[name=productButton]").click(function() {    
 	   							 var category = $("#main_category").val();	   							 
                                  var sub_category = $("#sub_category").val();
@@ -251,17 +256,23 @@
                                          	$("#product_name").val("");
                                             $("#productprice").val("");
                                             $("#productnum").val("");
-                                            $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                                            $("#productlist").append("<tr><td><input type='radio' id=radio onclick='maincheckline(this);'><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
                                          }
                                  	 }
                                  })                                 
                               })
+                              
+                        
+                              
                   $("#input_imgs").on("change", handleImgFileSelect);
+	   	
+	
                })
 
    function fileUploadAction() {
       console.log("fileUploadAction");
       $("#input_imgs").trigger('click');
+      
    }
 
    function handleImgFileSelect(e) {
@@ -290,6 +301,9 @@
 
             });
    }
+   
+   
+   
 </script>
 </head>
 <body>
@@ -416,12 +430,13 @@
 									</div>
 									<div id="plusproduct" class="panel-collapse collapse form-row">
 										<div class="panel-body col-md-4">
-											<div class="form-row mb-3">
-												<div class="col-md-5">세부 카테고리 :</div>
-												<select id="sub_category" name="sub_category" class="col-md-5 ml-1">
-
-												</select>
-											</div>
+										
+												<div class="form-row mb-3">
+													<div class="col-md-5">세부 카테고리 :</div>
+													<select id="sub_category" name="sub_category" class="col-md-5 ml-1">
+	
+													</select>
+												</div>
 											<div class="form-row mb-3">
 												<div class="col-md-5">제품명 :</div>
 												<input id="product_name" class="form-control col-md-5 ml-1"
@@ -481,7 +496,8 @@
 						<div class="col-md-12">
 							<table class="table">
 								<thead>
-									<tr>										
+									<tr>
+											<th>메인상품</th>								
 										<th>세부카테고리</th>
 										<th>제품명</th>
 										<th>가격</th>
@@ -643,23 +659,40 @@
             	 tdArr.push(td.eq(i).text());
              })
              var product_name = tdArr[1];
+             console.log(product_name);
              $.ajax({
             	 url:"productInfoDelete.bo",
             	 type:"get",
             	 data:{product_name:product_name},
+            	 
             	 success:function(){
             		 console.log("삭제 완료");
             	 }
              })
              
              console.log(tdArr[1]);
-             
+             tr.remove();
              //라인 삭제
-             
-             
-             
+
           }
        }
+       
+       function maincheckline(obj) {     	  
+
+           var tr = $(obj).parent().parent();
+           console.log(tr);
+           var td = tr.children();             
+           var tdArr = new Array();
+           td.each(function(i){
+          	 tdArr.push(td.eq(i).text());
+           })
+           var product_name = tdArr[2];
+           console.log(product_name);
+          console.log("요기");
+  
+     }   
+
+     
 
       function deleteImageAction(index) {
          sel_files.splice(index, 1);
