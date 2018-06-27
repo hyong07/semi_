@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
@@ -165,7 +165,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <script>
-   var sel_files = [];
+   var sel_files = new Array();
    
 
    $(document).ready(function() {
@@ -214,11 +214,13 @@
 		   					$("#test").text("");
 		   					if(rep == "a"){  								   						
 		   						$("#plusButton").attr("href","#auction_product");
-		   						$("#type_check").text("경매 판매를 선택하셨습니다.");
+		   						$("#type_check").attr("value","a");
+		   						$("#type_check").text("경매");
 		   					}
 		   					else if(rep == "s"){		   						
 		   						$("#plusButton").attr("href", "#plusproduct");
-		   						$("#type_check").text("일반 판매를 선택하셨습니다.");
+		   						$("#type_check").attr("value","s");
+		   						$("#type_check").text("일반");
 		   					}
 		   					
 		   					
@@ -252,39 +254,46 @@
                                  	 }
                                  })                                 
                               })
-                  $("#input_imgs").on("change", handleImgFileSelect);
+                           $("#input_imgs").on("change", handleImgFileSelect);	   
                })
 
    function fileUploadAction() {
       console.log("fileUploadAction");
       $("#input_imgs").trigger('click');
+		
    }
-
+		
    function handleImgFileSelect(e) {
-
       var files = e.target.files;
+      var send_files = [];
       var filesArr = Array.prototype.slice.call(files);
-
       var index = 0;
-
-      filesArr
-            .forEach(function(f) {
+      filesArr.forEach(function(f) {
                if (!f.type.match("image.*")) {
                   alert("확장자는 이미지 확장자만 가능합니다.");
                   return;
                }
-
                sel_files.push(f);
+           	var file1 = $("#input_imgs").get(0).files[0];
+       		var file2 = $("#input_imgs").get(0).files[1];
+       		console.log("1");
+       		console.log(file1);
+       		console.log(file2);
+       		
                var reader = new FileReader();
-               reader.onload = function(e) {
+               reader.onload = function(e) {            	  
             	   var html = "<div class=\"col-md-4\"  id=\"img_id"+ index + "\"><img src=\"" + e.target.result + "\"  width=\"100\" height=\"100\" data-file='"+f.name+"' class='selProductFile' tilte='Click to remove'><p align=\"center\">"
                         + f.name + "<button type=\"button\" class=\"btn btn-sm col-md-1\" onclick=\"deleteImageAction("+ index + ")\">X</button></p></div>";
                   $(".imgs_wrap").append(html);
                   index++;
                }
                reader.readAsDataURL(f);
-
-            });
+               
+               
+            });  
+      console.log(sel_files);
+      $("#input_imgs").val(sel_files);
+      
    }
 </script>
 </head>
@@ -374,7 +383,7 @@
 		<div id="centerwrapper">
 
 			<div id="content">
-			<form action="write.bo" method="get">
+			<form action="write.bo" method="post" enctype="multipart/form-data">
 				<div class="card">
 					<div class="card-header">판매글 작성</div>
 					<div class="card-body">
@@ -395,7 +404,7 @@
 								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반
 								<input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								
 							</div>
-							<h id="type_check" color="red"></h>
+							<h id="type_check"><input type="text" name="sell_type" value=""></h>
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2">제품 등록 :</div>
@@ -506,9 +515,12 @@
 							<div class="form-row col-md-10">
 								<div class="input_wrap col-md-12">
 									<button type="button" onclick="fileUploadAction();"
-										class="my_button btn btn-secondary mb-3">파일 업로드</button>
-									<input type="file" id="input_imgs" multiple
-										accept="image/x-png,image/gif,image/jpeg" />
+										class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
+									<input type="file" id="input_imgs" name=img_file[] multiple 
+										accept="image/x-png,image/gif,image/jpeg" />	
+										<div id="file_test">
+										
+										</div>																											
 								</div>
 								<div class="imgs_wrap form-row">
 									<img id="img" />

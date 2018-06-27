@@ -56,16 +56,15 @@ public class Board_ProductDAO {
 		return result;
 	}
 	
-	public int addBoard(int board_no, String id, String title, String contents, String sell_type, String end_date) throws Exception{
+	public int addBoard(int board_no, String id, String title, String contents, String sell_type) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "insert into board values(?,?,?,?,sysdate,?,'p',?)";
+		String sql = "insert into board values(?,?,?,?,sysdate,?,'p','','')";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setInt(1, board_no);
 		pstat.setString(2, id);
 		pstat.setString(3, title);
 		pstat.setString(4, contents);
-		pstat.setString(5, sell_type);
-		pstat.setString(6, end_date);
+		pstat.setString(5, sell_type);		
 		int result = pstat.executeUpdate();
 		pstat.close();
 		con.close();		
