@@ -34,9 +34,6 @@
 <style>
 
 /* 전체적인 틀 css 끝*/
-/* div{ */
-/* 	border : 1px solid black; */
-/* } */
 #topnavicontainer {
 	margin: 0px auto;
 	width: 100%;
@@ -54,7 +51,6 @@
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
-	background-color:rgba(0, 0, 0, 0.03);
 }
 
 #headerwrapper {
@@ -129,35 +125,77 @@
 /* Mypage css*/
 #cardcontainer {
 	width: 80%;
-}
-
-.card-group>.card+.card {
-	border-left: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-#morebutton {
-	margin-top: 10px;
-}
-
-#buttondiv {
-	text-align: right;
+	height: 600px;
 }
 
 #card {
-	cursor: pointer;
+	height: 100%;
+}
+
+#pwform {
+	height: 100px;
+	margin-top: 150px;
+}
+
+#pw, #pwcheck {
+	margin-bottom: 10px;
 }
 .card-header{
 	background-color:#4f70ce;
 	color : white;
 }
-
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+	$(document).ready(function() {
+		$("#okbt").click(function() {
+			var pw = $("#pw").val();
+			var pwcheck = $("#pwcheck").val();
+
+			if (pw == '') {
+				alert('비밀번호를 입력하세요');
+				$("#pw").focus();
+			}
+			else if (pwcheck == '') {
+				alert('비밀번호확인을 입력하세요');
+				$("#pwcheck").focus();
+			} else if (pw != pwcheck) {
+				alert('비밀번호 와 비밀번호 확인이 일치하지 않습니다.');
+				$("#pw").val('');
+				$("#pwcheck").val('');
+			}
+			else{
+				$.ajax({
+					url : "currentpwcheck.mem",
+					type : "post",
+					data : {pw : pw},
+					success : function(response) {
+						console.log(response +"1");
+						if (response) {
+							alert("현재비밀번호와 같습니다. 새로운비밀번호를 입력하세요.");
+							$("#pw").val('');
+							$("#pwcheck").val('');
+						} else{
+							console.log(response+"2");
+							if(confirm("바꾸시겠습니까?")){
+								$("#pwform").submit();
+							}
+						}
+					},
+					error : function() {
+						console.log("error 발생");
+					},
+					complete : function() {
+						console.log("성공이건 실패건 어찌되었든 ajax 종료");
+					}
+				})
+			}
+
+		})
+	})
 </script>
 </head>
 <body>
@@ -247,7 +285,7 @@
 						<div class="col-md-2">
 							<ul class="nav nav-pills flex-column">
 								<li class="nav-item"><a href="mypage.jsp"
-									class="active nav-link btn-secondary"> <i
+									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
 								<li class="nav-item"><a href="mypage_purchase.jsp"
@@ -256,101 +294,34 @@
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+								<li class="nav-item"><a
+									class="active nav-link btn-secondary" href="mypage_info.mem">내
+										정보</a></li>
 								<li class="nav-item"><a
 									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card mb-4">
-								<div class="card-header">구매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3"cursor:pointer;>
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
+							<div class="card text-center" id="card">
+								<div class="card-header">내정보</div>
+								<div class="card-body text-center">
+									<form id="pwform" action="pwchange.mem" method="post">
+										<label for="inputPassword4" class="col-md-12">새 비밀번호</label>
+										<div class="text-center col-md-12">
+											<input type="password" class="col-md-4" id="pw"
+												placeholder="Password" name="pw">
 										</div>
-										<div class="card mr-3" id="card">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
+										<label for="inputPassword4" class="col-md-12">새 비밀번호
+											확인</label>
+										<div class="text-center col-md-12">
+											<input type="password" class="col-md-4" id="pwcheck"
+												placeholder="Password" name="pwcheck">
 										</div>
-										<div class="card" id="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
+										<div class="text-center col-md-12">
+											<input type="button" id="okbt" value="확인"
+												class="btn btn-secondary">
 										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card mb-4">
-								<div class="card-header">경매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">판매등록내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -428,8 +399,6 @@
 		</div>
 
 	</div>
-
-
 
 
 </body>

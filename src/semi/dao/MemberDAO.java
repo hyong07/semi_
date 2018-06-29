@@ -7,22 +7,14 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import semi.dbutils.DBUtils;
 import semi.dto.MemberDTO;
 
 public class MemberDAO {
-	// ======= DB Connection 
-	private Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String dbId = "kh";
-		String dbPw = "kh";
-		
-		return DriverManager.getConnection(url, dbId, dbPw);
-	}
 	
 	public boolean isIdExist(String id) throws Exception{
-		Connection con = this.getConnection();
-		String sql = "SELECT * FROM MEMBERS WHERE ID =?";
+		Connection con = DBUtils.getConnection();
+		String sql = "SELECT * FROM MEMBER WHERE ID =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		ResultSet rs = pstat.executeQuery();
@@ -36,16 +28,16 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public int insertMember(String id, String pw, String name, String phone, String email, String address) throws Exception{
-		Connection con = this.getConnection();
-		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?)";
+	public int insertMember(MemberDTO dto) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?,default)";
 		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, id);
-		pstat.setString(2, pw);
-		pstat.setString(3, name);
-		pstat.setString(4, phone);
-		pstat.setString(5, email);
-		pstat.setString(6, address);
+		pstat.setString(1, dto.getId());
+		pstat.setString(2, dto.getPw());
+		pstat.setString(3, dto.getName());
+		pstat.setString(4, dto.getEmail());
+		pstat.setString(5, dto.getPhone());
+		pstat.setString(6, dto.getAddress());
 		
 		int result = pstat.executeUpdate(); 
 		
@@ -57,7 +49,8 @@ public class MemberDAO {
 	}
 	
 	public boolean idpwcheck(String id, String pw) throws Exception {
-		Connection con = this.getConnection();
+		System.out.println(id + " : " + pw);
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =? AND PW =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
@@ -69,12 +62,12 @@ public class MemberDAO {
 		rs.close();
 		con.close();
 		pstat.close();
-		
+		System.out.println(result);
 		return result;
 	}
 	
 	public List<MemberDTO> selectMember() throws Exception{
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		ResultSet rs = pstat.executeQuery();
@@ -93,5 +86,79 @@ public class MemberDAO {
 		}
 		return list;
 	}
+	
+	public MemberDTO selectMember(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "SELECT * FROM MEMBER WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
+		ResultSet rs = pstat.executeQuery();
+		
+		MemberDTO dto = new MemberDTO();
+		
+		while(rs.next()) {
+			dto.setId(rs.getString("id"));
+			dto.setName(rs.getString("name"));
+			dto.setPhone(rs.getString("phone"));
+			dto.setEmail(rs.getString("email"));
+			dto.setAddress(rs.getString("address"));
+			dto.setPoint(rs.getString("point"));
+			
+		}
+		return dto;
+	}
+	
+	public int modifymember(String id,String name,String email,String phone,String address) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET NAME=?,EMAIL=?,PHONE=?,ADDRESS=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, name);
+		pstat.setString(2, email);
+		pstat.setString(3, phone);
+		pstat.setString(4, address);
+		pstat.setString(5, id);
+		
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	public int changepw(String id,String pw) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET PW=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, pw);
+		pstat.setString(2, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	public int leaveMember(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "delete from member where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	
 	
 }

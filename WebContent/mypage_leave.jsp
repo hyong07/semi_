@@ -34,9 +34,6 @@
 <style>
 
 /* 전체적인 틀 css 끝*/
-/* div{ */
-/* 	border : 1px solid black; */
-/* } */
 #topnavicontainer {
 	margin: 0px auto;
 	width: 100%;
@@ -54,7 +51,6 @@
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
-	background-color:rgba(0, 0, 0, 0.03);
 }
 
 #headerwrapper {
@@ -129,23 +125,9 @@
 /* Mypage css*/
 #cardcontainer {
 	width: 80%;
+	height: 600px;
 }
 
-.card-group>.card+.card {
-	border-left: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-#morebutton {
-	margin-top: 10px;
-}
-
-#buttondiv {
-	text-align: right;
-}
-
-#card {
-	cursor: pointer;
-}
 .card-header{
 	background-color:#4f70ce;
 	color : white;
@@ -157,7 +139,18 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+	$(document).ready(function() {
+		$("#leavebt").click(function(){
+			if( $("#check").is(":checked")){
+				if(confirm("정말정말 탈퇴하시겠습니까 ?ㅠㅠ")){
+					location.href = "leavemember.mem";
+				}
+			}
+			else{
+				alert("약관동의를 확인해주세요.");
+			}
+		})
+	})
 </script>
 </head>
 <body>
@@ -247,7 +240,7 @@
 						<div class="col-md-2">
 							<ul class="nav nav-pills flex-column">
 								<li class="nav-item"><a href="mypage.jsp"
-									class="active nav-link btn-secondary"> <i
+									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
 								<li class="nav-item"><a href="mypage_purchase.jsp"
@@ -257,99 +250,41 @@
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+									href="mypage_info.mem">내 정보</a></li>
 								<li class="nav-item"><a
-									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
+									class="active nav-link btn-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card mb-4">
-								<div class="card-header">구매신청내역</div>
+							<div class="card" id="card">
+								<div class="card-header">Auction Go! 탈퇴</div>
 								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3"cursor:pointer;>
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3" id="card">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card" id="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card mb-4">
-								<div class="card-header">경매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
+									<div class="form-row">
+										<div class="form-group col-md-12">
+											<label for="inputEmail4">더 이상 저희 Auction Go! 이용을 원치
+												않으셔서 탈퇴를 원하시는 경우, 탈퇴 이용약관 동의를 선택하신 후 탈퇴를 진행하시기 바랍니다.</label>
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a class="accordion-toggle text-dark" data-toggle="collapse"
+															data-parent="#accordion" href="#collapseThree">
+															탈퇴약관동의</a>
+													</h4>
+												</div>
+												<div id="collapseThree" class="panel-collapse collapse">
+													<textarea class="form-control col-md-10 panel-body mb-3 text-danger" rows="4" style="resize: none;" disabled>탈퇴시 저희 Auction Go!에서는 충전하셨던 포인트를 회원가입을 다시 하셔도 돌려드리지 않습니다. 다시 회원가입을 원하신다면 탈퇴하셔도 언제든 다시 회원가입할 수 있습니다. 그동안 저희 Auction Go!를 이용해주셔서 감사합니다.</textarea> 	
+													<div class="form-check form-check-inline">
+													  <input class="form-check-input" type="checkbox" id="check" value="option1">
+													  <label class="form-check-label">위의 탈퇴 약관에 동의합니다.</label>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
-									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">판매등록내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<button type="button" class="btn btn-secondary" id="leavebt">탈퇴하기</button>
 										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
 									</div>
 								</div>
 							</div>
@@ -428,9 +363,14 @@
 		</div>
 
 	</div>
-
-
-
+	<script>
+	function toggleChevron(e) {
+        $(e.target).prev('.panel-heading').find("i.indicator").toggleClass(
+              'glyphicon-chevron-down glyphicon-chevron-up');
+     }
+     $('#accordion').on('hidden.bs.collapse', toggleChevron);
+     $('#accordion').on('shown.bs.collapse', toggleChevron);
+	</script>
 
 </body>
 </html>

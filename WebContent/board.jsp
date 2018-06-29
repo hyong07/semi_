@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -27,22 +28,41 @@
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+	rel="stylesheet">
+<script
+	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
 
-/* 전체적인 틀 css 끝*/
-/* div{ */
-/* 	border : 1px solid black; */
-/* } */
+/*   primary: #12bbad, */
+/*   secondary: #4f70ce, */
+/*   light: #f3f3f3, */
+/*   dark: #151515, */
+/*   info: #ccc, */
+/*   success: #28a745, */
+/*   warning: #ffc107, */
+/*   danger: #dc3545 */
+body {
+	
+}
+
+div {
+	border: 0px solid black;
+	box-sizing: border-box;
+}
+
 #topnavicontainer {
 	margin: 0px auto;
 	width: 100%;
 }
 
 #topnavbar {
+	/*        position: fixed; */
 	width: 100%;
 	height: 40px;
 	font-size: 20px;
@@ -51,10 +71,10 @@
 }
 
 #allwrapper {
+	/*       opacity: 0.8; */
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
-	background-color:rgba(0, 0, 0, 0.03);
 }
 
 #headerwrapper {
@@ -103,15 +123,16 @@
 }
 
 #centerwrapper {
+	border: 2px solid red;
 	height: auto;
 	width: 80%;
+	padding-top: 0;
 	margin: 0px auto;
 }
 
 #content {
 	height: 100%;
 	width: 100%;
-	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -124,41 +145,21 @@
 	width: 100%;
 }
 
-/* 전체적인 틀 css 끝*/
-
-/* Mypage css*/
-#cardcontainer {
-	width: 80%;
+/* 광고  */
+.floating {
+	border: 1px solid black;
+	position: fixed;
+	right: 50%;
+	top: auto;
+	margin-right: -720px;
+	text-align: center;
+	width: 120px;
 }
-
-.card-group>.card+.card {
-	border-left: 1px solid rgba(0, 0, 0, 0.125);
-}
-
-#morebutton {
-	margin-top: 10px;
-}
-
-#buttondiv {
-	text-align: right;
-}
-
-#card {
-	cursor: pointer;
-}
-.card-header{
-	background-color:#4f70ce;
-	color : white;
-}
-
-/* Mypage css 끝*/
 </style>
 
-<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
-<script>
-	
-</script>
+
+
+
 </head>
 <body>
 
@@ -170,28 +171,22 @@
 			<a class="navbar-brand" href="#">Auction GO!</a>
 		</div>
 
-
 		<div class="collapse navbar-collapse text-center justify-content-end"
 			id="menucontainer">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="#"> <i
-						class="fa fa-user fa-fw"></i> Login
+				<li class="nav-item"><a class="nav-link" href="login.jsp">
+						<i class="fa fa-user fa-fw"></i> Login
 				</a></li>
-
 				<li class="nav-item"><a class="nav-link" href="#"> <i
 						class="fa fa-user fa-fw"></i> Sing in
 				</a></li>
 			</ul>
-
 			<a class="btn navbar-btn ml-2 btn-secondary text-white"> <i
 				class="fa d-inline fa-lg fa-user-circle-o"></i> My Page
 			</a>
-
 		</div>
 		</nav>
 	</div>
-
-
 
 	<div id="allwrapper">
 
@@ -223,146 +218,194 @@
 
 
 
+
+
 				<div id="headerright"></div>
 			</div>
 
+
+
+			<div id="centernavbar">
+				<nav class="nav nav-pills nav-justified">
+				<li class="nav-item"><a class="nav-link  text-secondary"
+					id="menubtn" href="#"> <i
+						class="fa d-inline fa-lg fa-bookmark-o"></i> category
+				</a></li>
+				<li class="nav-item"><a class="nav-link  text-secondary"
+					id="menubtn" href="#"> <i
+						class="fa d-inline fa-lg fa-bookmark-o"></i> category
+				</a></li>
+				<li class="nav-item"><a class="nav-link  text-secondary"
+					id="menubtn" href="#"> <i
+						class="fa d-inline fa-lg fa-bookmark-o"></i> category
+				</a></li>
+				<li class="nav-item"><a class="nav-link  text-secondary"
+					id="menubtn" href="#"> <i
+						class="fa d-inline fa-lg fa-bookmark-o"></i> category
+				</a></li>
+				<li class="nav-item"><a class="nav-link  text-secondary"
+					id="menubtn" href="#"> <i
+						class="fa d-inline fa-lg fa-bookmark-o"></i> category
+				</a></li>
+				</nav>
+			</div>
+
 		</div>
+
 		<div id="centerwrapper">
+
 			<div id="content">
-				<div class="container">
-					<div class="input-group">
-						<div class="input-group-prepend">
-							<span><p class="lead mr-3">
-									<ion-icon name="person"></ion-icon>
-									${sessionScope.loginid} 님
-								</p></span>
-						</div>
-						<p class="lead">
-							보유금액 :
-							<ion-icon name="logo-usd"></ion-icon>
-							1000
-						</p>
-					</div>
-					<div class="row h-100">
-						<div class="col-md-2">
-							<ul class="nav nav-pills flex-column">
-								<li class="nav-item"><a href="mypage.jsp"
-									class="active nav-link btn-secondary"> <i
-										class="fa fa-home fa-home"></i>&nbsp;MyPage
-								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.jsp"
-									class="nav-link text-secondary">구매신청내역</a></li>
-								<li class="nav-item"><a href="mypage_auction.jsp"
-									class="nav-link text-secondary">경매신청내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
-								<li class="nav-item"><a
-									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
-							</ul>
-						</div>
-						<div id="cardcontainer">
-							<div class="card mb-4">
-								<div class="card-header">구매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3"cursor:pointer;>
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
+				<div class="py-5">
+					<div class="container">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<div class="w-25 h-100 col-md-4 col-lg-2">
+										<div id=category_board>
+											<div>
+												<h1>Category</h1>
 											</div>
-										</div>
-										<div class="card mr-3" id="card">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card" id="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
+											<ul id="menu">
+												<li class="active"><a href="#"> 패션 <span
+														class="fa arrow"></span></a>
+													<ul>
+														<li><a href="#">남성의류</a></li>
+														<li><a href="#">여성의류</a></li>
+														<li><a href="#">아동의류</a></li>
+														<li><a href="#">잡화</a></li>
+													</ul></li>
+												<li><a href="#">전자제품 <span class="glyphicon arrow"></span></a>
+													<ul>
+														<li><a href="#">가전</a></li>
+														<li><a href="#">노트북 </a></li>
+
+														<li><a href="#">컴퓨터</a></li>
+														<li><a href="#">기타</a></li>
+													</ul></li>
+												<li><a href="#">리빙 <span class="glyphicon arrow"></span></a>
+													<ul>
+														<li><a href="#">주방</a></li>
+														<li><a href="#">생활</a></li>
+														<li><a href="#">욕실</a></li>
+														<li><a href="#">기타</a></li>
+													</ul></li>
+												<li><a href="#">문화 <span class="glyphicon arrow"></span></a>
+													<ul>
+														<li><a href="#">스포츠</a></li>
+														<li><a href="#">공연,전시 </a></li>
+
+														<li><a href="#">도서</a></li>
+														<li><a href="#">기타</a></li>
+													</ul></li>
+												<li><a href="#">뷰티 <span class="glyphicon arrow"></span></a>
+													<ul>
+														<li><a href="#">화장품</a></li>
+														<li><a href="#">향수</a></li>
+
+														<li><a href="#">기타</a></li>
+
+													</ul></li>
+
+											</ul>
+
+
 										</div>
 									</div>
-									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
+									<div class="col-md-4 w-75 col-lg-9">
+										<div class="row mx-1 py-2">
+											<div class="btn-group">
+												<a href="board.jsp" class="btn btn-secondary">All View</a> <a
+													href="ListView.jsp" class="btn btn-secondary">Auction</a> <a
+													href="board.jsp" class="btn btn-secondary">Buy It Now</a>
+											</div>
+											<div style="width: 400px"></div>
+											sort <select class="mx-2 text-muted">
+												<option value="최신순">최신순</option>
+												<option value="마감순">마감순</option>
+												<option value="조회순">조회순</option>
+												<option value="인기순">인기순</option>
+											</select>
+										</div>
+										<div class="row px-4">251 result</div>
+										<div class="row px-4">.</div>
+
+									
+										<c:forEach var="item" items="${boardlist}">
+											<div class="row">					
+												<div class="col-md-3 m-0 p-0">
+													<div class="card">
+														<img class="card-img-top"
+															src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
+															alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}"
+															class="card-link text-left m-0 p-3">${item.title}</a>
+														<div class="card-body m-0 p-0">
+															<ul class="list-group list-group-flush">
+																<li class="list-group-item">${pricelist[0]}</li>
+																<li class="list-group-item">${item.seller_id}</li>
+																<li
+																	class="list-group-item d-flex justify-content-between align-items-center">${item.viewcount}
+																	<span class="badge badge-secondary p-1">${item.sell_status}</span>
+																</li>
+															</ul>
+														</div>
+													</div>
+												</div>
+											</div>
+									</c:forEach>
+									
+
+
+										<div class="row">
+									
+										</div>
+										<div class="row">
+										
+										</div>
+										<div class="row">
+											<div class="col-md-3 m-0 p-0">
+										
+											</div>
+											<div class="col-md-3 m-0 p-0">
+										
+											</div>
+											<div class="col-md-3 m-0 p-0">
+											
+											</div>
+											<div class="col-md-3 m-0 p-0">
+										
+										</div>
+									</div>
+									<div class="col-md-4 w-25 col-lg-1">
+
+
+										<div class="floating">
+											<p>광고</p>
+											<img src="다운로드.gif" width="100" height="200">
+
+										</div>
+
+
+										<div class="floating">광고코드</div>
+
+
 									</div>
 								</div>
-							</div>
-							<div class="card mb-4">
-								<div class="card-header">경매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card">
-								<div class="card-header">판매등록내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
+								<div class="row"></div>
 							</div>
 						</div>
 					</div>
 				</div>
 
+
 			</div>
+
 		</div>
 
 
-		<div id="bottomwrapper">
+		<div id="bottomwrapper" class="bg-secondary">
+
 			<div id="footer">
+
 				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
@@ -424,12 +467,20 @@
 						</div>
 					</div>
 				</div>
+
+
+
+
+
+
+
+
+
 			</div>
+
 		</div>
 
 	</div>
-
-
 
 
 </body>
