@@ -43,18 +43,55 @@ public class MemberDAO {
 	   con.close();
 	   return result;
    }
+   
+   /*
+    * 
+    * 비밀번호 찾기 , 난수 생성 후 바뀐 비밀번호 넘김 
+    * 
+    */
    public String findPw(String email, String id) throws Exception{
 	   Connection con =DBUtils.getConnection();
 	   String result=null;
-	   String certification = Integer.toString((int)(Math.random() * 9000 + 1000));       	   	 
+	   String  pswd = "";
+	   StringBuffer sb = new StringBuffer();
+	   StringBuffer sc = new StringBuffer("!#$%^&*-=?~");  // 특수문자 모음, {}[] 같은 비호감문자는 뺌
+
+	   // 대문자 4개를 임의 발생 
+	   sb.append((char)((Math.random() * 26)+65));  // 첫글자는 대문자, 첫글자부터 특수문자 나오면 안 이쁨
+
+	   for( int i = 0; i<3; i++) {
+	      sb.append((char)((Math.random() * 26)+65));  // 아스키번호 65(A) 부터 26글자 중에서 택일
+	   } 
+
+	   // 소문자 4개를 임의발생
+	   for( int i = 0; i<4; i++) {
+	       sb.append((char)((Math.random() * 26)+97)); // 아스키번호 97(a) 부터 26글자 중에서 택일
+	   }  
+
+
+	   // 숫자 2개를 임의 발생
+	   for( int i = 0; i<2; i++) {
+	       sb.append((char)((Math.random() * 10)+48)); //아스키번호 48(1) 부터 10글자 중에서 택일
+	   }
+
+
+	   // 특수문자를 두개  발생시켜 랜덤하게 중간에 끼워 넣는다 
+	   sb.setCharAt(((int)(Math.random()*3)+1), sc.charAt((int)(Math.random()*sc.length()-1))); //대문자3개중 하나   
+	   sb.setCharAt(((int)(Math.random()*4)+4), sc.charAt((int)(Math.random()*sc.length()-1))); //소문자4개중 하나
+
+	   pswd = sb.toString();
+
+	      	   	 
 	   String sql = "update member set pw=? where email=? and id=?";
 	   PreparedStatement pstat = con.prepareStatement(sql);
-	   pstat.setString(1, certification);
+	   
+	   
+	   pstat.setString(1, pswd);
 	   pstat.setString(2, email);
 	   pstat.setString(3, id);
 	   int success = pstat.executeUpdate();	   
 	   if(success > 0) {
-		   result= certification;		   		 
+		   result= pswd;		   		 
 	   } 
 	   con.commit();
 	   pstat.close();

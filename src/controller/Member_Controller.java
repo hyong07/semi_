@@ -2,6 +2,8 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -127,6 +129,26 @@ public class Member_Controller extends HttpServlet {
 				isRedirect =false;
 				
 				dst = "find.jsp";
+			}else if(command.equals("/sms.mem")) {
+				
+				String to = "82"+request.getParameter("phone");
+				String from="33644643087";
+				String message = "doGood";
+				
+				String sendUrl = "https://www.proovl.com/api/send.php?user=6394162&token=mZJb0hlGqKxlgbpx4GqNTH4lX0aNAQ04";
+				StringBuilder sb = new StringBuilder();
+				sb.append(sendUrl);
+				sb.append("&to="+to);
+				sb.append("&from="+from);
+				sb.append("&text="+message);
+				
+				System.out.println(sb.toString());
+				URL url = new URL(sb.toString());
+				HttpURLConnection con = (HttpURLConnection)url.openConnection();
+				int result = con.getResponseCode();
+				System.out.println(result);
+				con.disconnect();
+				
 			}
 			
 			

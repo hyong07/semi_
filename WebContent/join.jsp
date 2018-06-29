@@ -18,6 +18,7 @@ pageEncoding="UTF-8"%>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
   
   <title>Insert title here</title>
   <style>
@@ -753,45 +754,10 @@ pageEncoding="UTF-8"%>
       display: inline-block;
     }
   </style>
-  </head>
-  <body>
-
-  <div id="topnavicontainer">
-    <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar">
-      <div id="logocontainer">
-        <a class="navbar-brand" href="#">Auction GO!</a>
-      </div>
-      <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" href="login.jsp">
-              <i class="fa fa-user fa-fw"></i> Login</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="join.jsp">
-              <i class="fa fa-user fa-fw"></i> Sign Up</a>
-          </li>
-        </ul>
-        <a class="btn navbar-btn ml-2 btn-secondary text-white">
-          <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a>
-      </div>
-    </nav>
-  </div>
-  <div id="allwrapper">
-    <div id="centerwrapper">
-      <!--       <div id="content"> -->
-      <div class="wrapper fadeInDown" >
-        <h1 class="display-4">
-          <b>Sign Up</b>
-        </h1>
-        <br>
-        <form action="join.mem" method="post">
-          <div id="formContent" class="">
-            <!-- Tabs Titles -->
-            <b>
-            
-              <script>
-<!-- 유효성검사 시작 -->
+  
+           <script>
+  
+  <!-- 유효성검사 시작 -->
 
 var idCheck = 0;
 var pwdCheck = 0;
@@ -958,12 +924,69 @@ $("document").ready(function(){
 	                $(this).focus();
 	            }
 	      }
-	  });  
-	
+	  }); 
+	    
+	   $("#confirm").click(function(){
+		
+		 var phone = $("#phone").val();
+		 
+		 $.ajax({
+				url:"sms.mem",
+				type:"post",
+				data:{
+					phone : phone
+					},
+					success function(data){
+						
+					}
+		 
+	   });	
+	   
 })
+  
+  
 
 
   </script>
+  
+  </head>
+  <body>
+
+  <div id="topnavicontainer">
+    <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar">
+      <div id="logocontainer">
+        <a class="navbar-brand" href="#">Auction GO!</a>
+      </div>
+      <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            <a class="nav-link" href="login.jsp">
+              <i class="fa fa-user fa-fw"></i> Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="join.jsp">
+              <i class="fa fa-user fa-fw"></i> Sign Up</a>
+          </li>
+        </ul>
+        <a class="btn navbar-btn ml-2 btn-secondary text-white">
+          <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a>
+      </div>
+    </nav>
+  </div>
+  <div id="allwrapper">
+    <div id="centerwrapper">
+      <!--       <div id="content"> -->
+      <div class="wrapper fadeInDown" >
+        <h1 class="display-4">
+          <b>Sign Up</b>
+        </h1>
+        <br>
+        <form action="join.mem" method="post">
+          <div id="formContent" class="">
+            <!-- Tabs Titles -->
+            <b>
+            
+     
               <!-- signup Form -->
               <img src="사람.png" height="20" width="20">
               <label>I D</label>
@@ -985,13 +1008,15 @@ $("document").ready(function(){
             <br>
             <img src="전화.png" height="20" width="20">
             <label>PH</label>
-            <input type="text" id="phone" required class="id"  class="fadeIn second" name="phone" placeholder="Input Your Phone">
-            <br>
+
+            <input type="text" id="phone" required class="id"  class="fadeIn second" name="phone" style="width:60%" placeholder="Input Your Phone">
+           <button class="" type="button" id="confirm"  style="width: 140px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;" > 번호 인증 </button>
+                     <br>
             <div id="add" class="w-100 text-left px-2">
               <img src="주소.png" height="20" width="20">
               <label>ADD</label>
               <input type="text" id="sample6_postcode" class="" required class="id" oninput="checkId()" name="addresspost" placeholder="Input Your Address" readonly="readonly" style="width:60%">
-              <button class="" type="button" id="post"  style="width: 160px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;" onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
+              <button class="" type="button" id="post"  style="width: 140px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;" onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
               <input type="text" id="sample6_address" required class="id" oninput="checkId()" class="" name="address" placeholder="Input Your Address" readonly="readonly" style="width: 85%; margin-left: 68px">
               <input type="text" id="sample6_address2" required class="id" oninput="checkId()" class="" name="address2" placeholder="Input Your Detailed Address"  style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> </div>
             <!-- 다음 API -->
