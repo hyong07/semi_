@@ -20,7 +20,7 @@ public class BoardDAO {
 		if(!(category2==null)) {
 			
 			sql =
-					"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
+					"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
 			
 			pstat = con.prepareStatement(sql);
 			pstat.setString(1, category);
@@ -30,12 +30,11 @@ public class BoardDAO {
 		else {
 			
 			sql =
-					"select b.* from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
+					"select b.* from board b, product p, files f where (p.category =?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
 			pstat = con.prepareStatement(sql);
 			pstat.setString(1, category);
 			
 		}
-
 
 		ResultSet rs = pstat.executeQuery();
 		ArrayList<BoardDTO> list = new ArrayList<>();
@@ -114,22 +113,19 @@ public class BoardDAO {
 		   return dto;
 	   }
 	   
-	   public int addBoard(String board_no, String id, String title, String contents, String sell_type) throws Exception{
+	   public int addBoard(BoardDTO dto) throws Exception{
 			Connection con = DBUtils.getConnection();
-			String sql = "insert into board values(?,?,?,?,sysdate,?,'p','','')";
+			String sql = "insert into board values(?,?,?,?,sysdate,?,default,'',default)";
 			PreparedStatement pstat = con.prepareStatement(sql);
-			pstat.setString(1, board_no);
-			pstat.setString(2, id);
-			pstat.setString(3, title);
-			pstat.setString(4, contents);
-			pstat.setString(5, sell_type);		
+			pstat.setString(1, dto.getBoard_seq());
+			pstat.setString(2, dto.getSeller_id());
+			pstat.setString(3, dto.getTitle());
+			pstat.setString(4, dto.getContents());
+			pstat.setString(5, dto.getSell_type());		
 			int result = pstat.executeUpdate();
 			pstat.close();
 			con.close();		
 			return result;
 		}
-	   
-	   
-
 
 }

@@ -169,9 +169,10 @@
    
 
    $(document).ready(function() {
-	    
+	
 	   	$("#main_category").change(function(){
 	   		var test = $("#main_category option:selected").val();
+	   		console.log(test);
 	   		$.ajax({
 	   			url:"category.bo",
 	   			type:"get",
@@ -181,13 +182,16 @@
 	   					$("#sub_category").empty();
 	   					for(i=0; i<rep.length;i++){
 	   						$("#sub_category").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+	   						console.log(rep[i]);
 	   					}
 	   				}
 	   			} 
 	   		})
 	   	})	
-	   	
-	   		$("input[name=sell_type]").click(function(){	   			
+	   		var sell_type;
+	   		$("input[name=sell_type]").click(function(){	
+	   			sell_type = $("input[name=sell_type]:checked").val();
+	   			
 	   			var test = $("#main_category option:selected").val();
 	   			$.ajax({
 	   				url:"category.bo",
@@ -203,9 +207,10 @@
 		   				}
 	   				}
 	   			})
-	   			
+	   		
 	   			if(test != ""){
-	   				var sell_type = $("input[name=sell_type]:checked").val();		   			
+	   			
+	   
 		   			$.ajax({
 		   				url:"sell_type.bo",
 		   				type:"get",
@@ -232,26 +237,40 @@
 	   			}
 	   			
 	   		})   		
-	   	}	   	  
-	   		$("input[name=productButton]").click(function() {    
+	      	  
+	   		$("input[name=productButton]").click(function() {  
+	   			
+	   			if(sell_type=="s"){
 	   							 var category = $("#main_category").val();	   							 
                                  var sub_category = $("#sub_category").val();
                                  var product_name = $("#product_name").val();
                                  var sell_price = $("#productprice").val();
                                  var sell_count = $("#productnum").val();
+                                 }
+	   			
+	   			else if(sell_type=="a")
+	   			{
+						 var category = $("#main_category").val();	   							 
+                    var sub_category = $("#sub_category").val();
+                    var product_name = $("#product_name1").val();
+                    var sell_price = $("#productprice1").val();
+                    var sell_count = $("#productnum1").val();
+                    }
+		
+	   		
+                                 console.log(category+" : "+sub_category + " : " + product_name + " : " + sell_price + " : " + sell_count);
                                  $.ajax({
                                 	 url:"productInfo.bo",
                                 	 type:"get",
                                 	 data:{category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,sell_count:sell_count},
                                  	 success:function(rep){
-                                 		if (sub_category == ""|| sell_price == "" || sell_count == "") {
-                                            alert("모두 입력해주세요.");
-                                         } else {$("#sub_category option:selected").prop("selected", false);
+                                 	console.log("성공!");
+                                 		$("#sub_category option:selected").prop("selected", false);
                                          	$("#product_name").val("");
                                             $("#productprice").val("");
                                             $("#productnum").val("");
                                             $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
-                                         }
+                                       
                                  	 }
                                  })                                 
                               })
@@ -398,7 +417,7 @@
 								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반
 								<input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								
 							</div>
-							<h id="type_check"><input type="text" name="sell_type" value=""></h>
+							<h id="type_check"><input type="text" name="sell_type1" value=""></h>
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2">제품 등록 :</div>
@@ -453,18 +472,18 @@
 											</div>
 											<div class="form-row mb-3">
 												<div class="col-md-5">경매품명 :</div>
-												<input id="product_name" class="form-control col-md-5 ml-1"
+												<input id="product_name1" class="form-control col-md-5 ml-1"
 													type="text" placeholder=""> 
 											</div>
 											
 											<div class="form-row mb-3">
 												<div class="col-md-5">시작입찰가 :</div>
-												<input id="productprice" class="form-control col-md-5 ml-1"
+												<input id="productprice1" class="form-control col-md-5 ml-1"
 													type="number" placeholder="" min=1>
 											</div>
 											<div class="form-row mb-3">
 												<div class="col-md-5">경매 기간 :</div>
-												<input id="productnum" class="form-control col-md-5 ml-1"
+												<input id="productnum1" class="form-control col-md-5 ml-1"
 													type="number" placeholder="" min=1 max=20>
 											</div>
 											<div class="form-row">

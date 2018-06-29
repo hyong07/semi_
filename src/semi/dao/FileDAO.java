@@ -100,7 +100,7 @@ public class FileDAO {
 			Connection con = DBUtils.getConnection();
 			int result = 0;
 			for(int i =0; i<dto.size(); i++) {
-				String sql = "insert into files values(file_seq.nextval,?,?,?,'')";
+				String sql = "insert into files values(file_seq.nextval,?,?,?,default)";
 				PreparedStatement pstat = con.prepareStatement(sql);
 				pstat.setString(1, dto.get(i).getBoard_no());
 				pstat.setString(2, dto.get(i).getOriginal_file_name());

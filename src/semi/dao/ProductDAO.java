@@ -44,16 +44,26 @@ public class ProductDAO {
 		return pricelist;
 	}
 	
-	public int addProduct(String board_no, String category, String detail_category, String sell_price, String sell_count, String p_name) throws Exception{
+	public int addProduct(String sell_type, ProductDTO dto) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "insert into product values(?,product_seq.nextval,?,?,?,?,'',?)";
+		String sql = null;
+		
+	if(sell_type.equals("a")) { 
+		sql = "insert into product values(?,product_seq.nextval,?,?,?,?,'y',?)";
+		
+	}
+	
+	else if(sell_type.equals("s")) {
+		sql = "insert into product values(?,product_seq.nextval,?,?,?,?,default,?)";
+	}
+	
 		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, board_no);
-		pstat.setString(2, category);
-		pstat.setString(3, detail_category);
-		pstat.setString(4, sell_price);
-		pstat.setString(5, sell_count);
-		pstat.setString(6, p_name);
+		pstat.setString(1, dto.getBoard_no());
+		pstat.setString(2, dto.getCategory());
+		pstat.setString(3, dto.getDetail_category());
+		pstat.setString(4, dto.getSell_price());
+		pstat.setString(5, dto.getSell_count());
+		pstat.setString(6, dto.getP_name());
 		int result = pstat.executeUpdate();
 		pstat.close();
 		con.close();
