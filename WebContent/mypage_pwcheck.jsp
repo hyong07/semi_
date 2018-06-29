@@ -350,17 +350,20 @@
 	<script>
 			function check_error() {
 			     var form = document.write_form;
+			     
 			     if(form.pw.value == '') {
-		
 			        alert('비밀번호를 입력하세요');
 
 			        form.pw.focus();
 
 			        return false;
 
-			     }else{
+			     }
+			     else{
+			    	
 			     	return true;
 			     }
+			     return true;
 			   }
 
 	</script>

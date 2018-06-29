@@ -13,7 +13,7 @@ public class MemberDTO {
 		super();
 	}
 	
-	public MemberDTO(String id, String pw, String name, String phone, String email, String address, String point) {
+	public MemberDTO(String id, String pw, String name, String email,String phone,  String address, String point) {
 		super();
 		this.id = id;
 		this.pw = pw;
