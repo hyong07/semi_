@@ -122,5 +122,21 @@ public class MemberDAO {
 		return result;
 	}
 	
+	public int leaveMember(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "delete from member where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
 	
 }

@@ -132,6 +132,11 @@
 #productlist{
 	border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+.card-header{
+	background-color:#4f70ce;
+	color : white;
+}
 /* Mypage css 끝*/
 </style>
 
@@ -212,7 +217,7 @@
 						<div class="input-group-prepend">
 							<span><p class="lead mr-3">
 									<ion-icon name="person"></ion-icon>
-									이유림님
+									${sessionScope.loginid} 님
 								</p></span>
 						</div>
 						<p class="lead">
@@ -237,7 +242,7 @@
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_pwcheck.jsp">내 정보</a></li>
 								<li class="nav-item"><a
-									class="nav-link text-secondary" href="mypage_leave.jsp">회원탈퇴</a></li>
+									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">

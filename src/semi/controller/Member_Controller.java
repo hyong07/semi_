@@ -69,17 +69,11 @@ public class Member_Controller extends HttpServlet {
 			}
 			else if(command.equals("/mypage_info.mem")) {
 				
-//				int result = Integer.parseInt(request.getParameter("result"));
-//				
-//				if(request.getParameter("result") != null) {
-//					result = Integer.parseInt(request.getParameter("result"));
-//				}
-//				
 				String loginid = (String) request.getSession().getAttribute("loginid");
 				MemberDTO dto = dao.selectMember(loginid);
 				
 				request.setAttribute("dto", dto);
-				//request.setAttribute("result", result);
+
 				isRedirect = false;
 				dst = "mypage_info.jsp";
 			}
@@ -102,6 +96,17 @@ public class Member_Controller extends HttpServlet {
 					dst = "mypage_info.mem";
 				}
 			}
+			else if(command.equals("/pwcheck2.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				if(result) {
+					isRedirect = false;
+					dst = "mypage_leave.jsp";
+				}
+			}
 			else if(command.equals("/member_modify.mem")) {
 				String id = request.getParameter("id");
 				String name = request.getParameter("name");
@@ -117,7 +122,7 @@ public class Member_Controller extends HttpServlet {
 					request.setAttribute("result", result);
 					request.setAttribute("dto", dto);
 					isRedirect = false;
-					dst = "mypage_info.jsp";
+					dst = "mypage_info.mem";
 				}else {
 					request.setAttribute("result", result);
 					isRedirect = false;
@@ -147,12 +152,25 @@ public class Member_Controller extends HttpServlet {
 				MemberDTO dto = dao.selectMember(loginid);
 				
 				if(result > 0) {
-					request.setAttribute("result", result);
-					request.setAttribute("dto", dto);
 					isRedirect = false;
-					dst = "mypage_info.jsp";
+					dst = "mypage_info.mem";
+				}else {
+					isRedirect = false;
+					dst = "error.html";
 				}
 				
+			}
+			else if(command.equals("/leavemember.mem")) {
+				System.out.println("µé¾î¿È");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				int result = dao.leaveMember(loginid);
+				System.out.println("!");
+				if(result > 0) {
+					System.out.println("!");
+					session.invalidate();
+					isRedirect = false;
+					dst = "memberout.jsp";
+				}
 			}
 			
 			if(isRedirect) {

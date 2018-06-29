@@ -128,6 +128,11 @@
 	height: 600px;
 }
 
+.card-header{
+	background-color:#4f70ce;
+	color : white;
+}
+
 /* Mypage css 끝*/
 </style>
 
@@ -135,7 +140,16 @@
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
 	$(document).ready(function() {
-
+		$("#leavebt").click(function(){
+			if( $("#check").is(":checked")){
+				if(confirm("정말정말 탈퇴하시겠습니까 ?ㅠㅠ")){
+					location.href = "leavemember.mem";
+				}
+			}
+			else{
+				alert("약관동의를 확인해주세요.");
+			}
+		})
 	})
 </script>
 </head>
@@ -235,27 +249,41 @@
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
+								<li class="nav-item"><a class="nav-link text-secondary"
+									href="mypage_info.mem">내 정보</a></li>
 								<li class="nav-item"><a
-									class="nav-link text-secondary" href="mypage_info.mem">내
-										정보</a></li>
-								<li class="nav-item"><a
-									class="active nav-link btn-secondary" href="mypage_leave.jsp">회원탈퇴</a></li>
+									class="active nav-link btn-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
 							<div class="card" id="card">
-								<div class="card-header">Auction Go! 탈퇴 </div>
+								<div class="card-header">Auction Go! 탈퇴</div>
 								<div class="card-body">
 									<div class="form-row">
 										<div class="form-group col-md-12">
-											<label for="inputEmail4">더 이상 저희 Auction Go! 이용을 원치 않으셔서 탈퇴를 원하시는 경우, 탈퇴 이용약관 동의를 선택하신 후 탈퇴를 진행하시기 바랍니다.</label> 
-											<textarea class="form-control" id="exampleFormControlTextarea1" rows="3" disabled>탈퇴시 저희 Auction Go!에서는 충전하셨던 포인트를 회원가입을 다시 하셔도 돌려드리지 않습니다. 다시 회원가입을 원하신다면 탈퇴하셔도 언제든 다시 회원가입할 수 있습니다. 그동안 저희 Auction Go!를 이용해주셔서 감사합니다.</textarea>
+											<label for="inputEmail4">더 이상 저희 Auction Go! 이용을 원치
+												않으셔서 탈퇴를 원하시는 경우, 탈퇴 이용약관 동의를 선택하신 후 탈퇴를 진행하시기 바랍니다.</label>
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a class="accordion-toggle text-dark" data-toggle="collapse"
+															data-parent="#accordion" href="#collapseThree">
+															탈퇴약관동의</a>
+													</h4>
+												</div>
+												<div id="collapseThree" class="panel-collapse collapse">
+													<textarea class="form-control col-md-10 panel-body mb-3 text-danger" rows="4" style="resize: none;" disabled>탈퇴시 저희 Auction Go!에서는 충전하셨던 포인트를 회원가입을 다시 하셔도 돌려드리지 않습니다. 다시 회원가입을 원하신다면 탈퇴하셔도 언제든 다시 회원가입할 수 있습니다. 그동안 저희 Auction Go!를 이용해주셔서 감사합니다.</textarea> 	
+													<div class="form-check form-check-inline">
+													  <input class="form-check-input" type="checkbox" id="check" value="option1">
+													  <label class="form-check-label">위의 탈퇴 약관에 동의합니다.</label>
+													</div>
+												</div>
+											</div>
 										</div>
 									</div>
 									<div class="form-row">
 										<div class="form-group col-md-8">
-											<label for="inputEmail4">Name</label> <input type="text"
-												class="form-control" placeholder="${dto.name }" readonly>
+											<button type="button" class="btn btn-secondary" id="leavebt">탈퇴하기</button>
 										</div>
 									</div>
 								</div>
@@ -335,7 +363,14 @@
 		</div>
 
 	</div>
-
+	<script>
+	function toggleChevron(e) {
+        $(e.target).prev('.panel-heading').find("i.indicator").toggleClass(
+              'glyphicon-chevron-down glyphicon-chevron-up');
+     }
+     $('#accordion').on('hidden.bs.collapse', toggleChevron);
+     $('#accordion').on('shown.bs.collapse', toggleChevron);
+	</script>
 
 </body>
 </html>
