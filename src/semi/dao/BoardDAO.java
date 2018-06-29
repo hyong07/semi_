@@ -58,14 +58,14 @@ public class BoardDAO {
 		return list;
 	}
 	
-	  public int checkboardNo() throws Exception{
+	  public String checkboardNo() throws Exception{
 	      Connection con = DBUtils.getConnection();
 	      String sql = "select board_seq.nextval from dual";
 	      PreparedStatement pstat = con.prepareStatement(sql);
 	      ResultSet rs = pstat.executeQuery();
-	      int result = 0;
+	      String result = "";
 	      while(rs.next()) {
-	         result = rs.getInt(1);
+	         result = rs.getString(1);
 	      }         
 	      return result;
 	   }
@@ -92,6 +92,7 @@ public class BoardDAO {
 		   String sql = "select * from board where board_seq=?";
 		   PreparedStatement pstat = con.prepareStatement(sql);
 		   pstat.setString(1, seq);
+		 
 		   ResultSet rs = pstat.executeQuery();
 		   BoardDTO dto = new BoardDTO();
 
@@ -112,6 +113,23 @@ public class BoardDAO {
 		   
 		   return dto;
 	   }
+	   
+	   public int addBoard(String board_no, String id, String title, String contents, String sell_type) throws Exception{
+			Connection con = DBUtils.getConnection();
+			String sql = "insert into board values(?,?,?,?,sysdate,?,'p','','')";
+			PreparedStatement pstat = con.prepareStatement(sql);
+			pstat.setString(1, board_no);
+			pstat.setString(2, id);
+			pstat.setString(3, title);
+			pstat.setString(4, contents);
+			pstat.setString(5, sell_type);		
+			int result = pstat.executeUpdate();
+			pstat.close();
+			con.close();		
+			return result;
+		}
+	   
+	   
 
 
 }

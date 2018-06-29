@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -54,7 +55,6 @@
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
-	background-color:rgba(0, 0, 0, 0.03);
 }
 
 #headerwrapper {
@@ -143,25 +143,42 @@
 	text-align: right;
 }
 
-#card {
-	cursor: pointer;
+#cardbody{
+	margin-left:200px;
+}
+
+#mypage_bt{
+	margin-left:100px;
 }
 .card-header{
 	background-color:#4f70ce;
 	color : white;
 }
-
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+	$(document).ready(function(){
+		$("#modify_bt").click(function(){
+			location.href = "mypage_modify.mem";
+		})
+		
+		$("#changepw_bt").click(function(){
+			location.href = "mypage_changepw.jsp";
+		})
+	})
 </script>
 </head>
 <body>
-
+ 	<c:choose> 
+            <c:when test="${result == 1}"> 
+            		<script> 
+            		alert("수정이 완료되었습니다.");
+            		</script> 
+           </c:when>
+     </c:choose> 
 
 	<div id="topnavicontainer">
 		<nav class="navbar navbar-expand-md navbar-dark bg-secondary"
@@ -247,7 +264,7 @@
 						<div class="col-md-2">
 							<ul class="nav nav-pills flex-column">
 								<li class="nav-item"><a href="mypage.jsp"
-									class="active nav-link btn-secondary"> <i
+									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
 								<li class="nav-item"><a href="mypage_purchase.jsp"
@@ -256,100 +273,51 @@
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+								<li class="nav-item"><a class="active nav-link btn-secondary"
+									href="mypage_info.mem">내 정보</a></li>
 								<li class="nav-item"><a
 									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card mb-4">
-								<div class="card-header">구매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3"cursor:pointer;>
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3" id="card">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card" id="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card mb-4">
-								<div class="card-header">경매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
 							<div class="card">
-								<div class="card-header">판매등록내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
+								<div class="card-header">내정보</div>
+								<div class="card-body" id="cardbody">
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Id</label> <input type="text"
+												class="form-control" placeholder="${dto.id }" readonly>
 										</div>
 									</div>
-									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Name</label> <input type="text"
+												class="form-control" placeholder="${dto.name }" readonly>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Email</label> <input type="text"
+												class="form-control" placeholder="${dto.email }" readonly>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputEmail4">Phone</label> <input type="text"
+												class="form-control" placeholder="${dto.phone }" readonly>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputAddress">Address</label> <input type="text"
+											class="form-control" placeholder="${dto.address }" readonly>
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12" id="mypage_bt">
+											<button type="button" id="changepw_bt" class="btn btn-danger">비밀번호 변경</button>
+											<button type="button" id="modify_bt" class="btn btn-secondary">내정보수정</button>
+										</div>
 									</div>
 								</div>
 							</div>

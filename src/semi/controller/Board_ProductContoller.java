@@ -1,5 +1,6 @@
 package semi.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
+import com.oreilly.servlet.MultipartRequest;
+import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
 import semi.dao.BoardDAO;
 import semi.dao.CategoryDAO;
@@ -48,12 +51,16 @@ public class Board_ProductContoller extends HttpServlet {
 				String category2 = request.getParameter("ca2");
 				
 				System.out.println(category + " : " + category2);
-				ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
 				ArrayList<BoardDTO> boardlist = boarddao.boardForBoard(category, category2);
+				
+				
+				
+				ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
 				ArrayList<String> pricelist = productdao.priceForBoard(category,category2);
 				System.out.println(filelist.size());
 				System.out.println(boardlist.size());
-				System.out.println(pricelist.size());
+				System.out.println(pricelist.
+						size());
 				request.setAttribute("filelist", filelist);
 				request.setAttribute("boardlist", boardlist);
 				request.setAttribute("pricelist", pricelist);
@@ -91,17 +98,40 @@ public class Board_ProductContoller extends HttpServlet {
 			
 			
 			 else if(command.equals("/write.bo")) {
-		         System.out.println("글작성!");
-		         int board_no = boarddao.checkboardNo();
-		         String id = (String) request.getSession().getAttribute("loginid");
-		         String title = request.getParameter("title");
-		         String contents = request.getParameter("contents");
-		         String sell_type = request.getParameter("sell_type");         
-		         String end_date = request.getParameter("end_date");
-		         int insertBoard = boarddao.addBoard(board_no,id,title,contents,sell_type,end_date);
-		         //int insertProduct = boardProduct_dao.addProduct(board_no, category, detail_category, sell_price, sell_count);         
-		      
-			 return;
+					System.out.println("라이트보!");			
+					List<FileDTO> fileList = new ArrayList<>();
+					String board_no = boarddao.checkboardNo();
+					String realPath = request.getServletContext().getRealPath("/image/"+(board_no));
+					System.out.println(realPath);			
+					File f = new File(realPath);
+					if(!f.exists()) {
+						f.mkdir();
+					}
+					int maxSize = 1024 * 1024 * 100;
+					String enc = "utf8";			
+					MultipartRequest mr = new MultipartRequest(request, realPath, maxSize, enc, new DefaultFileRenamePolicy());	
+					System.out.println(board_no);
+					String id = (String) request.getSession().getAttribute("loginid");			
+					fileList = filedao.searchFileName(realPath, board_no);
+					String title = mr.getParameter("title");
+					String contents = mr.getParameter("contents");
+					String sell_type = mr.getParameter("sell_type");
+					int insertBoard = boarddao.addBoard(board_no,id,title,contents,sell_type);
+					System.out.println("보드넘버!" + board_no+"헿");
+					for(int i=0; i<product_info.size(); i++) {				
+							String category = product_info.get(i).getCategory();
+							String detail_category = product_info.get(i).getDetail_category();
+							String p_name = product_info.get(i).getP_name();
+							String sell_price = product_info.get(i).getSell_count();
+							String sell_count = product_info.get(i).getSell_price();					
+							int insertProduct = productdao.addProduct(board_no, category, detail_category, sell_price, sell_count, p_name);
+					}
+					System.out.println(board_no+"보드넘버 : " + product_info.size());
+					int insertFile = filedao.insertFile(fileList);
+					System.out.println("" + insertFile + "인설트파일!");
+					System.out.println("우헿");
+					
+					return;
 			 }
 			
 			 else if(command.equals("/productInfo.bo")) {
@@ -149,12 +179,21 @@ public class Board_ProductContoller extends HttpServlet {
 			         return;
 			      }
 			
+				else if(command.equals("/sell_type.bo")) {			
+					String sell_type = request.getParameter("sell_type");			
+					response.setCharacterEncoding("utf8");	
+					response.setContentType("application/json");			
+					new Gson().toJson(sell_type, response.getWriter());	
+					
+					return;
+				}
+			
 			  else if(command.equals("/saleView.bo")) {
 				  System.out.println("z_z");
 				  
 				  String seq = request.getParameter("seq");
+				  String sell_type =request.getParameter("type");
 				  
-			
 				  BoardDTO bdto = new BoardDTO();
 				  bdto = boarddao.selectOneBoard(seq);
 				  ProductDTO pdto = new ProductDTO();
@@ -167,8 +206,12 @@ public class Board_ProductContoller extends HttpServlet {
 				  request.setAttribute("pdto", pdto);
 			
 				  isRedirect=false;
-		
-				  dst = "saleView.jsp";
+				  if(sell_type.equals("a")) {
+					  dst = "auctionarticleview.jsp";
+				  }
+				  else {
+					  dst = "salearticleview.jsp";
+				  }
 
 			  }
 

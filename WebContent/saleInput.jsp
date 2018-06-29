@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
 	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
@@ -165,13 +165,10 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
 <script>
-   var sel_files = [];
+   var sel_files = new Array();
    
 
    $(document).ready(function() {
-	   
-
-
 	    
 	   	$("#main_category").change(function(){
 	   		var test = $("#main_category option:selected").val();
@@ -180,7 +177,7 @@
 	   			type:"get",
 	   			data:{test:test},
 	   			success:function(rep){
-	   				if(rep.length>0){
+	   				if(rep.length>0){	   					
 	   					$("#sub_category").empty();
 	   					for(i=0; i<rep.length;i++){
 	   						$("#sub_category").append("<option value="+rep[i]+">"+rep[i]+"</option>");
@@ -197,16 +194,13 @@
 	   				type:"get",
 	   				data:{test:test},
 	   				success:function(rep){
-	   					if(rep.length>0){
+	   					if(rep.length>0){	   
+	   					
 		   					$("select[name=sub_category]").empty();
 		   					for(i=0; i<rep.length;i++){
 		   						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
-		   					
 		   					}
 		   				}
-	   				},
-	   				error:function(rep){
-	   				
 	   				}
 	   			})
 	   			
@@ -221,11 +215,13 @@
 		   					$("#test").text("");
 		   					if(rep == "a"){  								   						
 		   						$("#plusButton").attr("href","#auction_product");
-		   						$("#type_check").text("경매 판매를 선택하셨습니다.");
+		   						$("#type_check").attr("value","a");
+		   						$("#type_check").text("경매");
 		   					}
 		   					else if(rep == "s"){		   						
 		   						$("#plusButton").attr("href", "#plusproduct");
-		   						$("#type_check").text("일반 판매를 선택하셨습니다.");
+		   						$("#type_check").attr("value","s");
+		   						$("#type_check").text("일반");
 		   					}
 		   					
 		   					
@@ -235,10 +231,8 @@
 	   				alert("메인 카테고리를 선택해주세요.");
 	   			}
 	   			
-	   		})        
-	   		
-	   		
-	   		
+	   		})   		
+	   	}	   	  
 	   		$("input[name=productButton]").click(function() {    
 	   							 var category = $("#main_category").val();	   							 
                                  var sub_category = $("#sub_category").val();
@@ -256,54 +250,45 @@
                                          	$("#product_name").val("");
                                             $("#productprice").val("");
                                             $("#productnum").val("");
-                                            $("#productlist").append("<tr><td><input type='radio' id=radio onclick='maincheckline(this);'><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                                            $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
                                          }
                                  	 }
                                  })                                 
                               })
-                              
-                        
-                              
-                  $("#input_imgs").on("change", handleImgFileSelect);
-	   	
-	
+                           $("#input_imgs").on("change", handleImgFileSelect);	   
                })
 
    function fileUploadAction() {
       console.log("fileUploadAction");
-      $("#input_imgs").trigger('click');
-      
+      $("#input_imgs").trigger('click');		
    }
-
+   
    function handleImgFileSelect(e) {
-
       var files = e.target.files;
+      var send_files = [];
       var filesArr = Array.prototype.slice.call(files);
-
       var index = 0;
-
-      filesArr
-            .forEach(function(f) {
+      filesArr.forEach(function(f) {
                if (!f.type.match("image.*")) {
                   alert("확장자는 이미지 확장자만 가능합니다.");
                   return;
                }
-
-               sel_files.push(f);
+               sel_files.push(f);       		
                var reader = new FileReader();
-               reader.onload = function(e) {
+               reader.onload = function(e) {            	  
             	   var html = "<div class=\"col-md-4\"  id=\"img_id"+ index + "\"><img src=\"" + e.target.result + "\"  width=\"100\" height=\"100\" data-file='"+f.name+"' class='selProductFile' tilte='Click to remove'><p align=\"center\">"
                         + f.name + "<button type=\"button\" class=\"btn btn-sm col-md-1\" onclick=\"deleteImageAction("+ index + ")\">X</button></p></div>";
                   $(".imgs_wrap").append(html);
                   index++;
                }
                reader.readAsDataURL(f);
-
-            });
+               
+               
+            });  
+      console.log(sel_files);
+      $("#input_imgs").val(sel_files);
+      
    }
-   
-   
-   
 </script>
 </head>
 <body>
@@ -392,7 +377,7 @@
 		<div id="centerwrapper">
 
 			<div id="content">
-			<form action="write.bo" method="get">
+			<form action="write.bo" method="post" enctype="multipart/form-data">
 				<div class="card">
 					<div class="card-header">판매글 작성</div>
 					<div class="card-body">
@@ -413,7 +398,7 @@
 								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반
 								<input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								
 							</div>
-							<h id="type_check" color="red"></h>
+							<h id="type_check"><input type="text" name="sell_type" value=""></h>
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2">제품 등록 :</div>
@@ -430,13 +415,12 @@
 									</div>
 									<div id="plusproduct" class="panel-collapse collapse form-row">
 										<div class="panel-body col-md-4">
-										
-												<div class="form-row mb-3">
-													<div class="col-md-5">세부 카테고리 :</div>
-													<select id="sub_category" name="sub_category" class="col-md-5 ml-1">
-	
-													</select>
-												</div>
+											<div class="form-row mb-3">
+												<div class="col-md-5">세부 카테고리 :</div>
+												<select id="sub_category" name="sub_category" class="col-md-5 ml-1">
+
+												</select>
+											</div>
 											<div class="form-row mb-3">
 												<div class="col-md-5">제품명 :</div>
 												<input id="product_name" class="form-control col-md-5 ml-1"
@@ -496,8 +480,7 @@
 						<div class="col-md-12">
 							<table class="table">
 								<thead>
-									<tr>
-											<th>메인상품</th>								
+									<tr>										
 										<th>세부카테고리</th>
 										<th>제품명</th>
 										<th>가격</th>
@@ -526,9 +509,12 @@
 							<div class="form-row col-md-10">
 								<div class="input_wrap col-md-12">
 									<button type="button" onclick="fileUploadAction();"
-										class="my_button btn btn-secondary mb-3">파일 업로드</button>
-									<input type="file" id="input_imgs" multiple
-										accept="image/x-png,image/gif,image/jpeg" />
+										class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
+									<input type="file" id="input_imgs" name=img_file multiple 
+										accept="image/x-png,image/gif,image/jpeg" />	
+										<div id="file_test">
+										
+										</div>																											
 								</div>
 								<div class="imgs_wrap form-row">
 									<img id="img" />
@@ -659,40 +645,23 @@
             	 tdArr.push(td.eq(i).text());
              })
              var product_name = tdArr[1];
-             console.log(product_name);
              $.ajax({
             	 url:"productInfoDelete.bo",
             	 type:"get",
             	 data:{product_name:product_name},
-            	 
             	 success:function(){
             		 console.log("삭제 완료");
             	 }
              })
              
              console.log(tdArr[1]);
-             tr.remove();
+             
              //라인 삭제
-
+             
+             
+             
           }
        }
-       
-       function maincheckline(obj) {     	  
-
-           var tr = $(obj).parent().parent();
-           console.log(tr);
-           var td = tr.children();             
-           var tdArr = new Array();
-           td.each(function(i){
-          	 tdArr.push(td.eq(i).text());
-           })
-           var product_name = tdArr[2];
-           console.log(product_name);
-          console.log("요기");
-  
-     }   
-
-     
 
       function deleteImageAction(index) {
          sel_files.splice(index, 1);

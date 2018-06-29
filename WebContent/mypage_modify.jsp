@@ -54,7 +54,6 @@
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
-	background-color:rgba(0, 0, 0, 0.03);
 }
 
 #headerwrapper {
@@ -146,18 +145,18 @@
 #card {
 	cursor: pointer;
 }
+
 .card-header{
 	background-color:#4f70ce;
 	color : white;
 }
-
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+
 </script>
 </head>
 <body>
@@ -247,7 +246,7 @@
 						<div class="col-md-2">
 							<ul class="nav nav-pills flex-column">
 								<li class="nav-item"><a href="mypage.jsp"
-									class="active nav-link btn-secondary"> <i
+									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
 								<li class="nav-item"><a href="mypage_purchase.jsp"
@@ -256,101 +255,53 @@
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+								<li class="nav-item"><a class="active nav-link btn-secondary"
+									href="mypage_info.mem">내 정보</a></li>
 								<li class="nav-item"><a
 									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card mb-4">
-								<div class="card-header">구매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3"cursor:pointer;>
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3" id="card">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card" id="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
-							<div class="card mb-4">
-								<div class="card-header">경매신청내역</div>
-								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
-									</div>
-									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
-									</div>
-								</div>
-							</div>
 							<div class="card">
-								<div class="card-header">판매등록내역</div>
+								<div class="card-header">내 정보 수정</div>
 								<div class="card-body">
-									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
-											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
+								<form action="member_modify.mem" method="post" name=write_form onSubmit="return check_error()">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Id</label> <input type="text"
+												class="form-control"  name=id value="${dto.id }" readonly>
 										</div>
 									</div>
-									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary"
-											id="morebutton">더보기 +</a>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Name</label> <input type="text"
+												class="form-control" name=name value="${dto.name }">
+										</div>
 									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Email</label> <input type="text"
+												class="form-control" name=email value="${dto.email }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Phone</label> <input type="text"
+												class="form-control" name=phone value="${dto.phone }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputAddress">Address</label> <input type="text"
+											class="form-control" name=address value="${dto.address }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 text-right">
+											<input type="submit" class="btn btn-secondary" value="수정하기">
+										</div>
+									</div>
+									</form>
 								</div>
 							</div>
 						</div>
@@ -428,7 +379,43 @@
 		</div>
 
 	</div>
+	<script>
+			function check_error() {
+			     var form = document.write_form;
+			     if(form.name.value == '') {
 
+			        alert('이름을 입력하세요');
+
+			        form.name.focus();
+
+			        return false;
+
+			     }
+			     else if(form.email.value == ''){
+			    	 alert('이메일을 입력하세요');
+
+				     form.email.focus();
+
+				     return false;
+			     }
+			     else if(form.phone.value == ''){
+			    	 alert('핸드폰 번호를 입력하세요');
+
+				     form.phone.focus();
+
+				     return false;
+			     }
+			     else if(form.address.value == ''){
+			    	 alert('주소를 입력하세요');
+
+				     form.address.focus();
+
+				     return false;
+			     }
+			     return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
+			   }
+
+	</script>
 
 
 

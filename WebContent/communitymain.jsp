@@ -27,18 +27,21 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-
 <link href="https://fonts.googleapis.com/css?family=Open+Sans"
 	rel="stylesheet">
-<script
-	src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>  -->
+<link
+	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+	rel="stylesheet" id="bootstrap-css">
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-
+@import 'bootstrap-4.0.0';
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -47,6 +50,19 @@
 /*   success: #28a745, */
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
+/*   --blue: #007bff; */
+/*   --indigo: #6610f2; */
+/*   --purple: #6f42c1; */
+/*   --pink: #e83e8c; */
+/*   --red: #dc3545; */
+/*   --orange: #fd7e14; */
+/*   --yellow: #ffc107; */
+/*   --green: #28a745; */
+/*   --teal: #20c997; */
+/*   --cyan: #17a2b8; */
+/*   --white: #fff; */
+/*   --gray: #6c757d; */
+/*   --gray-dark: #343a40; */
 body {
 	
 }
@@ -62,7 +78,7 @@ div {
 }
 
 #topnavbar {
-	/*        position: fixed; */
+	/* 	    position: fixed; */
 	width: 100%;
 	height: 40px;
 	font-size: 20px;
@@ -71,7 +87,7 @@ div {
 }
 
 #allwrapper {
-	/*       opacity: 0.8; */
+	/* 		opacity: 0.8; */
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
@@ -118,21 +134,31 @@ div {
 #menubtn {
 	background: #FFF8DC;
 	box-shadow: 0;
-	border: 2px solid #7B68EE;
+	border: 1px solid #12bbad;
 	outline: none;
 }
 
 #centerwrapper {
-	border: 2px solid red;
+	/*  		height:64%;  */
 	height: auto;
 	width: 80%;
-	padding-top: 0;
 	margin: 0px auto;
 }
 
 #content {
 	height: 100%;
 	width: 100%;
+	background: #f4f4f4;
+}
+
+
+#card #pcard{
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  width: 200px;
+  height: 35px;
+
 }
 
 #bottomwrapper {
@@ -145,46 +171,79 @@ div {
 	width: 100%;
 }
 
-/* 광고  */
-.floating {
-	border: 1px solid black;
-	position: fixed;
-	right: 50%;
-	top: auto;
-	margin-right: -720px;
-	text-align: center;
-	width: 120px;
+th {
+	background: #F0FFFF;
 }
+
+.bg-orange {
+	background: #d8622b;
+	color: #fff !important;
+}
+
+img {
+	width: 100%;
+	max-height: 560px;
+}
+
+a {
+	color: #696969;
+}
+
+
+
+.cover {
+	min-height:100%;
+  display:flex;
+  align-items:center
+}
+
+
+
+
 </style>
 
 
 
+<script>
 
+
+</script>
 </head>
 <body>
+	<%
 
-
+%>
 	<div id="topnavicontainer">
-		<nav class="navbar navbar-expand-md navbar-dark bg-secondary"
+		<nav class="navbar navbar-expand-md navbar-dark bg-info"
 			id="topnavbar">
 		<div id="logocontainer">
-			<a class="navbar-brand" href="#">Auction GO!</a>
+			<a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>
 		</div>
 
 		<div class="collapse navbar-collapse text-center justify-content-end"
 			id="menucontainer">
 			<ul class="navbar-nav">
-				<li class="nav-item"><a class="nav-link" href="login.jsp">
-						<i class="fa fa-user fa-fw"></i> Login
-				</a></li>
-				<li class="nav-item"><a class="nav-link" href="#"> <i
-						class="fa fa-user fa-fw"></i> Sing in
+				<li class="nav-item"><c:choose>
+						<c:when test="${sessionScope.loginid != null}">
+							<a class="nav-link" href="logout.mem"> <i
+								class="fa fa-user fa-fw"></i> Logout
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a class="nav-link" href="login.jsp"> <i
+								class="fa fa-user fa-fw"></i> Login
+							</a>
+						</c:otherwise>
+					</c:choose></li>
+				<li class="nav-item"><a class="nav-link" href="join.jsp"> <i
+						class="fa fa-user fa-fw"></i> Sing up
 				</a></li>
 			</ul>
-			<a class="btn navbar-btn ml-2 btn-secondary text-white"> <i
+			<a class="btn navbar-btn ml-2 btn-info text-white"> <i
 				class="fa d-inline fa-lg fa-user-circle-o"></i> My Page
 			</a>
 		</div>
+
 		</nav>
 	</div>
 
@@ -205,7 +264,7 @@ div {
 											<input type="search" class="form-control"
 												placeholder="search">
 											<div class="input-group-append">
-												<button class="btn btn-secondary" type="button">Search</button>
+												<button class="btn btn-info" type="button">Search</button>
 											</div>
 										</div>
 									</form>
@@ -217,9 +276,6 @@ div {
 
 
 
-
-
-
 				<div id="headerright"></div>
 			</div>
 
@@ -227,23 +283,25 @@ div {
 
 			<div id="centernavbar">
 				<nav class="nav nav-pills nav-justified">
-				<li class="nav-item"><a class="nav-link  text-secondary"
+				<li class="nav-item"><a class="nav-link  text-info"
 					id="menubtn" href="#"> <i
 						class="fa d-inline fa-lg fa-bookmark-o"></i> category
 				</a></li>
-				<li class="nav-item"><a class="nav-link  text-secondary"
+
+
+				<li class="nav-item"><a class="nav-link  text-info"
+					id="menubtn" href="CommunityController.do"> <i
+						class="fa d-inline fa-lg fa-bookmark-o"></i> category
+				</a></li>
+				<li class="nav-item"><a class="nav-link  text-info"
 					id="menubtn" href="#"> <i
 						class="fa d-inline fa-lg fa-bookmark-o"></i> category
 				</a></li>
-				<li class="nav-item"><a class="nav-link  text-secondary"
+				<li class="nav-item"><a class="nav-link  text-info"
 					id="menubtn" href="#"> <i
 						class="fa d-inline fa-lg fa-bookmark-o"></i> category
 				</a></li>
-				<li class="nav-item"><a class="nav-link  text-secondary"
-					id="menubtn" href="#"> <i
-						class="fa d-inline fa-lg fa-bookmark-o"></i> category
-				</a></li>
-				<li class="nav-item"><a class="nav-link  text-secondary"
+				<li class="nav-item"><a class="nav-link  text-info"
 					id="menubtn" href="#"> <i
 						class="fa d-inline fa-lg fa-bookmark-o"></i> category
 				</a></li>
@@ -255,146 +313,151 @@ div {
 		<div id="centerwrapper">
 
 			<div id="content">
-				<div class="py-5">
-					<div class="container">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="row">
-									<div class="w-25 h-100 col-md-4 col-lg-2">
-										<div id=category_board>
-											<div>
-												<h1>Category</h1>
-											</div>
-											<ul id="menu">
-												<li class="active"><a href="#"> 패션 <span
-														class="fa arrow"></span></a>
-													<ul>
-														<li><a href="#">남성의류</a></li>
-														<li><a href="#">여성의류</a></li>
-														<li><a href="#">아동의류</a></li>
-														<li><a href="#">잡화</a></li>
-													</ul></li>
-												<li><a href="#">전자제품 <span class="glyphicon arrow"></span></a>
-													<ul>
-														<li><a href="#">가전</a></li>
-														<li><a href="#">노트북 </a></li>
 
-														<li><a href="#">컴퓨터</a></li>
-														<li><a href="#">기타</a></li>
-													</ul></li>
-												<li><a href="#">리빙 <span class="glyphicon arrow"></span></a>
-													<ul>
-														<li><a href="#">주방</a></li>
-														<li><a href="#">생활</a></li>
-														<li><a href="#">욕실</a></li>
-														<li><a href="#">기타</a></li>
-													</ul></li>
-												<li><a href="#">문화 <span class="glyphicon arrow"></span></a>
-													<ul>
-														<li><a href="#">스포츠</a></li>
-														<li><a href="#">공연,전시 </a></li>
+				<!-- <body draggable="true" > -->
+				<!-- 	<div class="py-5" > -->
+				<!-- 		<div class="container" id="a"> -->
+				<!-- 			<div class="row" id="row"> -->
+				<!-- 				<div class="col-md-10" > -->
+				<!-- 					<table class="table" > -->
+				<!-- 						<thead> -->
+				<!-- 							<tr> -->
+				<!-- 								<th colspan="5"  width="400">자유게시판</th> -->
+				<!-- 							</tr> -->
+				<!-- 							<tr> -->
+				<!-- 								<th >글번호</th> -->
+				<!-- 								<th width="450" align=center width="400" align=center>제목</th> -->
+				<!-- 								<th >작성자</th> -->
+				<!-- 								<th >작성일</th> -->
+				<!-- 								<th >조회</th> -->
+				<!-- 							</tr> -->
 
-														<li><a href="#">도서</a></li>
-														<li><a href="#">기타</a></li>
-													</ul></li>
-												<li><a href="#">뷰티 <span class="glyphicon arrow"></span></a>
-													<ul>
-														<li><a href="#">화장품</a></li>
-														<li><a href="#">향수</a></li>
+				<!-- 						</thead> -->
+				<!-- 						<tbody> -->
+				<%-- 							<c:choose> --%>
+				<%-- 								<c:when test="${result.isEmpty()}"> --%>
+				<!-- 									<tr> -->
+				<!-- 										<td colspan=4 height="300" align=center>표시할내용이없습니다..</td> -->
+				<!-- 									</tr> -->
 
-														<li><a href="#">기타</a></li>
+				<%-- 								</c:when> --%>
+				<%-- 								<c:otherwise> --%>
+				<%-- 									<c:forEach var="item" items="${result}"> --%>
 
-													</ul></li>
+				<!-- 										<tr> -->
+				<%-- 											<td>${item.seq} --%>
+				<%-- 											<td><a href="CommunityAticleView.do?seq=${item.seq}&count=${item.viewcount}">${item.title}</a> </td>   --%>
 
-											</ul>
+				<%-- 											<td>${item.writer} --%>
+				<%-- 											<td>${item.writedate} --%>
+				<%-- 											<td>${item.viewcount} --%>
+				<!-- 										</tr> -->
 
 
-										</div>
-									</div>
-									<div class="col-md-4 w-75 col-lg-9">
-										<div class="row mx-1 py-2">
-											<div class="btn-group">
-												<a href="board.jsp" class="btn btn-secondary">All View</a> <a
-													href="ListView.jsp" class="btn btn-secondary">Auction</a> <a
-													href="board.jsp" class="btn btn-secondary">Buy It Now</a>
-											</div>
-											<div style="width: 400px"></div>
-											sort <select class="mx-2 text-muted">
-												<option value="최신순">최신순</option>
-												<option value="마감순">마감순</option>
-												<option value="조회순">조회순</option>
-												<option value="인기순">인기순</option>
-											</select>
-										</div>
-										<div class="row px-4">251 result</div>
-										<div class="row px-4">.</div>
+				<%-- 									</c:forEach> --%>
+				<%-- 								</c:otherwise> --%>
+				<%-- 							</c:choose> --%>
+				<!-- 						</tbody> -->
+				<!-- 					</table> -->
+				<!-- 					    &nbsp; -->
+				<%-- 	<c:choose> --%>
+				<%--       <c:when test="${sessionScope.loginid != null}"> --%>
 
+
+
+				<!-- 					 <div class="col-md-12 text-right" > -->
+
+				<!--          				<a class="btn text-center text-light btn-secondary" href="communitywrite.jsp">Writing</a> -->
+				<!--         			</div> -->
+				<%--          </c:when> --%>
+				<%--                  <c:otherwise>         --%>
+
+				<!--                  <div class="col-md-12 text-right" > -->
+
+
+				<!--         			</div> -->
+
+				<%--                 </c:otherwise> --%>
+				<%--      </c:choose>			 --%>
+
+
+				<!-- 				</div> -->
+				<!-- 			</div> -->
+				<!-- 		</div> -->
+				<!-- 	</div> -->
+
+
+
+
+
+
+
+				<div class="row">
+
+					<c:choose>
+						<c:when test="${result.isEmpty()}">
+							<tr>
+								<td colspan=4 height="300" align=center>표시할내용이없습니다..</td>
+							</tr>
+
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="item" items="${result}">
+								<div class="p-3 align-self-center col-md-3">
+									<div class="card">
+										<div class="card-block p-5" id="card">
 									
-										<c:forEach var="item" items="${boardlist}">
-											<div class="row">					
-												<div class="col-md-3 m-0 p-0">
-													<div class="card">
-														<img class="card-img-top"
-															src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-															alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}"
-															class="card-link text-left m-0 p-3">${item.title}</a>
-														<div class="card-body m-0 p-0">
-															<ul class="list-group list-group-flush">
-																<li class="list-group-item">${pricelist[0]}</li>
-																<li class="list-group-item">${item.seller_id}</li>
-																<li
-																	class="list-group-item d-flex justify-content-between align-items-center">${item.viewcount}
-																	<span class="badge badge-secondary p-1">${item.sell_status}</span>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-									</c:forEach>
-									
-
-
-										<div class="row">
-									
-										</div>
-										<div class="row">
-										
-										</div>
-										<div class="row">
-											<div class="col-md-3 m-0 p-0">
-										
-											</div>
-											<div class="col-md-3 m-0 p-0">
-										
-											</div>
-											<div class="col-md-3 m-0 p-0">
+												<i class="fa d-inline fa-lg fa-bookmark-o"></i>
 											
-											</div>
-											<div class="col-md-3 m-0 p-0">
-										
+												<h2 class="text-right">${item.seq}
+											
+											</h2>
+											
+											<h5 class="text-center" id="pcard"  >
+												<a
+													href="ArticleCount.do?seq=${item.seq}&count=${item.viewcount}">${item.title}</a>
+											</h5>
+											
+											<hr>
+											
+											<p id="pcard">
+											${item.contents}&nbsp;</p>
+
+											<p>${item.writer} ${item.writedate} ${item.viewcount}</p>
+
+
 										</div>
-									</div>
-									<div class="col-md-4 w-25 col-lg-1">
-
-
-										<div class="floating">
-											<p>광고</p>
-											<img src="다운로드.gif" width="100" height="200">
-
-										</div>
-
-
-										<div class="floating">광고코드</div>
-
-
 									</div>
 								</div>
-								<div class="row"></div>
-							</div>
+							
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		
+			
+			
+
+				&nbsp;
+				<c:choose>
+					<c:when test="${sessionScope.loginid != null}">
+
+
+
+						<div class="col-md-12 text-right">
+
+							<a class="btn text-center text-light btn-secondary"
+								href="communitywrite.jsp">Writing</a>
 						</div>
-					</div>
-				</div>
+					</c:when>
+					<c:otherwise>
+
+						<div class="col-md-12 text-right"></div>
+
+					</c:otherwise>
+				</c:choose>
+
+
 
 
 			</div>
@@ -402,11 +465,14 @@ div {
 		</div>
 
 
-		<div id="bottomwrapper" class="bg-secondary">
+
+
+
+		<div id="bottomwrapper" class="bg-info">
 
 			<div id="footer">
 
-				<div class="text-white bg-secondary">
+				<div class="text-white bg-primary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -467,13 +533,6 @@ div {
 						</div>
 					</div>
 				</div>
-
-
-
-
-
-
-
 
 
 			</div>

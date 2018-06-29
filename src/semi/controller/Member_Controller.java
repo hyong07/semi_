@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
+
 import semi.dao.MemberDAO;
 import semi.dto.MemberDTO;
 
@@ -86,6 +88,126 @@ public class Member_Controller extends HttpServlet {
 				}
 				return;
 			}
+
+			else if(command.equals("/mypage_modify.mem")) {
+				String loginid = (String) request.getSession().getAttribute("loginid");
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				request.setAttribute("dto", dto);
+				isRedirect = false;
+				dst = "mypage_modify.jsp";
+			}
+			
+			else if(command.equals("/pwcheck.mem")) {
+				System.out.println("pwcheck µé¾î¿È");
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				System.out.println(pw + " : " + loginid);		
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				if(result) {
+					isRedirect = false;
+					dst = "mypage_info.mem";
+				}
+				else {
+					
+					dst="mypage_pwcheck.jsp";
+				}
+				
+				
+				
+			}
+			
+			
+			else if(command.equals("/mypage_info.mem")) {
+				
+				String loginid = (String) request.getSession().getAttribute("loginid");
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				request.setAttribute("dto", dto);
+
+				isRedirect = false;
+				dst = "mypage_info.jsp";
+			}
+			else if(command.equals("/pwcheck2.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				if(result) {
+					isRedirect = false;
+					dst = "mypage_leave.jsp";
+				}
+			}
+			else if(command.equals("/member_modify.mem")) {
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				String address = request.getParameter("address");
+				
+				int result = dao.modifymember(id,name,email,phone,address);
+				
+				MemberDTO dto = dao.selectMember(id);
+				
+				if(result > 0) {
+					request.setAttribute("result", result);
+					request.setAttribute("dto", dto);
+					isRedirect = false;
+					dst = "mypage_info.mem";
+				}else {
+					request.setAttribute("result", result);
+					isRedirect = false;
+					dst = "error.html";
+				}
+			}
+			else if(command.equals("/currentpwcheck.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				response.setCharacterEncoding("utf8");
+				response.setContentType("application/json");
+				
+				new Gson().toJson(result,response.getWriter());
+				
+				return;
+				
+			}
+			
+			else if(command.equals("/pwchange.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				int result = dao.changepw(loginid, pw);
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				if(result > 0) {
+					isRedirect = false;
+					dst = "mypage_info.mem";
+				}else {
+					isRedirect = false;
+					dst = "error.html";
+				}
+				
+			}
+			else if(command.equals("/leavemember.mem")) {
+				System.out.println("µé¾î¿È");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				int result = dao.leaveMember(loginid);
+				System.out.println("!");
+				if(result > 0) {
+					System.out.println("!");
+					session.invalidate();
+					isRedirect = false;
+					dst = "memberout.jsp";
+				}
+			}
+			
+			
+			
 
 			if(isRedirect) {
 				response.sendRedirect(dst);

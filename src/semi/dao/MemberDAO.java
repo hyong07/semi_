@@ -87,4 +87,78 @@ public class MemberDAO {
 		return list;
 	}
 	
+	public MemberDTO selectMember(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "SELECT * FROM MEMBER WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
+		ResultSet rs = pstat.executeQuery();
+		
+		MemberDTO dto = new MemberDTO();
+		
+		while(rs.next()) {
+			dto.setId(rs.getString("id"));
+			dto.setName(rs.getString("name"));
+			dto.setPhone(rs.getString("phone"));
+			dto.setEmail(rs.getString("email"));
+			dto.setAddress(rs.getString("address"));
+			dto.setPoint(rs.getString("point"));
+			
+		}
+		return dto;
+	}
+	
+	public int modifymember(String id,String name,String email,String phone,String address) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET NAME=?,EMAIL=?,PHONE=?,ADDRESS=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, name);
+		pstat.setString(2, email);
+		pstat.setString(3, phone);
+		pstat.setString(4, address);
+		pstat.setString(5, id);
+		
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	public int changepw(String id,String pw) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET PW=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, pw);
+		pstat.setString(2, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	public int leaveMember(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "delete from member where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	
+	
 }
