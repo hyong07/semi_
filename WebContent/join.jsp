@@ -18,8 +18,12 @@ pageEncoding="UTF-8"%>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<<<<<<< Updated upstream
   <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
   
+=======
+   <script  src="../../Jquery/prettify.js"></script>
+>>>>>>> Stashed changes
   <title>Insert title here</title>
   <style>
     /*   primary: #12bbad, */
