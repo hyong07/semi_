@@ -22,6 +22,7 @@ public class ProductDTO {
 		this.detail_category = detail_category;
 		this.sell_price = sell_price;
 		this.sell_count = sell_count;
+		this.p_name = p_name;
 	}
 	
 	

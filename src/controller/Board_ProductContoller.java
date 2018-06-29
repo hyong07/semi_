@@ -1,10 +1,14 @@
 package controller;
 
+import java.awt.Image;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.imageio.ImageIO;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -43,10 +47,10 @@ public class Board_ProductContoller extends HttpServlet {
 			new Gson().toJson(result, response.getWriter());	
 		}
 		else if(command.equals("/write.bo")) {
-			System.out.println("글작성!");
+			System.out.println("글작성!");			
 			List<FileDTO> fileList = new ArrayList<>();
 			int board_no = boardProduct_dao.checkboardNo();
-			String realPath = request.getServletContext().getRealPath("/image/"+(board_no+1));
+			String realPath = request.getServletContext().getRealPath("/image/"+(board_no));
 			System.out.println(realPath);			
 			File f = new File(realPath);
 			if(!f.exists()) {
@@ -56,35 +60,30 @@ public class Board_ProductContoller extends HttpServlet {
 			String enc = "utf8";			
 			MultipartRequest mr = new MultipartRequest(request, realPath, maxSize, enc, new DefaultFileRenamePolicy());	
 			System.out.println(board_no);
-//			String id = (String) request.getSession().getAttribute("loginid");
-			String id = "hello";
+			String id = (String) request.getSession().getAttribute("loginid");			
 			fileList = file_dao.searchFileName(realPath, board_no);
-
-			
-			//	
-			
-			System.out.println("값받기1");
-//			String file_test = mr.getParameter("file_info");			
-			String category = mr.getParameter("category");
-			System.out.println("값받기2");
-			String sub_category = mr.getParameter("sub_category");
-//			String img_file = mr.getParameter("img_file");
 			String title = mr.getParameter("title");
 			String contents = mr.getParameter("contents");
 			String sell_type = mr.getParameter("sell_type");
-
-			System.out.println(sell_type);			
-
+			System.out.println(sell_type);
 			int insertBoard = boardProduct_dao.addBoard(board_no,id,title,contents,sell_type);
-			System.out.println(insertBoard);
-			System.out.println("board 입력 성공");
-//			int insertProduct = boardProduct_dao.addProduct(board_no, category, detail_category, sell_price, sell_count);
+			System.out.println("글번호" + board_no+"인 글 작성완료");
+			for(int i=0; i<product_info.size(); i++) {				
+					String category = product_info.get(i).getCategory();
+					String detail_category = product_info.get(i).getDetail_category();
+					String p_name = product_info.get(i).getP_name();
+					String sell_price = product_info.get(i).getSell_count();
+					String sell_count = product_info.get(i).getSell_price();					
+					int insertProduct = boardProduct_dao.addProduct(board_no, category, detail_category, sell_price, sell_count, p_name);
+			}
+			System.out.println(board_no+"의 글에 등록된 상품은 : " + product_info.size());
 			int insertFile = file_dao.insertFile(fileList);
 			System.out.println("" + insertFile + "개의 파일이 등록됨");
 			System.out.println("값다받음");
 		}
 		else if(command.equals("/productInfo.bo")) {
 			System.out.println("나는 물품이다");
+			
 			String category = request.getParameter("category");
 			String sub_category = request.getParameter("sub_category");
 			String product_name = request.getParameter("product_name");
@@ -98,10 +97,6 @@ public class Board_ProductContoller extends HttpServlet {
 			product_dto.setSell_price(sell_price);
 			product_dto.setSell_count(sell_count);
 			product_info.add(product_dto);
-			for(int i =0; i<product_info.size(); i++) {
-				System.out.println(product_info.get(i).getP_name());
-			}
-			
 		}
 		
 		else if(command.equals("/productInfoDelete.bo")) {
@@ -109,6 +104,7 @@ public class Board_ProductContoller extends HttpServlet {
 			String product_name = request.getParameter("product_name");
 			boolean check = false;
 			int count = 0;
+			System.out.println(product_name);
 			for(ProductDTO tmp :product_info) {
 				if(product_name.equals(tmp.getP_name())) {
 					product_info.remove(count);		
@@ -124,11 +120,13 @@ public class Board_ProductContoller extends HttpServlet {
 		}
 		
 		else if(command.equals("/sell_type.bo")) {			
-			String sell_type = request.getParameter("sell_type");			
+			String sell_type = request.getParameter("sel");			
 			response.setCharacterEncoding("utf8");	
-			response.setContentType("application/json");			
+			response.setContentType("application/json");	
+			System.out.println("sell_type.bo 들어옴");
+			System.out.println(sell_type);
 			new Gson().toJson(sell_type, response.getWriter());			
-		}
+		}			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

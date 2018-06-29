@@ -149,6 +149,15 @@
 	vertical-align: middle;
 }
 
+#lasttest{
+	width:100%;
+	height:100%;
+}
+
+#lasttest1{
+	width:100%;
+	height:100%;
+}
 #input_imgs {
 	position: absolute;
 	width: 1px;
@@ -159,79 +168,154 @@
 	/*    clip: rect(0, 0, 0, 0); */
 	border: 0;
 }
+#radioBtn .notActive{
+    color: #3276b1;
+    background-color: #fff;
+}
+
+
+
+#jong{
+	float:right;
+}
+
+#radioBtn{
+	float:center;
+}
+
 </style>
 
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 
+
+
+
+
 <script>
    var sel_files = new Array();
-   
-
-   $(document).ready(function() {
-	    
-	   	$("#main_category").change(function(){
-	   		var test = $("#main_category option:selected").val();
+   $(document).ready(function() {	    
+	   	$("#main_category").change(function(){	   		
+	   		var test = $("#main_category option:selected").val();	   		
 	   		$.ajax({
 	   			url:"category.bo",
 	   			type:"get",
 	   			data:{test:test},
 	   			success:function(rep){
-	   				if(rep.length>0){
+	   				if(rep.length>0){	   					
 	   					$("#sub_category").empty();
 	   					for(i=0; i<rep.length;i++){
 	   						$("#sub_category").append("<option value="+rep[i]+">"+rep[i]+"</option>");
 	   					}
-	   				}
+	   				}	   				
+	   				$("#main_category").attr("style","visibility:hidden");	   				
+	   				$("#category").html(test);
+	   				$("#categoryButton").attr("type","button");
 	   			} 
 	   		})
-	   	})	
-	   	
-	   		$("input[name=sell_type]").click(function(){	   			
-	   			var test = $("#main_category option:selected").val();
-	   			$.ajax({
-	   				url:"category.bo",
-	   				type:"get",
-	   				data:{test:test},
-	   				success:function(rep){
-	   					if(rep.length>0){
-		   					$("select[name=sub_category]").empty();
-		   					for(i=0; i<rep.length;i++){
-		   						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
-		   					}
-		   				}
-	   				}
-	   			})
-	   			
-	   			if(test != ""){
-	   				var sell_type = $("input[name=sell_type]:checked").val();		   			
-		   			$.ajax({
-		   				url:"sell_type.bo",
-		   				type:"get",
-		   				data:{sell_type:sell_type},
-		   				success:function(rep){
-		   					$("input[name=sell_type]").attr("style","display:none");
-		   					$("#test").text("");
-		   					if(rep == "a"){  								   						
-		   						$("#plusButton").attr("href","#auction_product");
-		   						$("#type_check").attr("value","a");
-		   						$("#type_check").text("경매");
-		   					}
-		   					else if(rep == "s"){		   						
-		   						$("#plusButton").attr("href", "#plusproduct");
-		   						$("#type_check").attr("value","s");
-		   						$("#type_check").text("일반");
-		   					}
-		   					
-		   					
-		   				}
-		   			})
-	   			}else{
-	   				alert("메인 카테고리를 선택해주세요.");
-	   			}
-	   			
-	   		})        
 	   		
+	   	})	
+		
+	   	
+$('#radioBtn a').on('click', function(){
+    var sel = $(this).data('title');
+    var tog = $(this).data('toggle');
+    var test = $("#main_category option:selected").val();
+    $.ajax({
+			url:"category.bo",
+			type:"get",
+			data:{test:test},
+			success:function(rep){
+				if(rep.length>0){	   					
+					$("select[name=sub_category]").empty();
+					for(i=0; i<rep.length;i++){
+						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+					}
+				}
+			}
+		})
+		
+		if(test != ""){
+// 				var sell_type = $("input[name=sell_type]:checked").val();		   			
+   			$.ajax({
+   				url:"sell_type.bo",
+   				type:"get",
+   				data:{sel:sel},
+   				success:function(rep){
+				console.log(rep);
+				if(rep == "a"){		   						
+   						console.log("!!!!1");
+   							$("#plusButton").attr("href","#auction_product");
+   							document.getElementById("plusButton").click();
+   							$("#sell_product").attr("class","panel-collapse form-row collapse");
+   					}
+   					else if(rep == "s"){		   							
+   						console.log("!!!!2");
+   						 	$("#plusButton").attr("href", "#sell_product");	
+   						 	document.getElementById("plusButton").click(); 
+   						 	$("#auction_product").attr("class","panel-collapse form-row collapse");
+   					}		   					
+   				}
+   			})
+			}else{
+				alert("메인 카테고리를 선택해주세요.");
+				$("input[name=sell_type]").prop("checked",false);
+			}	
+    $('a[data-toggle="'+tog+'"]').not('[data-title="'+sel+'"]').removeClass('active').addClass('notActive');
+    $('a[data-toggle="'+tog+'"][data-title="'+sel+'"]').removeClass('notActive').addClass('active');
+})
+	   
+ 	   	$("#jong").mouseenter(function(){
+	   		   	alert("유의사항입니다!");	   		  
+ 	   	})
+	   
+	   	
+// 	   		$("input[name=sell_type]").click(function(){	   			
+// 	   			console.log("!");
+// 	   			var test = $("#main_category option:selected").val();
+// 	   			console.log(test);
+// 	   			$.ajax({
+// 	   				url:"category.bo",
+// 	   				type:"get",
+// 	   				data:{test:test},
+// 	   				success:function(rep){
+// 	   					if(rep.length>0){	   					
+// 		   					$("select[name=sub_category]").empty();
+// 		   					for(i=0; i<rep.length;i++){
+// 		   						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+// 		   					}
+// 		   				}
+// 	   				}
+// 	   			})
+	   			
+// 	   			if(test != ""){
+// 	   				var sell_type = $("input[name=sell_type]:checked").val();		   			
+// 		   			$.ajax({
+// 		   				url:"sell_type.bo",
+// 		   				type:"get",
+// 		   				data:{sell_type:sell_type},
+// 		   				success:function(rep){
+// 		   					if(rep == "a"){		   						
+// 		   						console.log("!!!!");
+// 		   							$("#plusButton").attr("href","#lasttest1");
+// 		   							document.getElementById("plusButton").click();
+// 		   							$("#lasttest").attr("class","panel-collapse form-row collapse")
+// 		   					}
+// 		   					else if(rep == "s"){		   							
+// 		   						console.log("!!!!");
+// 		   						 	$("#plusButton").attr("href", "#lasttest");	
+// 		   						 	document.getElementById("plusButton").click(); 
+// 		   						 	$("#lasttest1").attr("class","panel-collapse form-row collapse")
+// 		   					}		   					
+// 		   				}
+// 		   			})
+// 	   			}else{
+// 	   				alert("메인 카테고리를 선택해주세요.");
+// 	   				$("input[name=sell_type]").prop("checked",false);
+// 	   			}
+	   			
+	   		  		
+	   		   	  
 	   		$("input[name=productButton]").click(function() {    
 	   							 var category = $("#main_category").val();	   							 
                                  var sub_category = $("#sub_category").val();
@@ -259,10 +343,9 @@
 
    function fileUploadAction() {
       console.log("fileUploadAction");
-      $("#input_imgs").trigger('click');
-		
+      $("#input_imgs").trigger('click');		
    }
-		
+   
    function handleImgFileSelect(e) {
       var files = e.target.files;
       var send_files = [];
@@ -273,13 +356,7 @@
                   alert("확장자는 이미지 확장자만 가능합니다.");
                   return;
                }
-               sel_files.push(f);
-           	var file1 = $("#input_imgs").get(0).files[0];
-       		var file2 = $("#input_imgs").get(0).files[1];
-       		console.log("1");
-       		console.log(file1);
-       		console.log(file2);
-       		
+               sel_files.push(f);       		
                var reader = new FileReader();
                reader.onload = function(e) {            	  
             	   var html = "<div class=\"col-md-4\"  id=\"img_id"+ index + "\"><img src=\"" + e.target.result + "\"  width=\"100\" height=\"100\" data-file='"+f.name+"' class='selProductFile' tilte='Click to remove'><p align=\"center\">"
@@ -288,12 +365,7 @@
                   index++;
                }
                reader.readAsDataURL(f);
-               
-               
-            });  
-      console.log(sel_files);
-      $("#input_imgs").val(sel_files);
-      
+            });
    }
 </script>
 </head>
@@ -379,13 +451,14 @@
 				</nav>
 			</div>
 		</div>
-
 		<div id="centerwrapper">
-
 			<div id="content">
 			<form action="write.bo" method="post" enctype="multipart/form-data">
 				<div class="card">
-					<div class="card-header">판매글 작성</div>
+					<div class="card-header">판매글 작성
+							<ion-icon name="notifications" id="jong"></ion-icon>
+					</div>
+
 					<div class="card-body">
 						<div class="form-row mb-3">
 							<div class="col-md-2">메인카테고리 :</div>
@@ -397,29 +470,46 @@
 								<option value="문화">문화</option>
 								<option value="뷰티">뷰티</option>
 							</select>
+							<p id="category"></p><input type="hidden" id="categoryButton" name="categoryButton" class="btn btn-secondary" value="수정">
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2 ">판매 방법 :</div>
-							<div class="col-md-4" id="test">
-								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반
-								<input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								
-							</div>
-							<h id="type_check"><input type="text" name="sell_type" value=""></h>
+							
+<!-- 							<div class="col-md-4" id="test" style="margin:0 auto"> -->
+<!-- 								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반 -->
+<!-- 								 <input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								 -->
+<!-- 							</div>							 -->
+<!-- 	<div class="btn-group btn-group-toggle" data-toggle="buttons"> -->
+<!-- 	  <label class="btn btn-secondary active"> -->
+<!-- 	    <input type="radio" name="options" id="option1" autocomplete="off" value="s"> 일반 판매 -->
+<!-- 	  </label> -->
+<!-- 	  <label class="btn btn-secondary"> -->
+<!-- 	    <input type="radio" name="options" id="option2" autocomplete="off" value="a"> 경매 판매 -->
+<!-- 	  </label> -->
+  			<div class="input-group" id="radiodiv">
+                <div id="radioBtn" class="btn-group" style="margin:0 auto">
+                   <a class="btn btn-primary btn-sm active" data-toggle="happy" data-title="s">일반 판매</a>
+                   <a class="btn btn-primary btn-sm notActive" data-toggle="happy" data-title="a">경매 판매</a>
+                </div>
+             </div>
+  
+	</div>
 						</div>
-						<div class="form-row mb-3">
-							<div class="col-md-2">제품 등록 :</div>
-							<div class="col-md-10">
-								<div class="panel panel-default">
-									<div class="panel-heading">
+						<div class="panel-heading">
 										<h4 class="panel-title">
 											<a class="accordion-toggle" data-toggle="collapse"
-												data-parent="#accordion" href="" id="plusButton"> <i
+												data-parent="#accordion" href="" id="plusButton" style="display:none"> <i
 												id="plusicon" class="fa fa-plus" aria-hidden="true"></i>
 											</a><i
-												class="indicator glyphicon glyphicon-chevron-up pull-right"></i>
+												 class="glyphicon glyphicon-question-sign"></i>
 										</h4>
 									</div>
-									<div id="plusproduct" class="panel-collapse collapse form-row">
+						<div class="form-row mb-3">
+							<div class="panel-collapse collapse form-row" id="sell_product">
+							<div class="col-md-2">제품 등록 :</div>
+							<div class="col-md-10">
+								<div class="panel panel-default">									
+									<div id="plusproduct" class="panel-collapse collapse show form-row">
 										<div class="panel-body col-md-4">
 											<div class="form-row mb-3">
 												<div class="col-md-5">세부 카테고리 :</div>
@@ -449,7 +539,31 @@
 											</div>
 										</div>
 									</div>
-									<div id="auction_product" class="panel-collapse collapse form-row">
+							</div>
+
+						</div>
+						<div class="col-md-12">
+							<table class="table">
+								<thead>
+									<tr>										
+										<th>세부카테고리</th>
+										<th>제품명</th>
+										<th>가격</th>
+										<th>수량</th>
+										<th>#</th>
+									</tr>
+								</thead>
+								<tbody id="productlist">
+
+								</tbody>
+							</table>
+						</div>
+						</div>
+						<div class="panel-collapse collapse form-row" id="auction_product">
+							<div class="col-md-2">제품 등록 :</div>
+							<div class="col-md-10">
+								<div class="panel panel-default">									
+									<div id="auction_product" class="panel-collapse collapse show form-row">
 										<div class="panel-body col-md-4">
 											<div class="form-row mb-3">
 												<div class="col-md-5">세부 카테고리 :</div>
@@ -479,7 +593,6 @@
 											</div>
 									</div>
 								</div>
-
 							</div>
 
 						</div>
@@ -499,6 +612,7 @@
 								</tbody>
 							</table>
 						</div>
+						</div>
 						<div class="form-row mb-3 col-md-12">
 							<div class="col-md-2">제목 :</div>
 							<input type="text" name = "title" class="form-control col-md-8 ml-1">
@@ -516,7 +630,7 @@
 								<div class="input_wrap col-md-12">
 									<button type="button" onclick="fileUploadAction();"
 										class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
-									<input type="file" id="input_imgs" name=img_file[] multiple 
+									<input type="file" id="input_imgs" name=img_file multiple 
 										accept="image/x-png,image/gif,image/jpeg" />	
 										<div id="file_test">
 										

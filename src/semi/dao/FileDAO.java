@@ -3,6 +3,7 @@ package semi.dao;
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,6 +39,26 @@ public class FileDAO {
 		}
 		return result;
 	}
+	
+	public FileDTO selectFile(String board_no) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "select * from files where board_no=? and main_files='y'";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, board_no);
+		ResultSet rs = pstat.executeQuery();
+		FileDTO result = new FileDTO();
+		while(rs.next()) {
+			result.setFile_seq(rs.getInt(1));
+			result.setBoard_no(rs.getInt(2));
+			result.setOriginal_file_name(rs.getString(3));
+			result.setSystem_file_name(rs.getString(4));
+			result.setMain_files(rs.getString(5));
+		}
+		pstat.close();
+		con.close();
+		return result;	
+	}
+	
 	
 	
 }

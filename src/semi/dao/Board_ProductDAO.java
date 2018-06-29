@@ -71,15 +71,16 @@ public class Board_ProductDAO {
 		return result;
 	}
 	
-	public int addProduct(String board_no, String category, String detail_category, String sell_price, String sell_count) throws Exception{
+	public int addProduct(int board_no, String category, String detail_category, String sell_price, String sell_count, String p_name) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "insert into product values(?,product_seq.nextval,?,?,?,?)";
+		String sql = "insert into product values(?,product_seq.nextval,?,?,?,?,'',?)";
 		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, board_no);
+		pstat.setInt(1, board_no);
 		pstat.setString(2, category);
 		pstat.setString(3, detail_category);
 		pstat.setString(4, sell_price);
 		pstat.setString(5, sell_count);
+		pstat.setString(6, p_name);
 		int result = pstat.executeUpdate();
 		pstat.close();
 		con.close();
