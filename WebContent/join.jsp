@@ -18,12 +18,204 @@ pageEncoding="UTF-8"%>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-<<<<<<< Updated upstream
+
   <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
+
+<script  src="../../Jquery/prettify.js"></script>
+ <script>
   
-=======
-   <script  src="../../Jquery/prettify.js"></script>
->>>>>>> Stashed changes
+  <!-- 유효성검사 시작 -->
+
+var idCheck = 0;
+var pwdCheck = 0;
+//아이디 체크하여 가입버튼 비활성화,중복확인'
+function checkId(){
+	var inputed = $(".id").val();
+	$.ajax({
+		url:"idCheck.mem",
+		type:"post",
+		data:{
+			checkId : inputed
+			},
+		success:function(data){
+			if(inputed=="" && data==0){
+				$("#signUpBtn").prop("disabled", true);
+				$("#signUpBtn").css("background-color","#aaaaaa");
+				$("#id").css("background-color", "#FFCECE");
+				idCheck=0;
+			}else if(data==1){
+				$("#id").css("background-color", "#B0F6AC");
+				idCheck=1;
+				if(idCheck==1 && pwdCheck==1){
+					$("#signUpBtn").prop("disabled", false);
+					$("#signUpBtn").css("background-color","#4CAF50");
+					signupCheck();
+				}
+			}else if(data==0){
+				$("#signUpBtn").prop("disabled", true);
+				$("#signUpBtn").css("background-color","#aaaaaa");
+				$("#id").css("background-color", "#FFCECE");
+				idCheck=0;
+			}else if(inputed==""){
+				$("#id").css("background-color","#fff");
+			}		
+		}
+	});	
+	
+}
+//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음 알림;
+function checkPwd(){
+	var inputed = $(".pass").val();
+	var reinputed = $("#pw2").val();
+	if(reinputed =="" && (inputed !=reinputed || inputed==reinputed)){
+		$("#signUpBtn").prop("disabled",true);
+		$("#signUpBtn").css("background-color","#aaaaaa");
+		$("#pw2").css("background-color", "#FFCECE");
+	}
+	else if(inputed == reinputed){
+		$("#pw2").css("background-color","#B0F6AC");
+		pwdCheck =1;
+		if(idCheck==1 && pwdCheck==1){
+			$("#signUpBtn").prop("disabled",false);
+			$("#signUpBtn").css("background-color","#4CAF50");
+			signupCheck();
+		}
+	}else if(inputed!=reinputed){
+		pwdCheck=0;
+		$("#signUpBtn").prop("disabled",true);
+		$("#signUpBtn").css("background-color","#aaaaaa");
+		$("#pw2").css("background-color","#FFCECE");
+	}
+	if(inputed==""&& reinputed=="" ){
+		$("#pw2").css("background-color","#fff");
+	}	
+}
+//이름 이메일 폰 주소를 입력하지 않았을 경우 가입버튼 비활성화
+function signupCheck(){
+	var name = $("#name").val();
+	var email = $("#email").val();
+	var phone = $("#phone").val();
+	var sample6_postcode = $("#sample6_postcode").val();
+	var sample6_address = $("#sample6_address").val();
+	var sample6_address2 = $("#sample6_address2").val();
+	if(name=="" || email=="" || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2==""){
+		$("#signUpBtn").prop("disabled",true);
+		$("#signUpBtn").css("background-color","#aaaaaa");
+	}else{
+		
+	}
+}
+
+// 이름 이메일 번호 레겕스
+window.onload = function() {
+	
+	document.getElementById("name").oninput = function() {
+		var text = document.getElementById("name").value;
+		var regex = /[^가-힣]{2,}/;
+		if (regex.test(text)) {
+			var re = text.replace(regex, '');
+			document.getElementById("name").value = re;
+		}
+	};
+	
+
+};
+
+
+// cancel 버튼 눌렀을 시 회원정보 입력값들 초기화
+$("document").ready(function(){
+	
+	
+	$("#cancel").click(function(){
+		$(".id").val(null);
+		$(".pass").val(null);
+		$("#signUpBtn").prop("disabled",true);
+		$("#signUpBtn").css("background-color","#aaaaaa");
+		$("#name").val(null);
+		$("#sample6_postcode").val(null);
+		$("#id").css("background-color","#fff");
+		$("#pw2").css("background-color","#fff");
+	});
+	$("#id").keyup(function(){
+		var id = $("#id").val();
+		if(id==""){
+			$("#id").css("background-color","#fff");
+		}
+		
+
+		
+		
+	});
+	
+	 
+	    $("#phone").on('keydown', function(e){
+	       // 숫자만 입력받기
+	        var trans_num = $(this).val().replace(/-/gi,'');
+		var k = e.keyCode;
+					
+		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
+		{
+	  	    e.preventDefault();
+		}
+	    }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+	        if($(this).val() == '') return;
+	 
+	        // 기존 번호에서 - 를 삭제합니다.
+	        var trans_num = $(this).val().replace(/-/gi,'');
+	      
+	        // 입력값이 있을때만 실행합니다.
+	        if(trans_num != null && trans_num != '')
+	        {
+	            // 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
+	            if(trans_num.length==11 || trans_num.length==10) 
+	            {   
+	                // 유효성 체크
+	                var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+	                if(regExp_ctn.test(trans_num))
+	                {
+	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+	                    trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
+	                    $(this).val(trans_num);
+	                }
+	                else
+	                {
+	                    alert("유효하지 않은 전화번호 입니다.");
+	                    $(this).val("");
+	                    $(this).focus();
+	                }
+	            }
+	            else 
+	            {
+	                alert("유효하지 않은 전화번호 입니다.");
+	                $(this).val("");
+	                $(this).focus();
+	            }
+	      }
+	  }); 
+	    
+	   $("#confirm").click(function(){
+		
+		 var phone = $("#phone").val();
+		 	console.log(phone);
+		 $.ajax({
+				url:"sms.mem",
+				type:"post",
+				data:{
+					phone : phone
+					},
+					success:function(data){
+						
+					}
+		 
+	   });	
+	   
+})
+  
+  
+
+
+  </script>
+  
   <title>Insert title here</title>
   <style>
     /*   primary: #12bbad, */
@@ -759,200 +951,7 @@ pageEncoding="UTF-8"%>
     }
   </style>
   
-           <script>
-  
-  <!-- 유효성검사 시작 -->
-
-var idCheck = 0;
-var pwdCheck = 0;
-//아이디 체크하여 가입버튼 비활성화,중복확인'
-function checkId(){
-	var inputed = $(".id").val();
-	$.ajax({
-		url:"idCheck.mem",
-		type:"post",
-		data:{
-			checkId : inputed
-			},
-		success:function(data){
-			if(inputed=="" && data==0){
-				$("#signUpBtn").prop("disabled", true);
-				$("#signUpBtn").css("background-color","#aaaaaa");
-				$("#id").css("background-color", "#FFCECE");
-				idCheck=0;
-			}else if(data==1){
-				$("#id").css("background-color", "#B0F6AC");
-				idCheck=1;
-				if(idCheck==1 && pwdCheck==1){
-					$("#signUpBtn").prop("disabled", false);
-					$("#signUpBtn").css("background-color","#4CAF50");
-					signupCheck();
-				}
-			}else if(data==0){
-				$("#signUpBtn").prop("disabled", true);
-				$("#signUpBtn").css("background-color","#aaaaaa");
-				$("#id").css("background-color", "#FFCECE");
-				idCheck=0;
-			}else if(inputed==""){
-				$("#id").css("background-color","#fff");
-			}		
-		}
-	});	
-	
-}
-//재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음 알림;
-function checkPwd(){
-	var inputed = $(".pass").val();
-	var reinputed = $("#pw2").val();
-	if(reinputed =="" && (inputed !=reinputed || inputed==reinputed)){
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-		$("#pw2").css("background-color", "#FFCECE");
-	}
-	else if(inputed == reinputed){
-		$("#pw2").css("background-color","#B0F6AC");
-		pwdCheck =1;
-		if(idCheck==1 && pwdCheck==1){
-			$("#signUpBtn").prop("disabled",false);
-			$("#signUpBtn").css("background-color","#4CAF50");
-			signupCheck();
-		}
-	}else if(inputed!=reinputed){
-		pwdCheck=0;
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-		$("#pw2").css("background-color","#FFCECE");
-	}
-	if(inputed==""&& reinputed=="" ){
-		$("#pw2").css("background-color","#fff");
-	}	
-}
-//이름 이메일 폰 주소를 입력하지 않았을 경우 가입버튼 비활성화
-function signupCheck(){
-	var name = $("#name").val();
-	var email = $("#email").val();
-	var phone = $("#phone").val();
-	var sample6_postcode = $("#sample6_postcode").val();
-	var sample6_address = $("#sample6_address").val();
-	var sample6_address2 = $("#sample6_address2").val();
-	if(name=="" || email=="" || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2==""){
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-	}else{
-		
-	}
-}
-
-// 이름 이메일 번호 레겕스
-window.onload = function() {
-	
-	document.getElementById("name").oninput = function() {
-		var text = document.getElementById("name").value;
-		var regex = /[^가-힣]{2,}/;
-		if (regex.test(text)) {
-			var re = text.replace(regex, '');
-			document.getElementById("name").value = re;
-		}
-	};
-	
-
-};
-
-
-// cancel 버튼 눌렀을 시 회원정보 입력값들 초기화
-$("document").ready(function(){
-	
-	
-	$("#cancel").click(function(){
-		$(".id").val(null);
-		$(".pass").val(null);
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-		$("#name").val(null);
-		$("#sample6_postcode").val(null);
-		$("#id").css("background-color","#fff");
-		$("#pw2").css("background-color","#fff");
-	});
-	$("#id").keyup(function(){
-		var id = $("#id").val();
-		if(id==""){
-			$("#id").css("background-color","#fff");
-		}
-		
-
-		
-		
-	});
-	
-	 
-	    $("#phone").on('keydown', function(e){
-	       // 숫자만 입력받기
-	        var trans_num = $(this).val().replace(/-/gi,'');
-		var k = e.keyCode;
-					
-		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
-		{
-	  	    e.preventDefault();
-		}
-	    }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
-	        if($(this).val() == '') return;
-	 
-	        // 기존 번호에서 - 를 삭제합니다.
-	        var trans_num = $(this).val().replace(/-/gi,'');
-	      
-	        // 입력값이 있을때만 실행합니다.
-	        if(trans_num != null && trans_num != '')
-	        {
-	            // 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
-	            if(trans_num.length==11 || trans_num.length==10) 
-	            {   
-	                // 유효성 체크
-	                var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
-	                if(regExp_ctn.test(trans_num))
-	                {
-	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
-	                    trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
-	                    $(this).val(trans_num);
-	                }
-	                else
-	                {
-	                    alert("유효하지 않은 전화번호 입니다.");
-	                    $(this).val("");
-	                    $(this).focus();
-	                }
-	            }
-	            else 
-	            {
-	                alert("유효하지 않은 전화번호 입니다.");
-	                $(this).val("");
-	                $(this).focus();
-	            }
-	      }
-	  }); 
-	    
-	   $("#confirm").click(function(){
-		
-		 var phone = $("#phone").val();
-		 
-		 $.ajax({
-				url:"sms.mem",
-				type:"post",
-				data:{
-					phone : phone
-					},
-					success function(data){
-						
-					}
-		 
-	   });	
-	   
-})
-  
-  
-
-
-  </script>
-  
+          
   </head>
   <body>
 

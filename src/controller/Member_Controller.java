@@ -149,6 +149,7 @@ public class Member_Controller extends HttpServlet {
 				System.out.println(result);
 				con.disconnect();
 				
+				
 			}
 			
 			
