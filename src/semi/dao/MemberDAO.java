@@ -7,21 +7,13 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
+import semi.dbutils.DBUtils;
 import semi.dto.MemberDTO;
 
 public class MemberDAO {
-	// ======= DB Connection 
-	private Connection getConnection() throws Exception {
-		Class.forName("oracle.jdbc.driver.OracleDriver");
-		String url = "jdbc:oracle:thin:@localhost:1521:xe";
-		String dbId = "kh";
-		String dbPw = "kh";
-		
-		return DriverManager.getConnection(url, dbId, dbPw);
-	}
 	
 	public boolean isIdExist(String id) throws Exception{
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBERS WHERE ID =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
@@ -36,16 +28,16 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public int insertMember(String id, String pw, String name, String email, String phone, String address) throws Exception{
-		Connection con = this.getConnection();
+	public int insertMember(MemberDTO dto) throws Exception{
+		Connection con = DBUtils.getConnection();
 		String sql = "INSERT INTO MEMBER VALUES(?,?,?,?,?,?,default)";
 		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, id);
-		pstat.setString(2, pw);
-		pstat.setString(3, name);
-		pstat.setString(5, email);
-		pstat.setString(4, phone);
-		pstat.setString(6, address);
+		pstat.setString(1, dto.getId());
+		pstat.setString(2, dto.getPw());
+		pstat.setString(3, dto.getName());
+		pstat.setString(4, dto.getEmail());
+		pstat.setString(5, dto.getPhone());
+		pstat.setString(6, dto.getAddress());
 		
 		int result = pstat.executeUpdate(); 
 		
@@ -57,7 +49,8 @@ public class MemberDAO {
 	}
 	
 	public boolean idpwcheck(String id, String pw) throws Exception {
-		Connection con = this.getConnection();
+		System.out.println(id + " : " + pw);
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =? AND PW =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
@@ -69,12 +62,12 @@ public class MemberDAO {
 		rs.close();
 		con.close();
 		pstat.close();
-		
+		System.out.println(result);
 		return result;
 	}
 	
 	public List<MemberDTO> selectMember() throws Exception{
-		Connection con = this.getConnection();
+		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		ResultSet rs = pstat.executeQuery();
