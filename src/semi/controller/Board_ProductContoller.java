@@ -85,7 +85,7 @@ String end_date;
 
 
 			else if(command.equals("/category.bo")) {
-				System.out.println("µé¾î¿È");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½");
 				String main_category = request.getParameter("test");  
 				System.out.println(main_category);
 				List<String> result =category_dao.main_categoryGet(main_category);
@@ -110,7 +110,7 @@ String end_date;
 
 
 			else if(command.equals("/write.bo")) {
-				System.out.println("¶óÀÌÆ®º¸!");			
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½!");			
 				List<FileDTO> fileList = new ArrayList<>();
 				String board_no = boarddao.checkboardNo();
 				String realPath = request.getServletContext().getRealPath("/image/");
@@ -144,10 +144,10 @@ String end_date;
 				int insertBoard = boarddao.addBoard(bdto);
 				System.out.println(insertBoard);
 				  
-				System.out.println("¸î°³µé¿À°¥°í¾ß?" +product_info.size());
+				System.out.println("ï¿½î°³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?" +product_info.size());
   
 				for(int i=0; i<product_info.size(); i++) {	
-					System.out.println("¸î°³µé¿À°¥°í¾ß?" +product_info.size());
+					System.out.println("ï¿½î°³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?" +product_info.size());
 					String category = product_info.get(i).getCategory();
 					String detail_category = product_info.get(i).getDetail_category();
 					String p_name = product_info.get(i).getP_name();
@@ -162,9 +162,9 @@ String end_date;
 				System.out.println(fileList.size());
 				String mainfile_seq =null;
 //				for(FileDTO dto : fileList) {
-//					System.out.println("¿ä±â¸ÂÁö? " +mainfilename + " : " + dto.getOriginal_file_name());
+//					System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? " +mainfilename + " : " + dto.getOriginal_file_name());
 //					if(dto.getOriginal_file_name().equals(mainfilename)) {
-//						System.out.println("¿Ö ¾Èµé¾î¿ÀÁö?");
+//						System.out.println("ï¿½ï¿½ ï¿½Èµï¿½ï¿½ï¿½ï¿½ï¿½?");
 //						mainfile_no = dto.getBoard_no();
 //						System.out.println(mainfile_seq + " : " + mainfilename);
 //						break;
@@ -172,27 +172,27 @@ String end_date;
 //					
 //				}
 			
-				System.out.println(board_no+"º¸µå³Ñ¹ö : " + product_info.size());
+				System.out.println(board_no+"ï¿½ï¿½ï¿½ï¿½Ñ¹ï¿½ : " + product_info.size());
 				int insertFile = filedao.insertFile(fileList);
 				
 				int mainfileupdate = filedao.updateFile(board_no,mainfilename);
 				
-				System.out.println("" + insertFile + "ÀÎ¼³Æ®ÆÄÀÏ!");
-				System.out.println("¿ìÂm");
+				System.out.println("" + insertFile + "ï¿½Î¼ï¿½Æ®ï¿½ï¿½ï¿½ï¿½!");
+				System.out.println("ï¿½ï¿½ï¿½m");
 				
 				dst = "articleView.bo?seq="+board_no+"&sell_type="+sell_type;
 			}
   
 			else if(command.equals("/productInfo.bo")) {
 				
-				System.out.println("¿ä±âµé¾î¿È");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 
 				String category = request.getParameter("category");
 				String sub_category = request.getParameter("sub_category");
 				String product_name = request.getParameter("product_name");
 				String sell_price = request.getParameter("sell_price");
 				String sell_count = request.getParameter("sell_count");
-				 System.out.println(category+" 1: "+sub_category + " 2: " + product_name + " 3: " + sell_price + "¤Ð¤Ð : " + sell_count);
+				 System.out.println(category+" 1: "+sub_category + " 2: " + product_name + " 3: " + sell_price + "ï¿½Ð¤ï¿½ : " + sell_count);
 
 				ProductDTO product_dto = new ProductDTO();
 				product_dto.setCategory(category);
@@ -210,7 +210,7 @@ String end_date;
 			}
 	else if(command.equals("/auctionproductInfo.bo")) {
 				
-				System.out.println("¿ä±âµµµé¾î¿È");
+				System.out.println("ï¿½ï¿½âµµï¿½ï¿½ï¿½ï¿½");
 
 				String category = request.getParameter("category");
 				String sub_category = request.getParameter("sub_category");
@@ -229,7 +229,7 @@ String end_date;
 				  
 				System.out.println(product_dto.getSell_price());
 				product_info.add(product_dto);
-				System.out.println(product_info.size() + " »çÀÌÁî ");
+				System.out.println(product_info.size() + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ");
 				for(int i =0; i<product_info.size(); i++) {
 					System.out.println(product_info.get(i).getP_name());
 				}
@@ -239,7 +239,7 @@ String end_date;
 			
 
 			else if(command.equals("/productInfoDelete.bo")) {
-				System.out.println("¹°Ç° »èÁ¦ÇÒ²¨´Ù");;
+				System.out.println("ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½");;
 				String product_name = request.getParameter("product_name");
 				System.out.println(product_name);
 				boolean check = false;
@@ -309,12 +309,12 @@ String end_date;
 				SimpleDateFormat date = new SimpleDateFormat("MM/dd, hh:mm a");
 	
 				String sysdate = date.format(today);
-System.out.println(sysdate);
+				System.out.println(sysdate);
 				request.setAttribute("endhour", endhour);
 				request.setAttribute("sysdate", sysdate);
 				List<String> path = new ArrayList<>();
 				for(FileDTO dto : flist) {
-					System.out.println("¿©±ä?");
+					System.out.println("ï¿½ï¿½ï¿½ï¿½?");
 					path.add("image/"+seq+"/"+dto.getSystem_file_name());
 				}
 				
