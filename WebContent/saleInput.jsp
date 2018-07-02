@@ -283,9 +283,7 @@
                              					type:"get",
                              					data:{productCheck:productCheck},
                              					success:function(rep){
-                             						console.log("메인정하기 완료");
-                             						console.log(rep);
-                             						console.log("디비에만 넣어보심될듯");
+                             						
                              					}
                              				})
                              			})

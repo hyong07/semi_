@@ -54,7 +54,7 @@ public class ProductDAO {
 	}
 	
 	else if(sell_type.equals("s")) {
-		sql = "insert into product values(?,product_seq.nextval,?,?,?,?,default,?)";
+		sql = "insert into product values(?,product_seq.nextval,?,?,?,?,?,?)";
 	}
 	
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -62,8 +62,9 @@ public class ProductDAO {
 		pstat.setString(2, dto.getCategory());
 		pstat.setString(3, dto.getDetail_category());
 		pstat.setString(4, dto.getSell_price());
-		pstat.setString(5, dto.getSell_count());
-		pstat.setString(6, dto.getP_name());
+		pstat.setString(5, dto.getSell_count());		
+		pstat.setString(6, dto.getMain_product());
+		pstat.setString(7, dto.getP_name());
 		int result = pstat.executeUpdate();
 		pstat.close();
 		con.close();

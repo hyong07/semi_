@@ -129,11 +129,7 @@ String mainpname;
 			else if(command.equals("/write.bo")) {
 				System.out.println("라이트보!");			
 				List<FileDTO> fileList = new ArrayList<>();
-				String board_no = boarddao.checkboardNo();
-				String main_pname = request.getParameter("mainp");
-				System.out.println(main_pname);
-				System.out.println("메인 물품을 찾았따");
-				
+				String board_no = boarddao.checkboardNo();				
 				String realPath = request.getServletContext().getRealPath("/image/");
 				
 				System.out.println(realPath);			
@@ -168,9 +164,10 @@ String mainpname;
 					String detail_category = product_info.get(i).getDetail_category();
 					String p_name = product_info.get(i).getP_name();
 					String sell_price = product_info.get(i).getSell_count();
-					String sell_count = product_info.get(i).getSell_price();	
+					String sell_count = product_info.get(i).getSell_price();
+					String main_product = product_info.get(i).getMain_product();
 					
-					ProductDTO pdto = new ProductDTO(board_no,"", category, detail_category, sell_price, sell_count,"", p_name);
+					ProductDTO pdto = new ProductDTO(board_no,"", category, detail_category, sell_price, sell_count,main_product, p_name);
 					int insertProduct = productdao.addProduct(sell_type,pdto);
 				}
 				fileList = filedao.searchFileName(realPath, board_no);
@@ -193,8 +190,11 @@ String mainpname;
 				
 				System.out.println("" + insertFile + "인설트파일!");
 				System.out.println("우헿");
-
-				return;
+				request.setAttribute("seq", board_no);
+				request.setAttribute("type", sell_type);
+				isRedirect = false;
+				dst = "saleView.bo";
+				
 			}
 
 			else if(command.equals("/productInfo.bo")) {
@@ -246,15 +246,35 @@ String mainpname;
 
 				return;
 			}
+			else if(command.equals("/mainProductCheck.bo")) {
+				
+				String main_productName = request.getParameter("productCheck");
+				boolean mainProductCheck = false;
+				for(int i=0; i<product_info.size(); i++) {
+					if(main_productName.equals(product_info.get(i).getP_name())) {
+						mainProductCheck = true;
+						product_info.get(i).setMain_product("y");	
+						String test = product_info.get(i).getP_name();				
+					}
+					else {
+						product_info.get(i).setMain_product("n");
+					}					
+				}				
+				new Gson().toJson(main_productName, response.getWriter());
+				return;
+			}
 
 		
 
 			else if(command.equals("/saleView.bo")) {
 				System.out.println("z_z");
 
-				String seq = request.getParameter("seq");
-				String sell_type =request.getParameter("type");
+//				String seq = request.getParameter("seq");
+//				String sell_type =request.getParameter("type");
 
+				String seq = (String)request.getAttribute("seq");
+				String type = (String)request.getAttribute("type");
+				
 				BoardDTO bdto = new BoardDTO();
 				bdto = boarddao.selectOneBoard(seq);
 				ProductDTO pdto = new ProductDTO();
@@ -275,21 +295,7 @@ String mainpname;
 				}
 
 			}
-			else if(command.equals("/mainProductCheck.bo")) {
-				System.out.println("메인물품확인 들어옴!");
-				String main_productName = request.getParameter("productCheck");
-				boolean mainProductCheck = false;
-				for(int i=0; i<product_info.size(); i++) {
-					if(main_productName.equals(product_info.get(i).getP_name())) {
-						mainProductCheck = true;
-						product_info.get(i).setMain_product("y");
-						break;
-					}
-				}
-				System.out.println("메인정하기 완료!!");
-				new Gson().toJson(main_productName, response.getWriter());
-				
-			}
+			
 			
 
 			if(isRedirect) {
