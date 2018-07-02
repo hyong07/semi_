@@ -86,27 +86,6 @@ public class MemberDAO {
 		return dto;
 	}
 	
-	public MemberDTO selectMember(String id) throws Exception{
-		Connection con = DBUtils.getConnection();
-		String sql = "SELECT * FROM MEMBER WHERE ID=?";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, id);
-		ResultSet rs = pstat.executeQuery();
-		
-		MemberDTO dto = new MemberDTO();
-		
-		while(rs.next()) {
-			dto.setId(rs.getString("id"));
-			dto.setName(rs.getString("name"));
-			dto.setPhone(rs.getString("phone"));
-			dto.setEmail(rs.getString("email"));
-			dto.setAddress(rs.getString("address"));
-			dto.setPoint(rs.getString("point"));
-			
-		}
-		return dto;
-	}
-	
 	public int modifymember(String id,String name,String email,String phone,String address) throws Exception{
 		Connection con = DBUtils.getConnection();
 		String sql = "UPDATE MEMBER SET NAME=?,EMAIL=?,PHONE=?,ADDRESS=? WHERE ID=?";

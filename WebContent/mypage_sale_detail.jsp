@@ -131,10 +131,74 @@
 
 #productlist{
 	border: 1px solid rgba(0, 0, 0, 0.125);
+	  box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
 }
 .card-header{
 	background-color:#4f70ce;
 	color : white;
+}
+
+#app {
+  width: 100%;;
+  padding: 15px;
+  margin-top: 15px;
+  background: #fcfcfc;
+  box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+
+.table {
+  width: 100%;
+}
+
+
+.table th, .table td {
+  padding: 0.5em;
+}
+.table thead th {
+  border-bottom: 2px solid #abc;
+}
+.table td {
+  border-bottom: 1px solid #abc;
+}
+.table tbody tr:last-of-type td {
+  border-bottom-width: 2px;
+}
+.table .cart_item_img {
+  width: 80px;
+}
+.table .cart_item_qty{
+  text-align: center;
+  min-width: 140px;
+  width: 140px;
+}
+
+.table .cart_item_price{
+	text-align: center;
+} 
+
+.table .cart_item_tprice{
+	text-align: center;
+}
+
+.table .cart_item_qty input {
+  text-align: center;
+  border-radius: 3px;
+  border: 1px solid #ccc;
+  box-shadow: 0 1px 3px #ddd;
+}
+
+.page-btn {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  margin: 0;
+  text-align: right;
+}
+.page-btn .btn:focus {
+  box-shadow: none;
 }
 /* Mypage css 끝*/
 </style>
@@ -252,59 +316,167 @@
 										<div class="container">
 											<div class="row">
 												<div class="col-md-4">
-													<a href="mypage_sale_detail.jsp"><img class="card-img-top" src="cap.jpg" alt="Card image cap"></a>
+													<img class="card-img-top" src="note.jpg" alt="Card image cap">
 												</div>
 												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
+													<h3>LG그램 15인치</h3>
 													<p>가격 : 10000원</p>
 												</div>
 											</div>
 										</div>
 									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
+									<div id="app">
+									  <h4>구매신청명단</h4>
+									  <div class="cart_content">
+									    <table class="table">
+									      <thead>
+									      	<th>구매자ID</th>
+									        <th>상품명</th>
+									        <th class="cart_item_qty">수량</th>
+									        <th class="cart_item_price">가격</th>
+									        <th class="cart_item_tprice">총가격</th>
+									        <th> </th>
+									      </thead>
+									      <tbody>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr><tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									        <tr>
+									          <td>gogodldbfla</td>
+									          <td>LG그램 15인치</td>
+									          <td class="cart_item_qty">
+									            <input type="text" value="1" size="3"; readonly>
+									          </td>
+									          <td class="cart_item_price">1600000원</td>
+									          <td class="cart_item_tprice">1600000원</td>
+									          <td><input type="checkbox" class="mt-1"></td>
+									        </tr>
+									      </tbody>
+									      <tfoot>
+									        <tr>
+									          <td colspan="6" align="right"><input type="button" value="판매완료" class="btn btn-secondary"></td>
+									        </tr>
+									      </tfoot>
+									    </table>
+									  </div>
 									</div>
 								</div>
-								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
 							</div>
 						</div>
 					</div>
