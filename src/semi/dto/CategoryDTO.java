@@ -7,7 +7,7 @@ public class CategoryDTO {
 	public CategoryDTO() {
 		super();
 	}
-	
+	   
 	public CategoryDTO(String main_category, String sub_category) {
 		super();
 		this.main_category = main_category;

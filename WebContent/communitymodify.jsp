@@ -22,7 +22,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	
+   
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -32,124 +32,124 @@
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
 
-	body{
-		  
-	}
-	div{
-		border: 0px solid black;
+   body{
+        
+   }
+   div{
+      border: 0px solid black;
         box-sizing: border-box;
               
-	}	
-	#topnavicontainer{
-		margin: 0px auto;
-		width:100%;
-		
-	}	
-	#topnavbar{ 
-/* 	    position: fixed; */
-	 	width: 100%;
-	    height: 40px;
-	    font-size: 20px;   
-	    margin: 0px auto;   
-	    opacity: 0.9;
-	}	
-	#allwrapper{
-/* 		opacity: 0.8; */
-		width:100%;
-		height:100%;
-		margin: 0px auto;		
-	}
-	#headerwrapper{
-		height:21%;	
-		width:100%;
-	}
-	#header{
-		height:75%;
-		width:100%;
-	}	
-	#headerleft{
-		float:left;
-		height:100%;
-		width:15%;
-	}
-	#headercenter{
-		float:left;
-		height:100%;
-		width:65%;
-	}	
-	#search{
-		
-		width:100%;
-		height:100%;
-	}
-	
-	#headerright{
-		float:left;
-		height:100%;
-		width:20%;
-	}
-	#centernavbar{
-		height:25%;
-		width:100%;	
-	}
-	
-	#menubtn{
-		background:#FFF8DC; 
-		box-shadow: 0;
-		border: 2px solid #7B68EE;
-		outline: none;
+   }   
+   #topnavicontainer{
+      margin: 0px auto;
+      width:100%;
+      
+   }   
+   #topnavbar{ 
+/*        position: fixed; */
+       width: 100%;
+       height: 40px;
+       font-size: 20px;   
+       margin: 0px auto;   
+       opacity: 0.9;
+   }   
+   #allwrapper{
+/*       opacity: 0.8; */
+      width:100%;
+      height:100%;
+      margin: 0px auto;      
+   }
+   #headerwrapper{
+      height:21%;   
+      width:100%;
+   }
+   #header{
+      height:75%;
+      width:100%;
+   }   
+   #headerleft{
+      float:left;
+      height:100%;
+      width:15%;
+   }
+   #headercenter{
+      float:left;
+      height:100%;
+      width:65%;
+   }   
+   #search{
+      
+      width:100%;
+      height:100%;
+   }
+   
+   #headerright{
+      float:left;
+      height:100%;
+      width:20%;
+   }
+   #centernavbar{
+      height:25%;
+      width:100%;   
+   }
+   
+   #menubtn{
+      background:#FFF8DC; 
+      box-shadow: 0;
+      border: 2px solid #7B68EE;
+      outline: none;
   
-	}
-	#centerwrapper{
-/* 		height:64%; */
-		height:auto;
-		width:80%;
-		margin: 0px auto;
- 		position: absolute; 
-    	top:260px;
-    	left:550px;
+   }
+   #centerwrapper{
+/*       height:64%; */
+      height:auto;
+      width:80%;
+      margin: 0px auto;
+       position: absolute; 
+       top:260px;
+       left:550px;
   
-	}
-	
-	.col-md-6{
-		 background :#FAEBD7;
-	}
-	
-	
-	#content{
-		height:100%;
-		width:100%;		
- 		align: center; 
-	}
-	
-	#bottomwrapper{
-		height:15%;
-		width:100%;
-	}
-	#footer{
-		height:100%;
-		width:100%;
-		
-	}
-	
+   }
+   
+   .col-md-6{
+       background :#FAEBD7;
+   }
+   
+   
+   #content{
+      height:100%;
+      width:100%;      
+       align: center; 
+   }
+   
+   #bottomwrapper{
+      height:15%;
+      width:100%;
+   }
+   #footer{
+      height:100%;
+      width:100%;
+      
+   }
+   
 
-	
+   
 
 
-	
+   
 </style>
 
 
 
 <script>
 
-			window.onload = function() {
-			    document.getElementById("cencel").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-				}
-			
-			  
+         window.onload = function() {
+             document.getElementById("cencel").onclick = function() {
+                location.href = "CommunityMain.do";
+                }
+            }
+         
+           
 </script>
 </head>
 <body>
@@ -157,107 +157,107 @@
 response.setCharacterEncoding("utf8");
 %>
 
-	<div id="topnavicontainer">
-		<nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
-	     	<div id="logocontainer">
-	      	<a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
-	</div>
-	   
-	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
-	     <ul class="navbar-nav">
-	       <li class="nav-item">
-	         
-	       
-	    <c:choose>
-		<c:when test="${sessionScope.loginid != null}">
-		 <a class="nav-link" href="logout.mem">
-	            <i class="fa fa-user fa-fw" ></i> Logout</a>
-	              </c:when>
-	              <c:otherwise>
-	               <a class="nav-link" href="login.jsp">
-	               <i class="fa fa-user fa-fw" ></i> Login</a>
-	              </c:otherwise>
+   <div id="topnavicontainer">
+      <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
+           <div id="logocontainer">
+            <a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
+   </div>
+      
+   <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            
+          
+       <c:choose>
+      <c:when test="${sessionScope.loginid != null}">
+       <a class="nav-link" href="logout.mem">
+               <i class="fa fa-user fa-fw" ></i> Logout</a>
+                 </c:when>
+                 <c:otherwise>
+                  <a class="nav-link" href="login.jsp">
+                  <i class="fa fa-user fa-fw" ></i> Login</a>
+                 </c:otherwise>
      </c:choose>
-	       </li>
-	       <li class="nav-item">
-	           <a class="nav-link" href="join.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Sing up</a>
-	       </li> 
-	     </ul>  
-	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
-	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="join.jsp">
+               <i class="fa fa-user fa-fw" ></i> Sing up</a>
+          </li> 
+        </ul>  
+           <a class="btn navbar-btn ml-2 btn-secondary text-white">
+           <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
      </div>
    
    </nav>
   </div>
   
-	<div id="allwrapper" >
-	
-	<div id="headerwrapper">
-		<div id="header">
-			<div id="headerleft"></div>
-		
-		
-		<div id="headercenter">
-			<div class="py-5"  >  
-			    <div class="container" >
-			      <div class="row" > 
-			         <div class="col-md-12"> 
-			          <form class="form-inline" >
-			            <div class="input-group" id="search">
-			              <input type="search" class="form-control" placeholder="search">
-			              <div class="input-group-append">
-			                <button class="btn btn-secondary" type="button">Search</button>
-			              </div>
-			            </div>
-			          </form>
-			         </div> 
-			       </div> 
-			    </div>  
-			   </div>  
-		</div>
-			
-			
-				
-		<div id="headerright">
-	
-		</div>
-	</div>
+   <div id="allwrapper" >
+   
+   <div id="headerwrapper">
+      <div id="header">
+         <div id="headerleft"></div>
+      
+      
+      <div id="headercenter">
+         <div class="py-5"  >  
+             <div class="container" >
+               <div class="row" > 
+                  <div class="col-md-12"> 
+                   <form class="form-inline" >
+                     <div class="input-group" id="search">
+                       <input type="search" class="form-control" placeholder="search">
+                       <div class="input-group-append">
+                         <button class="btn btn-secondary" type="button">Search</button>
+                       </div>
+                     </div>
+                   </form>
+                  </div> 
+                </div> 
+             </div>  
+            </div>  
+      </div>
+         
+         
+            
+      <div id="headerright">
+   
+      </div>
+   </div>
 
-		
-		
-		<div id="centernavbar">
-			<nav class="nav nav-pills nav-justified">
-				<li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="CommunityController.do">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				 </li> 
-			</nav>
-		</div>
-	
-	</div>	
-	
-	<div id="centerwrapper">
-		
-		<div id="content">
-							
-	<div class="row">
+      
+      
+      <div id="centernavbar">
+         <nav class="nav nav-pills nav-justified">
+            <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+                <a class="nav-link  text-secondary" id="menubtn" href="CommunityController.do">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+             </li> 
+         </nav>
+      </div>
+   
+   </div>   
+   
+   <div id="centerwrapper">
+      
+      <div id="content">
+                     
+   <div class="row">
         <div class="col-md-6">
           <hr />
           <div class="Compose-Message">
@@ -267,10 +267,10 @@ response.setCharacterEncoding("utf8");
 <!--               </div> -->
 
 
-		
+      
 
 
-	<form action="ComunityModifyproc.do?seq=${seq}" method="post">
+   <form action="ComunityModifyproc.do?seq=${seq}" method="post">
               <div class="panel-body">
 
                 <label>Title : </label>
@@ -278,13 +278,13 @@ response.setCharacterEncoding("utf8");
                 <label>Writer : </label>
        
 <!--            <input type="text" class="form-control W-25"/> -->
-		
+      
 
-				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
-<!-- 				 <label>File : </label> -->
-<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
-       			
-      			</div>  					
+            <input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
+<!--              <label>File : </label> -->
+<!--             <input type="text" class="form-control w-50" placeholder="File" > -->
+                
+               </div>                 
        
                 <label>Enter Text : </label>
                  <textarea rows="9" class="form-control" name="contents" >${dto.contents}</textarea>
@@ -314,17 +314,17 @@ response.setCharacterEncoding("utf8");
       </div>
     </div>
   </div>
-							
-							
-		</div>
-			
-	</div>
-	
-	
-	<div id="bottomwrapper" class="bg-secondary">
-		
-		<div id="footer">
-		
+                     
+                     
+      </div>
+         
+   </div>
+   
+   
+   <div id="bottomwrapper" class="bg-secondary">
+      
+      <div id="footer">
+      
 <div class="text-white bg-secondary" >
     <div class="container">
       <div class="row">
@@ -376,12 +376,12 @@ response.setCharacterEncoding("utf8");
       </div>
     </div>
   </div>
-		
+      
 
-		</div>
-	
-	</div>
-	
+      </div>
+   
+   </div>
+   
 </div>
 
 

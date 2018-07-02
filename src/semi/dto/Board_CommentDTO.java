@@ -1,7 +1,7 @@
 package semi.dto;
 
 public class Board_CommentDTO {
-	
+	  
 	private String article_no;
 	private String comment_seq;
 	private String comment_contents;
@@ -18,6 +18,10 @@ public class Board_CommentDTO {
 		this.writer = writer;
 		this.writedate = writedate;
 		this.ip = ip;
+	}
+	
+	public Board_CommentDTO() {
+		
 	}
 
 	public String getArticle_no() {

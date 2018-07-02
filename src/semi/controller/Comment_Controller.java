@@ -52,6 +52,7 @@ public class Comment_Controller extends HttpServlet {
 			    
 				int result = dao1.commentInsertData(article_no, comment_text, writer, ip);				
 				
+				
 				if(result>0) {
 				request.setAttribute("result", result);
 				request.setAttribute("seq", article_no);
