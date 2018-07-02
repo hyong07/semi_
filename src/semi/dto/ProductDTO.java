@@ -8,18 +8,15 @@ public class ProductDTO {
 
 	private String sell_price;
 	private String sell_count;
-	private String main_product;
 	private String p_name;
-
-
 	
 	
 	public ProductDTO() {
 		super();
 	}
 	
-	public ProductDTO(String board_no, String product_seq,String category, String detail_category, String sell_price,
-			String sell_count, String main_product,String p_name) {
+	public ProductDTO(int board_no, int product_seq, String category, String detail_category, String sell_price,
+			String sell_count, String p_name) {
 		super();
 		this.board_no = board_no;
 		this.product_seq = product_seq;
@@ -31,8 +28,18 @@ public class ProductDTO {
 		this.main_product = main_product;
 		this.p_name = p_name;
 	}
+	
+	
+	
+	public String getP_name() {
+		return p_name;
+	}
 
-	public String getBoard_no() {
+	public void setP_name(String p_name) {
+		this.p_name = p_name;
+	}
+
+	public int getBoard_no() {
 		return board_no;
 	}
 

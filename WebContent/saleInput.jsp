@@ -194,8 +194,7 @@
 	   				type:"get",
 	   				data:{test:test},
 	   				success:function(rep){
-	   					if(rep.length>0){	   
-	   					
+	   					if(rep.length>0){
 		   					$("select[name=sub_category]").empty();
 		   					for(i=0; i<rep.length;i++){
 		   						$("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
@@ -215,13 +214,11 @@
 		   					$("#test").text("");
 		   					if(rep == "a"){  								   						
 		   						$("#plusButton").attr("href","#auction_product");
-		   						$("#type_check").attr("value","a");
-		   						$("#type_check").text("경매");
+		   						$("#type_check").text("경매 판매를 선택하셨습니다.");
 		   					}
 		   					else if(rep == "s"){		   						
 		   						$("#plusButton").attr("href", "#plusproduct");
-		   						$("#type_check").attr("value","s");
-		   						$("#type_check").text("일반");
+		   						$("#type_check").text("일반 판매를 선택하셨습니다.");
 		   					}
 		   					
 		   					
@@ -231,8 +228,8 @@
 	   				alert("메인 카테고리를 선택해주세요.");
 	   			}
 	   			
-	   		})   		
-	   	}	   	  
+	   		})        
+	   		
 	   		$("input[name=productButton]").click(function() {    
 	   							 var category = $("#main_category").val();	   							 
                                  var sub_category = $("#sub_category").val();
@@ -255,7 +252,7 @@
                                  	 }
                                  })                                 
                               })
-                           $("#input_imgs").on("change", handleImgFileSelect);	   
+                  $("#input_imgs").on("change", handleImgFileSelect);
                })
 
    function fileUploadAction() {
@@ -398,7 +395,7 @@
 								 <input	type="radio"  id="type_sell" name="sell_type"	value="s"> 일반
 								<input type="radio" name="sell_type" id="type_auction"  value="a"> 경매								
 							</div>
-							<h id="type_check"><input type="text" name="sell_type" value=""></h>
+							<h id="type_check" color="red"></h>
 						</div>
 						<div class="form-row mb-3">
 							<div class="col-md-2">제품 등록 :</div>
