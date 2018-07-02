@@ -98,7 +98,7 @@ public class Board_ProductContoller extends HttpServlet {
 			
 			
 			 else if(command.equals("/write.bo")) {
-					System.out.println("�뜝�룞�삕�뜝�룞�삕�듃�뜝�룞�삕!");			
+					System.out.println("占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈뱜占쎈쐻占쎈짗占쎌굲!");			
 					List<FileDTO> fileList = new ArrayList<>();
 					String board_no = boarddao.checkboardNo();
 					String realPath = request.getServletContext().getRealPath("/image/"+(board_no));
@@ -117,7 +117,7 @@ public class Board_ProductContoller extends HttpServlet {
 					String contents = mr.getParameter("contents");
 					String sell_type = mr.getParameter("sell_type");
 					int insertBoard = boarddao.addBoard(board_no,id,title,contents,sell_type);
-					System.out.println("�뜝�룞�삕�뜝�룞�삕嶸뺝뜝占�!" + board_no+"�뜝�릧");
+					System.out.println("占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲蒻몃틶�쐻�뜝占�!" + board_no+"占쎈쐻占쎈├");
 					for(int i=0; i<product_info.size(); i++) {				
 							String category = product_info.get(i).getCategory();
 							String detail_category = product_info.get(i).getDetail_category();
@@ -126,10 +126,10 @@ public class Board_ProductContoller extends HttpServlet {
 							String sell_count = product_info.get(i).getSell_price();					
 							int insertProduct = productdao.addProduct(board_no, category, detail_category, sell_price, sell_count, p_name);
 					}
-					System.out.println(board_no+"�뜝�룞�삕�뜝�룞�삕嶸뺝뜝占� : " + product_info.size());
+					System.out.println(board_no+"占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲蒻몃틶�쐻�뜝占� : " + product_info.size());
 					int insertFile = filedao.insertFile(fileList);
-					System.out.println("" + insertFile + "�뜝�떥�눦�삕�듃�뜝�룞�삕�뜝�룞�삕!");
-					System.out.println("�뜝�룞�삕�뜝�릧");
+					System.out.println("" + insertFile + "占쎈쐻占쎈뼢占쎈닰占쎌굲占쎈뱜占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲!");
+					System.out.println("占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈├");
 					
 					isRedirect=false;
 					dst = "saleView.bo";
@@ -159,7 +159,7 @@ public class Board_ProductContoller extends HttpServlet {
 		      }
 			
 			  else if(command.equals("/productInfoDelete.bo")) {
-			         System.out.println("�뜝�룞�삕�뭹 �뜝�룞�삕�뜝�룞�삕�뜝���먯삕�뜝�룞�삕");;
+			         System.out.println("占쎈쐻占쎈짗占쎌굲占쎈�� 占쎈쐻占쎈짗占쎌굲占쎈쐻占쎈짗占쎌굲占쎈쐻占쏙옙占쎈Ŋ�굲占쎈쐻占쎈짗占쎌굲");;
 			         String product_name = request.getParameter("product_name");
 			         System.out.println(product_name);
 			         boolean check = false;
@@ -197,14 +197,13 @@ public class Board_ProductContoller extends HttpServlet {
 				  
 				  BoardDTO bdto = new BoardDTO();
 				  bdto = boarddao.selectOneBoard(seq);
-				  ProductDTO pdto = new ProductDTO();
-				  pdto = productdao.mainProduct(seq);
+				  List<ProductDTO> result = new ArrayList<>();
+				  result = productdao.mainProduct(seq);
 				  FileDTO fdto = new FileDTO();
 				  fdto = filedao.mainFile(seq);
 				  
 				  request.setAttribute("fdto", fdto);
-				  request.setAttribute("bdto",bdto);
-				  request.setAttribute("pdto", pdto);
+				  request.setAttribute("result", result);
 			
 				  isRedirect=false;
 				  if(sell_type.equals("a")) {

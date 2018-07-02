@@ -61,17 +61,18 @@ public class ProductDAO {
 		return result;
 	}
 	   
-	   public ProductDTO mainProduct(String seq) throws Exception{
+	   public List<ProductDTO> mainProduct(String seq) throws Exception{
 		   Connection con = DBUtils.getConnection();
 		   String sql = "select * from product where board_no=?";
 		   PreparedStatement pstat = con.prepareStatement(sql);
 		   pstat.setString(1, seq);
 
 		   ResultSet rs = pstat.executeQuery();
-		   ProductDTO dto = new ProductDTO();
+		   List<ProductDTO> result = new ArrayList<>();
+		  
 		   
 		   while(rs.next()) {
-			  
+			   ProductDTO dto = new ProductDTO();
 			   dto.setBoard_no(seq);
 			   dto.setProduct_seq(rs.getString(2));
 			   dto.setCategory(rs.getString(3));
@@ -80,10 +81,12 @@ public class ProductDAO {
 			   dto.setSell_count(rs.getString(6));
 			   dto.setMain_product(rs.getString(7));
 			   dto.setP_name(rs.getString(8));
+			   
+			   result.add(dto);
 
 		   }
 		
-		   return dto;
+		   return result;
 	   }
 	   
 	   public ProductDTO selectProduct(String product_seq) throws Exception{
