@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import semi.dbutils.DBUtils;
+import semi.dto.Board_CommentDTO;
 
 public class Board_CommentDAO {
 	
@@ -34,6 +35,34 @@ public class Board_CommentDAO {
 
 	      return result;
 
+		
+	}
+	
+	public List<Board_CommentDTO> selectCommentList(String seq) throws Exception {
+		Connection con = DBUtils.getConnection();
+		 String sql = "select * from board_comment where article_no = ?";
+		 PreparedStatement  pstat = con.prepareStatement(sql);
+		 pstat.setString(1, seq);
+		 ResultSet rs =  pstat.executeQuery();
+		 List<Board_CommentDTO> list = new ArrayList<>();
+		 
+		 while(rs.next()) {
+			 Board_CommentDTO dto = new Board_CommentDTO();
+			 dto.setArticle_no(seq);
+			 dto.setComment_seq(rs.getString(2));
+			 dto.setComment_contents(rs.getString(3));
+			 dto.setWriter(rs.getString(4));
+			 dto.setWritedate(rs.getString(5));
+			 dto.setIp(rs.getString(6));
+			
+			 list.add(dto);			 
+		 }
+		 
+		 con.commit();
+		 con.close();
+		 pstat.close();
+		 
+		 return list;
 		
 	}
 

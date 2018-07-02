@@ -10,19 +10,18 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
+<link
+   href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   rel="stylesheet" id="bootstrap-css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
-
-
-<html >
+<html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	
+   
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -32,251 +31,287 @@
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
 
-	body{
-		  
-	}
-	div{
-		border: 0px solid black;
-        box-sizing: border-box;
+   body{
+        
+   }
+
+   div{
+      border: 0px solid black;
+      box-sizing: border-box;
               
-	}	
-	#topnavicontainer{
-		margin: 0px auto;
-		width:100%;
-		
-	}	
-	#topnavbar{ 
-/* 	    position: fixed; */
-	 	width: 100%;
-	    height: 40px;
-	    font-size: 20px;   
-	    margin: 0px auto;   
-	    opacity: 0.9;
-	}	
-	#allwrapper{
-/* 		opacity: 0.8; */
-		width:100%;
-		height:100%;
-		margin: 0px auto;		
-	}
-	#headerwrapper{
-		height:21%;	
-		width:100%;
-	}
-	#header{
-		height:75%;
-		width:100%;
-	}	
-	#headerleft{
-		float:left;
-		height:100%;
-		width:15%;
-	}
-	#headercenter{
-		float:left;
-		height:100%;
-		width:65%;
-	}	
-	#search{
-		
-		width:100%;
-		height:100%;
-	}
-	
-	#headerright{
-		float:left;
-		height:100%;
-		width:20%;
-	}
-	#centernavbar{
-		height:25%;
-		width:100%;	
-	}
-	
-	#menubtn{
-		background:#FFF8DC; 
-		box-shadow: 0;
-		border: 2px solid #7B68EE;
-		outline: none;
+   }
+   
+ 
+   
+   
+   #topnavicontainer{
+      margin: 0px auto;
+      width:100%;
+      
+   }
+   
+   #topnavbar{ 
+
+       width: 100%;
+       height: 40px;
+       font-size: 20px;   
+       margin: 0px auto;   
+       opacity: 0.9;
+   }
+   
+
+   #headerwrapper{
+      height:16%;   
+      width:100%;
+   }
+
+
+   #header{
+      height:70%;
+      width:100%;
+   }
+   
+   #headerleft{
+      float:left;
+      height:100%;
+      width:15%;
+   }
+
+   #headercenter{
+      float:left;
+      height:100%;
+      width:65%;
+   }
+
+   
+   #search{
+      height:100%;
+      width:100%;
+
+   }
+   
+   #headerright{
+      float:left;
+      height:100%;
+      width:20%;
+   }
+   #centernavbar{
+     height: 30%;
+      width:100%;   
+   }
+   
+   #menubtn{
+      background:#FFF8DC; 
+      box-shadow: 0;
+      border: 1px solid #7B68EE;
+      outline: none;
   
-	}
-	#centerwrapper{
-/* 		height:64%; */
-		height:auto;
-		width:80%;
-		margin: 0px auto;
- 		position: absolute; 
-    	top:260px;
-    	left:550px;
-  
-	}
-	
-	.col-md-6{
-		 background :#FAEBD7;
-	}
-	
-	
-	#content{
-		height:100%;
-		width:100%;		
- 		align: center; 
-	}
-	
-	#bottomwrapper{
-		height:15%;
-		width:100%;
-	}
-	#footer{
-		height:100%;
-		width:100%;
-		
-	}
-	
+   }
+   
+      #allwrapper{
 
-	
+      width:100%;
+      height:auto;
+      margin: 0px auto;
+      
+      }
+
+   #centerwrapper{
+     height:100%;  
+/*      height:auto;   */
+      width:80%;
+      margin: 0px auto;
+    
+      
+   }
+   
+   
+   
+   #articlerow{
+         
+       height:100%; 
+        width:100%; 
+   }
+   
+   #articlecol{
+      border-radius:10px;
+    
+    border: 2px solid #4f70ce;
+      margin: auto;
+      height:85%; 
+      width:100%;
+   }
+
+   #footer{
+    background:#7B68EE; 
+      width:100%;
+      
+   }
+   
+   
+/*  -----------------------------------------------------------------------------------------------------   */
 
 
-	
+
+
 </style>
 
 
 
 <script>
+         window.onload = function() {
+            var deletecount = 1;
+             document.getElementById("cencel").onclick = function() {
+                location.href = "CommunityMain.do";
+                }
+             
+             
+         }
 
-			window.onload = function() {
-			    document.getElementById("cencel").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-				}
-			
-			
-			
-			  
+
 </script>
 </head>
 <body>
-	
-	
-	
-	
-
-	<div id="topnavicontainer">
-		<nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
-	     	<div id="logocontainer">
-	      	<a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
-	</div>
-	   
-	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
-	     <ul class="navbar-nav">
-	       <li class="nav-item">
-	         
-	       
-	    <c:choose>
-		<c:when test="${sessionScope.loginid != null}">
-		 <a class="nav-link" href="logout.mem">
-	            <i class="fa fa-user fa-fw" ></i> Logout</a>
-	              </c:when>
-	              <c:otherwise>
-	               <a class="nav-link" href="login.jsp">
-	               <i class="fa fa-user fa-fw" ></i> Login</a>
-	              </c:otherwise>
+<%
+response.setCharacterEncoding("utf8");
+%>
+   <div id="topnavicontainer">
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="topnavbar" >
+        <div id="logocontainer">
+            <a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
+   </div>
+      
+   <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            
+          
+       <c:choose>
+      <c:when test="${sessionScope.loginid != null}">
+       <a class="nav-link" href="logout.mem">
+               <i class="fa fa-user fa-fw" ></i> Logout</a>
+                 </c:when>
+                 <c:otherwise>
+                  <a class="nav-link" href="login.jsp">
+                  <i class="fa fa-user fa-fw" ></i> Login</a>
+                 </c:otherwise>
      </c:choose>
-	       </li>
-	       <li class="nav-item">
-	           <a class="nav-link" href="join.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Sing up</a>
-	       </li> 
-	     </ul>  
-	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
-	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="join.jsp">
+               <i class="fa fa-user fa-fw" ></i> Sing up</a>
+          </li> 
+        </ul>  
+           <a class="btn navbar-btn ml-2 btn-primary text-white">
+           <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+            <span class="navbar-toggler-icon" ></span>
      </div>
    
    </nav>
+
   </div>
   
-	<div id="allwrapper" >
-	
-	<div id="headerwrapper">
-		<div id="header">
-			<div id="headerleft"></div>
-		
-		
-		<div id="headercenter">
-			<div class="py-5"  >  
-			    <div class="container" >
-			      <div class="row" > 
-			         <div class="col-md-12"> 
-			          <form class="form-inline" >
-			            <div class="input-group" id="search">
-			              <input type="search" class="form-control" placeholder="search">
-			              <div class="input-group-append">
-			                <button class="btn btn-secondary" type="button">Search</button>
-			              </div>
-			            </div>
-			          </form>
-			         </div> 
-			       </div> 
-			    </div>  
-			   </div>  
-		</div>
-			
-			
-				
-		<div id="headerright">
-	
-		</div>
-	</div>
+  
+  
+  
+     <div id="headerwrapper">
+      <div id="header">
+         <div id="headerleft"></div>
+      
+      
+      <div id="headercenter">
+         <div class="py-5"  >  
+             <div class="container"  >
+               <div class="row" > 
+                  <div class="col-md-12"> 
+                   <form class="form-inline" >
+                     <div class="input-group" id="search">
+                       <input type="search" class="form-control" placeholder="search">
+                       <div class="input-group-append">
+                         <button class="btn btn-primary" type="button">Search</button>
+                       </div>
+                     </div>
+                   </form>
+                  </div> 
+                </div> 
+             </div>  
+            </div>  
+      </div>
+         
+         
+            
+      <div id="headerright">
+   
+      </div>
+   </div>
 
-		
-		
-		<div id="centernavbar">
-			<nav class="nav nav-pills nav-justified">
-				<li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="CommunityController.do">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="#">
-					<i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
-				 </li> 
-			</nav>
-		</div>
-	
-	</div>	
-	
-	<div id="centerwrapper">
-		
-		<div id="content">
-		
-		
+      
+      
+      <div id="centernavbar">
+         <nav class="nav nav-pills nav-justified">
+            <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+                <a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+             </li> 
+             
+         
+         </nav>
+      </div>
+   
+   </div>   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   <div id="allwrapper" >
+      
+      <br>
+   
+   <div id="centerwrapper">
+      
 
-							
-	<div class="row">
-        <div class="col-md-6">
-          <hr />
-          <div class="Compose-Message">
-            <div class="panel panel-success">
-<!--               <div class="panel-heading"> -->
-<!--                 Input New Text -->
-<!--               </div> -->
+        
+        
+        
+       
+        
+  
+              <div class="row " id="articlerow">
+               <div class="col-md-6 bg-light " id="articlecol">
+                  <hr />
+                  
+                  
+                  
+                  <div class="Compose-Message">
+                     <div class="panel panel-success">
+                        <!--               <div class="panel-heading"> -->
+                        <!--                 Input New Text -->
+                        <!--               </div> -->
 
 
-		
- 
-
-	<form name=write_form action="ComunityWrite.do" method="post"  onSubmit="return check_error()">
+   <form name=write_form action="ComunityWrite.do" method="post"  onSubmit="return check_error()">
               <div class="panel-body">
 
                 <label>Title : </label>
@@ -284,28 +319,26 @@
                 <label>Writer : </label>
        
 <!--            <input type="text" class="form-control W-25"/> -->
-		
+      
 
-				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
-<!-- 				 <label>File : </label> -->
-<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
-       			
-      			</div>  					
+            <input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
+             <label>File : </label>
+            <input type="text" class="form-control w-50" placeholder="File" >
+                
+               </div>                 
        
                 <label>Enter Text : </label>
                 <textarea rows="9" class="form-control" name="contents"></textarea>
                 <hr />
                 
-    
-               
-       
-      
-       	<div class="col-md-12 text-right" >
-       	 <input type="submit" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> 
+
+             
+          <div class="col-md-12 text-right" >
+           <input type="submit" class="btn btn-primary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> 
 
                
-         <input type="button" id="cencel"  class="btn btn-secondary" value="Cencel"><span class="glyphicon glyphicon-tags text-light"></span>   
-         		
+         <input type="button" id="cencel"  class="btn btn-primary" value="Cencel"><span class="glyphicon glyphicon-tags text-light"></span>   
+               
          
               </div>
    
@@ -314,10 +347,7 @@
               
 
               
-                &nbsp;
-              <div class="panel-footer text-muted">
-                <strong>Note : </strong>Please note that we track all messages so don't send any spams.
-              </div>
+              
                 &nbsp;
             </div>
           </div>
@@ -325,46 +355,45 @@
       </div>
     </div>
   </div>
-							
-							
-		</div>
-			
-	</div>
-	
+                     
+                     
+   
 
 
-		<script>
-			
-			function check_error() {
-			     var form = document.write_form;
-			     if(form.title.value == '') {
-			
-			        alert('제목을 입력하세요');
-			
-			        form.title.focus();
-			
-			        return false;
-			
-			     }
-			     else if(form.contents.value == ''){
-			        alert('내용을 입력하세요');
-			
-			        form.title.focus();
-			
-			        return false;
-			     }
-			
-			     return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
-			   }
+      <script>
+         
+         function check_error() {
+              var form = document.write_form;
+              if(form.title.value == '') {
+         
+                 alert('제목을 입력하세요');
+         
+                 form.title.focus();
+         
+                 return false;
+         
+              }
+              else if(form.contents.value == ''){
+                 alert('내용을 입력하세요');
+         
+                 form.title.focus();
+         
+                 return false;
+              }
+         
+              return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
+            }
 
-	</script>	
-	
-	
-	<div id="bottomwrapper" class="bg-secondary">
-		
-		<div id="footer">
-		
-<div class="text-white bg-secondary" >
+   </script>               
+                        
+                        
+                        
+  <br>
+   
+
+       <div id="footer">
+      
+<div class="text-white " >
     <div class="container">
       <div class="row">
         <div class="p-4 col-md-3">
@@ -415,13 +444,12 @@
       </div>
     </div>
   </div>
-		
+      
 
-		</div>
-	
-	</div>
-	
-</div>
+      </div>
+   
+
+
 
 
 </body>

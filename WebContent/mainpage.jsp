@@ -21,7 +21,7 @@
 <title>Insert title here</title>
 <style>
 	
-/*   primary: #12bbad, */
+/*   primary: #12bbad, */ 
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
 /*   dark: #151515, */
@@ -251,7 +251,7 @@
 				 </li>   
 			 
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="communitymain.jsp">
+					<a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
 					 커뮤니티</a>
 				 </li> 
 				  
