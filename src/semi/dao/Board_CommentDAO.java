@@ -12,7 +12,7 @@ import semi.dto.Board_CommentDTO;
 
 public class Board_CommentDAO {
 	
-	
+	  
 	
 	public int insertBoard_Comment(String id, String seq, String contents, String ip) throws Exception {
 		  Connection con = DBUtils.getConnection();

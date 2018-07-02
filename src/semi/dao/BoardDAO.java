@@ -11,8 +11,8 @@ import semi.dto.BoardDTO;
 
 public class BoardDAO { 
 
-
-	public ArrayList<BoardDTO> boardForBoard(String category, String category2) throws Exception{
+  
+	 public ArrayList<BoardDTO> boardForBoard(String category, String category2) throws Exception{
 		Connection con = DBUtils.getConnection();
 		String sql = null;
 		PreparedStatement pstat = null;

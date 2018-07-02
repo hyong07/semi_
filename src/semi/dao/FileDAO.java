@@ -12,7 +12,7 @@ import semi.dto.FileDTO;
 import semi.dto.ProductDTO;
 
 public class FileDAO {
-
+   
 	public ArrayList<FileDTO> fileForBoard(String category, String category2) throws Exception{
 		Connection con = DBUtils.getConnection();
 		System.out.println(category2);

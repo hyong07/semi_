@@ -294,7 +294,7 @@ String end_date;
 				System.out.println(pdto.getDetail_category());
 				List<FileDTO> flist = new ArrayList<>();
 				
-				flist = filedao.selectFile(seq);
+		   		flist = filedao.selectFile(seq);
 				System.out.println(flist.size());
 
 				request.setAttribute("bdto",bdto);

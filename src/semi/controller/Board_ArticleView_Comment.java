@@ -40,7 +40,7 @@ public class Board_ArticleView_Comment extends HttpServlet {
 				String sell_type = request.getParameter("sell_type");
 				System.out.println(board_seq + " : " + contents + " : " +id + " : " + ip);
 				
-				int result = board_comment.insertBoard_Comment(id, board_seq,contents,ip);
+		 		int result = board_comment.insertBoard_Comment(id, board_seq,contents,ip);
 				System.out.println("°á°ú´Ù~~~" + result);
 				request.setAttribute("seq",board_seq);
 

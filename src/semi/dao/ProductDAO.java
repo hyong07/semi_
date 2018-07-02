@@ -82,7 +82,7 @@ public class ProductDAO {
     return result;
     
 	}
-
+   
 	   
 	   public ProductDTO mainProduct(String seq) throws Exception{
 		   Connection con = DBUtils.getConnection();

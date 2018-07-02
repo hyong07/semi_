@@ -12,7 +12,7 @@ public class MemberDTO {
 	public MemberDTO() {
 		super();
 	}
-	
+	  
 	public MemberDTO(String id, String pw, String name, String email,String phone,  String address, String point) {
 		super();
 		this.id = id;

@@ -10,7 +10,7 @@ public class FileDTO {
 	public FileDTO() {
 		super();
 	}
-	
+	  
 	public FileDTO(String file_seq, String board_no, String original_file_name, String system_file_name, String main_files) {
 		super();
 		this.file_seq = file_seq;
