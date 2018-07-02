@@ -458,6 +458,15 @@
 
                                     </select>
                                  </div>
+                                 <div class="input_wrap col-md-12">
+                           <button type="button" onclick="fileUploadAction();"
+                              class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
+                           <input type="file" id="input_imgs" name=img_file multiple 
+                              accept="image/x-png,image/gif,image/jpeg" />   
+                              <div id="file_test">
+                              
+                              </div>                                                                                 
+                        </div>
                                  <div class="form-row mb-3">
                                     <div class="col-md-5">제품명 :</div>
                                     <input id="product_name" class="form-control col-md-5 ml-1"
@@ -545,15 +554,7 @@
                   <div class="form-row mb-3  col-md-12">
                      <div class="col-md-2">사진첨부 :</div>
                      <div class="form-row col-md-10">
-                        <div class="input_wrap col-md-12">
-                           <button type="button" onclick="fileUploadAction();"
-                              class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
-                           <input type="file" id="input_imgs" name=img_file multiple 
-                              accept="image/x-png,image/gif,image/jpeg" />   
-                              <div id="file_test">
-                              
-                              </div>                                                                                 
-                        </div>
+                        
                         <div class="imgs_wrap form-row">
                            <img id="img" />
                         </div>
@@ -595,6 +596,7 @@
    <div id="bottomwrapper">
 
       <div id="footer">
+
 
          <div class="text-white bg-secondary">
             <div class="container">

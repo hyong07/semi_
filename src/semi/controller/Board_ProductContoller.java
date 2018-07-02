@@ -277,14 +277,14 @@ String mainpname;
 				
 				BoardDTO bdto = new BoardDTO();
 				bdto = boarddao.selectOneBoard(seq);
-				ProductDTO pdto = new ProductDTO();
-				pdto = productdao.mainProduct(seq);
+				List<ProductDTO> result = new ArrayList<>();
+				result = productdao.mainProduct(seq);
 				FileDTO fdto = new FileDTO();
 				fdto = filedao.mainFile(seq);
 
 				request.setAttribute("fdto", fdto);
 				request.setAttribute("bdto",bdto);
-				request.setAttribute("pdto", pdto);
+				request.setAttribute("pdto", result);
 
 				isRedirect=false;
 				if(sell_type.equals("a")) {

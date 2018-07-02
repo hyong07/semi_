@@ -165,10 +165,13 @@
 			 	   location.href = "CommunityMain.do";
 				    }
 			    
-			    
+			    function fileUploadAction(){
+					console.log("파일업로드 버튼 클릭!!");
+					$("#input_imgs").trigger('click'); 
+				} 
 			}
 
-
+		
 </script>
 </head>
 <body>
@@ -323,7 +326,9 @@ response.setCharacterEncoding("utf8");
 
 				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
 				 <label>File : </label>
-				<input type="text" class="form-control w-50" placeholder="File" >
+				 <button type="button" 
+                      class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
+                 
        			
       			</div>  					
        
