@@ -86,7 +86,7 @@ public class ProductDAO {
 		   return dto;
 	   }
 	   
-	   public ProductDTO selectProduct(String product_seq) throws Exception{
+	   public List<ProductDTO> selectProduct(String product_seq) throws Exception{
 		   Connection con = DBUtils.getConnection();
 		   String sql = "select * from product where product_seq=?";
 		   PreparedStatement pstat = con.prepareStatement(sql);
@@ -110,6 +110,7 @@ public class ProductDAO {
 		
 		   return dto;
 	   }
+	   
 	   
 
 
