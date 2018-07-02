@@ -21,13 +21,13 @@ pageEncoding="UTF-8"%>
 
   <script type="text/javascript" src="https://service.iamport.kr/js/iamport.payment-1.1.4.js"></script>
 
-<script  src="../../Jquery/prettify.js"></script>
  <script>
   
   <!-- 유효성검사 시작 -->
 
 var idCheck = 0;
 var pwdCheck = 0;
+var phoneConfirm=0; //문자인증 1일시 인증한 경우임
 //아이디 체크하여 가입버튼 비활성화,중복확인'
 function checkId(){
 	var inputed = $(".id").val();
@@ -46,7 +46,7 @@ function checkId(){
 			}else if(data==1){
 				$("#id").css("background-color", "#B0F6AC");
 				idCheck=1;
-				if(idCheck==1 && pwdCheck==1){
+				if(idCheck==1 && pwdCheck==1 &&phoneConfirm==1){
 					$("#signUpBtn").prop("disabled", false);
 					$("#signUpBtn").css("background-color","#4CAF50");
 					signupCheck();
@@ -78,6 +78,7 @@ function checkPwd(){
 		if(idCheck==1 && pwdCheck==1){
 			$("#signUpBtn").prop("disabled",false);
 			$("#signUpBtn").css("background-color","#4CAF50");
+			
 			signupCheck();
 		}
 	}else if(inputed!=reinputed){
@@ -95,16 +96,19 @@ function signupCheck(){
 	var name = $("#name").val();
 	var email = $("#email").val();
 	var phone = $("#phone").val();
+	var certification = $("#certification").val();
 	var sample6_postcode = $("#sample6_postcode").val();
 	var sample6_address = $("#sample6_address").val();
 	var sample6_address2 = $("#sample6_address2").val();
-	if(name=="" || email=="" || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2==""){
+	if(name.length<2 || email=="" || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2=="" || certification=="" || phoneConfirm==0){
 		$("#signUpBtn").prop("disabled",true);
 		$("#signUpBtn").css("background-color","#aaaaaa");
 	}else{
 		
 	}
 }
+
+
 
 // 이름 이메일 번호 레겕스
 window.onload = function() {
@@ -114,7 +118,9 @@ window.onload = function() {
 		var regex = /[^가-힣]{2,}/;
 		if (regex.test(text)) {
 			var re = text.replace(regex, '');
-			document.getElementById("name").value = re;
+			document.getElementById(
+					"name").value = re;
+			console.log(re);
 		}
 	};
 	
@@ -122,9 +128,10 @@ window.onload = function() {
 };
 
 
-// cancel 버튼 눌렀을 시 회원정보 입력값들 초기화
+
+
 $("document").ready(function(){
-	
+	//cancel버튼 클릭시 모든 인풋창 정보제거
 	
 	$("#cancel").click(function(){
 		$(".id").val(null);
@@ -132,22 +139,21 @@ $("document").ready(function(){
 		$("#signUpBtn").prop("disabled",true);
 		$("#signUpBtn").css("background-color","#aaaaaa");
 		$("#name").val(null);
+		$("#certification").remove();
 		$("#sample6_postcode").val(null);
 		$("#id").css("background-color","#fff");
 		$("#pw2").css("background-color","#fff");
 	});
+	//id 유효성
 	$("#id").keyup(function(){
 		var id = $("#id").val();
 		if(id==""){
 			$("#id").css("background-color","#fff");
 		}
-		
-
-		
-		
+	
 	});
 	
-	 
+	 //핸드폰 번호 유효성
 	    $("#phone").on('keydown', function(e){
 	       // 숫자만 입력받기
 	        var trans_num = $(this).val().replace(/-/gi,'');
@@ -156,7 +162,9 @@ $("document").ready(function(){
 		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
 		{
 	  	    e.preventDefault();
+	  	
 		}
+		
 	    }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
 	        if($(this).val() == '') return;
 	 
@@ -170,18 +178,22 @@ $("document").ready(function(){
 	            if(trans_num.length==11 || trans_num.length==10) 
 	            {   
 	                // 유효성 체크
+	               
 	                var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
 	                if(regExp_ctn.test(trans_num))
 	                {
 	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
 	                    trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
 	                    $(this).val(trans_num);
+	                 
 	                }
 	                else
 	                {
 	                    alert("유효하지 않은 전화번호 입니다.");
 	                    $(this).val("");
 	                    $(this).focus();
+	               
+	        			
 	                }
 	            }
 	            else 
@@ -189,33 +201,110 @@ $("document").ready(function(){
 	                alert("유효하지 않은 전화번호 입니다.");
 	                $(this).val("");
 	                $(this).focus();
+	      
 	            }
 	      }
+	       
 	  }); 
-	    
+	    // 문자인증 ajax
 	   $("#confirm").click(function(){
 		
 		 var phone = $("#phone").val();
-		 	console.log(phone);
-		 $.ajax({
+		 if(phone==""){alert("번호를 다시 입력하세요");}
+		 else{
+		 	console.log(phone);		 	
+		 	$.ajax({
 				url:"sms.mem",
 				type:"post",
 				data:{
 					phone : phone
-					},
-					success:function(data){
+					},	
+					 beforeSend: function() {
+					  
+
+					        $('.wrap-loading').removeClass('display-none');
+
+					    },
+					    complete: function() {
+					
+					        $('.wrap-loading').addClass('display-none');
+
+					    },
+
+				success:function(data){
+					
+					if((!data=="")){
+						alert("인증번호 전송완료");
+						$("input[name=phone]").attr("readonly",true);
+					var start = $("#confirm");
+					start.after("<input type='text' id='certification' name='certification' class='final' placeholder='인증번호를 입력하세요'>");
 						
-					}
-		 
-	   });	
+						
+					$("#certification").keyup(function(){
+						var insert = $("#certification").val();
+						if(insert==data){
+							$("#certification").css("background-color", "#B0F6AC");
+							 $("input[name=certification]").attr("readonly",true);
+
+							phoneConfirm=1;
+							signupCheck();
+						}else if(!(insert==data) && insert==""){
+							$("#certification").css("background-color", "#FFCECE");
+							$("#signUpBtn").prop("disabled",true);
+							$("#signUpBtn").css("background-color","#aaaaaa");
+							phoneConfirm=0;
+						}else if(insert!=data){
+							$("#certification").css("background-color", "#FFCECE");
+							$("#signUpBtn").prop("disabled",true);
+							$("#signUpBtn").css("background-color","#aaaaaa");
+							phoneConfirm=0;
+							}
+						
+						});
+					}	
+				}	
+				
+			});	
+		 }
 	   
-})
-  
+});
+}) 
   
 
 
   </script>
-  
+     <!-- 다음 API -->
+            <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
+            <script>
+              function sample6_execDaumPostcode() {
+                  new daum.Postcode({
+                      oncomplete: function(data) {
+          
+                          var fullAddr = ''; 
+                          var extraAddr = '';
+          
+                          if (data.userSelectedType === 'R') {
+                              fullAddr = data.roadAddress;
+          
+                          } else {
+                              fullAddr = data.jibunAddress;
+                          }
+                          if(data.userSelectedType === 'R'){
+                              if(data.bname !== ''){
+                                  extraAddr += data.bname;
+                              }
+                              if(data.buildingName !== ''){
+                                  extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
+                              }
+                              fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
+                          }
+                          document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
+                          document.getElementById('sample6_address').value = fullAddr;
+                          document.getElementById('sample6_address2').focus();
+                      }
+                  }).open();
+              }
+            </script>
   <title>Insert title here</title>
   <style>
     /*   primary: #12bbad, */
@@ -949,6 +1038,47 @@ $("document").ready(function(){
     #add {
       display: inline-block;
     }
+    
+    
+    .wrap-loading{ /*화면 전체를 어둡게 합니다.*/
+
+    position: fixed;
+
+    left:0;
+
+    right:0;
+
+    top:0;
+
+    bottom:0;
+
+    background: rgba(0,0,0,0.2); /*not in ie */
+
+    filter: progid:DXImageTransform.Microsoft.Gradient(startColorstr='#20000000', endColorstr='#20000000');    /* ie */
+
+    
+
+}
+
+    .wrap-loading div{ /*로딩 이미지*/
+
+        position: fixed;
+
+        top:50%;
+
+        left:50%;
+
+        margin-left: -21px;
+
+        margin-top: -21px;
+
+    }
+
+    .display-none{ /*감추기*/
+
+        display:none;
+}
+
   </style>
   
           
@@ -993,67 +1123,45 @@ $("document").ready(function(){
               <!-- signup Form -->
               <img src="사람.png" height="20" width="20">
               <label>I D</label>
-              <input type="text" id="id" name="id" required class="id" oninput="checkId()" class="fadeIn second filter-light" placeholder="Please enter your ID">
+              <input type="text" id="id" name="id" required class="id" oninput="checkId()" class="final" placeholder="Please enter your ID">
               <br>
               <img src="pw2.png" height="20" width="20">
               <label>PW</label>
-              <input type="password" id="pw" name="password" required class="pass" oninput="checkPwd()" class="fadeIn third" placeholder="Input Your Password">
+              <input type="password" id="pw" name="password" required class="pass" oninput="checkPwd()" class="final" placeholder="Input Your Password">
               <br>
               <img src="pw.png" height="20" width="20">
               <label>PW</label>
-              <input type="password" id="pw2" name="password2" required class="pass" oninput="checkPwd()" class="fadeIn third" placeholder="Input Your Password Again"> </b>
+              <input type="password" id="pw2" name="password2" required class="pass" oninput="checkPwd()" class="final" placeholder="Input Your Password Again"> </b>
           </div>
           <div id="formContent">
             <label>*NAME</label>
-            <input type="text" class="fadeIn second" required class="id" id="name" name="name"  oninput="checkId()" placeholder="Input Your Name">
+            <input type="text" class="final" required class="id" id="name" name="name"  oninput="checkId()" placeholder="Input Your Name">
             <label>*EMAIL</label>
-            <input type="text" id="email" required class="id" oninput="checkId()" class="fadeIn second" name="email" placeholder="Input Your Email">
+            <input type="text" id="email" required class="id" oninput="checkId()" class="final" name="email" placeholder="Input Your Email">
             <br>
             <img src="전화.png" height="20" width="20">
             <label>PH</label>
 
-            <input type="text" id="phone" required class="id"  class="fadeIn second" name="phone" style="width:60%" placeholder="Input Your Phone">
+            <input type="text" id="phone" required class="id"  class="final" name="phone" style="width:60%" placeholder="Input Your Phone">
+            <div class="wrap-loading display-none">
+
+   			 <div><img src="loading.gif"></div>
+
+			</div>  
+
+
+
+
            <button class="" type="button" id="confirm"  style="width: 140px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;" > 번호 인증 </button>
                      <br>
             <div id="add" class="w-100 text-left px-2">
               <img src="주소.png" height="20" width="20">
               <label>ADD</label>
-              <input type="text" id="sample6_postcode" class="" required class="id" oninput="checkId()" name="addresspost" placeholder="Input Your Address" readonly="readonly" style="width:60%">
+              <input type="text" id="sample6_postcode" class="final" required class="id" oninput="checkId()" name="addresspost" placeholder="Input Your Address" readonly="readonly" style="width:60%">
               <button class="" type="button" id="post"  style="width: 140px; height: 50px; background-color:#4f70ce; color:white;  font-size: 13px; font-weight: 600;" onclick="sample6_execDaumPostcode()"> 우편번호찾기 </button>
-              <input type="text" id="sample6_address" required class="id" oninput="checkId()" class="" name="address" placeholder="Input Your Address" readonly="readonly" style="width: 85%; margin-left: 68px">
-              <input type="text" id="sample6_address2" required class="id" oninput="checkId()" class="" name="address2" placeholder="Input Your Detailed Address"  style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> </div>
-            <!-- 다음 API -->
-            <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
-            <script>
-              function sample6_execDaumPostcode() {
-                  new daum.Postcode({
-                      oncomplete: function(data) {
-          
-                          var fullAddr = ''; 
-                          var extraAddr = '';
-          
-                          if (data.userSelectedType === 'R') {
-                              fullAddr = data.roadAddress;
-          
-                          } else {
-                              fullAddr = data.jibunAddress;
-                          }
-                          if(data.userSelectedType === 'R'){
-                              if(data.bname !== ''){
-                                  extraAddr += data.bname;
-                              }
-                              if(data.buildingName !== ''){
-                                  extraAddr += (extraAddr !== '' ? ', ' + data.buildingName : data.buildingName);
-                              }
-                              fullAddr += (extraAddr !== '' ? ' ('+ extraAddr +')' : '');
-                          }
-                          document.getElementById('sample6_postcode').value = data.zonecode; //5자리 새우편번호 사용
-                          document.getElementById('sample6_address').value = fullAddr;
-                          document.getElementById('sample6_address2').focus();
-                      }
-                  }).open();
-              }
-            </script>
+              <input type="text" id="sample6_address" required class="id" oninput="checkId()" class="final" name="address" placeholder="Input Your Address" readonly="readonly" style="width: 85%; margin-left: 68px">
+              <input type="text" id="sample6_address2" required class="id" oninput="checkId()" class="final" name="address2" placeholder="Input Your Detailed Address"  style="width: 85%; margin-left: 68px; margin-bottom:20px;" draggable="true"> </div>
+         
           </div>
           <div style="text-align:center;">
             <input type="submit" id="signUpBtn" class="fadeIn fourth" value="Sign up">
