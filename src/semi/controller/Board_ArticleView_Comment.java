@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import semi.dao.Board_CommentDAO;
 
-@WebServlet("*.co")
+@WebServlet("*.vo")
 public class Board_ArticleView_Comment extends HttpServlet {
 	
 	
@@ -31,7 +31,7 @@ public class Board_ArticleView_Comment extends HttpServlet {
 			boolean isRedirect = true;
 			String dst = null;
 
-			if(command.equals("/comment.co")) {
+			if(command.equals("/comment.vo")) {
 				String board_seq = request.getParameter("seq");
 				String contents = request.getParameter("contents");
 				System.out.println(board_seq + " : " + contents);

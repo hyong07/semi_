@@ -115,7 +115,7 @@ public class BoardDAO {
 	   
 	   public int addBoard(BoardDTO dto) throws Exception{
 			Connection con = DBUtils.getConnection();
-			String sql = "insert into board values(?,?,?,?,sysdate,?,default,'',default)";
+			String sql = "insert into board values(?,?,?,?,sysdate,?,default,'',default,'','')";
 			PreparedStatement pstat = con.prepareStatement(sql);
 			pstat.setString(1, dto.getBoard_seq());
 			pstat.setString(2, dto.getSeller_id());
