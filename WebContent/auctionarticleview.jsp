@@ -31,13 +31,15 @@
 /*   danger: #dc3545 */
 
    body{
+   
         
    }
 
    div{
       border: 0px solid black;
         box-sizing: border-box;
-              
+  
+            
    }
    
    #topnavicontainer{
@@ -301,6 +303,7 @@
       <div id="content">
        <div class="container">
     <div class="row">
+    <div id=wrapper>
       <!-- Post Content Column -->
       <div class="col-lg-8">
         <!-- Title -->
@@ -315,13 +318,13 @@
         <hr>       
         <!-- Preview Image -->
         <div .main> 
-        <div id='img_div'> 
-        <img class="img-fluid rounded" src="http://placehold.it/900x300" alt="" id=product_img></div>
+        <div id='img_div'> <img class="img-fluid rounded"  alt="" id=product_img src='${mainfile}'>
+     </div>
         <div class="col-md-7 order-1 order-md-2 p-2" id="main_text">
                                     <h3 class="text-primary">
                                        <a href="">${pdto.p_name}</a>
                                     </h3>
-                                    <i>9d 13h left (07/02, 4:34 AM)&nbsp;</i>
+                                    <i>${endhour} left (${sysdate})&nbsp;</i>
                                     <div>
                                        <br>
                                        <row>
@@ -355,15 +358,21 @@
                                        </row>
                                     </div>
                                  </div></div>
+                                 <div id=files>
+                                 	<c:forEach var="item" items="${path}">
+                                  <img class="img-fluid rounded"  alt="" id=product_img src='${item}'><br><br>
+                                  </c:forEach>
+                                 </div>
            <hr>
-        <!-- Post Content -->
-        <p class="lead">${bdto.contents}</p>
-        <hr>
-        <!-- Comments Form -->
+            <p class="lead">${bdto.contents}</p> <hr>
+       
+      
+        </div>
+
         <div class="card my-4">
           <h5 class="card-header">Leave a Comment:</h5>
           <div class="card-body">
-            <form class="text-right" action='comment.co?seq=${bdto.board_seq}' method=post>
+            <form class="text-right" action='comment.co?seq=${bdto.board_seq}&sell_type=${bdto.sell_type}' method=post>
               <div class="form-group"> 
                 <textarea class="form-control" rows="3" style="resize:none" name=contents></textarea>
               </div>
@@ -389,24 +398,25 @@
   
   
         <!-- Comment with nested comments -->
-        <div class="media mb-4">
-          <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-          <div class="media-body">
-            <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia
-            congue felis in faucibus.
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-                lacinia congue felis in faucibus. </div>
-            </div>
-            <div class="media mt-4">
-              <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
-              <div class="media-body">
-                <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec
-                lacinia congue felis in faucibus. </div>
-            </div>
-          </div>
+<!--         <div class="media mb-4"> -->
+<!--           <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""> -->
+<!--           <div class="media-body"> -->
+<!--             <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia -->
+<!--             congue felis in faucibus. -->
+<!--             <div class="media mt-4"> -->
+<!--               <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""> -->
+<!--               <div class="media-body"> -->
+<!--                 <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec -->
+<!--                 lacinia congue felis in faucibus. </div> -->
+<!--             </div> -->
+<!--             <div class="media mt-4"> -->
+<!--               <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt=""> -->
+<!--               <div class="media-body"> -->
+<!--                 <h5 class="mt-0">Commenter Name</h5> Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec -->
+<!--                 lacinia congue felis in faucibus. </div> -->
+<!--             </div> -->
+<!--           </div> -->
+<!--         </div> -->
         </div>
       </div>
       <!-- Sidebar Widgets Column -->

@@ -43,23 +43,46 @@ public class ProductDAO {
 		}
 		return pricelist;
 	}
-	
-	public int addProduct(String board_no, String category, String detail_category, String sell_price, String sell_count, String p_name) throws Exception{
+	  
+	public int addProduct(String sell_type, ProductDTO dto) throws Exception{
+		System.out.println("여기로오나요? " + sell_type);
 		Connection con = DBUtils.getConnection();
-		String sql = "insert into product values(?,product_seq.nextval,?,?,?,?,'',?)";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, board_no);
-		pstat.setString(2, category);
-		pstat.setString(3, detail_category);
-		pstat.setString(4, sell_price);
-		pstat.setString(5, sell_count);
-		pstat.setString(6, p_name);
-		int result = pstat.executeUpdate();
-		pstat.close();
-		con.close();
+		String sql = null;
+		PreparedStatement pstat=null;
+	if(sell_type.equals("a")) { 
+		System.out.println("들어오나요?");
+		System.out.println(dto.getBoard_no() + " : "+ dto.getCategory() + " : " + dto.getDetail_category() + " : " + dto.getSell_price() + " :" + dto.getSell_count() + " : " + dto.getP_name());;
+
+		sql = "insert into product values(?,product_seq.nextval,?,?,?,default,'y',?)";
+		pstat = con.prepareStatement(sql);
+		pstat.setString(1, dto.getBoard_no());
+		pstat.setString(2, dto.getCategory());
+		pstat.setString(3, dto.getDetail_category());
+		pstat.setString(4, dto.getSell_price());
+		pstat.setString(5, dto.getP_name());
 		
-		return result;
 	}
+	
+	 else if(sell_type.equals("s")) {
+	      sql = "insert into product values(?,product_seq.nextval,?,?,?,?,?,?)";
+	      pstat = con.prepareStatement(sql);
+	      pstat.setString(1, dto.getBoard_no());
+	      pstat.setString(2, dto.getCategory());
+	      pstat.setString(3, dto.getDetail_category());
+	      pstat.setString(4, dto.getSell_price());
+	      pstat.setString(5, dto.getSell_count());      
+	      pstat.setString(6, dto.getMain_product());
+	      pstat.setString(7, dto.getP_name());
+	      
+	   }
+	int result = pstat.executeUpdate();
+    pstat.close();
+    con.close();
+    
+    return result;
+    
+	}
+
 	   
 	   public ProductDTO mainProduct(String seq) throws Exception{
 		   Connection con = DBUtils.getConnection();
@@ -84,6 +107,32 @@ public class ProductDAO {
 		   }
 		
 		   return dto;
+	   }
+	   
+	   public List<ProductDTO> selectProduct(String seq) throws Exception{
+		   Connection con = DBUtils.getConnection();
+		   String sql = "select * from product where board_no=?";
+		   PreparedStatement pstat = con.prepareStatement(sql);
+		   pstat.setString(1, seq);
+
+		   ResultSet rs = pstat.executeQuery();
+		List<ProductDTO> list = new ArrayList<>();
+		   
+		   while(rs.next()) {
+			   ProductDTO dto = new ProductDTO();
+			   dto.setBoard_no(seq);
+			   dto.setProduct_seq(rs.getString(2));
+			   dto.setCategory(rs.getString(3));
+			   dto.setDetail_category(rs.getString(4));
+			   dto.setSell_price(rs.getString(5));
+			   dto.setSell_count(rs.getString(6));
+			   dto.setMain_product(rs.getString(7));
+			   dto.setP_name(rs.getString(8));
+
+			   list.add(dto);
+		   }
+		
+		   return list;
 	   }
 
 

@@ -82,25 +82,26 @@ public class FileDAO {
 	   
 	   
 		public List<FileDTO> searchFileName(String path, String board_no) throws Exception{
-			List<FileDTO> dto = new ArrayList<>();
+			List<FileDTO> list = new ArrayList<>();
 			File file = new File(path);
 			File[] fileList = file.listFiles();		
 			for(File tmp : fileList) {
 				FileDTO dtoTemp = new FileDTO();
+			
 				dtoTemp.setBoard_no(board_no);
 				dtoTemp.setOriginal_file_name(tmp.getName());
 				dtoTemp.setSystem_file_name(tmp.getName());
-				dto.add(dtoTemp);
+				list.add(dtoTemp);
 			}
 			
-			return dto;		
+			return list;		
 		}
 		
 		public int insertFile(List<FileDTO> dto) throws Exception{
 			Connection con = DBUtils.getConnection();
 			int result = 0;
 			for(int i =0; i<dto.size(); i++) {
-				String sql = "insert into files values(file_seq.nextval,?,?,?,'')";
+				String sql = "insert into files values(file_seq.nextval,?,?,?,default)";
 				PreparedStatement pstat = con.prepareStatement(sql);
 				pstat.setString(1, dto.get(i).getBoard_no());
 				pstat.setString(2, dto.get(i).getOriginal_file_name());
@@ -109,5 +110,44 @@ public class FileDAO {
 			}
 			return result;
 		}
+		
+		public int updateFile(String board_no, String mainfilename) throws Exception{
+			System.out.println("업데이트");
+			
+			Connection con = DBUtils.getConnection();
+			String sql = "update files set main_files = 'y' where board_no = ? and original_file_name=?";
+			 PreparedStatement pstat = con.prepareStatement(sql);
+			 pstat.setString(1, board_no);
+			 pstat.setString(2, mainfilename);
+			
+			 int result = pstat.executeUpdate();
+			System.out.println(result); 
+			 return result;
+		}
+		
+		
+		  public List<FileDTO> selectFile(String seq) throws Exception{
+			   Connection con = DBUtils.getConnection();
+			   String sql = "select * from files where board_no=?";
+			   PreparedStatement pstat = con.prepareStatement(sql);
+			   pstat.setString(1, seq);
+			   ResultSet rs = pstat.executeQuery();
+			   
+			   List<FileDTO> list = new ArrayList<>();
+			   while(rs.next()) {
+				   FileDTO dto = new FileDTO();
+				   dto.setFile_seq(rs.getString(1));
+				   dto.setBoard_no(seq);
+				   dto.setOriginal_file_name(rs.getString(3));
+				   dto.setSystem_file_name(rs.getString(4));
+				   dto.setMain_files(rs.getString(5));
+				   
+				   list.add(dto);
+		
+			   }
+			  
+			   return list;
+		   }
+		
 
 }

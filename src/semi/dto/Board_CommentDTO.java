@@ -19,6 +19,10 @@ public class Board_CommentDTO {
 		this.writedate = writedate;
 		this.ip = ip;
 	}
+	
+	public Board_CommentDTO() {
+		
+	}
 
 	public String getArticle_no() {
 		return article_no;
