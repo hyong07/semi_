@@ -12,8 +12,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+   href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   rel="stylesheet" id="bootstrap-css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -96,7 +96,7 @@
       width:20%;
    }
    #centernavbar{
-	  height: 30%;
+     height: 30%;
       width:100%;   
    }
    
@@ -114,7 +114,7 @@
       height:auto;
       margin: 0px auto;
       
-   	}
+      }
 
    #centerwrapper{
         height:100%;  
@@ -128,27 +128,27 @@
    
    
    #articlerow{
-   		
-    	height:100%; 
-     	width:100%; 
+         
+       height:100%; 
+        width:100%; 
    }
    
    #articlecol{
-   	border-radius:10px;
+      border-radius:10px;
     
     border: 2px solid #4f70ce;
-   	margin: auto;
-   	height:85%; 
-   	width:100%;
+      margin: auto;
+      height:85%; 
+      width:100%;
    }
 
 /*    #bottomwrapper{ */
-	 
+    
 /*       width:100%; */
 /*    } */
    
    #footer{
-	background:#7B68EE; 
+   background:#7B68EE; 
       width:100%;
   
    }
@@ -684,14 +684,14 @@
 
 
 <script>
-			window.onload = function() {
-				var deletecount = 1;
-			    document.getElementById("back").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-			    
-			    
-			}
+         window.onload = function() {
+            var deletecount = 1;
+             document.getElementById("back").onclick = function() {
+                location.href = "CommunityMain.do";
+                }
+             
+             
+         }
 
 
 </script>
@@ -811,7 +811,7 @@ response.setCharacterEncoding("utf8");
   
   
    <div id="allwrapper" >
-   	
+      
       <br>
    
    <div id="centerwrapper">
@@ -823,298 +823,298 @@ response.setCharacterEncoding("utf8");
        
         
   
-        		<div class="row " id="articlerow">
-					<div class="col-md-6 bg-light " id="articlecol">
-						<hr />
-						
-						
-						
-						<div class="Compose-Message">
-							<div class="panel panel-success">
-								<!--               <div class="panel-heading"> -->
-								<!--                 Input New Text -->
-								<!--               </div> -->
-
-
-
-								<div class="panel-body">
-
-									<label>Title : </label> <input type="text"
-										class="form-control w-100" name="title"
-										placeholder=${dto.title } readonly> <label>Writer
-										: </label>
-
-									<!--            <input type="text" class="form-control W-25"/> -->
-
-
-									<input type="text" class="form-control w-50"
-										placeholder=${dto.writer } name="loginid" readonly>
-									<!-- 				 <label>File : </label> -->
-									<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
-
-
-									<!-- 				 <label>Count : </label> -->
-									<!--                 <input type="text" class="form-control w-100"   name="viewcount"  placeholder=${dto.viewcount}  readonly> -->
-
-								</div>
-					
-								<label>Enter Text : </label>
-								<textarea rows="9" class="form-control" name="contents"
-									placeholder=${dto.contents } readonly></textarea>
-								<hr />
-
-								
-								
-								
-									
-								<c:choose>
-									<c:when test="${dto.writer.equals(sessionScope.loginid)}">
-
-
-										<div class="col-md-12 text-right">
-											<!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
-											<input type="button" id=back class="btn btn-secondary"
-												value="back"><span
-												class="glyphicon glyphicon-tags text-light"></span> <input
-												type="button" id=delete class="btn btn-secondary"
-												value="delete"><span
-												class="glyphicon glyphicon-tags text-light"></span> <input
-												type="button" id=modify class="btn btn-secondary"
-												value="modify "><span
-												class="glyphicon glyphicon-tags text-light"></span>
-
-
-										</div>
-										<script>
-					              document.getElementById("delete").onclick = function() {
-						        	   location.href = "CommunityDelete.do?seq=<%=request.getParameter("seq")%>";
-						        			   
-						           }
-							    
-							      document.getElementById("modify").onclick = function() {
-						        	   location.href = "ComunityModify.do?seq=<%=request.getParameter("seq")%>";
-								}
-										</script>
-
-									</c:when>
-									<c:otherwise>
-										<div class="col-md-12 text-right">
-											<!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
-											<input type="button" id=back class="btn btn-secondary"
-												value="back"><span
-												class="glyphicon glyphicon-tags text-light"></span>
-										</div>
-									</c:otherwise>
-								</c:choose>
-								
-
-							</div>
-						</div>
-						
-						
-			<c:choose>
-
-
-					<c:when test="${dto.writer == sessionScope.loginid}">			
-					
-					
-					<div class="comments-container bg-light">
-					    <div class="comment-form">
-					      <!-- Comment Avatar -->
-					      <form action="CommentWrite.co" method="get" class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
-					        <div class="form-row" >
-					          <textarea class="input border border-primary " id="comment_text" name="comment_text" ng-model="cmntCtrl.comment.text" placeholder="Add comment..." required="" ></textarea>
-					          <input type="hidden" name="seq" value="${dto.seq}">
-					        </div>
-					        <div class="form-row">
-					          <input type="submit" value="Add Comment" class=""> </div>
-					      </form>
-					    </div>
-					   </div> 
-					    
-					    	</c:when>
-									<c:otherwise>
-										
-					<div class="comments-container bg-light">
-					    <div class="comment-form">
-					      <!-- Comment Avatar -->
-					      <form class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
-					        <div class="form-row" >
-					          <textarea class="input border border-primary " ng-model="cmntCtrl.comment.text" placeholder="Please login..." required="" ></textarea>
-					        </div>
-					       
-					      </form>
-					    </div>
-						  </div> 
-						
-						
-						</c:otherwise>
-					</c:choose>
-					
-					    
-				<br>
-				
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-				
-		<c:if test="${result.size() > 0}">
-			<script>var num = 1;</script>
-					
-						
-				<c:forEach var="item" items="${result}">
-
-				<c:choose>
-
-
-				<c:when test="${dto.writer == sessionScope.loginid}">
-				
-					
-					    <br>
-					    <div class="comment-main-level">
-					      <div class="comment-box">
-					        <div class="comment-head bg-warning">
-					          <h6 class="comment-name by-author">
-					            <a>No.${item.comment_seq}</a>
-					            <a>ID:${item.writer}</a>
-					          </h6>
-					          <span>Date:${item.writedate}
-					  
-					          </span>
-					              
-					    	<span id="delbtn">
-					          <script>
-                  				$("#delbtn:last-child").after("<button id="+num+"  value='${item.comment_seq}'>delete</button>")
-					          </script>
-					         </span>  
-					       
-					       
-				
-					    
-					       
-					       
-					            
-					         <script>
-					                  document.getElementById(num).onclick = function() {
-					              	
- 					                     location.href = "CommentDelete.co?comment_seq=${item.comment_seq}&seq=${item.article_no}";}
+              <div class="row " id="articlerow">
+               <div class="col-md-6 bg-light " id="articlecol">
+                  <hr />
                   
-							</script> 
+                  
+                  
+                  <div class="Compose-Message">
+                     <div class="panel panel-success">
+                        <!--               <div class="panel-heading"> -->
+                        <!--                 Input New Text -->
+                        <!--               </div> -->
+
+
+
+                        <div class="panel-body">
+
+                           <label>Title : </label> <input type="text"
+                              class="form-control w-100" name="title"
+                              placeholder=${dto.title } readonly> <label>Writer
+                              : </label>
+
+                           <!--            <input type="text" class="form-control W-25"/> -->
+
+
+                           <input type="text" class="form-control w-50"
+                              placeholder=${dto.writer } name="loginid" readonly>
+                           <!--              <label>File : </label> -->
+                           <!--             <input type="text" class="form-control w-50" placeholder="File" > -->
+
+
+                           <!--              <label>Count : </label> -->
+                           <!--                 <input type="text" class="form-control w-100"   name="viewcount"  placeholder=${dto.viewcount}  readonly> -->
+
+                        </div>
+               
+                        <label>Enter Text : </label>
+                        <textarea rows="9" class="form-control" name="contents"
+                           placeholder=${dto.contents } readonly></textarea>
+                        <hr />
+
+                        
+                        
+                        
+                           
+                        <c:choose>
+                           <c:when test="${dto.writer.equals(sessionScope.loginid)}">
+
+
+                              <div class="col-md-12 text-right">
+                                 <!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
+                                 <input type="button" id=back class="btn btn-secondary"
+                                    value="back"><span
+                                    class="glyphicon glyphicon-tags text-light"></span> <input
+                                    type="button" id=delete class="btn btn-secondary"
+                                    value="delete"><span
+                                    class="glyphicon glyphicon-tags text-light"></span> <input
+                                    type="button" id=modify class="btn btn-secondary"
+                                    value="modify "><span
+                                    class="glyphicon glyphicon-tags text-light"></span>
+
+
+                              </div>
+                              <script>
+                             document.getElementById("delete").onclick = function() {
+                                location.href = "CommunityDelete.do?seq=<%=request.getParameter("seq")%>";
+                                      
+                             }
+                         
+                           document.getElementById("modify").onclick = function() {
+                                location.href = "ComunityModify.do?seq=<%=request.getParameter("seq")%>";
+                        }
+                              </script>
+
+                           </c:when>
+                           <c:otherwise>
+                              <div class="col-md-12 text-right">
+                                 <!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
+                                 <input type="button" id=back class="btn btn-secondary"
+                                    value="back"><span
+                                    class="glyphicon glyphicon-tags text-light"></span>
+                              </div>
+                           </c:otherwise>
+                        </c:choose>
+                        
+
+                     </div>
+                  </div>
+                  
+                  
+         <c:choose>
+
+
+               <c:when test="${dto.writer == sessionScope.loginid}">         
+               
+               
+               <div class="comments-container bg-light">
+                   <div class="comment-form">
+                     <!-- Comment Avatar -->
+                     <form action="CommentWrite.co" method="get" class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
+                       <div class="form-row" >
+                         <textarea class="input border border-primary " id="comment_text" name="comment_text" ng-model="cmntCtrl.comment.text" placeholder="Add comment..." required="" ></textarea>
+                         <input type="hidden" name="seq" value="${dto.seq}">
+                       </div>
+                       <div class="form-row">
+                         <input type="submit" value="Add Comment" class=""> </div>
+                     </form>
+                   </div>
+                  </div> 
+                   
+                      </c:when>
+                           <c:otherwise>
+                              
+               <div class="comments-container bg-light">
+                   <div class="comment-form">
+                     <!-- Comment Avatar -->
+                     <form class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
+                       <div class="form-row" >
+                         <textarea class="input border border-primary " ng-model="cmntCtrl.comment.text" placeholder="Please login..." required="" ></textarea>
+                       </div>
+                      
+                     </form>
+                   </div>
+                    </div> 
+                  
+                  
+                  </c:otherwise>
+               </c:choose>
+               
+                   
+            <br>
+            
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+            
+      <c:if test="${result.size() > 0}">
+         <script>var num = 1;</script>
+               
+                  
+            <c:forEach var="item" items="${result}">
+
+            <c:choose>
+
+
+            <c:when test="${dto.writer == sessionScope.loginid}">
+            
+               
+                   <br>
+                   <div class="comment-main-level">
+                     <div class="comment-box">
+                       <div class="comment-head bg-warning">
+                         <h6 class="comment-name by-author">
+                           <a>No.${item.comment_seq}</a>
+                           <a>ID:${item.writer}</a>
+                         </h6>
+                         <span>Date:${item.writedate}
+                 
+                         </span>
+                             
+                      <span id="delbtn">
+                         <script>
+                              $("#delbtn:last-child").after("<button id="+num+"  value='${item.comment_seq}'>delete</button>")
+                         </script>
+                        </span>  
+                      
+                      
+            
+                   
+                      
+                      
+                           
+                        <script>
+                                 document.getElementById(num).onclick = function() {
+                                
+                                     location.href = "CommentDelete.co?comment_seq=${item.comment_seq}&seq=${item.article_no}";}
+                  
+                     </script> 
      
-							 <span id="modifysubmit"> 
-					          <script>
-                  				$("#modifysubmit:last-child").after("<button id=commentmodifysuccess"+num+" >수정완료</button> ")
-					          </script></span>
-					          
-					          
-					          
-					       <script>
-					 
-					    	$("#commentmodifysuccess"+ num).click(
-										(function(e){
-											return function(){
-												var modifytext = $("#modify"+e).val();
-												location.href = "CommentModify.co?comment_seq=${item.comment_seq}&article_no=${item.article_no}&comment_text="+modifytext;
-						 					}
-										})(num)
-									);
-							
-								
-					    	</script>					      
-					      
-					       <span id="modifybtn1">
-					       <script>
-					       $("#modifybtn1:last-child").after("<button id=commentmodify"+num+" name=commentmodify type=button>수정</button>");
-			            	  
-					    	</script>
-						</span>
+                      <span id="modifysubmit"> 
+                         <script>
+                              $("#modifysubmit:last-child").after("<button id=commentmodifysuccess"+num+" >수정완료</button> ")
+                         </script></span>
+                         
+                         
+                         
+                      <script>
+                
+                      $("#commentmodifysuccess"+ num).click(
+                              (function(e){
+                                 return function(){
+                                    var modifytext = $("#modify"+e).val();
+                                    location.href = "CommentModify.co?comment_seq=${item.comment_seq}&article_no=${item.article_no}&comment_text="+modifytext;
+                                  }
+                              })(num)
+                           );
+                     
+                        
+                      </script>                     
+                     
+                      <span id="modifybtn1">
+                      <script>
+                      $("#modifybtn1:last-child").after("<button id=commentmodify"+num+" name=commentmodify type=button>수정</button>");
+                          
+                      </script>
+                  </span>
 
 
-				    </div>
-			
-				 
-				    <div id=modinput>
-						<script>   
-					        $("#modinput:last-child").after("<input type=text class=form-control   id=modify"+num+" name=comment_text2 readonly value=${item.comment_text}>");
-					    </script>
-					     
-					     
-					    <script>
-			                  
-			  				$("#commentmodify"+ num).click(
-			  					(function(e){
-			  						return function(){
-			  							$("#modify"+e).prop("readonly",false);
-			  	 					}
-			  					})(num)
-			  				);
-  		   
-			  				num++; 
-			  			 </script>
-					          
-					
+                </div>
+         
+             
+                <div id=modinput>
+                  <script>   
+                       $("#modinput:last-child").after("<input type=text class=form-control   id=modify"+num+" name=comment_text2 readonly value=${item.comment_text}>");
+                   </script>
+                    
+                    
+                   <script>
+                           
+                       $("#commentmodify"+ num).click(
+                          (function(e){
+                             return function(){
+                                $("#modify"+e).prop("readonly",false);
+                              }
+                          })(num)
+                       );
+           
+                       num++; 
+                     </script>
+                         
+               
 
-	
-					      </div>
-					    
-				    </div>
-				     
-				</div>
-				
-					<br>
-				
-					
-					</c:when>
+   
+                     </div>
+                   
+                </div>
+                 
+            </div>
+            
+               <br>
+            
+               
+               </c:when>
 
 
 
-				<c:otherwise>
-					
-		
-	
-					    <br>
-					    <div class="comment-main-level">
-					      <div class="comment-box">
-					        <div class="comment-head bg-warning">
-					          <h6 class="comment-name by-author">
-					            <a>${item.comment_seq}</a>
-					            <a>${item.writer}</a>
-					          </h6>
-					          <span>${item.writedate}</span>
-					         
-					         
-					        </div>
-					        <div class="comment-content bg-light">${item.comment_text}</div>
-					      </div>
-					    </div>
-					     <br>  
-			
-					         
-					      
+            <c:otherwise>
+               
+      
+   
+                   <br>
+                   <div class="comment-main-level">
+                     <div class="comment-box">
+                       <div class="comment-head bg-warning">
+                         <h6 class="comment-name by-author">
+                           <a>${item.comment_seq}</a>
+                           <a>${item.writer}</a>
+                         </h6>
+                         <span>${item.writedate}</span>
+                        
+                        
+                       </div>
+                       <div class="comment-content bg-light">${item.comment_text}</div>
+                     </div>
+                   </div>
+                    <br>  
+         
+                        
+                     
 
-					
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
+               
+         </c:otherwise>
+      </c:choose>
+   </c:forEach>
 </c:if>
-					
-					
-					
-				
-					
-										
-		</div>
-									
-	</div>
-			
+               
+               
+               
+            
+               
+                              
+      </div>
+                           
+   </div>
+         
         
         
        

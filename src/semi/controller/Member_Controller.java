@@ -23,7 +23,7 @@ public class Member_Controller extends HttpServlet {
 		try {
 
 			request.setCharacterEncoding("utf8");
-			response.setCharacterEncoding("utf8");
+   			response.setCharacterEncoding("utf8");
 
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();

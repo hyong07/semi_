@@ -11,7 +11,7 @@ import semi.dbutils.DBUtils;
 import semi.dto.MemberDTO;
 
 public class MemberDAO {
-	
+	    
 	public boolean isIdExist(String id) throws Exception{
 		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =?";
