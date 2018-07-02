@@ -19,9 +19,9 @@ public class FileDAO {
 		
 		String sql = null;
 		PreparedStatement pstat = null;
-		System.out.println("file ¿ä±â!!");
+		System.out.println("file ï¿½ï¿½ï¿½!!");
 		if(!(category2==null)) {
-			System.out.println("file ¿ä±â");
+			System.out.println("file ï¿½ï¿½ï¿½");
 			
 			sql =
 					"select f.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
@@ -33,7 +33,7 @@ public class FileDAO {
 		}
 
 		else {
-			System.out.println("file ¿ä±â??");
+			System.out.println("file ï¿½ï¿½ï¿½??");
 			sql =
 					"select f.* from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
 			pstat = con.prepareStatement(sql);
@@ -82,25 +82,26 @@ public class FileDAO {
 	   
 	   
 		public List<FileDTO> searchFileName(String path, String board_no) throws Exception{
-			List<FileDTO> dto = new ArrayList<>();
+			List<FileDTO> list = new ArrayList<>();
 			File file = new File(path);
 			File[] fileList = file.listFiles();		
 			for(File tmp : fileList) {
 				FileDTO dtoTemp = new FileDTO();
+			
 				dtoTemp.setBoard_no(board_no);
 				dtoTemp.setOriginal_file_name(tmp.getName());
 				dtoTemp.setSystem_file_name(tmp.getName());
-				dto.add(dtoTemp);
+				list.add(dtoTemp);
 			}
 			
-			return dto;		
+			return list;		
 		}
 		
 		public int insertFile(List<FileDTO> dto) throws Exception{
 			Connection con = DBUtils.getConnection();
 			int result = 0;
 			for(int i =0; i<dto.size(); i++) {
-				String sql = "insert into files values(file_seq.nextval,?,?,?,'')";
+				String sql = "insert into files values(file_seq.nextval,?,?,?,default)";
 				PreparedStatement pstat = con.prepareStatement(sql);
 				pstat.setString(1, dto.get(i).getBoard_no());
 				pstat.setString(2, dto.get(i).getOriginal_file_name());
@@ -109,5 +110,21 @@ public class FileDAO {
 			}
 			return result;
 		}
+		
+		public int updateFile(String board_no, String mainfilename) throws Exception{
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®");
+			
+			Connection con = DBUtils.getConnection();
+			String sql = "update files set main_files = 'y' where board_no = ? and original_file_name=?";
+			 PreparedStatement pstat = con.prepareStatement(sql);
+			 pstat.setString(1, board_no);
+			 pstat.setString(2, mainfilename);
+			
+			 int result = pstat.executeUpdate();
+			System.out.println(result); 
+			 return result;
+		}
+		
+		
 
 }

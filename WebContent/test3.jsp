@@ -10,10 +10,9 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-<link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -37,12 +36,9 @@
 
    div{
       border: 0px solid black;
-      box-sizing: border-box;
+        box-sizing: border-box;
               
    }
-   
- 
-   
    
    #topnavicontainer{
       margin: 0px auto;
@@ -61,13 +57,13 @@
    
 
    #headerwrapper{
-      height:16%;   
+      height:18%;   
       width:100%;
    }
 
 
    #header{
-      height:70%;
+      height:100%;
       width:100%;
    }
    
@@ -96,7 +92,7 @@
       width:20%;
    }
    #centernavbar{
-	  height: 30%;
+
       width:100%;   
    }
    
@@ -108,52 +104,53 @@
   
    }
    
+   
+   
       #allwrapper{
 
-      width:100%;
-      height:auto;
+      width:80%;
+      height:100%;
       margin: 0px auto;
       
    	}
-
+   
+   
+   
+   
    #centerwrapper{
-        height:100%;  
-/*      height:auto;   */
-      width:80%;
+       height:100%; 
+/*     height:auto;  */
+      width:100%;
       margin: 0px auto;
-    
+      background:#ccc; 
       
    }
    
    
    
-   #articlerow{
-   		
+   #a{
+   	
     	height:100%; 
      	width:100%; 
    }
    
-   #articlecol{
-   	border-radius:10px;
-    
-    border: 2px solid #4f70ce;
+   #b{
    	margin: auto;
-   	height:85%; 
-   	width:100%;
+   		height:85%; 
+    	width:100%;
    }
 
-/*    #bottomwrapper{ */
-	 
-/*       width:100%; */
-/*    } */
-   
-   #footer{
-	background:#7B68EE; 
+   #bottomwrapper{
+
       width:100%;
-  
+   }
+   #footer{
+
+      width:100%;
+      
    }
    
-
+   
 /*  -----------------------------------------------------------------------------------------------------   */
 
 
@@ -184,7 +181,9 @@
 
     .comment-form .comment-avatar {}
 
-    
+    .comment-form .form {
+      margin-left: 100px;
+    }
 
     .comment-form .form .form-row {
       margin-bottom: 10px;
@@ -214,7 +213,6 @@
 
     .comment-form .form textarea.input {
       height: 100px;
-      width : 1000px;
       padding: 15px;
     }
 
@@ -272,7 +270,7 @@
 
     .comments-container {
       margin: 60px auto 15px;
-      width: 700px;
+      width: 768px;
     }
 
     .comments-container h1 {
@@ -684,14 +682,7 @@
 
 
 <script>
-			window.onload = function() {
-				var deletecount = 1;
-			    document.getElementById("back").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-			    
-			    
-			}
+
 
 
 </script>
@@ -701,7 +692,7 @@
 response.setCharacterEncoding("utf8");
 %>
    <div id="topnavicontainer">
-      <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="topnavbar" >
+      <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
         <div id="logocontainer">
             <a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
    </div>
@@ -727,7 +718,7 @@ response.setCharacterEncoding("utf8");
                <i class="fa fa-user fa-fw" ></i> Sing up</a>
           </li> 
         </ul>  
-           <a class="btn navbar-btn ml-2 btn-primary text-white">
+           <a class="btn navbar-btn ml-2 btn-secondary text-white">
            <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
             <span class="navbar-toggler-icon" ></span>
      </div>
@@ -753,7 +744,7 @@ response.setCharacterEncoding("utf8");
                      <div class="input-group" id="search">
                        <input type="search" class="form-control" placeholder="search">
                        <div class="input-group-append">
-                         <button class="btn btn-primary" type="button">Search</button>
+                         <button class="btn btn-secondary" type="button">Search</button>
                        </div>
                      </div>
                    </form>
@@ -810,9 +801,15 @@ response.setCharacterEncoding("utf8");
   
   
   
+  
+  
+  
+  
+  
+  
    <div id="allwrapper" >
    	
-      <br>
+
    
    <div id="centerwrapper">
       
@@ -820,15 +817,19 @@ response.setCharacterEncoding("utf8");
         
         
         
-       
         
-  
-        		<div class="row " id="articlerow">
-					<div class="col-md-6 bg-light " id="articlecol">
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        		<div class="row text-center " id="a">
+					<div class="col-md-6 bg-light " id="b">
 						<hr />
-						
-						
-						
 						<div class="Compose-Message">
 							<div class="panel panel-success">
 								<!--               <div class="panel-heading"> -->
@@ -863,280 +864,83 @@ response.setCharacterEncoding("utf8");
 									placeholder=${dto.contents } readonly></textarea>
 								<hr />
 
-								
-								
-								
-									
-								<c:choose>
-									<c:when test="${dto.writer.equals(sessionScope.loginid)}">
 
 
-										<div class="col-md-12 text-right">
-											<!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
-											<input type="button" id=back class="btn btn-secondary"
-												value="back"><span
-												class="glyphicon glyphicon-tags text-light"></span> <input
-												type="button" id=delete class="btn btn-secondary"
-												value="delete"><span
-												class="glyphicon glyphicon-tags text-light"></span> <input
-												type="button" id=modify class="btn btn-secondary"
-												value="modify "><span
-												class="glyphicon glyphicon-tags text-light"></span>
-
-
-										</div>
-										<script>
-					              document.getElementById("delete").onclick = function() {
-						        	   location.href = "CommunityDelete.do?seq=<%=request.getParameter("seq")%>";
-						        			   
-						           }
-							    
-							      document.getElementById("modify").onclick = function() {
-						        	   location.href = "ComunityModify.do?seq=<%=request.getParameter("seq")%>";
-								}
-										</script>
-
-									</c:when>
-									<c:otherwise>
-										<div class="col-md-12 text-right">
-											<!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
-											<input type="button" id=back class="btn btn-secondary"
-												value="back"><span
-												class="glyphicon glyphicon-tags text-light"></span>
-										</div>
-									</c:otherwise>
-								</c:choose>
-								
 
 							</div>
 						</div>
-						
-						
-			<c:choose>
-
-
-					<c:when test="${dto.writer == sessionScope.loginid}">			
 					
-					
-					<div class="comments-container bg-light">
-					    <div class="comment-form">
-					      <!-- Comment Avatar -->
-					      <form action="CommentWrite.co" method="get" class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
-					        <div class="form-row" >
-					          <textarea class="input border border-primary " id="comment_text" name="comment_text" ng-model="cmntCtrl.comment.text" placeholder="Add comment..." required="" ></textarea>
-					          <input type="hidden" name="seq" value="${dto.seq}">
-					        </div>
-					        <div class="form-row">
-					          <input type="submit" value="Add Comment" class=""> </div>
-					      </form>
-					    </div>
-					   </div> 
-					    
-					    	</c:when>
-									<c:otherwise>
-										
 					<div class="comments-container bg-light">
 					    <div class="comment-form">
 					      <!-- Comment Avatar -->
 					      <form class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
 					        <div class="form-row" >
-					          <textarea class="input border border-primary " ng-model="cmntCtrl.comment.text" placeholder="Please login..." required="" ></textarea>
+					          <textarea class="input border border-secondary " ng-model="cmntCtrl.comment.text" placeholder="Add comment..." required="" ></textarea>
 					        </div>
-					       
+					        <div class="form-row">
+					          <input type="submit" value="Add Comment" class=""> </div>
 					      </form>
 					    </div>
-						  </div> 
-						
-						
-						</c:otherwise>
-					</c:choose>
-					
-					    
-				<br>
-				
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-				
-		<c:if test="${result.size() > 0}">
-			<script>var num = 1;</script>
-					
-						
-				<c:forEach var="item" items="${result}">
-
-				<c:choose>
-
-
-				<c:when test="${dto.writer == sessionScope.loginid}">
-				
-					
 					    <br>
 					    <div class="comment-main-level">
 					      <div class="comment-box">
 					        <div class="comment-head bg-warning">
 					          <h6 class="comment-name by-author">
-					            <a>No.${item.comment_seq}</a>
-					            <a>ID:${item.writer}</a>
+					            <a href="http://creaticode.com/blog">Agustin Ortiz</a>
 					          </h6>
-					          <span>Date:${item.writedate}
-					  
-					          </span>
-					              
-					    	<span id="delbtn">
-					          <script>
-                  				$("#delbtn:last-child").after("<button id="+num+"  value='${item.comment_seq}'>delete</button>")
-					          </script>
-					         </span>  
-					       
-					       
-				
-					    
-					       
-					       
-					            
-					         <script>
-					                  document.getElementById(num).onclick = function() {
-					              	
- 					                     location.href = "CommentDelete.co?comment_seq=${item.comment_seq}&seq=${item.article_no}";}
-                  
-							</script> 
-     
-							 <span id="modifysubmit"> 
-					          <script>
-                  				$("#modifysubmit:last-child").after("<button id=commentmodifysuccess"+num+" >수정완료</button> ")
-					          </script></span>
-					          
-					          
-					          
-					       <script>
-					 
-					    	$("#commentmodifysuccess"+ num).click(
-										(function(e){
-											return function(){
-												var modifytext = $("#modify"+e).val();
-												location.href = "CommentModify.co?comment_seq=${item.comment_seq}&article_no=${item.article_no}&comment_text="+modifytext;
-						 					}
-										})(num)
-									);
-							
-								
-					    	</script>					      
-					      
-					       <span id="modifybtn1">
-					       <script>
-					       $("#modifybtn1:last-child").after("<button id=commentmodify"+num+" name=commentmodify type=button>수정</button>");
-			            	  
-					    	</script>
-						</span>
-
-
-				    </div>
-			
-				 
-				    <div id=modinput>
-						<script>   
-					        $("#modinput:last-child").after("<input type=text class=form-control   id=modify"+num+" name=comment_text2 readonly value=${item.comment_text}>");
-					    </script>
-					     
-					     
-					    <script>
-			                  
-			  				$("#commentmodify"+ num).click(
-			  					(function(e){
-			  						return function(){
-			  							$("#modify"+e).prop("readonly",false);
-			  	 					}
-			  					})(num)
-			  				);
-  		   
-			  				num++; 
-			  			 </script>
-					          
-					
-
-	
-					      </div>
-					    
-				    </div>
-				     
-				</div>
-				
-					<br>
-				
-					
-					</c:when>
-
-
-
-				<c:otherwise>
-					
-		
-	
-					    <br>
-					    <div class="comment-main-level">
-					      <div class="comment-box">
-					        <div class="comment-head bg-warning">
-					          <h6 class="comment-name by-author">
-					            <a>${item.comment_seq}</a>
-					            <a>${item.writer}</a>
-					          </h6>
-					          <span>${item.writedate}</span>
-					         
-					         
+					          <span>hace 20 minutos</span>
+					          <i class="fa fa-reply"></i>
+					          <i class="fa fa-heart"></i>
 					        </div>
-					        <div class="comment-content bg-light">${item.comment_text}</div>
+					        <div class="comment-content"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Velit omnis animi et iure laudantium vitae, praesentium optio, sapiente distinctio illo? </div>
 					      </div>
 					    </div>
-					     <br>  
-			
-					         
-					      
-
-					
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
-</c:if>
-					
-					
-					
-				
-					
+					  </div>
 										
-		</div>
+										
+					</div>
 									
-	</div>
+					</div>
 			
         
         
-       
         
         
         
-
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
          
    </div>
- <br>
-
    
-</div>
-
-
-
-
-
+   
+   <div id="bottomwrapper" class="bg-secondary">
       
       <div id="footer">
       
-<div class="text-white " >
+<div class="text-white bg-secondary" >
     <div class="container">
       <div class="row">
         <div class="p-4 col-md-3">
@@ -1191,6 +995,9 @@ response.setCharacterEncoding("utf8");
 
       </div>
    
+   </div>
+   
+</div>
 
 
 </body>

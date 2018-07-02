@@ -35,7 +35,6 @@
 	rel="stylesheet" id="bootstrap-css">
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -63,96 +62,105 @@
 /*   --white: #fff; */
 /*   --gray: #6c757d; */
 /*   --gray-dark: #343a40; */
-body {
-	
-}
 
-div {
-	border: 0px solid black;
-	box-sizing: border-box;
-}
+   body{
+        
+   }
 
-#topnavicontainer {
-	margin: 0px auto;
-	width: 100%;
-}
+   div{
+      border: 0px solid black;
+      box-sizing: border-box;
+              
+   }
+   
+ 
+  
+   #topnavicontainer{
+      margin: 0px auto;
+      width:100%;
+      
+   }
+   
+   #topnavbar{ 
 
-#topnavbar {
-	/* 	    position: fixed; */
-	width: 100%;
-	height: 40px;
-	font-size: 20px;
-	margin: 0px auto;
-	opacity: 0.9;
-}
+       width: 100%;
+       height: 40px;
+       font-size: 20px;   
+       margin: 0px auto;   
+       opacity: 0.9;
+   }
+   
 
-#allwrapper {
-	/* 		opacity: 0.8; */
-	width: 100%;
-	height: 100%;
-	margin: 0px auto;
-}
-
-#headerwrapper {
-	height: 21%;
-	width: 100%;
-}
-
-#header {
-	height: 75%;
-	width: 100%;
-}
-
-#headerleft {
-	float: left;
-	height: 100%;
-	width: 15%;
-}
-
-#headercenter {
-	float: left;
-	height: 100%;
-	width: 65%;
-}
-
-#search {
-	width: 100%;
-	height: 100%;
-}
-
-#headerright {
-	float: left;
-	height: 100%;
-	width: 20%;
-}
-
-#centernavbar {
-	height: 25%;
-	width: 100%;
-}
-
-#menubtn {
-	background: #FFF8DC;
-	box-shadow: 0;
-	border: 1px solid #12bbad;
-	outline: none;
-}
-
-#centerwrapper {
-	/*  		height:64%;  */
-	height: auto;
-	width: 80%;
-	margin: 0px auto;
-}
-
-#content {
-	height: 100%;
-	width: 100%;
-	background: #f4f4f4;
-}
+   #headerwrapper{
+      height:16%;   
+      width:100%;
+   }
 
 
-#card #pcard{
+   #header{
+      height:70%;
+      width:100%;
+   }
+   
+   #headerleft{
+      float:left;
+      height:100%;
+      width:15%;
+   }
+
+   #headercenter{
+      float:left;
+      height:100%;
+      width:65%;
+   }
+
+   
+   #search{
+      height:100%;
+      width:100%;
+
+   }
+   
+   #headerright{
+      float:left;
+      height:100%;
+      width:20%;
+   }
+   #centernavbar{
+	  height: 30%;
+      width:100%;   
+   }
+   
+   #menubtn{
+      background:#FFF8DC; 
+      box-shadow: 0;
+      border: 1px solid #7B68EE;
+      outline: none;
+  
+   }
+   
+      #allwrapper{
+
+      width:100%;
+      height:auto;
+      margin: 0px auto;
+      
+      
+      
+     
+   	}
+
+   #centerwrapper{
+        height:100%;  
+/*      height:auto;   */
+      width:80%;
+      margin: 0px auto;
+  
+     
+      
+   }
+   
+   #card #pcard{
   overflow: hidden; 
   text-overflow: ellipsis;
   white-space: nowrap; 
@@ -160,17 +168,14 @@ div {
   height: 35px;
 
 }
+   
 
-#bottomwrapper {
-	height: 15%;
-	width: 100%;
-}
-
-#footer {
-	height: 100%;
-	width: 100%;
-}
-
+   #footer{
+	background:#7B68EE; 
+      width:100%;
+  
+   }
+   
 th {
 	background: #F0FFFF;
 }
@@ -197,124 +202,143 @@ a {
   align-items:center
 }
 
+.card{
+	border-radius:5px;   
+    border: 2px solid #4f70ce;
+  	
+  
+  
 
+}
 
+/*  -----------------------------------------------------------------------------------------------------   */
 
-</style>
+	</style>
 
+	</head>
+	<body>
+		<%
+		response.setCharacterEncoding("utf8");
+		%>
+   <div id="topnavicontainer">
+      <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="topnavbar" >
+        <div id="logocontainer">
+            <a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
+   </div>
+      
+   <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            
+          
+       <c:choose>
+      <c:when test="${sessionScope.loginid != null}">
+       <a class="nav-link" href="logout.mem">
+               <i class="fa fa-user fa-fw" ></i> Logout</a>
+                 </c:when>
+                 <c:otherwise>
+                  <a class="nav-link" href="login.jsp">
+                  <i class="fa fa-user fa-fw" ></i> Login</a>
+                 </c:otherwise>
+     </c:choose>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="join.jsp">
+               <i class="fa fa-user fa-fw" ></i> Sing up</a>
+          </li> 
+        </ul>  
+           <a class="btn navbar-btn ml-2 btn-primary text-white">
+           <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+            <span class="navbar-toggler-icon" ></span>
+     </div>
+   
+   </nav>
 
+  </div>
+  
+  
+  
+  
+     <div id="headerwrapper">
+      <div id="header">
+         <div id="headerleft"></div>
+      
+      
+      <div id="headercenter">
+         <div class="py-5"  >  
+             <div class="container"  >
+               <div class="row" > 
+                  <div class="col-md-12"> 
+                   <form class="form-inline" >
+                     <div class="input-group" id="search">
+                       <input type="search" class="form-control" placeholder="search">
+                       <div class="input-group-append">
+                         <button class="btn btn-primary" type="button">Search</button>
+                       </div>
+                     </div>
+                   </form>
+                  </div> 
+                </div> 
+             </div>  
+            </div>  
+      </div>
+         
+         
+            
+      <div id="headerright">
+   
+      </div>
+   </div>
 
-<script>
+      
+      
+      <div id="centernavbar">
+         <nav class="nav nav-pills nav-justified">
+            <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+                <a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+            </li> 
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+             </li> 
+             
+         
+         </nav>
+      </div>
+   
+   </div>   
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+   <div  id="allwrapper"  >
+   	
+      <br>
+   
+   <div class="bg-light" id="centerwrapper">
+      
 
-
-</script>
-</head>
-<body>
-	<%
-
-%>
-	<div id="topnavicontainer">
-		<nav class="navbar navbar-expand-md navbar-dark bg-info"
-			id="topnavbar">
-		<div id="logocontainer">
-			<a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>
-		</div>
-
-		<div class="collapse navbar-collapse text-center justify-content-end"
-			id="menucontainer">
-			<ul class="navbar-nav">
-				<li class="nav-item"><c:choose>
-						<c:when test="${sessionScope.loginid != null}">
-							<a class="nav-link" href="logout.mem"> <i
-								class="fa fa-user fa-fw"></i> Logout
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a class="nav-link" href="login.jsp"> <i
-								class="fa fa-user fa-fw"></i> Login
-							</a>
-						</c:otherwise>
-					</c:choose></li>
-				<li class="nav-item"><a class="nav-link" href="join.jsp"> <i
-						class="fa fa-user fa-fw"></i> Sing up
-				</a></li>
-			</ul>
-			<a class="btn navbar-btn ml-2 btn-info text-white"> <i
-				class="fa d-inline fa-lg fa-user-circle-o"></i> My Page
-			</a>
-		</div>
-
-		</nav>
-	</div>
-
-	<div id="allwrapper">
-
-		<div id="headerwrapper">
-			<div id="header">
-				<div id="headerleft"></div>
-
-
-				<div id="headercenter">
-					<div class="py-5">
-						<div class="container">
-							<div class="row">
-								<div class="col-md-12">
-									<form class="form-inline">
-										<div class="input-group" id="search">
-											<input type="search" class="form-control"
-												placeholder="search">
-											<div class="input-group-append">
-												<button class="btn btn-info" type="button">Search</button>
-											</div>
-										</div>
-									</form>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-
-				<div id="headerright"></div>
-			</div>
-
-
-
-			<div id="centernavbar">
-				<nav class="nav nav-pills nav-justified">
-				<li class="nav-item"><a class="nav-link  text-info"
-					id="menubtn" href="#"> <i
-						class="fa d-inline fa-lg fa-bookmark-o"></i> category
-				</a></li>
-
-
-				<li class="nav-item"><a class="nav-link  text-info"
-					id="menubtn" href="CommunityController.do"> <i
-						class="fa d-inline fa-lg fa-bookmark-o"></i> category
-				</a></li>
-				<li class="nav-item"><a class="nav-link  text-info"
-					id="menubtn" href="#"> <i
-						class="fa d-inline fa-lg fa-bookmark-o"></i> category
-				</a></li>
-				<li class="nav-item"><a class="nav-link  text-info"
-					id="menubtn" href="#"> <i
-						class="fa d-inline fa-lg fa-bookmark-o"></i> category
-				</a></li>
-				<li class="nav-item"><a class="nav-link  text-info"
-					id="menubtn" href="#"> <i
-						class="fa d-inline fa-lg fa-bookmark-o"></i> category
-				</a></li>
-				</nav>
-			</div>
-
-		</div>
-
-		<div id="centerwrapper">
-
-			<div id="content">
-
-				<!-- <body draggable="true" > -->
+        
+        					<!-- <body draggable="true" > -->
 				<!-- 	<div class="py-5" > -->
 				<!-- 		<div class="container" id="a"> -->
 				<!-- 			<div class="row" id="row"> -->
@@ -404,16 +428,16 @@ a {
 						<c:otherwise>
 							<c:forEach var="item" items="${result}">
 								<div class="p-3 align-self-center col-md-3">
-									<div class="card">
-										<div class="card-block p-5" id="card">
+									<div class="card "  >
+										<div class="card-block p-5 bg-light" id="card">
 									
 												<i class="fa d-inline fa-lg fa-bookmark-o"></i>
 											
-												<h2 class="text-right">${item.seq}
+												<h2 class="text-right">No.${item.seq}
 											
 											</h2>
 											
-											<h5 class="text-center" id="pcard"  >
+											<h5 class="text-center " id="pcard"  >
 												<a
 													href="ArticleCount.do?seq=${item.seq}&count=${item.viewcount}">${item.title}</a>
 											</h5>
@@ -423,7 +447,7 @@ a {
 											<p id="pcard">
 											${item.contents}&nbsp;</p>
 
-											<p>${item.writer} ${item.writedate} ${item.viewcount}</p>
+											<p>Id: ${item.writer}</p> <p> Date: ${item.writedate}</p> <p>Count: ${item.viewcount}</p>
 
 
 										</div>
@@ -457,89 +481,86 @@ a {
 					</c:otherwise>
 				</c:choose>
 
+        	
+        
+       
+			
+        
+        
+       
+        
+        
+        
+
+         
+   </div>
+ <br>
+
+   
+</div>
 
 
 
-			</div>
-
-		</div>
 
 
+      
+      <div id="footer">
+      
+	<div class="text-white " >
+    <div class="container">
+      <div class="row">
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-white">Auctino GO!</h2>
+          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-white">Mapsite</h2>
+          <ul class="list-unstyled">
+            <a href="#" class="text-white">Home</a>
+            <br>
+            <a href="#" class="text-white">About us</a>
+            <br>
+            <a href="#" class="text-white">Our services</a>
+            <br>
+            <a href="#" class="text-white">Stories</a>
+          </ul>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4">Contact</h2>
+          <p>
+            <a href="tel:+246 - 542 550 5462" class="text-white">
+              <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
+          </p>
+          <p>
+            <a href="mailto:info@pingendo.com" class="text-white">
+              <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction Go.com</a>
+          </p>
+          <p>
+            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
+              <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
+          </p>
+        </div>
+        <div class="p-4 col-md-3">
+          <h2 class="mb-4 text-light">Subscribe</h2>
+          <form>
+            <fieldset class="form-group text-white">
+              <label for="exampleInputEmail1">Get our newsletter</label>
+              <input type="email" class="form-control" placeholder="Enter email"> </fieldset>
+            <button type="submit" class="btn btn-outline-secondary">Submit</button>
+          </form>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12 mt-3">
+          <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
+        </div>
+      </div>
+    </div>
+  </div>
+      
 
-
-
-		<div id="bottomwrapper" class="bg-info">
-
-			<div id="footer">
-
-				<div class="text-white bg-primary">
-					<div class="container">
-						<div class="row">
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4 text-white">Auctino GO!</h2>
-								<p class="text-white">A company for whatever you may need,
-									from website prototyping to publishing</p>
-							</div>
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4 text-white">Mapsite</h2>
-								<ul class="list-unstyled">
-									<a href="#" class="text-white">Home</a>
-									<br>
-									<a href="#" class="text-white">About us</a>
-									<br>
-									<a href="#" class="text-white">Our services</a>
-									<br>
-									<a href="#" class="text-white">Stories</a>
-								</ul>
-							</div>
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4">Contact</h2>
-								<p>
-									<a href="tel:+246 - 542 550 5462" class="text-white"> <i
-										class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 -
-										542 550 5462
-									</a>
-								</p>
-								<p>
-									<a href="mailto:info@pingendo.com" class="text-white"> <i
-										class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction
-										Go.com
-									</a>
-								</p>
-								<p>
-									<a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white"
-										target="_blank"> <i
-										class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365
-										Park Street, NY
-									</a>
-								</p>
-							</div>
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4 text-light">Subscribe</h2>
-								<form>
-									<fieldset class="form-group text-white">
-										<label for="exampleInputEmail1">Get our newsletter</label> <input
-											type="email" class="form-control" placeholder="Enter email">
-									</fieldset>
-									<button type="submit" class="btn btn-outline-secondary">Submit</button>
-								</form>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 mt-3">
-								<p class="text-center text-white">© Copyright 2017 Pingendo
-									- All rights reserved.</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
-
-			</div>
-
-		</div>
-
-	</div>
+      </div>
+   
 
 
 </body>

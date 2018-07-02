@@ -1,27 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://v40.pingendo.com/assets/4.0.0/default/theme.css"
+	type="text/css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+	integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+	crossorigin="anonymous"></script>
+<script
+	src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+	integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+	crossorigin="anonymous"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+	crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+	rel="stylesheet">
+<!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>  -->
 <link
 	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
 	rel="stylesheet" id="bootstrap-css">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-   
+@import 'bootstrap-4.0.0';
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -30,6 +49,19 @@
 /*   success: #28a745, */
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
+/*   --blue: #007bff; */
+/*   --indigo: #6610f2; */
+/*   --purple: #6f42c1; */
+/*   --pink: #e83e8c; */
+/*   --red: #dc3545; */
+/*   --orange: #fd7e14; */
+/*   --yellow: #ffc107; */
+/*   --green: #28a745; */
+/*   --teal: #20c997; */
+/*   --cyan: #17a2b8; */
+/*   --white: #fff; */
+/*   --gray: #6c757d; */
+/*   --gray-dark: #343a40; */
 
    body{
         
@@ -42,8 +74,7 @@
    }
    
  
-   
-   
+  
    #topnavicontainer{
       margin: 0px auto;
       width:100%;
@@ -117,7 +148,7 @@
    	}
 
    #centerwrapper{
-     height:100%;  
+        height:100%;  
 /*      height:auto;   */
       width:80%;
       margin: 0px auto;
@@ -125,59 +156,58 @@
       
    }
    
+   #card #pcard{
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  white-space: nowrap; 
+  width: 200px;
+  height: 35px;
+
+}
    
-   
-   #articlerow{
-   		
-    	height:100%; 
-     	width:100%; 
-   }
-   
-   #articlecol{
-   	border-radius:10px;
-    
-    border: 2px solid #4f70ce;
-   	margin: auto;
-   	height:85%; 
-   	width:100%;
-   }
 
    #footer{
-	 background:#7B68EE; 
+	background:#7B68EE; 
       width:100%;
-      
+  
    }
    
+th {
+	background: #F0FFFF;
+}
+
+.bg-orange {
+	background: #d8622b;
+	color: #fff !important;
+}
+
+img {
+	width: 100%;
+	max-height: 560px;
+}
+
+a {
+	color: #696969;
+}
+
+
+
+.cover {
+	min-height:100%;
+  display:flex;
+  align-items:center
+}
    
+
 /*  -----------------------------------------------------------------------------------------------------   */
 
+	</style>
 
-
-
-</style>
-
-
-
-<script>
-			window.onload = function() {
-				var deletecount = 1;
-			    document.getElementById("cencel").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-			    
-			    function fileUploadAction(){
-					console.log("파일업로드 버튼 클릭!!");
-					$("#input_imgs").trigger('click'); 
-				} 
-			}
-
-		
-</script>
-</head>
-<body>
-<%
-response.setCharacterEncoding("utf8");
-%>
+	</head>
+	<body>
+		<%
+		response.setCharacterEncoding("utf8");
+		%>
    <div id="topnavicontainer">
       <nav class="navbar navbar-expand-md navbar-dark bg-primary" id="topnavbar" >
         <div id="logocontainer">
@@ -296,107 +326,173 @@ response.setCharacterEncoding("utf8");
       
 
         
-        
-        
-       
-        
-  
-        		<div class="row " id="articlerow">
-					<div class="col-md-6 bg-light " id="articlecol">
-						<hr />
-						
-						
-						
-						<div class="Compose-Message">
-							<div class="panel panel-success">
-								<!--               <div class="panel-heading"> -->
-								<!--                 Input New Text -->
-								<!--               </div> -->
+        					<!-- <body draggable="true" > -->
+				<!-- 	<div class="py-5" > -->
+				<!-- 		<div class="container" id="a"> -->
+				<!-- 			<div class="row" id="row"> -->
+				<!-- 				<div class="col-md-10" > -->
+				<!-- 					<table class="table" > -->
+				<!-- 						<thead> -->
+				<!-- 							<tr> -->
+				<!-- 								<th colspan="5"  width="400">자유게시판</th> -->
+				<!-- 							</tr> -->
+				<!-- 							<tr> -->
+				<!-- 								<th >글번호</th> -->
+				<!-- 								<th width="450" align=center width="400" align=center>제목</th> -->
+				<!-- 								<th >작성자</th> -->
+				<!-- 								<th >작성일</th> -->
+				<!-- 								<th >조회</th> -->
+				<!-- 							</tr> -->
+
+				<!-- 						</thead> -->
+				<!-- 						<tbody> -->
+				<%-- 							<c:choose> --%>
+				<%-- 								<c:when test="${result.isEmpty()}"> --%>
+				<!-- 									<tr> -->
+				<!-- 										<td colspan=4 height="300" align=center>표시할내용이없습니다..</td> -->
+				<!-- 									</tr> -->
+
+				<%-- 								</c:when> --%>
+				<%-- 								<c:otherwise> --%>
+				<%-- 									<c:forEach var="item" items="${result}"> --%>
+
+				<!-- 										<tr> -->
+				<%-- 											<td>${item.seq} --%>
+				<%-- 											<td><a href="CommunityAticleView.do?seq=${item.seq}&count=${item.viewcount}">${item.title}</a> </td>   --%>
+
+				<%-- 											<td>${item.writer} --%>
+				<%-- 											<td>${item.writedate} --%>
+				<%-- 											<td>${item.viewcount} --%>
+				<!-- 										</tr> -->
 
 
-	<form name=write_form action="ComunityWrite.do" method="post"  onSubmit="return check_error()">
-              <div class="panel-body">
+				<%-- 									</c:forEach> --%>
+				<%-- 								</c:otherwise> --%>
+				<%-- 							</c:choose> --%>
+				<!-- 						</tbody> -->
+				<!-- 					</table> -->
+				<!-- 					    &nbsp; -->
+				<%-- 	<c:choose> --%>
+				<%--       <c:when test="${sessionScope.loginid != null}"> --%>
 
-                <label>Title : </label>
-                <input type="text" class="form-control w-100" id="title" name="title" placeholder="Title" >
-                <label>Writer : </label>
-       
-<!--            <input type="text" class="form-control W-25"/> -->
+
+
+				<!-- 					 <div class="col-md-12 text-right" > -->
+
+				<!--          				<a class="btn text-center text-light btn-secondary" href="communitywrite.jsp">Writing</a> -->
+				<!--         			</div> -->
+				<%--          </c:when> --%>
+				<%--                  <c:otherwise>         --%>
+
+				<!--                  <div class="col-md-12 text-right" > -->
+
+
+				<!--         			</div> -->
+
+				<%--                 </c:otherwise> --%>
+				<%--      </c:choose>			 --%>
+
+
+				<!-- 				</div> -->
+				<!-- 			</div> -->
+				<!-- 		</div> -->
+				<!-- 	</div> -->
+
+
+
+
+
+
+
+				<div class="row">
+
+					<c:choose>
+						<c:when test="${result.isEmpty()}">
+							<tr>
+								<td colspan=4 height="300" align=center>표시할내용이없습니다..</td>
+							</tr>
+
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="item" items="${result}">
+								<div class="p-3 align-self-center col-md-3">
+									<div class="card">
+										<div class="card-block p-5" id="card">
+									
+												<i class="fa d-inline fa-lg fa-bookmark-o"></i>
+											
+												<h2 class="text-right">${item.seq}
+											
+											</h2>
+											
+											<h5 class="text-center" id="pcard"  >
+												<a
+													href="ArticleCount.do?seq=${item.seq}&count=${item.viewcount}">${item.title}</a>
+											</h5>
+											
+											<hr>
+											
+											<p id="pcard">
+											${item.contents}&nbsp;</p>
+
+											<p>${item.writer} ${item.writedate} ${item.viewcount}</p>
+
+
+										</div>
+									</div>
+								</div>
+							
+						</c:forEach>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		
+			
+			
 
-				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
-				 <label>File : </label>
-				 <button type="button" 
-                      class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
-                 
-       			
-      			</div>  					
+				&nbsp;
+				<c:choose>
+					<c:when test="${sessionScope.loginid != null}">
+
+
+
+						<div class="col-md-12 text-right">
+
+							<a class="btn text-center text-light btn-secondary"
+								href="communitywrite.jsp">Writing</a>
+						</div>
+					</c:when>
+					<c:otherwise>
+
+						<div class="col-md-12 text-right"></div>
+
+					</c:otherwise>
+				</c:choose>
+
+        	
+        
        
-                <label>Enter Text : </label>
-                <textarea rows="9" class="form-control" name="contents"></textarea>
-                <hr />
-                
+			
+        
+        
+       
+        
+        
+        
 
-				 
-       	<div class="col-md-12 text-right" >
-       	 <input type="submit" class="btn btn-primary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> 
-
-               
-         <input type="button" id="cencel"  class="btn btn-primary" value="Cencel"><span class="glyphicon glyphicon-tags text-light"></span>   
-         		
          
-              </div>
+   </div>
+ <br>
+
    
-
-              </form>
-              
-
-              
-              
-                &nbsp;
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-							
-							
-	
+</div>
 
 
-		<script>
-			
-			function check_error() {
-			     var form = document.write_form;
-			     if(form.title.value == '') {
-			
-			        alert('제목을 입력하세요');
-			
-			        form.title.focus();
-			
-			        return false;
-			
-			     }
-			     else if(form.contents.value == ''){
-			        alert('내용을 입력하세요');
-			
-			        form.title.focus();
-			
-			        return false;
-			     }
-			
-			     return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
-			   }
 
-	</script>					
-								
-								
-								
-  <br>
-   
 
-       <div id="footer">
+
+      
+      <div id="footer">
       
 <div class="text-white " >
     <div class="container">
@@ -453,8 +549,6 @@ response.setCharacterEncoding("utf8");
 
       </div>
    
-
-
 
 
 </body>

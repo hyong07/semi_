@@ -30,8 +30,8 @@
 /*   danger: #dc3545 */
 
 
-   div{
-      border: 1px solid black;
+	div{
+		border: 0px solid black;
         box-sizing: border-box;
    }
    
