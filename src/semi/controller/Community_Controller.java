@@ -30,13 +30,13 @@ public class Community_Controller extends HttpServlet {
 
 			PrintWriter out = response.getWriter();
 
-			System.out.println(requestURI+ contextPath + command);
+         System.out.println(requestURI+ contextPath + command);
 
-			
-			CommunityDAO dao = new CommunityDAO();
-			CommunityDTO dto = new CommunityDTO();
-			boolean isRedirect = true;
-			String dst = null;
+         
+         CommunityDAO dao = new CommunityDAO();
+         CommunityDTO dto = new CommunityDTO();
+         boolean isRedirect = true;
+         String dst = null;
 
 			if(command.equals("/CommunityMain.do")) {
 			List<CommunityDTO> result = dao.communityoutput();
@@ -140,22 +140,22 @@ public class Community_Controller extends HttpServlet {
 			if(isRedirect) {
 				response.sendRedirect(dst);
 
-			}else {
-				RequestDispatcher rd = request.getRequestDispatcher(dst);
-				rd.forward(request, response);
-			}
+         }else {
+            RequestDispatcher rd = request.getRequestDispatcher(dst);
+            rd.forward(request, response);
+         }
 
 		}catch(Exception e) {
 			e.printStackTrace();
 			response.sendRedirect("error.html");
 		}
 
-	}
+   }
 
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
-	}
+   
+   protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+      // TODO Auto-generated method stub
+      doGet(request, response);
+   }
 
 }

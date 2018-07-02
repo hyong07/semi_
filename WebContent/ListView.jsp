@@ -336,8 +336,8 @@ ing {
 									<div class="col-md-4 w-75 col-lg-9">
 										<div class="row mx-1 py-2">
 											<div class="btn-group">
-												<a href="#" class="btn btn-secondary">All View</a> <a
-													href="#" class="btn btn-secondary">Auction</a> <a href="#"
+												<a href="board.jsp" class="btn btn-secondary">All View</a> <a
+													href="ListView.jsp" class="btn btn-secondary">Auction</a> <a href="board.jsp"
 													class="btn btn-secondary">Buy It Now</a>
 											</div>
 											<div style="width: 400px"></div>

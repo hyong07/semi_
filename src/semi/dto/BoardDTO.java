@@ -1,7 +1,7 @@
 package semi.dto;
 
 public class BoardDTO {
-	private int board_seq;
+	private String board_seq;
 	private String seller_id;
 	private String title;
 	private String contents;
@@ -9,13 +9,14 @@ public class BoardDTO {
 	private String sell_type;
 	private String sell_status;
 	private String end_date;
+	private String viewcount;
 	
 	public BoardDTO() {
 		super();
 	}
-	
-	public BoardDTO(int board_seq, String seller_id, String title, String contents, String write_date, String sell_type,
-			String sell_status, String end_date) {
+	   
+	public BoardDTO(String board_seq, String seller_id, String title, String contents, String write_date, String sell_type,
+			String sell_status, String end_date, String viewcount) {
 		super();
 		this.board_seq = board_seq;
 		this.seller_id = seller_id;
@@ -25,11 +26,12 @@ public class BoardDTO {
 		this.sell_type = sell_type;
 		this.sell_status = sell_status;
 		this.end_date = end_date;
+		this.viewcount = viewcount;
 	}
-	public int getBoard_seq() {
+	public String getBoard_seq() {
 		return board_seq;
 	}
-	public void setBoard_seq(int board_seq) {
+	public void setBoard_seq(String board_seq) {
 		this.board_seq = board_seq;
 	}
 	public String getSeller_id() {
@@ -73,6 +75,13 @@ public class BoardDTO {
 	}
 	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
+	}
+	
+	public String getViewcount() {
+		return viewcount;
+	}
+	public void setViewcount(String viewcount) {
+		this.viewcount = viewcount;
 	}
 	
 	

@@ -19,7 +19,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	
+   
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -30,54 +30,54 @@
 /*   danger: #dc3545 */
 
 
-	div{
-		border: 0px solid black;
+   div{
+      border: 1px solid black;
         box-sizing: border-box;
-	}
-	
-	#topnavicontainer{
-		margin: 0px auto;
-		width:100%;
-		
-	}
-	
-	#topnavbar{ 
-/* 	    position: fixed; */
-	 	width: 100%;
-	    height: 40px;
-	    font-size: 20px;   
-	    margin: 0px auto;   
-	    opacity: 0.9;
-	}
-	
-	#allwrapper{
-/* 		opacity: 0.8; */
-		width:100%;
-		height:100%;
-		margin: 0px auto;
-		
-	}
+   }
+   
+   #topnavicontainer{
+      margin: 0px auto;
+      width:100%;
+      
+   }
+   
+   #topnavbar{ 
+/*        position: fixed; */
+       width: 100%;
+       height: 40px;
+       font-size: 20px;   
+       margin: 0px auto;   
+       opacity: 0.9;
+   }
+   
+   #allwrapper{
+/*       opacity: 0.8; */
+      width:100%;
+      height:100%;
+      margin: 0px auto;
+      
+   }
 
-	
-	#centerwrapper{
-/* 		height:85%;  */
-		height:auto; 
-		width:80%;
-		margin: 0px auto;
-		height:100%;
-		width:100%;
-		background : 	#F8F8FF;
-		
-	}
-	
-	#content{
-/* 		padding:0; */
-/* 		margin:0; */
-		height:100%;
-		width:100%;
-		
-	}
-	@import url('https://fonts.googleapis.com/css?family=Poppins');
+   
+   #centerwrapper{
+/*       height:85%;  */
+      height:auto; 
+      width:80%;
+      margin: 0px auto;
+      height:100%;
+      width:100%;
+      background :    #F8F8FF;
+      
+   }
+   
+   #content{
+/*       padding:0; */
+/*       margin:0; */
+      height:100%;
+      width:100%;
+      
+   }
+   @import url('https://fonts.googleapis.com/css?family=Poppins');
 
 
 
@@ -357,18 +357,18 @@ input[type=password]:placeholder {
 * {
   box-sizing: border-box;
 }
-		
-	
+      
+   
 #bottomwrapper{
-		height:15%;
-		width:100%;
-	}
+      height:15%;
+      width:100%;
+   }
 #footer{
-		height:100%;
-		width:100%;
-		
-	}
-	
+      height:100%;
+      width:100%;
+      
+   }
+   
 </style>
 
 <script>
@@ -376,140 +376,140 @@ input[type=password]:placeholder {
 </script>
 </head>
 <body>
-	<div id="topnavicontainer">
-		<nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
-	     	<div id="logocontainer">
-	      	<a class="navbar-brand" href="#">Auction GO!</a>  
-	</div>
-	    
-	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
-	     <ul class="navbar-nav">
-	       <li class="nav-item">
-	          <a class="nav-link" href="login.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Login</a>
-	       </li>
-	       <li class="nav-item">
-	           <a class="nav-link" href="join.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Sing Up</a>
-	       </li> 
-	     </ul>  
-	        <a class="btn navbar-btn ml-2 btn-secondary text-white">
-	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+   <div id="topnavicontainer">
+      <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
+           <div id="logocontainer">
+            <a class="navbar-brand" href="#">Auction GO!</a>  
+   </div>
+       
+   <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+             <a class="nav-link" href="login.jsp">
+               <i class="fa fa-user fa-fw" ></i> Login</a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="join.jsp">
+               <i class="fa fa-user fa-fw" ></i> Sing Up</a>
+          </li> 
+        </ul>  
+           <a class="btn navbar-btn ml-2 btn-secondary text-white">
+           <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
      </div>
    </nav>
   </div>
   
-	<div id="allwrapper" >
+   <div id="allwrapper" >
 
-	<div id="centerwrapper">
-		
-		<div id="content"> 
-		
-		<div class="wrapper fadeInDown">
-			  <div id="formContent">
-			    <!-- Tabs Titles -->
-			   
-			    <h2 class="inactive underlineHover">Sign in</h2>
-			
-			    <!-- Icon -->
-			    <div class="fadeIn first">
-			      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
-			    </div>
-			
-			    <!-- Login Form -->
-			  <form action=login.mem method=post>
-			      <input type="text" id="login" class="fadeIn second" name="loginid" placeholder="login">
-			      <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
-			      <input type="submit" class="fadeIn fourth" value="Log In">
-			      <input type="button" id=join class="fadeIn fourth" value="Join">
-			    
-<!-- 					<div class="col-xs-6 col-sm-6 col-md-6"> -->
+   <div id="centerwrapper">
+      
+      <div id="content"> 
+      
+      <div class="wrapper fadeInDown">
+           <div id="formContent">
+             <!-- Tabs Titles -->
+            
+             <h2 class="inactive underlineHover">Sign in</h2>
+         
+             <!-- Icon -->
+             <div class="fadeIn first">
+               <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+             </div>
+         
+             <!-- Login Form -->
+           <form action=login.mem method=post>
+               <input type="text" id="login" class="fadeIn second" name="loginid" placeholder="login">
+               <input type="password" id="password" class="fadeIn third" name="password" placeholder="password">
+               <input type="submit" class="fadeIn fourth" value="Log In">
+               <input type="button" id=join class="fadeIn fourth" value="Join">
+             
+<!--                <div class="col-xs-6 col-sm-6 col-md-6"> -->
 <!--           <a href="#" class="btn btn-lg btn-primary btn-block">Naver</a> -->
 <!--         </div> -->
 <!--         <div class="col-xs-6 col-sm-6 col-md-6"> -->
 <!--           <a href="#" class="btn btn-lg btn-info btn-block">Kakao</a> -->
-<!--         </div>			     -->
-			    
-	 		</form>
-			&nbsp;
-			    <!-- Remind Passowrd -->
-			    <div id="formFooter">
-			      <a class="underlineHover" href="#">Forgot Password?</a>
-			    </div>
-  			
-  				</div>
-			</div>
-		    	
-		 </div>
-	</div>
+<!--         </div>              -->
+             
+          </form>
+         &nbsp;
+             <!-- Remind Passowrd -->
+             <div id="formFooter">
+               <a class="underlineHover" href="#">Forgot Password?</a>
+             </div>
+           
+              </div>
+         </div>
+             
+       </div>
+   </div>
 </div>
 
-	
-	
-	<div id="bottomwrapper" class="bg-secondary">
-		
-		<div id="footer">
-		
-		<div class="text-white bg-secondary" >
-		    <div class="container">
-		      <div class="row">
-		        <div class="p-4 col-md-3">
-		          <h2 class="mb-4 text-white">Auctino GO!</h2>
-		          <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
-		        </div>
-		        <div class="p-4 col-md-3">
-		          <h2 class="mb-4 text-white">Mapsite</h2>
-		          <ul class="list-unstyled">
-		            <a href="#" class="text-white">Home</a>
-		            <br>
-		            <a href="#" class="text-white">About us</a>
-		            <br>
-		            <a href="#" class="text-white">Our services</a>
-		            <br>
-		            <a href="#" class="text-white">Stories</a>
-		          </ul>
-		        </div>
-		        <div class="p-4 col-md-3">
-		          <h2 class="mb-4">Contact</h2>
-		          <p>
-		            <a href="tel:+246 - 542 550 5462" class="text-white">
-		              <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
-		          </p>
-		          <p>
-		            <a href="mailto:info@pingendo.com" class="text-white">
-		              <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction Go.com</a>
-		          </p>
-		          <p>
-		            <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
-		              <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
-		          </p>
-		        </div>
-		        <div class="p-4 col-md-3">
-		          <h2 class="mb-4 text-light">Subscribe</h2>
-		          <form>
-		            <fieldset class="form-group text-white">
-		              <label for="exampleInputEmail1">Get our newsletter</label>
-		              <input type="email" class="form-control" placeholder="Enter email"> </fieldset>
-		            <button type="submit" class="btn btn-outline-secondary">Submit</button>
-		          </form>
-		        </div>
-		      </div>
-		      <div class="row">
-		        <div class="col-md-12 mt-3">
-		          <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
-		        </div>
-		      </div>
-		    </div>
-		  </div>
-		
-		</div>
-	</div>
+   
+   
+   <div id="bottomwrapper" class="bg-secondary">
+      
+      <div id="footer">
+      
+      <div class="text-white bg-secondary" >
+          <div class="container">
+            <div class="row">
+              <div class="p-4 col-md-3">
+                <h2 class="mb-4 text-white">Auctino GO!</h2>
+                <p class="text-white">A company for whatever you may need, from website prototyping to publishing</p>
+              </div>
+              <div class="p-4 col-md-3">
+                <h2 class="mb-4 text-white">Mapsite</h2>
+                <ul class="list-unstyled">
+                  <a href="#" class="text-white">Home</a>
+                  <br>
+                  <a href="#" class="text-white">About us</a>
+                  <br>
+                  <a href="#" class="text-white">Our services</a>
+                  <br>
+                  <a href="#" class="text-white">Stories</a>
+                </ul>
+              </div>
+              <div class="p-4 col-md-3">
+                <h2 class="mb-4">Contact</h2>
+                <p>
+                  <a href="tel:+246 - 542 550 5462" class="text-white">
+                    <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
+                </p>
+                <p>
+                  <a href="mailto:info@pingendo.com" class="text-white">
+                    <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction Go.com</a>
+                </p>
+                <p>
+                  <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
+                    <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
+                </p>
+              </div>
+              <div class="p-4 col-md-3">
+                <h2 class="mb-4 text-light">Subscribe</h2>
+                <form>
+                  <fieldset class="form-group text-white">
+                    <label for="exampleInputEmail1">Get our newsletter</label>
+                    <input type="email" class="form-control" placeholder="Enter email"> </fieldset>
+                  <button type="submit" class="btn btn-outline-secondary">Submit</button>
+                </form>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-12 mt-3">
+                <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      
+      </div>
+   </div>
 </div>
 
 <script>
 
 document.getElementById("join").onclick = function() {
-	location.href = "join.jsp";
+   location.href = "terms_of_use.jsp";
 }
 </script>
 
