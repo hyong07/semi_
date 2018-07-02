@@ -6,7 +6,7 @@
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
    crossorigin="anonymous">
-<link
+<link   
    href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
    rel="stylesheet">
 <link rel="stylesheet"
@@ -167,7 +167,8 @@
 <script>
    var sel_files = new Array();
    var filenames = new Array();
-
+   
+   
 
    $(document).ready(function() {
    
@@ -194,7 +195,7 @@
  
      
 
-	  
+     
             var sell_type;
             $("input[name=sell_type]").click(function(){   
                sell_type = $("input[name=sell_type]:checked").val();
@@ -223,20 +224,20 @@
                      type:"get",
                      data:{sell_type:sell_type},
                      success:function(rep){
-                        $("input[name=sell_type]").attr("style","display:none");
-                        $("#test").text("");
+//                         $("input[name=sell_type]").attr("style","display:none");
+//                         $("#test").text("");
                         if(rep == "a"){                                               
                            $("#plusButton").attr("href","#auction_product");
                            $("#type_check").attr("value","a");
                            $("#type_check").text("경매");
+						   $("#sell_typeTest").val(rep);
                         }
                         else if(rep == "s"){                           
                            $("#plusButton").attr("href", "#plusproduct");
                            $("#type_check").attr("value","s");
                            $("#type_check").text("일반");
-                        }
-                        
-                        
+						   $("#sell_typeTest").val(rep);
+                        }                        
                      }
                   })
                }else{
@@ -250,50 +251,77 @@
                var index = 0;
                if(sell_type=="s"){
                             var category = $("#main_category").val();                            
-                            var sub_category = $("#sub_category").val();
-                            var product_name = $("#product_name").val();
-                            var sell_price = $("#productprice").val();
-                            var sell_count = $("#productnum").val();
-                }
-              else if(sell_type=="a")
-               {
+                                 var sub_category = $("#sub_category").val();
+                                 var product_name = $("#product_name").val();
+                                 var sell_price = $("#productprice").val();
+                                 var sell_count = $("#productnum").val();
+                                 var board_no = $("#board_no").val();
+
+                                 $.ajax({
+                                     url:"productInfo.bo",
+                                     type:"get",                                   
+                                     data:{board_no:board_no,category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,sell_count:sell_count,sell_type:sell_type},
+                                      success:function(rep){
+                                         
+                                     console.log(rep);
+                                        $("#sub_category option:selected").prop("selected", false);
+                                             $("#product_name").val("");
+                                             $("#productprice").val("");
+                                             $("#productnum").val("");
+                                             $("#productlist").append("<tr><td><input type='radio' name='mainp' id="+rep+" value="+rep+"><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                                             $("input[name=mainp]").click(function(){
+                                                 var productCheck = $("input[name=mainp]:checked").val();
+                                                 $.ajax({
+                                                    url:"mainProductCheck.bo",
+                                                    type:"get",
+                                                    data:{board_no:board_no,productCheck:productCheck},
+                                                    success:function(rep){
+                                                       
+                                                    }
+                                                 })
+                                              })
+                              
+                         
+                                      }
+                                  }) 
+                                  console.log(category+" : "+sub_category + " : " + product_name + " : " + sell_price + " : " + sell_count);
+                                 
+                                 }
+               
+               else if(sell_type=="a")
+               { console.log("요기지??0");
                    var category = $("#main_category").val();                            
                     var sub_category = $("#sub_category").val();
                     var product_name = $("#product_name1").val();
-                    var sell_price = $("#productprice1").val();
-                    var sell_count = $("#productnum1").val();
-               }
-
-    console.log(category+" : "+sub_category + " : " + product_name + " : " + sell_price + " : " + sell_count);
-                          		$.ajax({
-                                    url:"productInfo.bo",
-                                    type:"get",
-                                    data:{category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,sell_count:sell_count},
-                                     success:function(rep){ 
-                                    console.log(rep);
-                                       $("#sub_category option:selected").prop("selected", false);
-                                            $("#product_name").val("");
-                                            $("#productprice").val("");
-                                            $("#productnum").val("");
-                                            $("#productlist").append("<tr><td><input type='radio' name='mainp' id="+rep+" value="+rep+"><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+ sell_count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
-                             			$("input[name=mainp]").click(function(){
-                             				var productCheck = $("input[name=mainp]:checked").val();
-                             				$.ajax({
-                             					url:"mainProductCheck.bo",
-                             					type:"get",
-                             					data:{productCheck:productCheck},
-                             					success:function(rep){
-                             						
-                             					}
-                             				})
-                             			})
-                                     }
-                                 })                                 
+                    var sell_price = $("#productstartprice").val();
+                    var end_date = $("#productenddate").val();
+                    var board_no = $("#board_no").val();
+        			var bidunit = $("#productbidunit").val();
+                    $.ajax({  
+                        url:"auctionproductInfo.bo",
+                        type:"get",
+                        data:{board_no:board_no,category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,end_date:end_date,sell_type:sell_type,bidunit:bidunit},
+                         success:function(rep){
+                              
+                        console.log(rep);
+                           $("#sub_category option:selected").prop("selected", false);
+                                $("#product_name1").val("");
+                                $("#productstartprice").val("");
+                                $("#productenddate").val("");
+                                $("#productbidunit").val("");
+                                $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                    
+                         } 
+                     }) 
+                     console.log(category+" : "+sub_category + " : " + product_name + " : " + sell_price);
+                    
+                    }
+      
+                             
                               })
-
                            $("#input_imgs").on("change", handleImgFileSelect);      
                })
-       
+               
 
    function fileUploadAction() {
       console.log("fileUploadAction");
@@ -313,8 +341,7 @@
                }
                sel_files.push(f);              
                var reader = new FileReader();
-                
-         
+
                filenames.push(f.name);
                reader.onload = function(e) {                 
                   var html = "<div class=col-md-4  id=img_id"+ index + "><img src=" + e.target.result + "  width=100 height=100 data-file="+f.name+" class='selProductFile' tilte='Click to remove'><p align=center>"
@@ -326,8 +353,7 @@
                
                
             });  
-      
-      
+      console.log(sel_files);      
    }   
 </script>
 </head>
@@ -414,11 +440,13 @@
       <div id="centerwrapper">
 
          <div id="content">
-         <form action="write.bo" method="post" enctype="multipart/form-data">
-            <div class="card">
+         <form action="write.bo?seq=${board_no}" method="post" enctype="multipart/form-data">
+            <div class="card">          
                <div class="card-header">판매글 작성</div>
                <div class="card-body">
                   <div class="form-row mb-3">
+                  <input type="hidden" id="board_no" name="board_no" value="${board_no}">
+                  <input type="hidden" id="sell_typeTest" name="sell_typeTest" value="">
                      <div class="col-md-2">메인카테고리 :</div>
                      <select id="main_category" name="category" class="col-md-3 ml-1">
                         <option value="">선 택</option>
@@ -458,15 +486,6 @@
 
                                     </select>
                                  </div>
-                                 <div class="input_wrap col-md-12">
-                           <button type="button" onclick="fileUploadAction();"
-                              class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
-                           <input type="file" id="input_imgs" name=img_file multiple 
-                              accept="image/x-png,image/gif,image/jpeg" />   
-                              <div id="file_test">
-                              
-                              </div>                                                                                 
-                        </div>
                                  <div class="form-row mb-3">
                                     <div class="col-md-5">제품명 :</div>
                                     <input id="product_name" class="form-control col-md-5 ml-1"
@@ -505,19 +524,24 @@
                                  
                                  <div class="form-row mb-3">
                                     <div class="col-md-5">시작입찰가 :</div>
-                                    <input id="productprice1" class="form-control col-md-5 ml-1"
+                                    <input id="productstartprice" class="form-control col-md-5 ml-1"
+                                       type="number" placeholder="" min=1>
+                                 </div>
+                                 <div class="form-row mb-3">
+                                    <div class="col-md-5">입찰 단위 :</div>
+                                    <input id="productbidunit" class="form-control col-md-5 ml-1"
                                        type="number" placeholder="" min=1>
                                  </div>
                                  <div class="form-row mb-3">
                                     <div class="col-md-5">경매 기간 :</div>
-                                    <input id="productnum1" class="form-control col-md-5 ml-1"
+                                    <input id="productenddate" name="productenddate" class="form-control col-md-5 ml-1"
                                        type="number" placeholder="" min=1 max=20>
                                  </div>
                                  <div class="form-row">
                                     <input id="productbt" type="button" name="productButton"
                                        class="btn btn-secondary" value="등록">
                                  </div>
-                           </div>
+                           </div> 
                         </div>
 
                      </div>
@@ -554,7 +578,15 @@
                   <div class="form-row mb-3  col-md-12">
                      <div class="col-md-2">사진첨부 :</div>
                      <div class="form-row col-md-10">
-                        
+                        <div class="input_wrap col-md-12">
+                           <button type="button" onclick="fileUploadAction();"
+                              class="my_button btn btn-secondary mb-3" id="uploadButton">파일 업로드</button>
+                           <input type="file" id="input_imgs" name=img_file multiple 
+                              accept="image/x-png,image/gif,image/jpeg" />   
+                              <div id="file_test">
+                              
+                              </div>                                                                                 
+                        </div>
                         <div class="imgs_wrap form-row">
                            <img id="img" />
                         </div>
@@ -596,7 +628,6 @@
    <div id="bottomwrapper">
 
       <div id="footer">
-
 
          <div class="text-white bg-secondary">
             <div class="container">
@@ -683,11 +714,13 @@
                 tdArr.push(td.eq(i).text());
              })
              var product_name = tdArr[1];
+           	 var board_no = $("#board_no").val();
              $.ajax({
                 url:"productInfoDelete.bo",
                 type:"get",
-                data:{product_name:product_name},
+                data:{product_name:product_name,board_no:board_no},
                 success:function(){
+                              
                    console.log("삭제 완료");
                 }
              })
@@ -720,16 +753,14 @@
                type:"get",
                data:{name:name},
                success:function(rep){
+                 
                   console.log("성공!");
                } 
             })
        
-         console.log(filenames[e]);
-       
+         console.log(filenames[e]);       
       }
       
-
-     
    </script>
 
 </body>

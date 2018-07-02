@@ -219,7 +219,7 @@ response.setCharacterEncoding("utf8");
       <div id="centernavbar">
          <nav class="nav nav-pills nav-justified">
             <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               <a class="nav-link  text-secondary" id="menubtn" href="getboardseq.bo">
                <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
             </li> 
                 <li class="nav-item">

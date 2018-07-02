@@ -10,13 +10,15 @@ public class BoardDTO {
 	private String sell_status;
 	private String end_date;
 	private String viewcount;
+	private String bidunit;
+	private String bidcnt;
 	
 	public BoardDTO() {
 		super();
 	}
 	
 	public BoardDTO(String board_seq, String seller_id, String title, String contents, String write_date, String sell_type,
-			String sell_status, String end_date, String viewcount) {
+			String sell_status, String end_date, String viewcount, String bidunit, String bidcnt) {
 		super();
 		this.board_seq = board_seq;
 		this.seller_id = seller_id;
@@ -28,6 +30,25 @@ public class BoardDTO {
 		this.end_date = end_date;
 		this.viewcount = viewcount;
 	}
+	
+	
+	
+	public String getBidunit() {
+		return bidunit;
+	}
+
+	public void setBidunit(String bidunit) {
+		this.bidunit = bidunit;
+	}
+
+	public String getBidcnt() {
+		return bidcnt;
+	}
+
+	public void setBidcnt(String bidcnt) {
+		this.bidcnt = bidcnt;
+	}
+
 	public String getBoard_seq() {
 		return board_seq;
 	}
