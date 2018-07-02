@@ -98,7 +98,7 @@ public class Board_ProductContoller extends HttpServlet {
 			
 			
 			 else if(command.equals("/write.bo")) {
-					System.out.println("占쏙옙占쏙옙트占쏙옙!");			
+					System.out.println("�뜝�룞�삕�뜝�룞�삕�듃�뜝�룞�삕!");			
 					List<FileDTO> fileList = new ArrayList<>();
 					String board_no = boarddao.checkboardNo();
 					String realPath = request.getServletContext().getRealPath("/image/"+(board_no));
@@ -117,7 +117,7 @@ public class Board_ProductContoller extends HttpServlet {
 					String contents = mr.getParameter("contents");
 					String sell_type = mr.getParameter("sell_type");
 					int insertBoard = boarddao.addBoard(board_no,id,title,contents,sell_type);
-					System.out.println("占쏙옙占쏙옙箕占�!" + board_no+"占퐉");
+					System.out.println("�뜝�룞�삕�뜝�룞�삕嶸뺝뜝占�!" + board_no+"�뜝�릧");
 					for(int i=0; i<product_info.size(); i++) {				
 							String category = product_info.get(i).getCategory();
 							String detail_category = product_info.get(i).getDetail_category();
@@ -126,12 +126,13 @@ public class Board_ProductContoller extends HttpServlet {
 							String sell_count = product_info.get(i).getSell_price();					
 							int insertProduct = productdao.addProduct(board_no, category, detail_category, sell_price, sell_count, p_name);
 					}
-					System.out.println(board_no+"占쏙옙占쏙옙箕占� : " + product_info.size());
+					System.out.println(board_no+"�뜝�룞�삕�뜝�룞�삕嶸뺝뜝占� : " + product_info.size());
 					int insertFile = filedao.insertFile(fileList);
-					System.out.println("" + insertFile + "占싸쇽옙트占쏙옙占쏙옙!");
-					System.out.println("占쏙옙占퐉");
+					System.out.println("" + insertFile + "�뜝�떥�눦�삕�듃�뜝�룞�삕�뜝�룞�삕!");
+					System.out.println("�뜝�룞�삕�뜝�릧");
 					
-					return;
+					isRedirect=false;
+					dst = "saleView.bo";
 			 }
 			
 			 else if(command.equals("/productInfo.bo")) {
@@ -158,7 +159,7 @@ public class Board_ProductContoller extends HttpServlet {
 		      }
 			
 			  else if(command.equals("/productInfoDelete.bo")) {
-			         System.out.println("占쏙옙품 占쏙옙占쏙옙占쌀뀐옙占쏙옙");;
+			         System.out.println("�뜝�룞�삕�뭹 �뜝�룞�삕�뜝�룞�삕�뜝���먯삕�뜝�룞�삕");;
 			         String product_name = request.getParameter("product_name");
 			         System.out.println(product_name);
 			         boolean check = false;
