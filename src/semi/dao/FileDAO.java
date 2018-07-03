@@ -117,7 +117,7 @@ public class FileDAO {
  		pstat.close();
  		con.close();
          return result;
-      }
+      } 
       
       public int updateFile(String board_no, String mainfilename) throws Exception{
          System.out.println("업데이트");

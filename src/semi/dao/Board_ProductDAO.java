@@ -74,7 +74,7 @@ public class Board_ProductDAO {
 		pstat.close();
 		con.close();
 		return result;
-	}
+	} 
 	
 	public int addProduct(int board_no, String category, String detail_category, String sell_price, String sell_count, String p_name) throws Exception{
 		Connection con = DBUtils.getConnection();

@@ -141,7 +141,7 @@ public class BoardDAO {
       pstat.setString(1, seq);
       ResultSet rs = pstat.executeQuery();
       String result = null;
-
+ 
       if(rs.next()) {
          result= rs.getString(1);
       }

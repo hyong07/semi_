@@ -141,7 +141,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             System.out.println(board_no+" : " +sell_type);
             String title = mr.getParameter("title");
             String contents = mr.getParameter("contents");
-            
+             
             String end_date = end_dateMap.get(board_no);
             System.out.println(end_date + " : ");  
             

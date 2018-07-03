@@ -287,7 +287,7 @@
                                   console.log(category+" : "+sub_category + " : " + product_name + " : " + sell_price + " : " + sell_count);
                                  
                                  }
-               
+                
                else if(sell_type=="a")
                { console.log("요기지??0");
                    var category = $("#main_category").val();                            

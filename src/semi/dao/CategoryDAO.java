@@ -19,7 +19,7 @@ public class CategoryDAO {
 		List<String> result = new ArrayList<>();
 		while(rs.next()) {
 			result.add(rs.getString(1));		
-		}
+		} 
 		con.commit();
 		pstat.close();
 		con.close();
