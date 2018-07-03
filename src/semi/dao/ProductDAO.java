@@ -64,15 +64,15 @@ public class ProductDAO {
 	}
 	
 	 else if(sell_type.equals("s")) {
-	      sql = "insert into product values(?,product_seq.nextval,?,?,?,?,?,?)";
+	      sql = "insert into product values(?,product_seq.nextval,?,?,?,?,default,?)";
 	      pstat = con.prepareStatement(sql);
 	      pstat.setString(1, dto.getBoard_no());
 	      pstat.setString(2, dto.getCategory());
 	      pstat.setString(3, dto.getDetail_category());
 	      pstat.setString(4, dto.getSell_price());
 	      pstat.setString(5, dto.getSell_count());      
-	      pstat.setString(6, dto.getMain_product());
-	      pstat.setString(7, dto.getP_name());
+	  
+	      pstat.setString(6, dto.getP_name());
 	      
 	   }
 	int result = pstat.executeUpdate();
@@ -133,6 +133,46 @@ public class ProductDAO {
 		   }
 		
 		   return list;
+	   }
+	   
+	   public int deleteProduct(String board_no, String product_name) throws Exception{
+  			Connection con = DBUtils.getConnection();
+  			String sql = "delete from product where board_no=? and p_name=?";
+  			PreparedStatement pstat = con.prepareStatement(sql);
+  			pstat.setString(1, board_no);
+  			pstat.setString(2, product_name);
+  			int result = pstat.executeUpdate();   			
+  			con.commit();
+  			con.close();
+  			pstat.close();
+  			
+  			return result;
+  		}
+	   public int resetMainP(String board_no) throws Exception{
+		   Connection con = DBUtils.getConnection();
+		   String sql = "update product set main_product='n' where board_no = ?";
+		   PreparedStatement pstat = con.prepareStatement(sql);
+		   pstat.setString(1, board_no);
+		   int result = pstat.executeUpdate();
+		   con.commit();
+		   con.close();
+		   pstat.close();
+		   
+		   return result;
+	   }
+	   public int updateMainP(String board_no, String main_productName) throws Exception {
+		   Connection con = DBUtils.getConnection();
+				String sql = "update product set main_product='y' where board_no = ? and p_name = ?";
+				PreparedStatement pstat = con.prepareStatement(sql);
+				pstat.setString(1, board_no);
+	   			pstat.setString(2, main_productName);
+	   			int result = pstat.executeUpdate();   			
+	   			con.commit();
+	   			con.close();
+	   			pstat.close();
+	   			
+	   			return result;
+		   
 	   }
 
 
