@@ -140,15 +140,14 @@ public class ProductDAO {
       
       public ProductDTO mainProduct(String seq) throws Exception{
          Connection con = DBUtils.getConnection();
-         String sql = "select * from product where board_no=?";
+         String sql = "select * from product where board_no=? and main_product='y'";
          PreparedStatement pstat = con.prepareStatement(sql);
          pstat.setString(1, seq);
 
-         ResultSet rs = pstat.executeQuery();
+         ResultSet rs = pstat.executeQuery();         
          ProductDTO dto = new ProductDTO();
-         
          while(rs.next()) {
-           
+        	
             dto.setBoard_no(seq);
             dto.setProduct_seq(rs.getString(2));
             dto.setCategory(rs.getString(3));
@@ -156,14 +155,34 @@ public class ProductDAO {
             dto.setSell_price(rs.getString(5));
             dto.setSell_count(rs.getString(6));
             dto.setMain_product(rs.getString(7));
-            dto.setP_name(rs.getString(8));
-
+            dto.setP_name(rs.getString(8));            
          }
          con.commit();
  		pstat.close();
  		con.close();
          return dto;
       }
+      
+      public String getproductcount(String seq) throws Exception{
+          Connection con = DBUtils.getConnection();
+           String sql = "select sell_count from product where product_seq=?";
+           PreparedStatement pstat = con.prepareStatement(sql);
+           pstat.setString(1, seq);
+           
+           ResultSet rs = pstat.executeQuery();
+           
+           String count = null;
+           
+           while(rs.next()) {
+              count = rs.getString(1);
+           }
+           
+           con.commit();
+           con.close();
+           pstat.close();
+           return count;
+       }
+      
       
       public List<ProductDTO> selectProduct(String seq) throws Exception{
          Connection con = DBUtils.getConnection();

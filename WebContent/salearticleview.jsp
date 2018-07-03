@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
    crossorigin="anonymous">
-<link
+<link   
    href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
    rel="stylesheet">
 <link rel="stylesheet"
@@ -15,10 +15,8 @@
 <link rel="stylesheet"
    href="https://v40.pingendo.com/assets/4.0.0/default/theme.css"
    type="text/css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -29,17 +27,11 @@
    crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans"
    rel="stylesheet">
-<link
-   href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-   rel="stylesheet" id="bootstrap-css">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<html>
+<script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-@import 'bootstrap-4.0.0';
 
 body {
    
@@ -124,33 +116,92 @@ div {
    background: #7B68EE;
    width: 100%;
 }
+
 </style>
 
 <!-- 카카오 로그아웃  -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
+$(document).ready(function(){
+   $("#product").on('change', function (e) {
+      var count = 0;
+       var product_seq = $("option:selected", this).val();
+      if($("#productlist tr").length){
+         $("#productlist tr").each(function(i){
+            var id = this.id;
+            
+            if(id == product_seq){
+               alert("이미 존재하는 상품입니다.");
+               count++;
+               $("#product option:eq(0)").prop("selected",true);
+               return;
+            }         
+          });         
+         if(count == 0){
+            var product = $("option:selected",this).text();
+             var product_name = product.split("-")[0];
+             var product_price = product.split("-")[1].split("원")[0];
+             $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button></tr>");
+         }         
+      }
+      else{
+         var product = $("option:selected",this).text();
+          var product_name = product.split("-")[0];
+          var product_price = product.split("-")[1].split("원")[0];
+          $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button></tr>");
+      }
+      
+   });
+
          function kakaoLogout() {
          Kakao.init('c75f8598dbbf710a4383c8032f913119');
          Kakao.Auth.logout();
          location.href = "logout.mem";
          }
+        
+})
+      function down(e){
+             var stat = $('#check').text();
+             var num = parseInt(stat,10);
+             num--;
+          if(num<=0){
+             alert('더이상 줄일수 없습니다.');
+             num =1;
+           }
+          $('#check').text(num);
+        }
+
+      function up(e){
+             var stat = $('#check').text();
+             var num = parseInt(stat,10);
+             var product_seq = $(e).parent().parent().attr('id');
+             var td = $(e).parent();
+             var test = $(td.find("#check")).text();
+             console.log(test);
+             $.ajax({
+                 url:"checkcount.bo",
+                 type:"get",
+                 data:{product_seq:product_seq},
+                 success:function(rep){ 
+                	 
+                    var count = parseInt(rep.split("\"")[1],10);
+                   
+                    if(num>=count){
+                        alert("수량초과로 더이상 늘릴수 없습니다.");
+                    return;
+                     }else{
+                        num++;
+                     }
+                    $('#check').text(num);
+                    
+                 }
+              })
+            
+        }
          
-         $(document).ready(function(){
-            $("#add").click(function(){
-               var product = $("#product option:selected").val();
-               var product_seq = product.split('번')[0];
-               var count = $('#check').text();
-               
-               $.ajax({
-                  url:"productinfo.bo",
-                    type:"get",
-                    data:{product_seq:product_seq},
-                    success:function(rep){
-                      $("#productlist").append("<tr><td>"+ product_seq+ "<td>"+ rep.getP_name() +"<td>"+ rep.getSell_price+ "<td>"+ count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
-                    }
-               })
-            }) 
-         })
+        
 </script>
 
 </head>
@@ -276,8 +327,8 @@ div {
                      <!-- Preview Image -->
                      <div .main class="row">
                         <div id='img_div' class="col-md-5">
-                           <img class="img-fluid rounded"
-                              src="http://placehold.it/900x300" alt="" id=product_img>
+                                    <img class="img-fluid rounded"
+                              src="${mainfile}" alt="" id=product_img>
                         </div>
                         <div class="col-md-7" id="main_text">
                            <div>
@@ -287,42 +338,23 @@ div {
                                     <thead>
                                        <tr>
                                           <td>상품명 :</td>
-                                          <td>
-                                          <c:forEach var="item" items="${result}">
-                                                <c:choose>
-                                                   <c:when test="${item.main_product == 'y'}">
-                                                      ${item.p_name}
-                                                   </c:when>
-                                                </c:choose>
-                                          </c:forEach>      
-                                          </td>
+                                          <td>${pdto.p_name}</td>   
                                        </tr>
                                     </thead>
                                     <tbody>
                                        <tr>
                                           <td>상품 가격 :</td>
-                                          <td>
-                                    <c:forEach var="item" items="${result}">
-                                                   <c:choose>
-                                                      <c:when test="${item.main_product == 'y'}">
-                                                         ${item.sell_price} 222
-                                                      </c:when>
-                                                   </c:choose>
-                                             </c:forEach>      
-                                </td>
+                                          <td>${pdto.sell_price }</td>
                                        </tr>
                                           <tr>
-                                              <td>
+                                              <td colspan="2">
                                                  <select id="product">
+                                                    <option>상품을 선택해주세요.</option>
                                                     <c:forEach var="item" items="${result}">
-                                                       <option>${item.product_seq }번 . ${item.p_name } - ${item.sell_price }원</option>
+                                                       <option value="${item.product_seq }">${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
                                                  </c:forEach>      
                                                  </select>
                                               </td>
-                                             <td><img src="saram.png" width="18px" height="18px">
-                                                <i id="check">1</i>  <!-- 기본 수량 -->
-                                                <a href="#" id="numUp">▲</a> 
-                                                <a href="#" id="numDown">▼</a></td>
                                           </tr>
                                        <tr>
                                           <td class="text-right" colspan="2"><input type="button" id="add" class="btn btn-secondary" value="등록"> </td>
@@ -338,7 +370,7 @@ div {
                     
                     <div class="col-md-12">
                   <table class="table">
-                     <thead>
+                     <thead >
                         <tr>
                            <th>제품번호</th>                              
                            <th>제품명</th>
@@ -352,42 +384,18 @@ div {
                      </tbody>
                    </table>
                    </div>
-                     
-                     <script>
-                                  $(function(){
-                                     /* 수량 감소 코드 */
-                                     $('#numDown').click(function(e){
-                                        e.preventDefault();
-                                        var stat = $('#check').text();
-                                         var num = parseInt(stat,10);
-                                        num--;
-                                     if(num<=0){
-                                        alert('더이상 줄일수 없습니다.');
-                                        num =1;
-                                      }
-                                     $('#check').text(num);
-                                      });
-                                     
-                                     /* 수량 증가 코드 */
-                                     $('#numUp').click(function(e){
-                                        e.preventDefault();
-                                        var stat = $('#check').text();
-                                        var num = parseInt(stat,10);
-                                        num++;
-                                     /* db에서 해당상품의 수량을 조회해서 변경해야 함  */
-                                    if(num>5){
-                                     alert('더이상 늘릴수 없습니다.');
-                                      return;
-                                     }
-                                    $('#check').text(num);
-                                        });
-                                   });
-                                </script>
                                 
                      <hr>
                      <!-- Post Content -->
-                     <p class="lead">${bdto.contents}</p>
-                     <hr>
+
+                     <div id=files>
+                        <c:forEach var="item" items="${path}">
+                           <img class="img-fluid rounded"  alt="" id=product_img src='${item}'><br><br>
+                        </c:forEach>
+                     </div>
+                 <hr>
+            <p class="lead">${bdto.contents}</p>
+         <hr>
                      <!-- Comments Form -->
                      <div class="card my-4">
                         <h5 class="card-header">Leave a Comment:</h5>

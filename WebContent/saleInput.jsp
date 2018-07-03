@@ -206,8 +206,7 @@
                   type:"get",
                   data:{test:test},
                   success:function(rep){
-                     if(rep.length>0){      
-                     
+                     if(rep.length>0){                     
                         $("select[name=sub_category]").empty();
                         for(i=0; i<rep.length;i++){
                            $("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
@@ -733,14 +732,11 @@
                               
                    console.log("삭제 완료");
                 }
-             })
-             
+             })             
              console.log(tdArr[1]);
              
              //라인 삭제
-             
-             
-             
+        
           }
        }
 

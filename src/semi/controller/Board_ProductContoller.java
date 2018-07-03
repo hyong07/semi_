@@ -100,10 +100,18 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             return;
          }
          
+         else if(command.equals("/checkcount.bo")) {
+             String product_seq = request.getParameter("product_seq");             
+             String count = productdao.getproductcount(product_seq);
+             new Gson().toJson(count, response.getWriter());
+              return;
+          }
+         
          
          else if(command.equals("/mainfilename.bo")) {
             String board_no = request.getParameter("board_no");
-        	String mainfilename = request.getParameter("name");                        
+        	String mainfilename = request.getParameter("name");       
+        	System.out.println(mainfilename);
             mainfileMap.put(board_no, mainfilename);           
             return;            
          }
@@ -141,11 +149,17 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             System.out.println(board_no+" : " +sell_type);
             String title = mr.getParameter("title");
             String contents = mr.getParameter("contents");
-             
-            String end_date = end_dateMap.get(board_no);
-            System.out.println(end_date + " : ");  
+            String end_date = null;
             
-            BoardDTO bdto = new BoardDTO(board_no,id,title,contents,"",sell_type,"",end_date,"","","");
+            if(sell_type.equals("s")) {
+               end_date = "1";
+            }
+            else if(sell_type.equals("a")){
+               end_date = end_dateMap.get(board_no);
+            } 
+            
+            
+            BoardDTO bdto = new BoardDTO(board_no,id,title,contents,"",sell_type,"",end_date,"","","");            
             System.out.println(bdto.getEnd_date());
             	System.out.println("어디까지나오는거냐");
             int insertBoard = boarddao.addBoard(bdto);
@@ -232,7 +246,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
                String board_no = request.getParameter("board_no");
                System.out.println(main_productName +" : " + board_no);
                int resetMainP = productdao.resetMainP(board_no);
-               int result  = productdao.updateMainP(board_no,main_productName);
+               int result  = productdao.updateMainP(board_no,main_productName);               
                new Gson().toJson(main_productName, response.getWriter());
                return;
             }
@@ -243,8 +257,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
         	 request.setAttribute("point", point);
         	 isRedirect=false;
         	 dst = "moneyTest.jsp";
-         }
-         
+         }        
 
          else if(command.equals("/articleView.bo")) { 
             System.out.println("z_z");
@@ -256,16 +269,18 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             BoardDTO bdto = new BoardDTO();
             bdto = boarddao.selectOneBoard(seq);
             System.out.println(bdto.getContents());
-            ProductDTO pdto = new ProductDTO();
+            ProductDTO pdto = new ProductDTO();            
             pdto = productdao.mainProduct(seq);
             System.out.println(pdto.getDetail_category());
             List<FileDTO> flist = new ArrayList<>();
-            
+            List<ProductDTO> result = new ArrayList<>();
+            result = productdao.selectProduct(seq);
             flist = filedao.selectFile(seq);
             System.out.println(flist.size());
 
             request.setAttribute("bdto",bdto);
-            request.setAttribute("pdto", pdto);
+            request.setAttribute("pdto", pdto);            
+            request.setAttribute("result", result);
             request.setAttribute("flist", flist);
          
             
@@ -288,8 +303,8 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             request.setAttribute("path", path);
             
             request.setAttribute("files", path);
-//            String mainfile = "image/"+seq+"/"+mainfilename;
-//            request.setAttribute("mainfile", mainfile);
+            String mainfile = "image/"+seq+"/"+ mainfileMap.get(seq);
+            request.setAttribute("mainfile", mainfile);
             
             
             
