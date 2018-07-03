@@ -224,17 +224,19 @@
                      type:"get",
                      data:{sell_type:sell_type},
                      success:function(rep){
-                        $("input[name=sell_type]").attr("style","display:none");
-                        $("#test").text("");
+//                         $("input[name=sell_type]").attr("style","display:none");
+//                         $("#test").text("");
                         if(rep == "a"){                                               
                            $("#plusButton").attr("href","#auction_product");
                            $("#type_check").attr("value","a");
                            $("#type_check").text("경매");
+                           $("#sell_typeTest").val(rep);
                         }
                         else if(rep == "s"){                           
                            $("#plusButton").attr("href", "#plusproduct");
                            $("#type_check").attr("value","s");
                            $("#type_check").text("일반");
+                           $("#sell_typeTest").val(rep);
                         }
                         
                         
@@ -255,10 +257,11 @@
                                  var product_name = $("#product_name").val();
                                  var sell_price = $("#productprice").val();
                                  var sell_count = $("#productnum").val();
+                                 var board_no = $("#board_no").val();
                                  $.ajax({
                                      url:"productInfo.bo",
                                      type:"get",
-                                     data:{category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,sell_count:sell_count},
+                                     data:{board_no:board_no,category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,sell_count:sell_count},
                                       success:function(rep){
                                      	 
                                      console.log(rep);
@@ -272,7 +275,7 @@
                                                  $.ajax({
                                                     url:"mainProductCheck.bo",
                                                     type:"get",
-                                                    data:{productCheck:productCheck},
+                                                    data:{board_no:board_no,productCheck:productCheck},
                                                     success:function(rep){
                                                        
                                                     }
@@ -293,11 +296,12 @@
                     var product_name = $("#product_name1").val();
                     var sell_price = $("#productstartprice").val();
                     var end_date = $("#productenddate").val();
-        
+                    var board_no = $("#board_no").val();
+        			var bidunit = $("#productbidunit").val();
                     $.ajax({  
                         url:"auctionproductInfo.bo",
                         type:"get",
-                        data:{category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,end_date:end_date},
+                        data:{board_no:board_no,category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,end_date:end_date,sell_type:sell_type,bidunit:bidunit},
                          success:function(rep){
                         	   
                         console.log(rep);
@@ -305,6 +309,7 @@
                                 $("#product_name1").val("");
                                 $("#productstartprice").val("");
                                 $("#productenddate").val("");
+                                $("#productbidunit").val("");
                                 $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
                     
                          } 
