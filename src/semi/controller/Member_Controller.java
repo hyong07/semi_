@@ -2,6 +2,8 @@ package semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +15,10 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.api.SendMail;
 import semi.dao.MemberDAO;
 import semi.dto.MemberDTO;
+
 
 @WebServlet("*.mem")
 public class Member_Controller extends HttpServlet {
@@ -23,7 +27,7 @@ public class Member_Controller extends HttpServlet {
 		try {
 
 			request.setCharacterEncoding("utf8");
-   			response.setCharacterEncoding("utf8");
+			response.setCharacterEncoding("utf8");
 
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -92,38 +96,38 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/mypage_modify.mem")) {
 				String loginid = (String) request.getSession().getAttribute("loginid");
 				MemberDTO dto = dao.selectMember(loginid);
-				
+
 				request.setAttribute("dto", dto);
 				isRedirect = false;
 				dst = "mypage_modify.jsp";
 			}
-			
+
 			else if(command.equals("/pwcheck.mem")) {
-				System.out.println("pwcheck ����");
+				System.out.println("pwcheck 들어옴");
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				System.out.println(pw + " : " + loginid);		
 				boolean result = dao.idpwcheck(loginid,pw);
-				
+
 				if(result) {
 					isRedirect = false;
 					dst = "mypage_info.mem";
 				}
 				else {
-					
+
 					dst="mypage_pwcheck.jsp";
 				}
-				
-				
-				
+
+
+
 			}
-			
-			
+
+
 			else if(command.equals("/mypage_info.mem")) {
-				
+
 				String loginid = (String) request.getSession().getAttribute("loginid");
 				MemberDTO dto = dao.selectMember(loginid);
-				
+
 				request.setAttribute("dto", dto);
 
 				isRedirect = false;
@@ -132,9 +136,9 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/pwcheck2.mem")) {
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
-				
+
 				boolean result = dao.idpwcheck(loginid,pw);
-				
+
 				if(result) {
 					isRedirect = false;
 					dst = "mypage_leave.jsp";
@@ -146,11 +150,11 @@ public class Member_Controller extends HttpServlet {
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
 				String address = request.getParameter("address");
-				
+
 				int result = dao.modifymember(id,name,email,phone,address);
-				
+
 				MemberDTO dto = dao.selectMember(id);
-				
+
 				if(result > 0) {
 					request.setAttribute("result", result);
 					request.setAttribute("dto", dto);
@@ -165,25 +169,25 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/currentpwcheck.mem")) {
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
-				
+
 				boolean result = dao.idpwcheck(loginid,pw);
-				
+
 				response.setCharacterEncoding("utf8");
 				response.setContentType("application/json");
-				
+
 				new Gson().toJson(result,response.getWriter());
-				
+
 				return;
-				
+
 			}
-			
+
 			else if(command.equals("/pwchange.mem")) {
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
-				
+
 				int result = dao.changepw(loginid, pw);
 				MemberDTO dto = dao.selectMember(loginid);
-				
+
 				if(result > 0) {
 					isRedirect = false;
 					dst = "mypage_info.mem";
@@ -191,10 +195,10 @@ public class Member_Controller extends HttpServlet {
 					isRedirect = false;
 					dst = "error.html";
 				}
-				
+
 			}
 			else if(command.equals("/leavemember.mem")) {
-				System.out.println("����");
+				System.out.println("들어옴");
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				int result = dao.leaveMember(loginid);
 				System.out.println("!");
@@ -205,9 +209,151 @@ public class Member_Controller extends HttpServlet {
 					dst = "memberout.jsp";
 				}
 			}
+
+			//이메일로 계정, 비번찾기
+
+			else if(command.equals("/idFind.mem")){
+
+
+
+
+
+				String email = request.getParameter("email");
+
+				String name = request.getParameter("name");
+
+				System.out.println(email);
+
+				System.out.println(name);
+
+				String result = dao.findId(email, name);
+
+
+
+				if(!(result.equals("1"))) {
+
+					SendMail sendmail = new SendMail(1,result,email);
+
+					sendmail.sendmail();
+
+					request.setAttribute("result", 1);
+
+				}else {
+
+					request.setAttribute("result", 3);
+
+				}
+
+
+
+				isRedirect =false;
+
+
+
+				dst = "find.jsp";
+
+			}
+
+			else if(command.equals("/pwFind.mem")){
+
+				String email = request.getParameter("email");
+
+				String id= request.getParameter("id");
+
+				System.out.println(email);
+
+				System.out.println(id);
+
+				String result = dao.findPw(email,id);
+
+
+				if(result!=null) {
+
+
+
+					SendMail sendmail = new SendMail(email,result);
+
+					sendmail.sendmail();
+
+					request.setAttribute("result", 2);
+
+				}
+
+				else {
+
+					request.setAttribute("result", 3);
+
+				}
+
+				isRedirect =false;
+
+
+
+				dst = "find.jsp";
+
+			}
 			
-			
-			
+			//문자인증 
+			else if(command.equals("/sms.mem")) {
+				 
+				 String  pswd = "";
+				 
+		           StringBuffer sb1 = new StringBuffer();
+		 
+		           // ���� 5���
+		           for( int i = 0; i<5; i++) {
+		 
+		               sb1.append((char)((Math.random() * 10)+48)); //�ƽ�Ű��ȣ 48(1) ���� 10�
+		           }
+		 
+
+		 
+		           pswd = sb1.toString();
+		 
+				 
+		        String to = "82"+request.getParameter("phone");
+		 
+		        String from="33644643087";
+		 
+		        String message = pswd;
+		 
+		        
+		 
+		        String sendUrl = "https://www.proovl.com/api/send.php?user=6394162&token=mZJb0hlGqKxlgbpx4GqNTH4lX0aNAQ04";
+		 
+		        StringBuilder sb = new StringBuilder();
+		 
+		        sb.append(sendUrl);
+		 
+		        sb.append("&to="+to);
+		 
+		        sb.append("&from="+from);
+		 
+		        sb.append("&text="+message);
+		 
+		        
+		 
+		        System.out.println(sb.toString());
+		 
+		        URL url = new URL(sb.toString());
+		 
+		        HttpURLConnection con = (HttpURLConnection)url.openConnection();
+		 
+		        int result = con.getResponseCode();
+		 
+		        System.out.println(result);
+		 
+		        con.disconnect();
+		 
+		        out.print(message);
+		        
+		        return;
+		 
+		 
+		      }
+		 
+
+
 
 			if(isRedirect) {
 				response.sendRedirect(dst);

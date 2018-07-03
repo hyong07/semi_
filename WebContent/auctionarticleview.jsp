@@ -329,37 +329,76 @@
                                        <br>
                                        <row>
                                        <div class="col-md-11 ">
+                                       
+                                     <form action='bidsubmit.bid' method="post">
                                           <table class="table">
-                                             <thead>
+                                          
+                                              <c:choose>
+                                                                <c:when test="${not empty currentprice}"> 
+                                                    <thead>
                                                 <tr>
                                                 <td>start : </td>
                                                 <td>${pdto.sell_price}</td>
                                                    
                                                 </tr>
+                              
                                              </thead>
-                                             <tbody>
+                                             <tbody> 
                                                 <tr>     
                                                 <td>current : </td>
-                                                <td>1,350,000</td>
-                                                
+                                                 <td>${currentprice}
+                                                 <img src="saram.png" width="18px" height="18px"> <i>  ${bdto.bidcnt} bid&nbsp;</i>
+                                                 </td>
                                                 </tr>
-                                                <tr>
-                                                   <td><img src="saram.png" width="18px" height="18px"> <i>1 bid&nbsp;</i>
+                                                    <tr>
+                                                   <td> <input name = 'bidacount' id="bidacount" type="number" placeholder='${currentprice}' min='${currentprice}'  >
                                                    </td> 
-                                                   <td class="text-right"><a class="btn btn-secondary" href="#">입찰 신청 </a></td>
+                                                   <td class="text-right"><button>입찰신청</button></td>
                                                 </tr>
+                                                       </c:when>
+                                              
+                                              
+                                             <c:otherwise>
+                                             <thead>
+                                                <tr>
+                                                <td>start : </td>
+                                                <td>${pdto.sell_price}</td>
+                                            </tr>
+                                          </thead>
+                                             <tbody>
+                                                <tr>       
+                                                <td>current : </td>
+                                                 <td>${pdto.sell_price}
+                                                 <img src="saram.png" width="18px" height="18px"> <i>  ${bdto.bidcnt} bid&nbsp;</i>
+                                                    
+                                                 </td>
+                                                </tr>
+                                                    <tr>
+                                                   <td> <input id="bidacount" type="number" placeholder='${pdto.sell_price}' min='${pdto.sell_price}' step='${bdto.bidunit}' >
+                                                   </td> 
+                                                   <td class="text-right"><button>입찰신청</button></td>
+                                                </tr>
+                                                </c:otherwise>
+                                  
+                                                       </c:choose>
+                                            
                                                 <tr>
                                                    <td></td>
                                                    <td></td>
                                                 </tr>
+                                             
+                                             
+                                            
                                              </tbody>
                                           </table>
+                                          </form>
+                                    
                                        </div>
                                        </row>
                                     </div>
                                  </div></div>
                                  <div id=files>
-                                 	<c:forEach var="item" items="${path}">
+                                    <c:forEach var="item" items="${path}">
                                   <img class="img-fluid rounded"  alt="" id=product_img src='${item}'><br><br>
                                   </c:forEach>
                                  </div>
@@ -382,14 +421,14 @@
         </div>
         <!-- Single Comment -->
         
-           
+        
         
       <div class="media mb-4 text-center">
     <div class="text-center py-0">
       <img src="사람.png" height="20" width="20" class="my-3"> </div>
     <div class="media-body mx-2 text-left px-2">
       <div id=cotop><h5 class="mt-0 text-left p-0" >Commenter</h5>
- 					날짜
+                날짜
       </div>
  Comment contents Comment contentsComment contentsComment contentsComment contentsComment contentsComment contents</div>
   </div>

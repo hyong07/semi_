@@ -246,7 +246,7 @@
 				 </li>   
 			    
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="saleInput.jsp" >
+					<a class="nav-link  text-secondary" id="menubtn" href="getboardseq.bo" >
 					 상품등록</a> 
 				 </li>   
 			 

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import semi.dbutils.DBUtils;
-   
+
 
 public class CategoryDAO {      
    public List<String> main_categoryGet(String choice) throws Exception{
@@ -20,8 +20,9 @@ public class CategoryDAO {
       while(rs.next()) {
          result.add(rs.getString(1));      
       }
-      pstat.close();
-      con.close();
+     con.commit();
+   pstat.close();
+   con.close();   
       return result;
    }
 }

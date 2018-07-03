@@ -91,6 +91,8 @@ function checkPwd(){
 		$("#pw2").css("background-color","#fff");
 	}	
 }
+
+
 //이름 이메일 폰 주소를 입력하지 않았을 경우 가입버튼 비활성화
 function signupCheck(){
 	var name = $("#name").val();
@@ -100,12 +102,13 @@ function signupCheck(){
 	var sample6_postcode = $("#sample6_postcode").val();
 	var sample6_address = $("#sample6_address").val();
 	var sample6_address2 = $("#sample6_address2").val();
-	if(name.length<2 || email=="" || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2=="" || certification=="" || phoneConfirm==0){
+	if(name.length<3 || email=="" ||email.replace(/^\s+|\s+$/g,"").length==0 || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2=="" || certification=="" || phoneConfirm==0){
 		$("#signUpBtn").prop("disabled",true);
 		$("#signUpBtn").css("background-color","#aaaaaa");
 	}else{
 		
 	}
+	
 }
 
 
@@ -123,7 +126,7 @@ window.onload = function() {
 			console.log(re);
 		}
 	};
-	
+
 
 };
 
@@ -206,6 +209,7 @@ $("document").ready(function(){
 	      }
 	       
 	  }); 
+
 	    // 문자인증 ajax
 	   $("#confirm").click(function(){
 		
@@ -268,6 +272,61 @@ $("document").ready(function(){
 		 }
 	   
 });
+
+	   $("#email").on('keydown', function(e){
+	      
+	    
+		   var email = $("#email").val();
+		var k = e.keyCode;
+					
+		if(email.length >= 30 && email.length<5 && email.replace(/^\s+|\s+$/g,"".length==0))
+		{
+	  	    e.preventDefault();
+	  	
+		}
+		
+	    }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+	        if($(this).val() == '') return;
+	 
+	        // 기존 번호에서 - 를 삭제합니다.
+	        var email = $(this).val();
+	      
+	        // 입력값이 있을때만 실행합니다.
+	        if(email != null && email != '')
+	        {
+	            
+	               
+	                	     var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+	                
+	                if(regex.test(email))
+	                {
+	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+	                                      
+	                    $(this).val(email);
+	                 
+	                }
+	                else
+	                {
+	                    alert("유효하지 않은 이메일 입니다.");
+	                    $(this).val("");
+	                    $(this).focus();
+	               
+	        			
+	                }
+	        }
+	            else 
+	            {
+	                alert("유효하지 않은 이메일 입니다.");
+	                $(this).val("");
+	                $(this).focus();
+	      
+	            }
+	        
+	       
+	  }); 
+	  
+		   
+			    
 }) 
   
 
@@ -1222,7 +1281,7 @@ $("document").ready(function(){
             </div>
             <div class="row">
               <div class="col-md-12 mt-3">
-                <p class="text-center text-white">© Copyright 2017 Pingendo - All rights reserved. </p>
+                <p class="text-center text-white">ⓒ Copyright 2017 Pingendo - All rights reserved. </p>
               </div>
             </div>
           </div>
