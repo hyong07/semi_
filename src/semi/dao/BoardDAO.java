@@ -115,9 +115,10 @@ public class BoardDAO {
 
    public int addBoard(BoardDTO dto) throws Exception{
       Connection con = DBUtils.getConnection();
-      String sql = "insert into board values(?,?,?,?,sysdate,?,default,sysdate+?,default,'','')";
+      String sql = "insert into board values(?,?,?,?,sysdate,?,default,sysdate+?,default,default,default)";
       PreparedStatement pstat = con.prepareStatement(sql);
       System.out.println(dto.getEnd_date() + " : ");
+      System.out.println("! 시발여긴나오는거냐");
       pstat.setString(1, dto.getBoard_seq());
       pstat.setString(2, dto.getSeller_id());
       pstat.setString(3, dto.getTitle());
@@ -125,8 +126,9 @@ public class BoardDAO {
       pstat.setString(5, dto.getSell_type());      
       pstat.setString(6, dto.getEnd_date());
       int result = pstat.executeUpdate();
-      pstat.close();
-      con.close();   
+      con.commit();
+		pstat.close();
+		con.close();
       System.out.println("결과는요~" + result);
       return result;
 
@@ -143,7 +145,9 @@ public class BoardDAO {
       if(rs.next()) {
          result= rs.getString(1);
       }
-
+      con.commit();
+		pstat.close();
+		con.close();
       return result;
    }
    

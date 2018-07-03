@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -23,17 +24,13 @@ import semi.dao.CategoryDAO;
 import semi.dao.FileDAO;
 import semi.dao.ProductDAO;
 import semi.dto.BoardDTO;
-import semi.dto.Board_CommentDTO;
 import semi.dto.FileDTO;
 import semi.dto.ProductDTO;
 
 @WebServlet("*.bo")
 public class Board_ProductContoller extends HttpServlet {
-
-
-String mainfilename;
-String mainpname;
-String end_date;
+HashMap<String, String> mainfileMap = new HashMap<String,String>();
+HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
       try {
@@ -105,10 +102,10 @@ String end_date;
          
          
          else if(command.equals("/mainfilename.bo")) {
-            mainfilename = request.getParameter("name");
-            System.out.println(mainfilename);
-            return;
-            
+            String board_no = request.getParameter("board_no");
+        	String mainfilename = request.getParameter("name");                        
+            mainfileMap.put(board_no, mainfilename);           
+            return;            
          }
       
 
@@ -145,31 +142,30 @@ String end_date;
             String title = mr.getParameter("title");
             String contents = mr.getParameter("contents");
             
+            String end_date = end_dateMap.get(board_no);
             System.out.println(end_date + " : ");  
             
             BoardDTO bdto = new BoardDTO(board_no,id,title,contents,"",sell_type,"",end_date,"","","");
-            System.out.println(bdto.getEnd_date());  
+            System.out.println(bdto.getEnd_date());
+            	System.out.println("어디까지나오는거냐");
             int insertBoard = boarddao.addBoard(bdto);
             System.out.println(insertBoard);
                        
   
             fileList = filedao.searchFileName(realPath, board_no);
-            System.out.println(fileList.size());
-            String mainfile_seq =null;
-   
-            
             int insertFile = filedao.insertFile(fileList);
+            String mainfilename = mainfileMap.get(board_no);
+            System.out.println("메인파일이머냐~~~~~~~~~~" + mainfilename);
+            int mainfileupdate = filedao.updateFile(board_no,mainfilename);            
             
-            int mainfileupdate = filedao.updateFile(board_no,mainfilename);
-            
+            System.out.println("" + mainfileupdate + " 메인파일업데이트!");
             System.out.println("" + insertFile + "인설트파일!");
             System.out.println("우헿");
             
             dst = "articleView.bo?seq="+board_no+"&sell_type="+sell_type;
          }
   
-         else if(command.equals("/productInfo.bo")) {
-            
+         else if(command.equals("/productInfo.bo")) {            
             System.out.println("요기들어옴");
             String sell_type = request.getParameter("sell_type");
             String category = request.getParameter("category");
@@ -201,7 +197,8 @@ String end_date;
             String sub_category = request.getParameter("sub_category");
             String product_name = request.getParameter("product_name");
             String sell_price = request.getParameter("sell_price");
-            end_date = request.getParameter("end_date");
+            String end_date = request.getParameter("end_date");
+            end_dateMap.put(board_no, end_date);
             System.out.println(sell_price + " :::" + end_date);
             
             ProductDTO product_dto = new ProductDTO();
@@ -233,12 +230,21 @@ String end_date;
          else if(command.equals("/mainProductCheck.bo")) {               
                String main_productName = request.getParameter("productCheck");
                String board_no = request.getParameter("board_no");
+               System.out.println(main_productName +" : " + board_no);
                int resetMainP = productdao.resetMainP(board_no);
                int result  = productdao.updateMainP(board_no,main_productName);
                new Gson().toJson(main_productName, response.getWriter());
                return;
             }
-      
+         
+         else if(command.equals("/pointCharge.bo")) {
+        	 String point = request.getParameter("point");
+        	 System.out.println(point);
+        	 request.setAttribute("point", point);
+        	 isRedirect=false;
+        	 dst = "moneyTest.jsp";
+         }
+         
 
          else if(command.equals("/articleView.bo")) { 
             System.out.println("z_z");
@@ -282,8 +288,8 @@ String end_date;
             request.setAttribute("path", path);
             
             request.setAttribute("files", path);
-            String mainfile = "image/"+seq+"/"+mainfilename;
-            request.setAttribute("mainfile", mainfile);
+//            String mainfile = "image/"+seq+"/"+mainfilename;
+//            request.setAttribute("mainfile", mainfile);
             
             
             

@@ -159,7 +159,9 @@ public class ProductDAO {
             dto.setP_name(rs.getString(8));
 
          }
-      
+         con.commit();
+ 		pstat.close();
+ 		con.close();
          return dto;
       }
       
@@ -185,7 +187,9 @@ public class ProductDAO {
 
             list.add(dto);
          }
-      
+         con.commit();
+ 		pstat.close();
+ 		con.close();
          return list;
       }
 

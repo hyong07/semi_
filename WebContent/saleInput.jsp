@@ -295,6 +295,7 @@
                     var product_name = $("#product_name1").val();
                     var sell_price = $("#productstartprice").val();
                     var end_date = $("#productenddate").val();
+                    console.log(end_date);
                     var board_no = $("#board_no").val();
         			var bidunit = $("#productbidunit").val();
                     $.ajax({  
@@ -353,7 +354,15 @@
                
                
             });  
-      console.log(sel_files);      
+      var board_no = $("#board_no").val();
+     	$.ajax({
+     		url:"fileUpload.bo",
+     		type:"get",
+     		data:{board_no:board_no, sel_files:sel_files},
+     		success:function(rep){
+     			
+     		}
+     	})
    }   
 </script>
 </head>
@@ -446,7 +455,8 @@
                <div class="card-body">
                   <div class="form-row mb-3">
                   <input type="hidden" id="board_no" name="board_no" value="${board_no}">
-                  <input type="hidden" id="sell_typeTest" name="sell_typeTest" value="">
+                  <input type="hidden" id="mainfileName" name="mainfileName" value="">                  
+                  <input type="hidden" id="end_date" name="end_date" value="">          
                      <div class="col-md-2">메인카테고리 :</div>
                      <select id="main_category" name="category" class="col-md-3 ml-1">
                         <option value="">선 택</option>
@@ -748,14 +758,16 @@
        
       function insertMain_img(e){
          var name = filenames[e];
+         var board_no = $("#board_no").val();
+         console.log("여긴들어오냐")
           $.ajax({
                url:"mainfilename.bo",
                type:"get",
-               data:{name:name},
-               success:function(rep){
-                 
-                  console.log("성공!");
-               } 
+               data:{name:name,board_no:board_no},
+               success:function(rep){                 
+                 console.log("성공했냐");
+                 console.log(rep)
+               }
             })
        
          console.log(filenames[e]);       

@@ -20,6 +20,7 @@ public class CategoryDAO {
 		while(rs.next()) {
 			result.add(rs.getString(1));		
 		}
+		con.commit();
 		pstat.close();
 		con.close();
 		return result;

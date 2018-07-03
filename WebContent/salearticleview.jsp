@@ -134,7 +134,24 @@ div {
          Kakao.Auth.logout();
          location.href = "logout.mem";
          }
-      </script>
+         
+         $(document).ready(function(){
+            $("#add").click(function(){
+               var product = $("#product option:selected").val();
+               var product_seq = product.split('번')[0];
+               var count = $('#check').text();
+               
+               $.ajax({
+                  url:"productinfo.bo",
+                    type:"get",
+                    data:{product_seq:product_seq},
+                    success:function(rep){
+                      $("#productlist").append("<tr><td>"+ product_seq+ "<td>"+ rep.getP_name() +"<td>"+ rep.getSell_price+ "<td>"+ count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                    }
+               })
+            }) 
+         })
+</script>
 
 </head>
 <body>
@@ -242,61 +259,99 @@ div {
                   <div class="col-lg-8">
                      <!-- Title -->
                      <h1 class="mt-4">${bdto.title}</h1>
-                     <!-- Author -->
-                     <p class="lead">
-                        by <a href="#">${bdto.seller_id}</a>
-                     </p>
                      <hr>
+                     <!-- Author -->
+                     <div class="row">
+                        <div class="col-md-6">
+                        <p class="lead">
+                           by <a href="#">${bdto.seller_id}</a>
+                        </p>
+                        </div>
                      <!-- Date/Time -->
-                     <p>Posted on ${bdto.write_date}</p>
+                        <div class="col-md-6">
+                        <p>Posted on ${bdto.write_date}</p>
+                        </div>
+                     </div>
                      <hr>
                      <!-- Preview Image -->
-                     <div .main>
-                        <div id='img_div'>
+                     <div .main class="row">
+                        <div id='img_div' class="col-md-5">
                            <img class="img-fluid rounded"
                               src="http://placehold.it/900x300" alt="" id=product_img>
                         </div>
-                        <div class="col-md-7 order-1 order-md-2 p-2" id="main_text">
-                           <h3 class="text-primary">
-                              <a href="">${pdto.p_name}</a>
-                           </h3>
-                           <i>9d 13h left (07/02, 4:34 AM)&nbsp;</i>
+                        <div class="col-md-7" id="main_text">
                            <div>
-                              <br>
                               <row>
                               <div class="col-md-11 ">
                                  <table class="table">
                                     <thead>
                                        <tr>
                                           <td>상품명 :</td>
-                                          <td>${pdto.sell_price}</td>
-
+                                          <td>
+                                          <c:forEach var="item" items="${result}">
+                                                <c:choose>
+                                                   <c:when test="${item.main_product == 'y'}">
+                                                      ${item.p_name}
+                                                   </c:when>
+                                                </c:choose>
+                                          </c:forEach>      
+                                          </td>
                                        </tr>
                                     </thead>
                                     <tbody>
                                        <tr>
                                           <td>상품 가격 :</td>
-                                          <td><!-- db에 가져와서 사용 해야 함  --></td>
+                                          <td>
+                                    <c:forEach var="item" items="${result}">
+                                                   <c:choose>
+                                                      <c:when test="${item.main_product == 'y'}">
+                                                         ${item.sell_price} 222
+                                                      </c:when>
+                                                   </c:choose>
+                                             </c:forEach>      
+                                </td>
                                        </tr>
                                           <tr>
+                                              <td>
+                                                 <select id="product">
+                                                    <c:forEach var="item" items="${result}">
+                                                       <option>${item.product_seq }번 . ${item.p_name } - ${item.sell_price }원</option>
+                                                 </c:forEach>      
+                                                 </select>
+                                              </td>
                                              <td><img src="saram.png" width="18px" height="18px">
                                                 <i id="check">1</i>  <!-- 기본 수량 -->
                                                 <a href="#" id="numUp">▲</a> 
                                                 <a href="#" id="numDown">▼</a></td>
-                                             <td class="text-right"><a class="btn btn-secondary"
-                                                href="#">구매 신청 </a></td>
                                           </tr>
                                        <tr>
-                                          <td></td>
-                                          <td></td>
+                                          <td class="text-right" colspan="2"><input type="button" id="add" class="btn btn-secondary" value="등록"> </td>
                                        </tr>
                                     </tbody>
                                  </table>
+                                 
                               </div>
                               </row>
                            </div>
                         </div>
                      </div>
+                    
+                    <div class="col-md-12">
+                  <table class="table">
+                     <thead>
+                        <tr>
+                           <th>제품번호</th>                              
+                           <th>제품명</th>
+                           <th>가격</th>
+                           <th>수량</th>
+                           <th>#</th>
+                        </tr>
+                     </thead>
+                      <tbody id="productlist">
+      
+                     </tbody>
+                   </table>
+                   </div>
                      
                      <script>
                                   $(function(){

@@ -84,6 +84,9 @@ public class MemberDAO {
 			
 			list.add(dto);
 		}
+		con.commit();
+		pstat.close();
+		con.close();
 		return list;
 	}
 	
