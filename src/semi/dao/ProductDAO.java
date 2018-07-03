@@ -212,6 +212,30 @@ public class ProductDAO {
          return list;
       }
  
-
+      public ProductDTO buyProduct(String product_seq) throws Exception{
+    	  Connection con = DBUtils.getConnection();
+    	  String sql = "select * from product where product_seq=?";
+    	  PreparedStatement pstat = con.prepareStatement(sql);
+    	  pstat.setString(1, product_seq);
+    	  ResultSet rs = pstat.executeQuery();
+    	  ProductDTO result = new ProductDTO();
+    	  while(rs.next()) {
+    		  result.setBoard_no(rs.getString(1));
+    		  result.setProduct_seq(rs.getString(2));
+    		  result.setCategory(rs.getString(3));
+    		  result.setDetail_category(rs.getString(4));
+    		  result.setSell_price(rs.getString(5));
+    		  result.setSell_count(rs.getString(6));
+    		  result.setMain_product(rs.getString(7));
+    		  result.setP_name(rs.getString(8));
+    	  }
+    	  
+    	  con.commit();
+    	  con.close();
+    	  pstat.close();
+    	  
+    	  return result;
+ 
+    	  }
 
 }

@@ -153,15 +153,58 @@ $(document).ready(function(){
           $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button></tr>");
       }
       
+      $.ajax({
+    	  url:"totalPrice.buy",
+    	  type:"get",
+    	  data:{product_seq:product_seq},
+    	  success:function(rep){
+    		  console.log(rep);
+    		  $("#totalPrice").text("꽥");
+    	  }
+    	  
+      })
+      
+      
+      
+      
    });
+   
+})
 
-         function kakaoLogout() {
+function buyStart(){
+         var buyProduct = new Array();
+         var productCount = new Array();
+         $("#productlist tr").each(function(i){
+              var id = this.id;
+              buyProduct.push(id);
+              console.log(buyProduct);
+     
+         })
+         
+         $("#productlist tr i").each(function(i){
+            productCount.push($(this).text());
+         })
+         
+         jQuery.ajaxSettings.traditional = true;
+
+         $.ajax({
+               url:"selectbuyproduct.buy",
+               type:"get",
+               data:{buyProduct:buyProduct,productCount:productCount},
+               success:function(rep){ 
+                   
+               }
+            })
+          
+      }
+	 	
+	 
+  function kakaoLogout() {
          Kakao.init('c75f8598dbbf710a4383c8032f913119');
          Kakao.Auth.logout();
          location.href = "logout.mem";
          }
-        
-})
+         
       function down(e){
              var stat = $('#check').text();
              var num = parseInt(stat,10);
@@ -383,6 +426,12 @@ $(document).ready(function(){
       
                      </tbody>
                    </table>
+                   <div>
+                   		<p>총 구매 금액 : </p><p id="totalPrice"></p>
+                   </div>
+                   <div>
+                   		<button id="buyButton" onclick="buyStart()">구매 신청</button>
+                   </div>
                    </div>
                                 
                      <hr>
