@@ -41,6 +41,9 @@ public class ProductDAO {
 			String sell_price = rs.getString(1);
 			pricelist.add(sell_price);
 		}
+		con.commit();
+		pstat.close();
+		con.close(); 
 		return pricelist;
 	}
 	  
@@ -76,9 +79,10 @@ public class ProductDAO {
 	      
 	   }
 	int result = pstat.executeUpdate();
-    pstat.close();
-    con.close();
-    
+	System.out.println(result);
+	con.commit();
+	pstat.close();
+	con.close(); 
     return result;
     
 	}
@@ -87,7 +91,7 @@ public class ProductDAO {
 	   public ProductDTO mainProduct(String seq) throws Exception{
 		   Connection con = DBUtils.getConnection();
 		   String sql = "select * from product where board_no=?";
-		   PreparedStatement pstat = con.prepareStatement(sql);
+		   PreparedStatement pstat = con.prepareStatement(sql);	
 		   pstat.setString(1, seq);
 
 		   ResultSet rs = pstat.executeQuery();
@@ -95,7 +99,7 @@ public class ProductDAO {
 		   
 		   while(rs.next()) {
 			  
-			   dto.setBoard_no(seq);
+			   dto.setBoard_no(rs.getString(2));
 			   dto.setProduct_seq(rs.getString(2));
 			   dto.setCategory(rs.getString(3));
 			   dto.setDetail_category(rs.getString(4));
@@ -105,7 +109,10 @@ public class ProductDAO {
 			   dto.setP_name(rs.getString(8));
 
 		   }
-		
+		   System.out.println("¿Ã∂•");
+			con.commit();
+			pstat.close();
+			con.close(); 
 		   return dto;
 	   }
 	   
@@ -131,7 +138,9 @@ public class ProductDAO {
 
 			   list.add(dto);
 		   }
-		
+			con.commit();
+			pstat.close();
+			con.close(); 
 		   return list;
 	   }
 	   

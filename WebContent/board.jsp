@@ -330,28 +330,28 @@ div {
 										<div class="row px-4">.</div>
 
 									
-										<c:forEach var="item" items="${boardlist}">
-											<div class="row">					
-												<div class="col-md-3 m-0 p-0">
-													<div class="card">
-														<img class="card-img-top"
-															src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
-															alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}"
-															class="card-link text-left m-0 p-3">${item.title}</a>
-														<div class="card-body m-0 p-0">
-															<ul class="list-group list-group-flush">
-																<li class="list-group-item">${pricelist[0]}</li>
-																<li class="list-group-item">${item.seller_id}</li>
-																<li
-																	class="list-group-item d-flex justify-content-between align-items-center">${item.viewcount}
-																	<span class="badge badge-secondary p-1">${item.sell_status}</span>
-																</li>
-															</ul>
-														</div>
-													</div>
-												</div>
-											</div>
-									</c:forEach>
+<%-- 										<c:forEach var="item" items="${boardlist}"> --%>
+<!-- 											<div class="row">					 -->
+<!-- 												<div class="col-md-3 m-0 p-0"> -->
+<!-- 													<div class="card"> -->
+<!-- 														<img class="card-img-top" -->
+<!-- 															src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg" -->
+<%-- 															alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}" --%>
+<%-- 															class="card-link text-left m-0 p-3">${item.title}</a> --%>
+<!-- 														<div class="card-body m-0 p-0"> -->
+<!-- 															<ul class="list-group list-group-flush"> -->
+<%-- 																<li class="list-group-item">${pricelist[0]}</li> --%>
+<%-- 																<li class="list-group-item">${item.seller_id}</li> --%>
+<!-- 																<li -->
+<%-- 																	class="list-group-item d-flex justify-content-between align-items-center">${item.viewcount} --%>
+<%-- 																	<span class="badge badge-secondary p-1">${item.sell_status}</span> --%>
+<!-- 																</li> -->
+<!-- 															</ul> -->
+<!-- 														</div> -->
+<!-- 													</div> -->
+<!-- 												</div> -->
+<!-- 											</div> -->
+<%-- 									</c:forEach> --%>
 									
 
 

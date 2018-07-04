@@ -31,6 +31,8 @@ public class Member_Controller extends HttpServlet {
 			MemberDAO dao = new MemberDAO();
 			boolean isRedirect = true;
 			String dst = "null";
+			
+			String buyer_id = (String)request.getSession().getAttribute("loginid");
 
 			HttpSession session = request.getSession();
 
@@ -206,6 +208,36 @@ public class Member_Controller extends HttpServlet {
 				}
 			}
 			
+			else if(command.equals("/getPoint.mem")) {
+				System.out.println("포인트구하자");
+				String mypoint = dao.getPoint(buyer_id);
+
+				new Gson().toJson(mypoint, response.getWriter());
+				return;
+			}
+			else if(command.equals("/minuspoint.mem")) {
+				String seq = request.getParameter("seq");
+				System.out.println("마이너스포인트하자");
+				String id= request.getParameter("id");
+				String bidprice = request.getParameter("bidprice");
+				System.out.println(id + " : " + bidprice);
+				
+				int result = dao.minusPoint(id,bidprice);
+				//서버 보유 포인트 더하기...
+				isRedirect=false;
+				System.out.println("포인트빠져나갔니? " + result);
+				dst = "bidcntplus.bo?seq="+seq;
+				
+			}
+			else if(command.equals("/returnpoint.mem")) {
+				String id = request.getParameter("id");
+				String point = request.getParameter("point");
+				int returnpoint = dao.returnPoint(id,point);
+				System.out.println(returnpoint + "포인트리턴됐니?");
+				
+				//dst= mypage.....
+				
+			}
 			
 			
 

@@ -20,8 +20,9 @@ public class CategoryDAO {
       while(rs.next()) {
          result.add(rs.getString(1));      
       }
-      pstat.close();
-      con.close();
+  	con.commit();
+	pstat.close();
+	con.close();   
       return result;
    }
 }

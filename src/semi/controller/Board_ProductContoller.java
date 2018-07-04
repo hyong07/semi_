@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import semi.dao.BidderDAO;
 import semi.dao.BoardDAO;
 import semi.dao.CategoryDAO;
 import semi.dao.FileDAO;
@@ -32,6 +33,7 @@ public class Board_ProductContoller extends HttpServlet {
 
 	HashMap<String, String> mainfileMap = new HashMap<String,String>();
 	HashMap<String, String> end_dateMap = new HashMap<String,String>();
+	HashMap<String, String> bidunitMap = new HashMap<String,String>();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
 		try {
@@ -46,13 +48,14 @@ public class Board_ProductContoller extends HttpServlet {
 			ProductDAO productdao = new ProductDAO();
 			BoardDAO boarddao = new BoardDAO();
 			CategoryDAO category_dao = new CategoryDAO();
-
+ 
 			boolean isRedirect = true;
 			String dst = null;
 
 //			if(command.equals("/board.bo")) {
 //				String category = request.getParameter("ca1");
 //				String category2 = request.getParameter("ca2");
+//				String allandsale = request.getParameter("allandsale");
 //
 //				System.out.println(category + " : " + category2);
 //				ArrayList<BoardDTO> boardlist = boarddao.boardForBoard(category, category2);
@@ -69,7 +72,9 @@ public class Board_ProductContoller extends HttpServlet {
 //
 //			}
 			
-		    if(command.equals("/sell_type.bo")) {         
+		    if(command.equals("/sell_type.bo")) {    
+		    	
+		    	
 		            String sell_type = request.getParameter("sell_type");
 		            System.out.println(sell_type);
 		            request.setAttribute("sell_type", sell_type);
@@ -99,7 +104,8 @@ public class Board_ProductContoller extends HttpServlet {
 			 else if(command.equals("/mainfilename.bo")) {
 		            String board_no = request.getParameter("board_no");
 		        	String mainfilename = request.getParameter("name");                        
-		            mainfileMap.put(board_no, mainfilename);           
+		            mainfileMap.put(board_no, mainfilename);
+		            System.out.println(mainfileMap.get(board_no));
 		            return;            
 		         }
 		
@@ -108,7 +114,7 @@ public class Board_ProductContoller extends HttpServlet {
 			else if(command.equals("/write.bo")) {
 				System.out.println("라이트보!");			
 				List<FileDTO> fileList = new ArrayList<>();
-				String board_no = boarddao.checkboardNo();
+				String board_no = request.getParameter("seq");
 				String realPath = request.getServletContext().getRealPath("/image/");
 				
 				System.out.println(realPath);			
@@ -133,11 +139,20 @@ public class Board_ProductContoller extends HttpServlet {
 		            System.out.println(board_no+" : " +sell_type);
 				String title = mr.getParameter("title");
 				String contents = mr.getParameter("contents");
+				String end_date = null;
+				String bidunit = null;
+				if(sell_type.equals("s")) {
+					end_date = "1";
+					bidunit ="1";
+				}
+				else if(sell_type.equals("a")){
+					end_date = end_dateMap.get(board_no);
+					bidunit = bidunitMap.get(board_no);
+				}
+			
+		          System.out.println(end_date + " : ");  
 				
-				   String end_date = end_dateMap.get(board_no);
-		            System.out.println(end_date + " : ");  
-				
-				BoardDTO bdto = new BoardDTO(board_no,id,title,contents,"",sell_type,"",end_date,"","","");
+				BoardDTO bdto = new BoardDTO(board_no,id,title,contents,"",sell_type,"",end_date,"",bidunit,"");
 				System.out.println(bdto.getEnd_date());  
 				int insertBoard = boarddao.addBoard(bdto);
 				System.out.println(insertBoard);
@@ -146,7 +161,7 @@ public class Board_ProductContoller extends HttpServlet {
 			
 				fileList = filedao.searchFileName(realPath, board_no);
 				System.out.println(fileList.size());
-				String mainfile_seq =null;
+			
 				int insertFile = filedao.insertFile(fileList);
 				  String mainfilename = mainfileMap.get(board_no);
 				int mainfileupdate = filedao.updateFile(board_no,mainfilename);
@@ -185,14 +200,17 @@ public class Board_ProductContoller extends HttpServlet {
 				
 				System.out.println("요기도들어옴");
 				 String board_no = request.getParameter("board_no");
+				 System.out.println(board_no);
 				 String sell_type = request.getParameter("sell_type");
 				String category = request.getParameter("category");
 				String sub_category = request.getParameter("sub_category");
 				String product_name = request.getParameter("product_name");
 				String sell_price = request.getParameter("sell_price");
 				String end_date = request.getParameter("end_date");
+				String bidunit = request.getParameter("bidunit");
 				 end_dateMap.put(board_no, end_date);
-				System.out.println(sell_price + " :::" + end_date);
+				 bidunitMap.put(board_no, bidunit);
+				System.out.println(sell_price + " :::" +end_dateMap.get(board_no));
 			
 				ProductDTO product_dto = new ProductDTO();
 				 product_dto.setBoard_no(board_no);
@@ -200,6 +218,7 @@ public class Board_ProductContoller extends HttpServlet {
 				product_dto.setDetail_category(sub_category);
 				product_dto.setP_name(product_name);
 				product_dto.setSell_price(sell_price);
+			
 				product_dto.setSell_count("");
 				  
 				  
@@ -210,7 +229,15 @@ public class Board_ProductContoller extends HttpServlet {
 				new Gson().toJson(product_name, response.getWriter());
 				return;
 			}
-			
+		    
+		    
+	  else if(command.equals("/getboardseq.bo")) {
+          String board_no = boarddao.checkboardNo();
+          request.setAttribute("board_no", board_no);
+          
+          isRedirect=false;
+          dst = "saleInput.jsp";
+       }
 
 	else if(command.equals("/productInfoDelete.bo")) {
         System.out.println("물품 삭제할꺼다");;
@@ -238,7 +265,7 @@ public class Board_ProductContoller extends HttpServlet {
 
 				String seq = request.getParameter("seq");
 				String sell_type =request.getParameter("sell_type");
-				
+				System.out.println(seq + " : " +sell_type +"111111111111111");
 
 				BoardDTO bdto = new BoardDTO();
 				bdto = boarddao.selectOneBoard(seq);
@@ -252,6 +279,7 @@ public class Board_ProductContoller extends HttpServlet {
 				System.out.println(flist.size());
 
 				request.setAttribute("bdto",bdto);
+				System.out.println(bdto.getBidunit() + " dyrjtdl............맞막.......");
 				request.setAttribute("pdto", pdto);
 				request.setAttribute("flist", flist);
 			
@@ -274,8 +302,26 @@ public class Board_ProductContoller extends HttpServlet {
 				
 				request.setAttribute("path", path);
 				
-				request.setAttribute("files", path);
-				
+				String mainfile = "image/"+seq+"/"+mainfileMap.get(seq);
+	            request.setAttribute("mainfile", mainfile);
+	            
+	            
+	            BidderDAO biddao = new BidderDAO();
+	            String currentprice = pdto.getSell_price();
+	            System.out.println(currentprice);
+	            
+	            if(! (bdto.getBidcnt().equals("0"))  ) { //bidcnt가 0이거나 '입찰'없을때
+	            	System.out.println("잉?용기");
+	            	currentprice = biddao.getCurrentPrice(seq);
+	            }
+	            
+	            System.out.println("잉?" + currentprice);
+	            
+	            int num = Integer.parseInt(currentprice) + Integer.parseInt(bdto.getBidunit());
+	            request.setAttribute("num", num);
+	       
+	            request.setAttribute("currentprice", currentprice);
+	    		
 				
 				
 				isRedirect=false;
@@ -286,6 +332,15 @@ public class Board_ProductContoller extends HttpServlet {
 					dst = "salearticleview.jsp";
 				}
 
+			}
+		    
+			else if(command.equals("/bidcntplus.bo")) {
+				String seq = request.getParameter("seq");
+				int result = boarddao.plusbidcnt(seq);
+				
+				isRedirect = false;
+				dst = "articleView.bo?seq="+seq+"&sell_type=a";
+				
 			}
 			
 

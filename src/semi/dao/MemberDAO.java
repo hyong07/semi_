@@ -159,6 +159,58 @@ public class MemberDAO {
 		return result;
 	}
 	
+	public String getPoint(String id) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "SELECT point FROM member WHERE ID=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, id);
+	      
+	      ResultSet result = pstat.executeQuery();
+	      String mypoint=null;
+	      
+	      if(result.next()) {
+	    	  mypoint = result.getString(1);
+	      }
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      return mypoint;
+	   }
+	
+	 public int minusPoint(String id, String bid) throws Exception{
+         Connection con = DBUtils.getConnection();
+         String sql = "UPDATE MEMBER SET POINT=((SELECT POINT FROM MEMBER WHERE ID=?)-?) WHERE id=?";
+         PreparedStatement pstat = con.prepareStatement(sql);
+         
+         pstat.setString(1, id);
+         pstat.setString(2, bid);
+         pstat.setString(3, id);
+         
+         int result = pstat.executeUpdate();
+         
+         con.commit();
+         con.close();
+         pstat.close();
+         return result;
+      }
+	 
+	 public int returnPoint(String id, String point) throws Exception{
+         Connection con = DBUtils.getConnection();
+         String sql = "UPDATE MEMBER SET POINT=((SELECT POINT FROM MEMBER WHERE ID=?)+?) WHERE ID=?";
+         PreparedStatement pstat = con.prepareStatement(sql);
+         
+         pstat.setString(1, id);
+         pstat.setString(2, point);
+         pstat.setString(3, id);
+         
+         int result = pstat.executeUpdate();
+         
+         con.commit();
+         con.close();
+         pstat.close();
+         return result;
+      }
+	
 	
 	
 }

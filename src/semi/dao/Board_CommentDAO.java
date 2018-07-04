@@ -29,10 +29,9 @@ public class Board_CommentDAO {
 	      int result =  pstat.executeUpdate();
 	      System.out.println(result);
 	      
-	      con.commit();   
-	      pstat.close();   
-	      con.close();
-
+	  	con.commit();
+		pstat.close();
+		con.close();   
 	      return result;
 
 		
@@ -58,10 +57,9 @@ public class Board_CommentDAO {
 			 list.add(dto);			 
 		 }
 		 
-		 con.commit();
-		 con.close();
-		 pstat.close();
-		 
+			con.commit();
+			pstat.close();
+			con.close();   
 		 return list;
 		
 	}

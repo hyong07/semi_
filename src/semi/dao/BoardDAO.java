@@ -30,7 +30,7 @@ public class BoardDAO {
 //		else {
 //
 //			sql =
-//					"select b.* from board b, product p, files f where (p.category =?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
+//					"select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
 //			pstat = con.prepareStatement(sql);
 //			pstat.setString(1, category);
 //
@@ -65,7 +65,10 @@ public class BoardDAO {
 		String result = "";
 		while(rs.next()) {
 			result = rs.getString(1);
-		}         
+		}       
+		con.commit();
+		pstat.close();
+		con.close();   
 		return result;
 	}
 
@@ -80,6 +83,7 @@ public class BoardDAO {
 		pstat.setString(5, sell_type);
 		pstat.setString(6, end_date);
 		int result = pstat.executeUpdate();
+		con.commit();
 		pstat.close();
 		con.close();      
 		return result;
@@ -107,26 +111,52 @@ public class BoardDAO {
 			dto.setSell_status(rs.getString(7));
 			dto.setEnd_date(rs.getString(8));
 			dto.setViewcount(rs.getString(9));
+			dto.setBidunit(rs.getString(10));
 
+			dto.setBidcnt(rs.getString(11));
+			
 		}
-
+		con.commit();
+		pstat.close();
+		con.close();   
 		return dto;
 	}
 
 	public int addBoard(BoardDTO dto) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "insert into board values(?,?,?,?,sysdate,?,default,sysdate+?,default,default,default)";
-		PreparedStatement pstat = con.prepareStatement(sql);
+		String sql=null;
+		PreparedStatement pstat=null;
+		if(dto.getSell_type().equals("s")) {
+		sql = "insert into board values(?,?,?,?,sysdate,?,default,default,default,default,default)";
+		 pstat = con.prepareStatement(sql);
 		System.out.println(dto.getEnd_date() + " : ");
 		pstat.setString(1, dto.getBoard_seq());
 		pstat.setString(2, dto.getSeller_id());
 		pstat.setString(3, dto.getTitle());
 		pstat.setString(4, dto.getContents());
-		pstat.setString(5, dto.getSell_type());		
-		pstat.setString(6, dto.getEnd_date());
+		pstat.setString(5, dto.getSell_type());	
+		
+		
+		}
+		else if(dto.getSell_type().equals("a")){
+			
+			sql = "insert into board values(?,?,?,?,sysdate,?,default,sysdate+?,default,?,default)";
+			
+			pstat = con.prepareStatement(sql);
+			System.out.println(dto.getEnd_date() + " : ");
+			pstat.setString(1, dto.getBoard_seq());
+			pstat.setString(2, dto.getSeller_id());
+			pstat.setString(3, dto.getTitle());
+			pstat.setString(4, dto.getContents());
+			pstat.setString(5, dto.getSell_type());	
+			pstat.setString(6, dto.getEnd_date());
+			pstat.setString(7, dto.getBidunit());
+		}
+		
 		int result = pstat.executeUpdate();
+		con.commit();
 		pstat.close();
-		con.close();	
+		con.close();   	
 		System.out.println("결과는요~" + result);
 		return result;
 
@@ -143,9 +173,29 @@ public class BoardDAO {
 		if(rs.next()) {
 			result= rs.getString(1);
 		}
-
+		con.commit();
+		pstat.close();
+		con.close();   
 		return result;
 	}
+	
+	   public int plusbidcnt(String seq) throws Exception {
+		      Connection con = DBUtils.getConnection();
+		      String sql =  "update board set bidcnt=(select bidcnt from board where board_seq=?)+1 where board_seq=?";
+		      PreparedStatement pstat = con.prepareStatement(sql);
+		      
+		      pstat.setString(1, seq);
+		      pstat.setString(2, seq);
+		      
+		      int result = pstat.executeUpdate();
+		      
+		      con.commit();
+		      con.close();
+		      
+		      
+		      pstat.close();
+		      return result;
+		   }
 	
 
 }

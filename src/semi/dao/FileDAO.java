@@ -24,7 +24,7 @@ public class FileDAO {
 			System.out.println("file ¿ä±â");
 			
 			sql =
-					"select f.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
+					"select f.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (f.main_files='y') ";
 			
 			pstat = con.prepareStatement(sql);
 			pstat.setString(1, category);
@@ -55,7 +55,9 @@ public class FileDAO {
 
 		}
 		System.out.println(list.size());
-
+		con.commit();
+		pstat.close();
+		con.close();   
 		return list;
 	}
 	
@@ -76,7 +78,9 @@ public class FileDAO {
 			   dto.setMain_files(rs.getString(5));
 	
 		   }
-		  
+			con.commit();
+			pstat.close();
+			con.close();   
 		   return dto;
 	   }
 	   
@@ -100,14 +104,19 @@ public class FileDAO {
 		public int insertFile(List<FileDTO> dto) throws Exception{
 			Connection con = DBUtils.getConnection();
 			int result = 0;
+			PreparedStatement pstat=null;
 			for(int i =0; i<dto.size(); i++) {
 				String sql = "insert into files values(file_seq.nextval,?,?,?,default)";
-				PreparedStatement pstat = con.prepareStatement(sql);
+				 pstat = con.prepareStatement(sql);
 				pstat.setString(1, dto.get(i).getBoard_no());
 				pstat.setString(2, dto.get(i).getOriginal_file_name());
 				pstat.setString(3, dto.get(i).getSystem_file_name());
 				result += pstat.executeUpdate();			
 			}
+			
+			con.commit();
+			pstat.close();
+			con.close();   
 			return result;
 		}
 		
@@ -122,6 +131,9 @@ public class FileDAO {
 			
 			 int result = pstat.executeUpdate();
 			System.out.println(result); 
+			con.commit();
+			pstat.close();
+			con.close();   
 			 return result;
 		}
 		
@@ -145,7 +157,9 @@ public class FileDAO {
 				   list.add(dto);
 		
 			   }
-			  
+				con.commit();
+				pstat.close();
+				con.close(); 
 			   return list;
 		   }
 		
