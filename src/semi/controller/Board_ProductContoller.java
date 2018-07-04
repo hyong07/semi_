@@ -261,10 +261,8 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
          else if(command.equals("/articleView.bo")) { 
             System.out.println("z_z");
-
             String seq = request.getParameter("seq");
-            String sell_type =request.getParameter("sell_type");
-            
+            String sell_type =request.getParameter("sell_type");            
             System.out.println(seq +" : " + sell_type);
             BoardDTO bdto = new BoardDTO();
             bdto = boarddao.selectOneBoard(seq);
@@ -277,7 +275,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             result = productdao.selectProduct(seq);
             flist = filedao.selectFile(seq);
             System.out.println(flist.size());
-
+            
             request.setAttribute("bdto",bdto);
             request.setAttribute("pdto", pdto);            
             request.setAttribute("result", result);

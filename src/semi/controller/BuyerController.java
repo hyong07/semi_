@@ -13,7 +13,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import semi.dao.BoardDAO;
+import semi.dao.BuyerDAO;
+import semi.dao.BuyserverDAO;
+import semi.dao.MemberDAO;
 import semi.dao.ProductDAO;
+import semi.dto.BuyerDTO;
+import semi.dto.BuyserverDTO;
 import semi.dto.ProductDTO;
 
 @WebServlet("*.buy")
@@ -32,16 +37,21 @@ public class BuyerController extends HttpServlet {
 		
 		ProductDAO pdao = new ProductDAO();
 		BoardDAO bdao = new BoardDAO();
-		
+		BuyerDAO buydao = new BuyerDAO();
+		BuyserverDAO bsdao = new BuyserverDAO();
+		MemberDAO mdao = new MemberDAO();
 		if(command.equals("/selectbuyproduct.buy")){
 			System.out.println("구매신청 시작 들어왔다!!");
 			String[] productSeq = request.getParameterValues("buyProduct");
 			String[] buyProductCount = request.getParameterValues("productCount");
+			String board_no = request.getParameter("board_no");
+			System.out.println(board_no);						
+			
 			List<ProductDTO> buyInfo = new ArrayList<>();
 			int totalPrice = 0;
 			for(int i=0; i<productSeq.length; i++) {
-				String productNo = productSeq[i];
-				String productCount = buyProductCount[i];
+				String productNo = productSeq[i];	
+				System.out.println(productNo);
 				buyInfo.add(pdao.buyProduct(productNo));
 			}
 			
@@ -49,25 +59,106 @@ public class BuyerController extends HttpServlet {
 				int product_price = Integer.parseInt(buyInfo.get(i).getSell_price());
 				int buy_count = Integer.parseInt(buyProductCount[i]);
 				totalPrice += product_price*buy_count;				
-			}
+			}			
 			
-			System.out.println(totalPrice);
-			request.setAttribute("totalPrice", totalPrice);
-			request.setAttribute("productInfo", buyInfo);
 			
-//			dst ?   isDirect ? 
+			response.setCharacterEncoding("utf8");
+			response.setContentType("application/json");
+			
+//			JSONArray array = new JSONArray();
+//			JSONObject o = new JSONObject();
+//			o.put("id", seller_id);
+//			o.put("productInfo", buyInfo);
+//			array.add(o);
+			
+			
+			new Gson().toJson(buyInfo, response.getWriter());
 			
 		}
 		
 		else if(command.equals("/totalPrice.buy")) {
 			System.out.println("물품 총합 구하기 들어옴!!");
-			String product_seq = request.getParameter("product_seq");
+			String product_seq = request.getParameter("product_seq");			
+			String currentPrice = request.getParameter("currentPrice");
 			System.out.println(product_seq);
-			ProductDTO test = new ProductDTO();
-			test = pdao.buyProduct(product_seq);
-			String price = test.getSell_price();
-			new Gson().toJson(price, response.getWriter());
+			System.out.println(currentPrice);
+			ProductDTO priceValue = new ProductDTO();
+			priceValue = pdao.buyProduct(product_seq);
+			int current = 0;
+			
+			if(currentPrice == "") {
+				current = 0;			
+			}
+			else {			
+				current = Integer.parseInt(currentPrice);
+			}
+			
+			int price = Integer.parseInt(priceValue.getSell_price());
+			int totalPrice = current + price;
+			new Gson().toJson(totalPrice, response.getWriter());
+			return;
 		}
+		
+		else if(command.equals("/totalPlus.buy")) {
+			System.out.println("버튼 눌렀을떄임!!");
+			int currentPrice = Integer.parseInt(request.getParameter("current"));			
+			String product_seq = request.getParameter("product_seq");
+			ProductDTO price = pdao.buyProduct(product_seq);	
+			System.out.println("가격 잘가져옴");
+			int salePrice = Integer.parseInt(price.getSell_price());			
+			System.out.println("합칠값다 구함");
+			int totalPrice = currentPrice + salePrice;
+			System.out.println(totalPrice);
+			System.out.println("더해진 값임");
+			new Gson().toJson(totalPrice, response.getWriter());
+			return;
+		}
+		else if(command.equals("/totalMinus.buy")) {
+			System.out.println(" - 버튼 눌렀을떄임!!");
+			int currentPrice = Integer.parseInt(request.getParameter("current"));			
+			String product_seq = request.getParameter("product_seq");
+			ProductDTO price = pdao.buyProduct(product_seq);	
+			System.out.println("가격 잘가져옴");
+			int salePrice = Integer.parseInt(price.getSell_price());			
+			System.out.println("합칠값다 구함");
+			int totalPrice = currentPrice - salePrice;
+			System.out.println(totalPrice);
+			System.out.println("더해진 값임");
+			new Gson().toJson(totalPrice, response.getWriter());
+			return;
+		}
+		
+		else if(command.equals("/buyComplete.buy")) {
+			System.out.println("구매 신청 완료를 위한 마지막단계");
+			String board_no = request.getParameter("board_no");
+			String productSeq = request.getParameter("product_seq");
+			String productCount = request.getParameter("product_count");			
+			String[] p_seq = productSeq.split(",", 20);
+			String[] p_count = productCount.split(",",20);
+			String contact = request.getParameter("contact");
+			String seller_id = "hello";          	// 판매자 세션 ID 값 bdao.getSeller_id(board_no);
+			String buyer_id = "test";  			   	// 구매자  세션  ID 값			
+			ProductDTO buyProduct = new ProductDTO();		
+			for(int i =0; i<p_seq.length; i++) {				
+				String product_seq = p_seq[i];				
+				buyProduct = pdao.buyProduct(product_seq);				
+				String product_count = p_count[i];				
+				BuyerDTO buyerdto = new BuyerDTO(0,board_no,product_seq,seller_id,buyer_id,contact,buyProduct.getSell_price(),product_count,"","");
+				buydao.insertBuyer(buyerdto);
+			}
+			
+			System.out.println("buyer 테이블에 내용 저장");
+			//String buyTotal = buydao.totalPrice(board_no);
+			//BuyserverDTO buyServerdto = new BuyserverDTO(board_no,seller_id,buyer_id,buyTotal,"구매대기중");
+			//bsdao.insertBuyserver(buyServerdto);
+			System.out.println("buyserver 테이블에 구매 저장");
+			//int pointUpdate = mdao.usePoint(buyer_id,buyTotal);
+			System.out.println("member 테이블 point 사용");
+			System.out.println("구매 완료된 상품들  Product테이블에서 Update");
+			
+			System.out.println("구매 최종 완료");
+		}		
+		
 		
 		}catch(Exception e) {
 			e.printStackTrace();

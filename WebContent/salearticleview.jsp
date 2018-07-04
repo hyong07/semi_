@@ -117,6 +117,12 @@ div {
    width: 100%;
 }
 
+/* 여기까지 메인 */
+
+#tfoot{
+   background-color:rgba(0, 0, 0, 0.03);
+}
+
 </style>
 
 <!-- 카카오 로그아웃  -->
@@ -138,42 +144,67 @@ $(document).ready(function(){
                $("#product option:eq(0)").prop("selected",true);
                return;
             }         
-          });         
+          }); 
+         
          if(count == 0){
             var product = $("option:selected",this).text();
              var product_name = product.split("-")[0];
              var product_price = product.split("-")[1].split("원")[0];
-             $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button></tr>");
+             $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><td><ion-icon name='close' onclick='deleteLine(this);' style='cursor: pointer'></ion-icon></tr>");
          }         
       }
       else{
          var product = $("option:selected",this).text();
           var product_name = product.split("-")[0];
           var product_price = product.split("-")[1].split("원")[0];
-          $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button></tr>");
+          $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><td><ion-icon name='close' onclick='deleteLine(this);' style='cursor: pointer'></ion-icon></tr>");
       }
       
+      var currentPrice = $("#totalPrice").text();
       $.ajax({
-    	  url:"totalPrice.buy",
-    	  type:"get",
-    	  data:{product_seq:product_seq},
-    	  success:function(rep){
-    		  console.log(rep);
-    		  $("#totalPrice").text("꽥");
-    	  }
-    	  
+         url:"totalPrice.buy",
+         type:"get",
+         data:{product_seq:product_seq,currentPrice:currentPrice},
+         success:function(rep){
+            console.log(rep);
+            $("#totalPrice").text(rep);
+         }
+         
       })
-      
-      
-      
-      
+
    });
-   
+  
+   $("#okButton").click(function(){
+	   var buyProduct = new Array();
+       var productCount = new Array();
+       var board_no = ${bdto.board_seq};
+       var contact = $("#contact").val();
+       $("#productlist tr").each(function(i){
+            var id = this.id;
+            buyProduct.push(id);
+            console.log(buyProduct);   
+       })
+       
+       $("#productlist tr i").each(function(i){
+          productCount.push($(this).text());
+       })
+       
+       
+       
+	   var check = confirm("구매 진행 하시겠습니까 ?");
+	   if(check==1){
+		   location.href = "buyComplete.buy?product_seq="+buyProduct+"&product_count="+productCount+"&board_no="+board_no+"&contact="+contact;   
+	   }	   
+   })
 })
+
+
 
 function buyStart(){
          var buyProduct = new Array();
          var productCount = new Array();
+         var board_no = ${bdto.board_seq};
+         
          $("#productlist tr").each(function(i){
               var id = this.id;
               buyProduct.push(id);
@@ -190,59 +221,109 @@ function buyStart(){
          $.ajax({
                url:"selectbuyproduct.buy",
                type:"get",
-               data:{buyProduct:buyProduct,productCount:productCount},
-               success:function(rep){ 
-                   
+               data:{buyProduct:buyProduct,productCount:productCount,board_no:board_no},
+               success:function(rep){			
+            	   for(var i=0; i<rep.length;i++){
+                       $("#productCheckList").append("<tr><td>"+ rep[i].p_name +"<td>"+ rep[i].sell_price+ "<td>"+ productCount[i] +"</tr>");
+                    }                  
                }
             })
-          
+           
       }
-	 	
-	 
+       
+    
   function kakaoLogout() {
          Kakao.init('c75f8598dbbf710a4383c8032f913119');
          Kakao.Auth.logout();
          location.href = "logout.mem";
          }
          
-      function down(e){
-             var stat = $('#check').text();
-             var num = parseInt(stat,10);
-             num--;
-          if(num<=0){
-             alert('더이상 줄일수 없습니다.');
-             num =1;
-           }
-          $('#check').text(num);
-        }
+  function down(e){
+         var td = $(e).parent();
+         var stat =$(td.find("#check")).text();
+         var num = parseInt(stat,10);
+         var product_seq = $(e).parent().parent().attr('id');
+         num--;
+      if(num<=0){
+         alert('더이상 줄일수 없습니다.');
+         num =1;
+       }
+      else{
+         var current = $("#totalPrice").text();
+         $.ajax({
+            url:"totalMinus.buy",
+            type:"get",
+            data:{product_seq:product_seq,current:current},
+            success:function(rep){
+               console.log("플러스 버튼 됨");
+               $("#totalPrice").text(rep);
+            }
+         }) 
+      }
+      $(td.find("#check")).text(num);
+      
+     
+      
+    }
 
-      function up(e){
-             var stat = $('#check').text();
-             var num = parseInt(stat,10);
-             var product_seq = $(e).parent().parent().attr('id');
-             var td = $(e).parent();
-             var test = $(td.find("#check")).text();
-             console.log(test);
-             $.ajax({
-                 url:"checkcount.bo",
-                 type:"get",
-                 data:{product_seq:product_seq},
-                 success:function(rep){ 
-                	 
-                    var count = parseInt(rep.split("\"")[1],10);
+  function up(e){
+        var td = $(e).parent();
+         var stat = $(td.find("#check")).text();
+         var num = parseInt(stat,10);
+         var product_seq = $(e).parent().parent().attr('id');
+         $.ajax({
+             url:"checkcount.bo",
+             type:"get",
+             data:{product_seq:product_seq},
+             success:function(rep){ 
+                var count = parseInt(rep.split("\"")[1],10);
+               
+                if(num>=count){
+                    alert("수량초과로 더이상 늘릴수 없습니다.");
+                 }else{
+                    num++;
                    
-                    if(num>=count){
-                        alert("수량초과로 더이상 늘릴수 없습니다.");
-                    return;
-                     }else{
-                        num++;
-                     }
-                    $('#check').text(num);
-                    
+                    var current = $("#totalPrice").text();
+                     $.ajax({
+                        url:"totalPlus.buy",
+                        type:"get",
+                        data:{product_seq:product_seq,current:current},
+                        success:function(rep){
+                           console.log("플러스 버튼 됨");
+                           $("#totalPrice").text(rep);
+                        }
+                     })  
                  }
-              })
-            
-        }
+                
+                $(td.find("#check")).text(num);
+                
+             }
+          })
+        
+    }
+  
+  function deleteLine(e) {          
+      var result = confirm("삭제하시겠습니까 ?");
+      if (result == 1) {
+         var tr = $(e).parent().parent();
+         var stat =tr.find("#check").text();
+         var num = parseInt(stat,10);
+         console.log(num);
+         var product_seq = $(e).parent().parent().attr('id');
+         var current = $("#totalPrice").text();
+         $.ajax({
+            url:"productDelete.buy",
+            type:"get",
+            data:{product_seq:product_seq,num:num,current:current},
+            success:function(rep){
+               $("#totalPrice").text(rep);           
+                console.log("삭제 완료");
+            }
+         })  
+         tr.remove();
+      }
+   }
+     
          
         
 </script>
@@ -339,6 +420,7 @@ function buyStart(){
       </div>
 
    </div>
+   
 
    <!--         네비바 헤더   (위에코드)           -->
 
@@ -399,9 +481,6 @@ function buyStart(){
                                                  </select>
                                               </td>
                                           </tr>
-                                       <tr>
-                                          <td class="text-right" colspan="2"><input type="button" id="add" class="btn btn-secondary" value="등록"> </td>
-                                       </tr>
                                     </tbody>
                                  </table>
                                  
@@ -413,7 +492,7 @@ function buyStart(){
                     
                     <div class="col-md-12">
                   <table class="table">
-                     <thead >
+                     <thead id="tfoot">
                         <tr>
                            <th>제품번호</th>                              
                            <th>제품명</th>
@@ -423,15 +502,12 @@ function buyStart(){
                         </tr>
                      </thead>
                       <tbody id="productlist">
-      
+                     
                      </tbody>
+                     <thead>
+                         <th colspan="5" class="text-right" id="tfoot">총 구매 금액  : <span id="totalPrice"></span><input class="btn btn-secondary ml-4 mr-4" data-target="#myModal" data-toggle="modal" id="buyButton"  onclick="buyStart()" value="구매 신청"></th>
+                      </thead>
                    </table>
-                   <div>
-                   		<p>총 구매 금액 : </p><p id="totalPrice"></p>
-                   </div>
-                   <div>
-                   		<button id="buyButton" onclick="buyStart()">구매 신청</button>
-                   </div>
                    </div>
                                 
                      <hr>
@@ -634,6 +710,44 @@ function buyStart(){
    </div>
 
    <!--      바닥             -->
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">구매확인</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" id="productModal">
+           <table   class="table">
+              <thead id="tfoot">
+                 <th>제품명</th>
+                 <th>가격</th>
+                 <th>수량</th>
+              </thead>
+              <tbody id="productCheckList">
+                 
+              </tbody>
+           </table>
+           
+           <p>입력하신 번호는 판매자에게 제공됩니다.(-제외하고 입력)</p>
+           <input type="text" value="01033333333" id="contact">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <input type="button" class="btn btn-secondary" id = "okButton" value="확인">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

@@ -90,4 +90,23 @@ public class MemberDAO {
 		return list;
 	}
 	
+	public int usePoint(String id,String totalPrice) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "update member set point = (select point from member where id=?)-? where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
+		pstat.setString(2, totalPrice);
+		pstat.setString(3, id);
+		
+		int result = pstat.executeUpdate();
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+		
+	}
+	
+	
+	
 }

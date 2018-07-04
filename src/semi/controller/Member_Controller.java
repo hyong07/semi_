@@ -23,18 +23,13 @@ public class Member_Controller extends HttpServlet {
 			String command = requestURI.substring(contextPath.length());
 			MemberDAO dao = new MemberDAO();
 			boolean isRedirect = true;
-			String dst = "null";
-			
-			HttpSession session = request.getSession();
-			
+			String dst = "null";			
+			HttpSession session = request.getSession();			
 			if(command.equals("/login.mem")){
 				String id = request.getParameter("loginid");
-				String pw = request.getParameter("password");
-			
+				String pw = request.getParameter("password");			
 				boolean result = dao.idpwcheck(id, pw);
-				System.out.println(result);
-				
-				
+				System.out.println(result);			
 				if(result) {
 					request.getSession().setAttribute("loginid", id);
 					System.out.println(request.getSession().getAttribute("loginid"));

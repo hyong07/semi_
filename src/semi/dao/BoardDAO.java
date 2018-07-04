@@ -151,5 +151,21 @@ public class BoardDAO {
       return result;
    }
    
+   public String getSeller_id(String board_no) throws Exception{
+	   Connection con = DBUtils.getConnection();
+	   String sql = "select seller_id from board where board_seq=?";
+	   PreparedStatement pstat = con.prepareStatement(sql);
+	   pstat.setString(1, board_no);
+	   ResultSet rs = pstat.executeQuery();
+	   String result = null;
+	   while(rs.next()) {
+		   result = rs.getString(1);
+	   }
+	   con.commit();
+	   con.close();
+	   pstat.close();
+	   return result;	   
+   }
+   
 
 }

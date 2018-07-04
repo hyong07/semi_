@@ -217,6 +217,7 @@ public class ProductDAO {
     	  String sql = "select * from product where product_seq=?";
     	  PreparedStatement pstat = con.prepareStatement(sql);
     	  pstat.setString(1, product_seq);
+    	  System.out.println("여기까진 오냐 ?");
     	  ResultSet rs = pstat.executeQuery();
     	  ProductDTO result = new ProductDTO();
     	  while(rs.next()) {
@@ -229,7 +230,7 @@ public class ProductDAO {
     		  result.setMain_product(rs.getString(7));
     		  result.setP_name(rs.getString(8));
     	  }
-    	  
+    	  System.out.println("여기까진 오냐 ?");
     	  con.commit();
     	  con.close();
     	  pstat.close();
@@ -237,5 +238,10 @@ public class ProductDAO {
     	  return result;
  
     	  }
+      
+//      public int burnProduct() throws Exception{
+//    	  Connection con = DBUtils.getConnection();
+//    	  
+//      }
 
 }
