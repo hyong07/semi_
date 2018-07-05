@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -32,17 +32,7 @@
    rel="stylesheet">
 <script
    src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-   crossorigin="anonymous"></script>
-<script
-   src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-   integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-   crossorigin="anonymous"></script>
-<script
-   src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-   integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-   crossorigin="anonymous"></script>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -156,17 +146,6 @@ div {
 }
 
 /* 광고  */
-.
-ing {
-   border: 1px solid black;
-   position: fixed;
-   right: 50%;
-   top: auto;
-   margin-right: -720px;
-   text-align: center;
-   width: 120px;
-}
-
 .floating {
    border: 1px solid black;
    position: fixed;
@@ -180,20 +159,16 @@ ing {
 
 
 
-<script>
 
-$(document).ready(function(){
-   console.log("qq");
-})
-
-</script>
 </head>
 <body>
+
+
    <div id="topnavicontainer">
       <nav class="navbar navbar-expand-md navbar-dark bg-secondary"
          id="topnavbar">
       <div id="logocontainer">
-         <a class="navbar-brand" href="#">Auction GO!</a>
+         <a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>
       </div>
 
       <div class="collapse navbar-collapse text-center justify-content-end"
@@ -290,7 +265,7 @@ $(document).ready(function(){
                                  <div>
                                     <h1>Category</h1>
                                  </div>
-                                 <ul id="menu">
+                                              <ul id="menu">
                                     <li class="active"><a href="#"> 패션 <span
                                           class="fa arrow"></span></a>
                                        <ul>
@@ -353,86 +328,91 @@ $(document).ready(function(){
                               </div>
                               <div class="row px-4">251 result</div>
                               <div class="row px-4">.</div>
-      
-      
-      
-
-            
-     <c:forEach var="item" items="${boardlist}" varStatus="status"> 
-
-      
-       <div class="row"> 
 
 
 
-        <div class="col-md-5 order-2 order-md-1 p-2" >
-          <img class="img-fluid d-block px-5 border" src="note.jpg"> </div>
-        <div class="col-md-7 order-1 order-md-2 p-2">
-          <h3 class="text-primary">
-            <a href="">title: ${item.title}</a>
-          </h3>
-          <i>${item.write_date}&nbsp;</i>
-          <div>
-            <br>
-            <row>
-              <div class="col-md-11 ">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      <td>price : ${pricelist[status.index]}</td>
-                      <td>Id : ${item.seller_id}</td>
-                       <td>SELL_type : ${item.sell_type}</td>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1,350,000 </td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="saram.png" width="18px" height="18px">
-                        <i>1 bid&nbsp;</i>
-                        <br>
-                        <img src="noon.png" width="20px" height="20px">
-                        <i>31&nbsp;</i>
-                      </td>
-                      <td class="text-right">
-                        <a class="btn btn-secondary" href="#">판매 중 </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </row>
-            
-            
 
-            
-               
-          </div>
-          </div>
-          </div>
-        
-        </c:forEach> 
-        
 
-        
-        
-        
-        </div>
-      </div>
-       
-       
+                           <div class="row"> 
+                              <c:forEach var="item" items="${boardlist}">
+                                           
+                                    <div class="col-md-3 m-0 p-0">
+                                       <div class="card">
+                                          <img class="card-img-top"
+                                             src="https://pingendo.com/assets/photos/wireframe/photo-1.jpg"
+                                             alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}"
+                                             class="card-link text-left m-0 p-3">No:${item.board_seq} Title : ${item.title}</a>
+                                          <div class="card-body m-0 p-0">
+                                             <ul class="list-group list-group-flush">
+                                                <li class="list-group-item">price : ${pricelist[0]}</li>
+                                         
+                                                <li class="list-group-item">Id : ${item.seller_id}</li>
+                                                 <li class="list-group-item">Date : ${item.write_date}</li>
+                                                <li
+                                                   class="list-group-item d-flex justify-content-between align-items-center">View:${item.viewcount}
+                                                   <span class="badge badge-secondary p-1">${item.sell_status}</span>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 
+                           </c:forEach>
+                          </div>
+
+
+
+
+
+
+
+
+                              <div class="row">
+                           
+                              </div>
+                              <div class="row">
+                              
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-3 m-0 p-0">
+                              
+                                 </div>
+                                 <div class="col-md-3 m-0 p-0">
+                              
+                                 </div>
+                                 <div class="col-md-3 m-0 p-0">
+                                 
+                                 </div>
+                                 <div class="col-md-3 m-0 p-0">
+                              
+                              </div>
+                           </div>
+                           <div class="col-md-4 w-25 col-lg-1">
+
+
+                              <div class="floating">
+                                 <p>광고</p>
+                                 <img src="다운로드.gif" width="100" height="200">
+
+                              </div>
+
+
+                              <div class="floating">광고코드</div>
+
+
+                           </div>
+                        </div>
+                        <div class="row"></div>
+                     </div>
+                  </div>
+               </div>
             </div>
+
 
          </div>
 
       </div>
+
 
       <div id="bottomwrapper" class="bg-secondary">
 

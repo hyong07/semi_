@@ -11,38 +11,41 @@ import semi.dto.BoardDTO;
 import semi.dto.ProductDTO;
 
 public class ProductDAO {
-   public ArrayList<String> priceForBoard(String category, String category2) throws Exception{
-      Connection con = DBUtils.getConnection();
-      
-      String sql = null;
-      PreparedStatement pstat = null;
+	public ArrayList<String> priceForBoard(String category, String category2) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      
+	      String sql = null;
+	      PreparedStatement pstat = null;
 
-      if(!(category2==null)) {
-         sql =
-               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
-         
-         pstat = con.prepareStatement(sql);
-         pstat.setString(1, category);
-         pstat.setString(2, category2);
-      }
+	      if(!(category2==null)) {
+	         sql =
+	               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)  ";
+	         
+	         pstat = con.prepareStatement(sql);
+	         pstat.setString(1, category);
+	         pstat.setString(2, category2);
+	      }
 
-      else {
-         
-         sql =
-               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
-         pstat = con.prepareStatement(sql);
-         pstat.setString(1, category);
-         
-      }
-      ResultSet rs = pstat.executeQuery();
-      ArrayList<String> pricelist = new ArrayList<>();
+	      else {
+	         
+	         sql =
+	               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)  ";
+	         pstat = con.prepareStatement(sql);
+	         pstat.setString(1, category);
+	         
+	      }
+	      ResultSet rs = pstat.executeQuery();
+	      ArrayList<String> pricelist = new ArrayList<>();
 
-      while(rs.next()) {
-         String sell_price = rs.getString(1);
-         pricelist.add(sell_price);
-      }
-      return pricelist;
-   }
+	      while(rs.next()) {
+	         String sell_price = rs.getString(1);
+	         pricelist.add(sell_price);
+	      }   con.commit();
+	       con.close();
+	       pstat.close();
+	       
+	      return pricelist;
+	   }
      
    public int addProduct(String sell_type, ProductDTO dto) throws Exception{
       System.out.println("여기로오나요? " + sell_type);
@@ -183,6 +186,23 @@ public class ProductDAO {
            return count;
        }
       
+      public String getProductName(String seq) throws Exception{
+    	  Connection con = DBUtils.getConnection();
+    	  String sql = "select p_name from product where product_seq=?";
+    	  PreparedStatement pstat = con.prepareStatement(sql);
+    	  pstat.setString(1, seq);
+    	  ResultSet rs = pstat.executeQuery();
+    	  String result = null;
+    	  while(rs.next()) {
+    		  result = rs.getString(1);
+    	  }
+    	  con.commit();
+    	  con.close();
+    	  pstat.close();
+    	  return result;
+      }
+      
+      
       
       public List<ProductDTO> selectProduct(String seq) throws Exception{
          Connection con = DBUtils.getConnection();
@@ -191,7 +211,7 @@ public class ProductDAO {
          pstat.setString(1, seq);
 
          ResultSet rs = pstat.executeQuery();
-      List<ProductDTO> list = new ArrayList<>();
+         List<ProductDTO> list = new ArrayList<>();
          
          while(rs.next()) {
             ProductDTO dto = new ProductDTO();
@@ -216,8 +236,7 @@ public class ProductDAO {
     	  Connection con = DBUtils.getConnection();
     	  String sql = "select * from product where product_seq=?";
     	  PreparedStatement pstat = con.prepareStatement(sql);
-    	  pstat.setString(1, product_seq);
-    	  System.out.println("여기까진 오냐 ?");
+    	  pstat.setString(1, product_seq);    	  
     	  ResultSet rs = pstat.executeQuery();
     	  ProductDTO result = new ProductDTO();
     	  while(rs.next()) {
@@ -229,8 +248,7 @@ public class ProductDAO {
     		  result.setSell_count(rs.getString(6));
     		  result.setMain_product(rs.getString(7));
     		  result.setP_name(rs.getString(8));
-    	  }
-    	  System.out.println("여기까진 오냐 ?");
+    	  }    	  
     	  con.commit();
     	  con.close();
     	  pstat.close();
@@ -239,9 +257,20 @@ public class ProductDAO {
  
     	  }
       
-//      public int burnProduct() throws Exception{
-//    	  Connection con = DBUtils.getConnection();
-//    	  
-//      }
+      public int buyProductUpdate(String seq, String count) throws Exception{
+    	  Connection con = DBUtils.getConnection();
+    	  String sql = "update product set sell_count = (select sell_count from product where product_seq=?)-? where product_seq=?";
+    	  PreparedStatement pstat = con.prepareStatement(sql);
+    	  pstat.setString(1, seq);
+    	  pstat.setString(2, count);
+    	  pstat.setString(3, seq);
+    	  
+    	  int result = pstat.executeUpdate();
+    	  con.commit();
+    	  con.close();
+    	  pstat.close();
+    	  
+    	  return result;    	  
+      }
 
 }

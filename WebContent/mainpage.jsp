@@ -88,7 +88,7 @@
       
       width:100%;
       height:100%;
-   }
+   } 
    
    #headerright{
       float:left;
@@ -217,31 +217,60 @@ response.setCharacterEncoding("utf8");
       
       
       <div id="centernavbar">
-         <nav class="nav nav-pills nav-justified">
+         <nav class="nav nav-pills nav-justified"> 
+      
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               </a>
+             </li>  
             <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="getboardseq.bo">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=패션">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 패션</a>
             </li> 
                 <li class="nav-item">
-                <a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+                <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=전자제품">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 전자제품</a>
             </li> 
                 <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=리빙">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 리빙</a>
             </li> 
                 <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=문화">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 문화</a>
             </li> 
                 <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> category</a>
+               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=뷰티">
+               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 뷰티</a>
              </li> 
              
-         
+           
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               </a>
+             </li>   
+             
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="saleInput.jsp" >
+                상품등록</a> 
+             </li>   
+          
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
+                커뮤니티</a>
+             </li> 
+              
+                <li class="nav-item">
+               <a class="nav-link  text-secondary" id="menubtn" href="#">
+               </a>
+             </li> 
+             
+              
          </nav>
       </div>
+   
+   </div>   
+   
    
    </div>   
    

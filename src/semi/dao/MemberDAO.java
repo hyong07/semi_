@@ -108,5 +108,23 @@ public class MemberDAO {
 	}
 	
 	
+	public String getContact(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "select phone from member where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
+		ResultSet rs = pstat.executeQuery();
+		String result = null;
+		while(rs.next()) {
+			result = rs.getString(1);
+		}
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	
 	
 }

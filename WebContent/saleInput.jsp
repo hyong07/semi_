@@ -181,9 +181,9 @@
                data:{test:test},
                success:function(rep){
                   if(rep.length>0){                     
-                     $("#sub_category").empty();
+                     $("select[name=sub_category]").empty();
                      for(i=0; i<rep.length;i++){
-                        $("#sub_category").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+                        $("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
                         console.log(rep[i]);
                      }
                   }
