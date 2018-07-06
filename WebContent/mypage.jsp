@@ -252,7 +252,7 @@
 									class="active nav-link btn-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.mem"
+								<li class="nav-item"><a href="mypage_purchase.mem" 
 									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>

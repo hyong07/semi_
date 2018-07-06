@@ -174,7 +174,7 @@
 					data : {pw : pw},
 					success : function(response) {
 						console.log(response +"1");
-						if (response) {
+						if (response) { 
 							alert("현재비밀번호와 같습니다. 새로운비밀번호를 입력하세요.");
 							$("#pw").val('');
 							$("#pwcheck").val('');

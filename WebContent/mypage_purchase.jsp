@@ -308,7 +308,7 @@
 										<div class="cart_content">
 											<table class="table">
 												<thead>
-													<th>판매자ID</th>
+													<th>판매자ID</th> 
 													<th>상품명</th>
 													<th class="cart_item_qty">수량</th>
 													<th class="cart_item_price">가격</th>

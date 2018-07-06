@@ -154,7 +154,7 @@
 	transition-duration: 0.3s;
 }
 
-.table {
+.table { 
 	width: 100%;
 }
 

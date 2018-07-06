@@ -271,7 +271,7 @@
 													<div class="row">
 														<div class="col-md-4">
 															<img class="card-img-top" src="${mainfilepath[status.index]}" alt="이미지가 없습니다.">
-														</div>
+														</div> 
 														<div class="col-md-8">
 															<h5>${item.title}</h5>
 															<p>${item.contents } </p>

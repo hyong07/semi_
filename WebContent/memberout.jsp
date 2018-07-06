@@ -12,4 +12,4 @@
 		location.href = "mainpage.jsp";
 	</script>
 </body>
-</html>
+</html> 
