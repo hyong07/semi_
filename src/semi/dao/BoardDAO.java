@@ -10,6 +10,7 @@ import semi.dbutils.DBUtils;
 import semi.dto.BoardDTO;
 
 public class BoardDAO { 
+	
 
   
 	 public ArrayList<BoardDTO> boardForBoard(String category, String category2) throws Exception{
@@ -18,7 +19,7 @@ public class BoardDAO {
 	      PreparedStatement pstat = null;
 
 	      if(!(category2==null)) {
-	         System.out.println("¼­ºêÄ«Å×°í¸®°¡ ÀÖ´Â°Å¾ß" + category2);
+	         System.out.println("ï¿½ï¿½ï¿½ï¿½Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½Ö´Â°Å¾ï¿½" + category2);
 
 	         sql =
 	               "select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') order by b.board_seq desc";
@@ -29,7 +30,7 @@ public class BoardDAO {
 	      }
 
 	      else {
-	         System.out.println("¼­ºêÄ«Å×°í¸®°¡ ¾ø´Â°Å¾ß");
+	         System.out.println("ï¿½ï¿½ï¿½ï¿½Ä«ï¿½×°ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â°Å¾ï¿½");
 
 	         sql =
 	               "select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y')  and (f.MAIN_FILES = 'y') order by b.board_seq desc";
@@ -59,7 +60,7 @@ public class BoardDAO {
 	      con.commit();
 	       con.close();
 	       pstat.close();
-	      System.out.println(list.size() + " ±×·¡¼­ ¸î°³°¡³ª¿Í¾ßÇÏ´Âµ¥?"); 
+	      System.out.println(list.size() + " ï¿½×·ï¿½ï¿½ï¿½ ï¿½î°³ï¿½ï¿½ï¿½ï¿½ï¿½Í¾ï¿½ï¿½Ï´Âµï¿½?"); 
 	      return list;
 	      
 	   }
@@ -224,7 +225,7 @@ public class BoardDAO {
       String sql = "insert into board values(?,?,?,?,sysdate,?,default,sysdate+?,default,default,default)";
       PreparedStatement pstat = con.prepareStatement(sql);
       System.out.println(dto.getEnd_date() + " : ");
-      System.out.println("! ½Ã¹ß¿©±ä³ª¿À´Â°Å³Ä");
+      System.out.println("! ï¿½Ã¹ß¿ï¿½ï¿½ä³ªï¿½ï¿½ï¿½Â°Å³ï¿½");
       pstat.setString(1, dto.getBoard_seq());
       pstat.setString(2, dto.getSeller_id());
       pstat.setString(3, dto.getTitle());
@@ -235,7 +236,7 @@ public class BoardDAO {
       con.commit();
 		pstat.close();
 		con.close();
-      System.out.println("°á°ú´Â¿ä~" + result);
+      System.out.println("ï¿½ï¿½ï¿½ï¿½Â¿ï¿½~" + result);
       return result;
 
    }

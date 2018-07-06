@@ -34,9 +34,6 @@
 <style>
 
 /* 전체적인 틀 css 끝*/
-/* div{ */
-/* 	border : 1px solid black; */
-/* } */
 #topnavicontainer {
 	margin: 0px auto;
 	width: 100%;
@@ -110,6 +107,7 @@
 #content {
 	height: 100%;
 	width: 100%;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -127,10 +125,7 @@
 /* Mypage css*/
 #cardcontainer {
 	width: 80%;
-}
-
-#productlist{
-	border: 1px solid rgba(0, 0, 0, 0.125);
+	height: 600px;
 }
 
 .card-header{
@@ -138,67 +133,24 @@
 	color : white;
 }
 
-#app {
-	width: 100%;;
-	padding: 15px;
-	margin-top: 15px;
-	background: #fcfcfc;
-	box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
-	-webkit-transition-duration: 0.3s;
-	transition-duration: 0.3s;
-}
-
-.table {
-	width: 100%;
-}
-
-.table th, .table td {
-	padding: 0.5em;
-}
-
-.table thead th {
-	border-bottom: 2px solid #abc;
-}
-
-.table td {
-	border-bottom: 1px solid #abc;
-}
-
-.table tbody tr:last-of-type td {
-	border-bottom-width: 2px;
-}
-
-.table .cart_item_img {
-	width: 80px;
-}
-
-.table .cart_item_qty {
-	text-align: center;
-	min-width: 140px;
-	width: 140px;
-}
-
-.table .cart_item_price {
-	text-align: center;
-}
-
-.table .cart_item_tprice {
-	text-align: center;
-}
-
-.table .cart_item_qty input {
-	text-align: center;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	box-shadow: 0 1px 3px #ddd;
-}
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+	$(document).ready(function() {
+		$("#leavebt").click(function(){
+			if( $("#check").is(":checked")){
+				if(confirm("정말정말 탈퇴하시겠습니까 ?ㅠㅠ")){
+					location.href = "leavemember.mem";
+				}
+			}
+			else{
+				alert("약관동의를 확인해주세요.");
+			}
+		})
+	})
 </script>
 </head>
 <body>
@@ -261,6 +213,9 @@
 					</div>
 				</div>
 
+
+
+
 				<div id="headerright"></div>
 			</div>
 
@@ -288,58 +243,51 @@
 									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.mem"
-									class="active nav-link btn-secondary">구매신청내역</a></li>
+								<li class="nav-item"><a href="mypage_purchase.jsp"
+									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.mem">판매등록내역</a></li>
+									href="mypage_sale.jsp">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+									href="mypage_info.mem">내 정보</a></li>
 								<li class="nav-item"><a
-									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
+									class="active nav-link btn-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-	
-									<div id="app">
-									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>구매신청목록</h4>
-									<c:forEach var="no" items="${board_no}" varStatus="status">
-										<div class="cart_content">
-											<table class="table">
-												<thead>
-													<th>판매자ID</th>
-													<th>상품명</th>
-													<th class="cart_item_qty">수량</th>
-													<th class="cart_item_price">가격</th>
-													<th class="cart_item_tprice">총가격</th>
-												</thead>
-												<tbody>
-													<c:forEach var="item" items="${bdto}" varStatus="status">
-														<c:choose>
-															<c:when test="${item.board_no == no}">
-																<tr>
-																	<td>${item.seller_id }</td>
-																	<td>${buyproduct[status.index]}</td>
-																	<td class="cart_item_qty"><input type="text" value="${item.buy_count }" size="3" ; readonly></td>
-																	<td class="cart_item_price">${item.buy_price }</td>
-																	<td class="cart_item_tprice">${item.buy_price * item.buy_count }</td>
-																<tr>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</tbody>
-												<tfoot>
-													<tr>
-														
-														<td colspan="6" align="right"><input type="button" value="물품수령완료"  onclick="deliverproduct(this)" class="btn btn-secondary"></td>
-													</tr>
-												</tfoot>
-											</table>
-												
+							<div class="card" id="card">
+								<div class="card-header">Auction Go! 탈퇴</div>
+								<div class="card-body">
+									<div class="form-row">
+										<div class="form-group col-md-12">
+											<label for="inputEmail4">더 이상 저희 Auction Go! 이용을 원치
+												않으셔서 탈퇴를 원하시는 경우, 탈퇴 이용약관 동의를 선택하신 후 탈퇴를 진행하시기 바랍니다.</label>
+											<div class="panel panel-default">
+												<div class="panel-heading">
+													<h4 class="panel-title">
+														<a class="accordion-toggle text-dark" data-toggle="collapse"
+															data-parent="#accordion" href="#collapseThree">
+															탈퇴약관동의</a>
+													</h4>
+												</div>
+												<div id="collapseThree" class="panel-collapse collapse">
+													<textarea class="form-control col-md-10 panel-body mb-3 text-danger" rows="4" style="resize: none;" disabled>탈퇴시 저희 Auction Go!에서는 충전하셨던 포인트를 회원가입을 다시 하셔도 돌려드리지 않습니다. 다시 회원가입을 원하신다면 탈퇴하셔도 언제든 다시 회원가입할 수 있습니다. 그동안 저희 Auction Go!를 이용해주셔서 감사합니다.</textarea> 	
+													<div class="form-check form-check-inline">
+													  <input class="form-check-input" type="checkbox" id="check" value="option1">
+													  <label class="form-check-label">위의 탈퇴 약관에 동의합니다.</label>
+													</div>
+												</div>
+											</div>
 										</div>
-									</c:forEach>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<button type="button" class="btn btn-secondary" id="leavebt">탈퇴하기</button>
+										</div>
+									</div>
 								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -348,9 +296,9 @@
 		</div>
 
 
-		<div id="bottomwrapper" class="bg-secondary">
+		<div id="bottomwrapper">
 			<div id="footer">
-				<div class="text-white">
+				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -415,9 +363,14 @@
 		</div>
 
 	</div>
-
-
-
+	<script>
+	function toggleChevron(e) {
+        $(e.target).prev('.panel-heading').find("i.indicator").toggleClass(
+              'glyphicon-chevron-down glyphicon-chevron-up');
+     }
+     $('#accordion').on('hidden.bs.collapse', toggleChevron);
+     $('#accordion').on('shown.bs.collapse', toggleChevron);
+	</script>
 
 </body>
 </html>

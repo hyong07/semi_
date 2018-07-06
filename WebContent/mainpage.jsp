@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
@@ -19,8 +19,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-   
-/*   primary: #12bbad, */
+	
+/*   primary: #12bbad, */ 
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
 /*   dark: #151515, */
@@ -135,12 +135,6 @@
 </style>
 
 
-
-<script>
-
-
-
-</script>
 </head>
 <body>
 <%
@@ -173,7 +167,7 @@ response.setCharacterEncoding("utf8");
                <i class="fa fa-user fa-fw" ></i> Sing up</a>
           </li> 
         </ul>  
-           <a class="btn navbar-btn ml-2 btn-secondary text-white">
+           <a class="btn navbar-btn ml-2 btn-secondary text-white" href="mypage.mem">
            <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
             <span class="navbar-toggler-icon" ></span>
      </div>
@@ -181,112 +175,109 @@ response.setCharacterEncoding("utf8");
    </nav>
   </div>
   
-   <div id="allwrapper" >
-   
-   <div id="headerwrapper">
-      <div id="header">
-         <div id="headerleft"></div>
-      
-      
-      <div id="headercenter">
-         <div class="py-5"  >  
-             <div class="container" >
-               <div class="row" > 
-                  <div class="col-md-12"> 
-                   <form class="form-inline" >
-                     <div class="input-group" id="search">
-                       <input type="search" class="form-control" placeholder="search">
-                       <div class="input-group-append">
-                         <button class="btn btn-secondary" type="button">Search</button>
-                       </div>
-                     </div>
-                   </form>
-                  </div> 
-                </div> 
-             </div>  
-            </div>  
-      </div>
-         
-         
-            
-      <div id="headerright">
-   
-      </div>
-   </div>
-
-      
-      
-      <div id="centernavbar">
-         <nav class="nav nav-pills nav-justified"> 
-      
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
-               </a>
-             </li>  
-            <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=패션">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 패션</a>
-            </li> 
-                <li class="nav-item">
-                <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=전자제품">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 전자제품</a>
-            </li> 
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=리빙">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 리빙</a>
-            </li> 
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=문화">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 문화</a>
-            </li> 
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=뷰티">
-               <i class="fa d-inline fa-lg fa-bookmark-o"></i> 뷰티</a>
-             </li> 
-             
-           
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
-               </a>
-             </li>   
-             
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="saleInput.jsp" >
-                상품등록</a> 
-             </li>   
-          
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
-                커뮤니티</a>
-             </li> 
-              
-                <li class="nav-item">
-               <a class="nav-link  text-secondary" id="menubtn" href="#">
-               </a>
-             </li> 
-             
-              
-         </nav>
-      </div>
-   
-   </div>   
-   
-   
-   </div>   
-   
-   <div id="centerwrapper">
-      
-      <div id="content">
-      
-      </div>
-         
-   </div>
-   
-   
-   <div id="bottomwrapper" class="bg-secondary">
-      
-      <div id="footer">
-      
+	<div id="allwrapper" >
+	
+	<div id="headerwrapper">
+		<div id="header">
+			<div id="headerleft"></div>
+		
+		
+		<div id="headercenter">
+			<div class="py-5"  >  
+			    <div class="container" >
+			      <div class="row" > 
+			         <div class="col-md-12"> 
+			          <form class="form-inline" >
+			            <div class="input-group" id="search">
+			              <input type="search" class="form-control" placeholder="search">
+			              <div class="input-group-append">
+			                <button class="btn btn-secondary" type="button">Search</button>
+			              </div>
+			            </div>
+			          </form>
+			         </div> 
+			       </div> 
+			    </div>  
+			   </div>  
+		</div>
+			
+			
+				
+		<div id="headerright">
+	
+		</div>
+	</div>
+  
+		
+		
+		<div id="centernavbar">
+			<nav class="nav nav-pills nav-justified"> 
+	   
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					</a>
+				 </li>  
+				<li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=패션">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 패션</a>
+				</li> 
+					 <li class="nav-item">
+				    <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=전자제품">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 전자제품</a>
+				</li> 
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=리빙">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 리빙</a>
+				</li> 
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=문화">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 문화</a>
+				</li> 
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=뷰티">
+					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 뷰티</a>
+				 </li> 
+				 
+			  
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					</a>
+				 </li>   
+			    
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="getboardseq.bo" >
+					 상품등록</a> 
+				 </li>   
+			 
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
+					 커뮤니티</a>
+				 </li> 
+				  
+					 <li class="nav-item">
+					<a class="nav-link  text-secondary" id="menubtn" href="#">
+					</a>
+				 </li> 
+			    
+				  
+			</nav>
+		</div>
+	
+	</div>	
+	
+	<div id="centerwrapper">
+		
+		<div id="content">
+		
+		</div>
+			
+	</div>
+	
+	
+	<div id="bottomwrapper" class="bg-secondary">
+		
+		<div id="footer">
+		
 <div class="text-white bg-secondary" >
     <div class="container">
       <div class="row">

@@ -110,6 +110,7 @@
 #content {
 	height: 100%;
 	width: 100%;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -129,68 +130,25 @@
 	width: 80%;
 }
 
-#productlist{
-	border: 1px solid rgba(0, 0, 0, 0.125);
+.card-group>.card+.card {
+	border-left: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+#morebutton {
+	margin-top: 10px;
+}
+
+#buttondiv {
+	text-align: right;
+}
+
+#card {
+	cursor: pointer;
 }
 
 .card-header{
 	background-color:#4f70ce;
 	color : white;
-}
-
-#app {
-	width: 100%;;
-	padding: 15px;
-	margin-top: 15px;
-	background: #fcfcfc;
-	box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
-	-webkit-transition-duration: 0.3s;
-	transition-duration: 0.3s;
-}
-
-.table {
-	width: 100%;
-}
-
-.table th, .table td {
-	padding: 0.5em;
-}
-
-.table thead th {
-	border-bottom: 2px solid #abc;
-}
-
-.table td {
-	border-bottom: 1px solid #abc;
-}
-
-.table tbody tr:last-of-type td {
-	border-bottom-width: 2px;
-}
-
-.table .cart_item_img {
-	width: 80px;
-}
-
-.table .cart_item_qty {
-	text-align: center;
-	min-width: 140px;
-	width: 140px;
-}
-
-.table .cart_item_price {
-	text-align: center;
-}
-
-.table .cart_item_tprice {
-	text-align: center;
-}
-
-.table .cart_item_qty input {
-	text-align: center;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	box-shadow: 0 1px 3px #ddd;
 }
 /* Mypage css 끝*/
 </style>
@@ -198,7 +156,7 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+
 </script>
 </head>
 <body>
@@ -261,6 +219,9 @@
 					</div>
 				</div>
 
+
+
+
 				<div id="headerright"></div>
 			</div>
 
@@ -288,58 +249,61 @@
 									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.mem"
-									class="active nav-link btn-secondary">구매신청내역</a></li>
+								<li class="nav-item"><a href="mypage_purchase.jsp"
+									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.mem">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+									href="mypage_sale.jsp">판매등록내역</a></li>
+								<li class="nav-item"><a class="active nav-link btn-secondary"
+									href="mypage_info.mem">내 정보</a></li>
 								<li class="nav-item"><a
 									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-	
-									<div id="app">
-									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>구매신청목록</h4>
-									<c:forEach var="no" items="${board_no}" varStatus="status">
-										<div class="cart_content">
-											<table class="table">
-												<thead>
-													<th>판매자ID</th>
-													<th>상품명</th>
-													<th class="cart_item_qty">수량</th>
-													<th class="cart_item_price">가격</th>
-													<th class="cart_item_tprice">총가격</th>
-												</thead>
-												<tbody>
-													<c:forEach var="item" items="${bdto}" varStatus="status">
-														<c:choose>
-															<c:when test="${item.board_no == no}">
-																<tr>
-																	<td>${item.seller_id }</td>
-																	<td>${buyproduct[status.index]}</td>
-																	<td class="cart_item_qty"><input type="text" value="${item.buy_count }" size="3" ; readonly></td>
-																	<td class="cart_item_price">${item.buy_price }</td>
-																	<td class="cart_item_tprice">${item.buy_price * item.buy_count }</td>
-																<tr>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</tbody>
-												<tfoot>
-													<tr>
-														
-														<td colspan="6" align="right"><input type="button" value="물품수령완료"  onclick="deliverproduct(this)" class="btn btn-secondary"></td>
-													</tr>
-												</tfoot>
-											</table>
-												
+							<div class="card">
+								<div class="card-header">내 정보 수정</div>
+								<div class="card-body">
+								<form action="member_modify.mem" method="post" name=write_form onSubmit="return check_error()">
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Id</label> <input type="text"
+												class="form-control"  name=id value="${dto.id }" readonly>
 										</div>
-									</c:forEach>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Name</label> <input type="text"
+												class="form-control" name=name value="${dto.name }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Email</label> <input type="text"
+												class="form-control" name=email value="${dto.email }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-6">
+											<label for="inputEmail4">Phone</label> <input type="text"
+												class="form-control" name=phone value="${dto.phone }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="form-group col-md-8">
+											<label for="inputAddress">Address</label> <input type="text"
+											class="form-control" name=address value="${dto.address }">
+										</div>
+									</div>
+									<div class="form-row">
+										<div class="col-md-12 text-right">
+											<input type="submit" class="btn btn-secondary" value="수정하기">
+										</div>
+									</div>
+									</form>
 								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -348,9 +312,9 @@
 		</div>
 
 
-		<div id="bottomwrapper" class="bg-secondary">
+		<div id="bottomwrapper">
 			<div id="footer">
-				<div class="text-white">
+				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -415,7 +379,43 @@
 		</div>
 
 	</div>
+	<script>
+			function check_error() {
+			     var form = document.write_form;
+			     if(form.name.value == '') {
 
+			        alert('이름을 입력하세요');
+
+			        form.name.focus();
+
+			        return false;
+
+			     }
+			     else if(form.email.value == ''){
+			    	 alert('이메일을 입력하세요');
+
+				     form.email.focus();
+
+				     return false;
+			     }
+			     else if(form.phone.value == ''){
+			    	 alert('핸드폰 번호를 입력하세요');
+
+				     form.phone.focus();
+
+				     return false;
+			     }
+			     else if(form.address.value == ''){
+			    	 alert('주소를 입력하세요');
+
+				     form.address.focus();
+
+				     return false;
+			     }
+			     return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
+			   }
+
+	</script>
 
 
 

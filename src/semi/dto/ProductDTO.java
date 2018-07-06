@@ -11,13 +11,11 @@ public class ProductDTO {
 	private String main_product;
 	private String p_name;
 
-
-	
 	
 	public ProductDTO() {
 		super();
 	}
-	
+	   
 	public ProductDTO(String board_no, String product_seq,String category, String detail_category, String sell_price,
 			String sell_count, String main_product,String p_name) {
 		super();

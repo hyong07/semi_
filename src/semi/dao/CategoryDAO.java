@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import semi.dbutils.DBUtils;
-import semi.dto.CategoryDTO;
+   
 
 public class CategoryDAO {		
 	public List<String> main_categoryGet(String choice) throws Exception{

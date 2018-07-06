@@ -34,9 +34,6 @@
 <style>
 
 /* 전체적인 틀 css 끝*/
-/* div{ */
-/* 	border : 1px solid black; */
-/* } */
 #topnavicontainer {
 	margin: 0px auto;
 	width: 100%;
@@ -110,6 +107,7 @@
 #content {
 	height: 100%;
 	width: 100%;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -127,70 +125,24 @@
 /* Mypage css*/
 #cardcontainer {
 	width: 80%;
+	height: 600px;
 }
 
-#productlist{
-	border: 1px solid rgba(0, 0, 0, 0.125);
+#card {
+	height: 100%;
 }
 
+#pwform {
+	height: 100px;
+	margin-top: 150px;
+}
+
+#pw, #pwcheck {
+	margin-bottom: 10px;
+}
 .card-header{
 	background-color:#4f70ce;
 	color : white;
-}
-
-#app {
-	width: 100%;;
-	padding: 15px;
-	margin-top: 15px;
-	background: #fcfcfc;
-	box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
-	-webkit-transition-duration: 0.3s;
-	transition-duration: 0.3s;
-}
-
-.table {
-	width: 100%;
-}
-
-.table th, .table td {
-	padding: 0.5em;
-}
-
-.table thead th {
-	border-bottom: 2px solid #abc;
-}
-
-.table td {
-	border-bottom: 1px solid #abc;
-}
-
-.table tbody tr:last-of-type td {
-	border-bottom-width: 2px;
-}
-
-.table .cart_item_img {
-	width: 80px;
-}
-
-.table .cart_item_qty {
-	text-align: center;
-	min-width: 140px;
-	width: 140px;
-}
-
-.table .cart_item_price {
-	text-align: center;
-}
-
-.table .cart_item_tprice {
-	text-align: center;
-}
-
-.table .cart_item_qty input {
-	text-align: center;
-	border-radius: 3px;
-	border: 1px solid #ccc;
-	box-shadow: 0 1px 3px #ddd;
 }
 /* Mypage css 끝*/
 </style>
@@ -198,7 +150,52 @@
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <script>
-	
+	$(document).ready(function() {
+		$("#okbt").click(function() {
+			var pw = $("#pw").val();
+			var pwcheck = $("#pwcheck").val();
+
+			if (pw == '') {
+				alert('비밀번호를 입력하세요');
+				$("#pw").focus();
+			}
+			else if (pwcheck == '') {
+				alert('비밀번호확인을 입력하세요');
+				$("#pwcheck").focus();
+			} else if (pw != pwcheck) {
+				alert('비밀번호 와 비밀번호 확인이 일치하지 않습니다.');
+				$("#pw").val('');
+				$("#pwcheck").val('');
+			}
+			else{
+				$.ajax({
+					url : "currentpwcheck.mem",
+					type : "post",
+					data : {pw : pw},
+					success : function(response) {
+						console.log(response +"1");
+						if (response) {
+							alert("현재비밀번호와 같습니다. 새로운비밀번호를 입력하세요.");
+							$("#pw").val('');
+							$("#pwcheck").val('');
+						} else{
+							console.log(response+"2");
+							if(confirm("바꾸시겠습니까?")){
+								$("#pwform").submit();
+							}
+						}
+					},
+					error : function() {
+						console.log("error 발생");
+					},
+					complete : function() {
+						console.log("성공이건 실패건 어찌되었든 ajax 종료");
+					}
+				})
+			}
+
+		})
+	})
 </script>
 </head>
 <body>
@@ -261,6 +258,9 @@
 					</div>
 				</div>
 
+
+
+
 				<div id="headerright"></div>
 			</div>
 
@@ -288,58 +288,42 @@
 									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.mem"
-									class="active nav-link btn-secondary">구매신청내역</a></li>
+								<li class="nav-item"><a href="mypage_purchase.jsp"
+									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.mem">판매등록내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_pwcheck.jsp">내 정보</a></li>
+									href="mypage_sale.jsp">판매등록내역</a></li>
+								<li class="nav-item"><a
+									class="active nav-link btn-secondary" href="mypage_info.mem">내
+										정보</a></li>
 								<li class="nav-item"><a
 									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-	
-									<div id="app">
-									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>구매신청목록</h4>
-									<c:forEach var="no" items="${board_no}" varStatus="status">
-										<div class="cart_content">
-											<table class="table">
-												<thead>
-													<th>판매자ID</th>
-													<th>상품명</th>
-													<th class="cart_item_qty">수량</th>
-													<th class="cart_item_price">가격</th>
-													<th class="cart_item_tprice">총가격</th>
-												</thead>
-												<tbody>
-													<c:forEach var="item" items="${bdto}" varStatus="status">
-														<c:choose>
-															<c:when test="${item.board_no == no}">
-																<tr>
-																	<td>${item.seller_id }</td>
-																	<td>${buyproduct[status.index]}</td>
-																	<td class="cart_item_qty"><input type="text" value="${item.buy_count }" size="3" ; readonly></td>
-																	<td class="cart_item_price">${item.buy_price }</td>
-																	<td class="cart_item_tprice">${item.buy_price * item.buy_count }</td>
-																<tr>
-															</c:when>
-														</c:choose>
-													</c:forEach>
-												</tbody>
-												<tfoot>
-													<tr>
-														
-														<td colspan="6" align="right"><input type="button" value="물품수령완료"  onclick="deliverproduct(this)" class="btn btn-secondary"></td>
-													</tr>
-												</tfoot>
-											</table>
-												
+							<div class="card text-center" id="card">
+								<div class="card-header">내정보</div>
+								<div class="card-body text-center">
+									<form id="pwform" action="pwchange.mem" method="post">
+										<label for="inputPassword4" class="col-md-12">새 비밀번호</label>
+										<div class="text-center col-md-12">
+											<input type="password" class="col-md-4" id="pw"
+												placeholder="Password" name="pw">
 										</div>
-									</c:forEach>
+										<label for="inputPassword4" class="col-md-12">새 비밀번호
+											확인</label>
+										<div class="text-center col-md-12">
+											<input type="password" class="col-md-4" id="pwcheck"
+												placeholder="Password" name="pwcheck">
+										</div>
+										<div class="text-center col-md-12">
+											<input type="button" id="okbt" value="확인"
+												class="btn btn-secondary">
+										</div>
+									</form>
 								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -348,9 +332,9 @@
 		</div>
 
 
-		<div id="bottomwrapper" class="bg-secondary">
+		<div id="bottomwrapper">
 			<div id="footer">
-				<div class="text-white">
+				<div class="text-white bg-secondary">
 					<div class="container">
 						<div class="row">
 							<div class="p-4 col-md-3">
@@ -415,8 +399,6 @@
 		</div>
 
 	</div>
-
-
 
 
 </body>

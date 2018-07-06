@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -132,6 +134,25 @@
 #productlist{
 	border: 1px solid rgba(0, 0, 0, 0.125);
 }
+
+#productlist:hover{
+ width: 100%;;
+  padding: 15px;
+  margin-top: 15px;
+  background: #fcfcfc;
+  box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
+  -webkit-transition-duration: 0.3s;
+          transition-duration: 0.3s;
+}
+#app {
+	width: 100%;;
+	padding: 15px;
+	margin-top: 15px;
+	background: #fcfcfc;
+	box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}
 /* Mypage css 끝*/
 </style>
 
@@ -212,7 +233,7 @@
 						<div class="input-group-prepend">
 							<span><p class="lead mr-3">
 									<ion-icon name="person"></ion-icon>
-									이유림님
+									${sessionScope.loginid} 님
 								</p></span>
 						</div>
 						<p class="lead">
@@ -235,71 +256,32 @@
 								<li class="nav-item"><a class="active nav-link btn-secondary"
 									href="mypage_sale.jsp">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="#">내 정보</a></li>
+									href="mypage_pwcheck.jsp">내 정보</a></li>
+								<li class="nav-item"><a
+									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card">
-								<div class="card-header">판매등록내역</div>
-								<div class="card-body">
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
+							<div id="app">
+									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>판매글</h4>
+									<c:forEach var="item" items="${result }" varStatus="status">
+										<a href="mypage_sale_detail.mem?board_seq=${item.board_seq}">
+											<div class="py-1 mb-2" id="productlist">
+												<div class="container">
+													<div class="row">
+														<div class="col-md-4">
+															<img class="card-img-top" src="${mainfilepath[status.index]}" alt="이미지가 없습니다.">
+														</div>
+														<div class="col-md-8">
+															<h5>${item.title}</h5>
+															<p>${item.contents } </p>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
+										</a>
+									</c:forEach>
 								</div>
-								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
-							</div>
 						</div>
 					</div>
 				</div>

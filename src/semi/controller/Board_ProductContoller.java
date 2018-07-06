@@ -55,7 +55,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
              System.out.println(category + " : " + category2);
              ArrayList<BoardDTO> boardlist = boarddao.boardForBoard(category, category2);
-             System.out.println(boardlist.size()+ " °¹¼ö!!!");
+             System.out.println(boardlist.size()+ " ï¿½ï¿½ï¿½ï¿½!!!");
              ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
              ArrayList<String> pricelist = productdao.priceForBoard(category,category2);
              System.out.println(filelist.size());
@@ -134,7 +134,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
 
          else if(command.equals("/category.bo")) {
-            System.out.println("µé¾î¿È");
+            System.out.println("ï¿½ï¿½ï¿½ï¿½");
             String main_category = request.getParameter("test");  
             System.out.println(main_category);
             List<String> result =category_dao.main_categoryGet(main_category);
@@ -167,7 +167,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
 
          else if(command.equals("/write.bo")) {
-            System.out.println("¶óÀÌÆ®º¸!");
+            System.out.println("ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½!");
             String board_no = request.getParameter("seq");            
 //            String sell_type = request.getParameter("sell_typeTest");
 //            String sell_type1 = request.getParameter("sell_type");
@@ -209,7 +209,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             
             BoardDTO bdto = new BoardDTO(board_no,id,title,contents,"",sell_type,"",end_date,"","","");            
             System.out.println(bdto.getEnd_date());
-            	System.out.println("¾îµð±îÁö³ª¿À´Â°Å³Ä");
+            	System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Â°Å³ï¿½");
             int insertBoard = boarddao.addBoard(bdto);
             System.out.println(insertBoard);
                        
@@ -217,18 +217,18 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             fileList = filedao.searchFileName(realPath, board_no);
             int insertFile = filedao.insertFile(fileList);
             String mainfilename = mainfileMap.get(board_no);
-            System.out.println("¸ÞÀÎÆÄÀÏÀÌ¸Ó³Ä~~~~~~~~~~" + mainfilename);
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ì¸Ó³ï¿½~~~~~~~~~~" + mainfilename);
             int mainfileupdate = filedao.updateFile(board_no,mainfilename);            
             
-            System.out.println("" + mainfileupdate + " ¸ÞÀÎÆÄÀÏ¾÷µ¥ÀÌÆ®!");
-            System.out.println("" + insertFile + "ÀÎ¼³Æ®ÆÄÀÏ!");
-            System.out.println("¿ìÂm");
+            System.out.println("" + mainfileupdate + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¾ï¿½ï¿½ï¿½ï¿½ï¿½Æ®!");
+            System.out.println("" + insertFile + "ï¿½Î¼ï¿½Æ®ï¿½ï¿½ï¿½ï¿½!");
+            System.out.println("ï¿½ï¿½ï¿½m");
             
             dst = "articleView.bo?seq="+board_no+"&sell_type="+sell_type;
          }
   
          else if(command.equals("/productInfo.bo")) {            
-            System.out.println("¿ä±âµé¾î¿È");
+            System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
             String sell_type = request.getParameter("sell_type");
             String category = request.getParameter("category");
             String sub_category = request.getParameter("sub_category");
@@ -236,8 +236,8 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             String sell_price = request.getParameter("sell_price");
             String sell_count = request.getParameter("sell_count");
             String board_no = request.getParameter("board_no");
-            System.out.println("¹Ù²ã¶º" + board_no);
-             System.out.println(category+" 1: "+sub_category + " 2: " + product_name + " 3: " + sell_price + "¤Ð¤Ð : " + sell_count);
+            System.out.println("ï¿½Ù²ã¶º" + board_no);
+             System.out.println(category+" 1: "+sub_category + " 2: " + product_name + " 3: " + sell_price + "ï¿½Ð¤ï¿½ : " + sell_count);
             
             ProductDTO product_dto = new ProductDTO();
             product_dto.setBoard_no(board_no);
@@ -252,7 +252,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             return;
          }
    else if(command.equals("/auctionproductInfo.bo")) {            
-            System.out.println("¿ä±âµµµé¾î¿È");
+            System.out.println("ï¿½ï¿½âµµï¿½ï¿½ï¿½ï¿½");
             String board_no = request.getParameter("board_no");
             String sell_type = request.getParameter("sell_type");
             String category = request.getParameter("category");
@@ -271,7 +271,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             product_dto.setSell_price(sell_price);
             product_dto.setSell_count("");
             int result = productdao.addProduct(sell_type, product_dto);
-              System.out.println("°æ¸ÅÂÊµµ ´Ù µé¾î°¡°ÔµÊ ");
+              System.out.println("ï¿½ï¿½ï¿½ï¿½Êµï¿½ ï¿½ï¿½ ï¿½ï¿½î°¡ï¿½Ôµï¿½ ");
             System.out.println(product_dto.getSell_price());
            
             new Gson().toJson(product_name, response.getWriter());
@@ -280,7 +280,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
          
 
          else if(command.equals("/productInfoDelete.bo")) {
-            System.out.println("¹°Ç° »èÁ¦ÇÒ²¨´Ù");;
+            System.out.println("ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ï¿½Ò²ï¿½ï¿½ï¿½");;
             String product_name = request.getParameter("product_name");
             String board_no = request.getParameter("board_no");
             
@@ -342,7 +342,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             request.setAttribute("sysdate", sysdate);
             List<String> path = new ArrayList<>();
             for(FileDTO dto : flist) {
-               System.out.println("¿©±ä?");
+               System.out.println("ï¿½ï¿½ï¿½ï¿½?");
                path.add("image/"+seq+"/"+dto.getSystem_file_name());
             }
             

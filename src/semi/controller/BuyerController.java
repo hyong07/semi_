@@ -29,7 +29,7 @@ import semi.dto.ProductDTO;
 
 @WebServlet("*.buy")
 public class BuyerController extends HttpServlet {
-	private static final long serialVersionUID = 1L;
+   private static final long serialVersionUID = 1L;
        
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -48,7 +48,7 @@ public class BuyerController extends HttpServlet {
 		BuyserverDAO bsdao = new BuyserverDAO();
 		MemberDAO mdao = new MemberDAO();
 		if(command.equals("/selectbuyproduct.buy")){
-			System.out.println("±¸¸Å½ÅÃ» ½ÃÀÛ µé¾î¿Ô´Ù!!");
+			System.out.println("ï¿½ï¿½ï¿½Å½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ô´ï¿½!!");
 			String[] productSeq = request.getParameterValues("buyProduct");
 			String[] buyProductCount = request.getParameterValues("productCount");
 			String board_no = request.getParameter("board_no");
@@ -84,7 +84,7 @@ public class BuyerController extends HttpServlet {
 		}
 		
 		else if(command.equals("/totalPrice.buy")) {
-			System.out.println("¹°Ç° ÃÑÇÕ ±¸ÇÏ±â µé¾î¿È!!");
+			System.out.println("ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½!!");
 			String product_seq = request.getParameter("product_seq");			
 			String currentPrice = request.getParameter("currentPrice");
 			System.out.println(product_seq);
@@ -107,44 +107,44 @@ public class BuyerController extends HttpServlet {
 		}
 		
 		else if(command.equals("/totalPlus.buy")) {
-			System.out.println("¹öÆ° ´­·¶À»‹šÀÓ!!");
+			System.out.println("ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 			int currentPrice = Integer.parseInt(request.getParameter("current"));			
 			String product_seq = request.getParameter("product_seq");
 			ProductDTO price = pdao.buyProduct(product_seq);	
-			System.out.println("°¡°Ý Àß°¡Á®¿È");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½");
 			int salePrice = Integer.parseInt(price.getSell_price());			
-			System.out.println("ÇÕÄ¥°ª´Ù ±¸ÇÔ");
+			System.out.println("ï¿½ï¿½Ä¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			int totalPrice = currentPrice + salePrice;
 			System.out.println(totalPrice);
-			System.out.println("´õÇØÁø °ªÀÓ");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			new Gson().toJson(totalPrice, response.getWriter());
 			return;
 		}
 		else if(command.equals("/totalMinus.buy")) {
-			System.out.println(" - ¹öÆ° ´­·¶À»‹šÀÓ!!");
+			System.out.println(" - ï¿½ï¿½Æ° ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 			int currentPrice = Integer.parseInt(request.getParameter("current"));			
 			String product_seq = request.getParameter("product_seq");
 			ProductDTO price = pdao.buyProduct(product_seq);	
-			System.out.println("°¡°Ý Àß°¡Á®¿È");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½");
 			int salePrice = Integer.parseInt(price.getSell_price());			
-			System.out.println("ÇÕÄ¥°ª´Ù ±¸ÇÔ");
+			System.out.println("ï¿½ï¿½Ä¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			int totalPrice = currentPrice - salePrice;
 			System.out.println(totalPrice);
-			System.out.println("´õÇØÁø °ªÀÓ");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			new Gson().toJson(totalPrice, response.getWriter());
 			return;
 		}
 		
 		else if(command.equals("/buyComplete.buy")) {
-			System.out.println("±¸¸Å ½ÅÃ» ¿Ï·á¸¦ À§ÇÑ ¸¶Áö¸·´Ü°è");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½Ï·á¸¦ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ü°ï¿½");
 			String board_no = request.getParameter("board_no");
 			String productSeq = request.getParameter("product_seq");
 			String productCount = request.getParameter("product_count");			
 			String[] p_seq = productSeq.split(",", 20);
 			String[] p_count = productCount.split(",",20);
 			String contact = request.getParameter("contact");
-			String seller_id = "hello";          	// ÆÇ¸ÅÀÚ ¼¼¼Ç ID °ª bdao.getSeller_id(board_no);
-			String buyer_id = "asd";  			   	// ±¸¸ÅÀÚ  ¼¼¼Ç  ID °ª			
+			String seller_id = "hello";          	// ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ID ï¿½ï¿½ bdao.getSeller_id(board_no);
+			String buyer_id = "asd";  			   	// ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½  ï¿½ï¿½ï¿½ï¿½  ID ï¿½ï¿½			
 			ProductDTO buyProduct = new ProductDTO();		
 			for(int i =0; i<p_seq.length; i++) {				
 				String product_seq = p_seq[i];				
@@ -154,18 +154,18 @@ public class BuyerController extends HttpServlet {
 				buydao.insertBuyer(buyerdto);
 				int productUpdate = pdao.buyProductUpdate(product_seq, product_count);
 			}
-			System.out.println("¹°Ç°¼ö·®±îÁö ¹Ù·Î ¾÷µ¥ÀÌÆ®µÊ!");
-			System.out.println("buyer Å×ÀÌºí¿¡ ³»¿ë ÀúÀå");
+			System.out.println("ï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù·ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½!");
+			System.out.println("buyer ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			String buyTotal = buydao.totalPrice(board_no);			
-			BuyserverDTO buyServerdto = new BuyserverDTO(board_no,seller_id,buyer_id,buyTotal,"±¸¸Å´ë±âÁß");
+			BuyserverDTO buyServerdto = new BuyserverDTO(board_no,seller_id,buyer_id,buyTotal,"ï¿½ï¿½ï¿½Å´ï¿½ï¿½ï¿½ï¿½");
 			bsdao.insertBuyserver(buyServerdto);
-			System.out.println("buyserver Å×ÀÌºí¿¡ ±¸¸Å ÀúÀå");
+			System.out.println("buyserver ï¿½ï¿½ï¿½Ìºï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½");
 			int pointUpdate = mdao.usePoint(buyer_id,buyTotal);
-			System.out.println("member Å×ÀÌºí point »ç¿ë");
-			System.out.println("±¸¸Å ¿Ï·áµÈ »óÇ°µé  ProductÅ×ÀÌºí¿¡¼­ Update");
+			System.out.println("member ï¿½ï¿½ï¿½Ìºï¿½ point ï¿½ï¿½ï¿½");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½  Productï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ Update");
 			
 			
-			System.out.println("±¸¸Å ÃÖÁ¾ ¿Ï·á");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ï·ï¿½");
 			
 			String seller_contact = bdao.getSeller_id(board_no);
 			request.setAttribute("seller_contact", seller_contact);
@@ -177,7 +177,7 @@ public class BuyerController extends HttpServlet {
 		}
 		
 		else if(command.equals("/delivery.buy")) {
-			System.out.println("ÆÇ¸ÅÀÚ°¡ ¹°Ç°À» ¹è¼Û½ÃÄÑ¹ö·Áµû!~~~ ÄÁÆ®·Ñ·¯ µé¾î¿Í¹ö·Áµû!!");
+			System.out.println("ï¿½Ç¸ï¿½ï¿½Ú°ï¿½ ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ï¿½Û½ï¿½ï¿½Ñ¹ï¿½ï¿½ï¿½ï¿½ï¿½!~~~ ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ ï¿½ï¿½ï¿½Í¹ï¿½ï¿½ï¿½ï¿½ï¿½!!");
 			String board_no = request.getParameter("board_no");
 			String buyer_id = request.getParameter("buyer_id");
 			boolean buy_state = false;
@@ -191,7 +191,7 @@ public class BuyerController extends HttpServlet {
 		
 		
 		else if(command.equals("/buySMS.buy")) {
-			System.out.println("¹®ÀÚ Àü¼ÛµÉ²¨¾ß!!");
+			System.out.println("ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ÛµÉ²ï¿½ï¿½ï¿½!!");
 			String seller_contact = mdao.getContact((String)request.getAttribute("seller_contact"));
 			String buyer_contact = (String)request.getAttribute("buyer_contact");
 			String board_no = (String)request.getAttribute("board_no");
@@ -205,17 +205,17 @@ public class BuyerController extends HttpServlet {
 			for(int i=0; i<buyInfo.size(); i++) {				
 				p_name[i] = pdao.getProductName(buyInfo.get(i).getProduct_no());
 				p_count[i] = buyInfo.get(i).getBuy_count();				
-				msg +=  p_name[i] +" "+ p_count[i]+"°³" +" / "; 
+				msg +=  p_name[i] +" "+ p_count[i]+"ï¿½ï¿½" +" / "; 
 			}
 			
 			System.out.println(msg);
 			
 			System.out.println(seller_contact + " : " + buyer_contact);
-			System.out.println("Å×½ºÆ® ¿Ï·á ");
+			System.out.println("ï¿½×½ï¿½Æ® ï¿½Ï·ï¿½ ");
 			String to = "82"+seller_contact;
             String from="33644643087";
-            String finalMsg = "ÆÇ¸ÅÇÏ½Ç ¹°Ç° Áß¿¡¼­ "+msg+"±¸¸Å½ÅÃ»ÇÏ¿´½À´Ï´Ù. ¹°Ç°À» ¹ß¼ÛÇØÁÖ¼¼¿ä."
-            		+ "±¸¸ÅÀÚ : " +buyer_contact;              
+            String finalMsg = "ï¿½Ç¸ï¿½ï¿½Ï½ï¿½ ï¿½ï¿½Ç° ï¿½ß¿ï¿½ï¿½ï¿½ "+msg+"ï¿½ï¿½ï¿½Å½ï¿½Ã»ï¿½Ï¿ï¿½ï¿½ï¿½ï¿½Ï´ï¿½. ï¿½ï¿½Ç°ï¿½ï¿½ ï¿½ß¼ï¿½ï¿½ï¿½ï¿½Ö¼ï¿½ï¿½ï¿½."
+            		+ "ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : " +buyer_contact;              
             
             String message = URLEncoder.encode(finalMsg, "UTF-8");
             

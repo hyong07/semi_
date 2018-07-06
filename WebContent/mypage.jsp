@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -54,6 +56,7 @@
 	width: 100%;
 	height: 100%;
 	margin: 0px auto;
+	background-color:rgba(0, 0, 0, 0.03);
 }
 
 #headerwrapper {
@@ -110,7 +113,7 @@
 #content {
 	height: 100%;
 	width: 100%;
-	margin-bottom:40px;
+	margin-bottom: 40px;
 }
 
 #bottomwrapper {
@@ -145,6 +148,10 @@
 #card {
 	cursor: pointer;
 }
+.card-header{
+	background-color:#4f70ce;
+	color : white;
+}
 
 /* Mypage css 끝*/
 </style>
@@ -162,7 +169,7 @@
 		<nav class="navbar navbar-expand-md navbar-dark bg-secondary"
 			id="topnavbar">
 		<div id="logocontainer">
-			<a class="navbar-brand" href="#">Auction GO!</a>
+			<a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>
 		</div>
 
 
@@ -229,7 +236,7 @@
 						<div class="input-group-prepend">
 							<span><p class="lead mr-3">
 									<ion-icon name="person"></ion-icon>
-									이유림님
+									${sessionScope.loginid} 님
 								</p></span>
 						</div>
 						<p class="lead">
@@ -245,14 +252,16 @@
 									class="active nav-link btn-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.jsp"
+								<li class="nav-item"><a href="mypage_purchase.mem"
 									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.jsp">판매등록내역</a></li>
+									href="mypage_sale.mem">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="#">내 정보</a></li>
+									href="mypage_pwcheck.jsp">내 정보</a></li>
+								<li class="nav-item"><a
+									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
@@ -281,8 +290,8 @@
 										</div>
 									</div>
 									<div id="buttondiv">
-										<a href="mypage_purchase.jsp" class="btn btn-secondary" id="morebutton">더보기
-											+</a>
+										<a href="mypage_purchase.jsp" class="btn btn-secondary"
+											id="morebutton">더보기 +</a>
 									</div>
 								</div>
 							</div>
@@ -311,8 +320,8 @@
 										</div>
 									</div>
 									<div id="buttondiv">
-										<a href="mypage_auction.jsp" class="btn btn-secondary" id="morebutton">더보기
-											+</a>
+										<a href="mypage_auction.jsp" class="btn btn-secondary"
+											id="morebutton">더보기 +</a>
 									</div>
 								</div>
 							</div>
@@ -320,29 +329,19 @@
 								<div class="card-header">판매등록내역</div>
 								<div class="card-body">
 									<div class="card-group">
-										<div class="card mr-3">
-											<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">배트맨모자</h5>
+										<c:forEach var="item" items="${saleboard}" begin="0" step="1" end="2" varStatus="status">
+											<div class="card mr-3">
+												<img class="card-img-top" src="${mainfilepath[status.index]}" alt="사진이 없습니다.">
+												<div class="card-body">
+													<h5 class="card-title">${item.title}</h5>
+													<p>${item.contents }</p>
+												</div>
 											</div>
-										</div>
-										<div class="card mr-3">
-											<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">푹신 쇼파</h5>
-											</div>
-										</div>
-										<div class="card">
-											<img class="card-img-top" src="notebook.jpg"
-												alt="Card image cap">
-											<div class="card-body">
-												<h5 class="card-title">노트북</h5>
-											</div>
-										</div>
+										</c:forEach>
 									</div>
 									<div id="buttondiv">
-										<a href="mypage_sale.jsp" class="btn btn-secondary" id="morebutton">더보기
-											+</a>
+										<a href="mypage_sale.jsp" class="btn btn-secondary"
+											id="morebutton">더보기 +</a>
 									</div>
 								</div>
 							</div>

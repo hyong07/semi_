@@ -175,7 +175,7 @@ $(document).ready(function(){
    });
   
    $("#okButton").click(function(){
-	   var buyProduct = new Array();
+      var buyProduct = new Array();
        var productCount = new Array();
        var board_no = ${bdto.board_seq};
        var contact = $("#contact").val();
@@ -189,12 +189,12 @@ $(document).ready(function(){
           productCount.push($(this).text());
        })
        
+       jQuery.ajaxSettings.traditional = true;
        
-       
-	   var check = confirm("구매 진행 하시겠습니까 ?");
-	   if(check==1){
-		   location.href = "buyComplete.buy?product_seq="+buyProduct+"&product_count="+productCount+"&board_no="+board_no+"&contact="+contact;   
-	   }	   
+      var check = confirm("구매 진행 하시겠습니까 ?");
+      if(check==1){
+         location.href = "buyComplete.buy?product_seq="+buyProduct+"&product_count="+productCount+"&board_no="+board_no+"&contact="+contact;   
+      }      
    })
 })
 
@@ -222,11 +222,14 @@ function buyStart(){
                url:"selectbuyproduct.buy",
                type:"get",
                data:{buyProduct:buyProduct,productCount:productCount,board_no:board_no},
-               success:function(rep){			
-            	   for(var i=0; i<rep.length;i++){
+               success:function(rep){         
+                  for(var i=0; i<rep.length;i++){
                        $("#productCheckList").append("<tr><td>"+ rep[i].p_name +"<td>"+ rep[i].sell_price+ "<td>"+ productCount[i] +"</tr>");
-                    }                  
+                       $("#buyButton").attr("data-target","#myModal");
+                  }
+                 
                }
+               
             })
            
       }
@@ -476,7 +479,14 @@ function buyStart(){
                                                  <select id="product">
                                                     <option>상품을 선택해주세요.</option>
                                                     <c:forEach var="item" items="${result}">
-                                                       <option value="${item.product_seq }">${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
+                                                    	<c:choose>
+                                                    		<c:when test="${item.sell_count } == 0">
+                                                    			<option value="${item.product_seq }" readonly>${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
+                                                    		</c:when>
+                                                    		<c:otherwise>
+                                                    			<option value="${item.product_seq }">${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
+                                                    		</c:otherwise>
+                                                    	</c:choose>
                                                  </c:forEach>      
                                                  </select>
                                               </td>
@@ -505,7 +515,7 @@ function buyStart(){
                      
                      </tbody>
                      <thead>
-                         <th colspan="5" class="text-right" id="tfoot">총 구매 금액  : <span id="totalPrice"></span><input class="btn btn-secondary ml-4 mr-4" data-target="#myModal" data-toggle="modal" id="buyButton"  onclick="buyStart()" value="구매 신청"></th>
+                         <th colspan="5" class="text-right" id="tfoot">총 구매 금액  : <span id="totalPrice"></span><button type="button" class="btn btn-secondary ml-4 mr-4" data-toggle="modal" id="buyButton"  onclick="buyStart()" value="구매 신청"></th>
                       </thead>
                    </table>
                    </div>

@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
@@ -129,13 +130,18 @@
 	width: 80%;
 }
 
-#productlist{
+#productlist {
+	width: 100%;
+	margin-bottom: 6px;
 	border: 1px solid rgba(0, 0, 0, 0.125);
+	box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
 }
 
-.card-header{
-	background-color:#4f70ce;
-	color : white;
+.card-header {
+	background-color: #4f70ce;
+	color: white;
 }
 
 #app {
@@ -192,14 +198,27 @@
 	border: 1px solid #ccc;
 	box-shadow: 0 1px 3px #ddd;
 }
+
+.page-btn {
+	padding-top: 15px;
+	padding-bottom: 15px;
+	margin: 0;
+	text-align: right;
+}
+
+.page-btn .btn:focus {
+	box-shadow: none;
+}
+
+#collapseThree thead th {
+	width: 100%;
+}
 /* Mypage css 끝*/
 </style>
 
 <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
-<script>
-	
-</script>
+
 </head>
 <body>
 
@@ -288,42 +307,76 @@
 									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.mem"
-									class="active nav-link btn-secondary">구매신청내역</a></li>
+								<li class="nav-item"><a href="mypage_purchase.jsp"
+									class="nav-link text-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>
-								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.mem">판매등록내역</a></li>
+								<li class="nav-item"><a
+									class="active nav-link btn-secondary" href="mypage_sale.mem">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_pwcheck.jsp">내 정보</a></li>
-								<li class="nav-item"><a
-									class="nav-link text-secondary" href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
+								<li class="nav-item"><a class="nav-link text-secondary"
+									href="mypage_pwcheck2.jsp">회원탈퇴</a></li>
 							</ul>
 						</div>
 						<div id="cardcontainer">
-	
+							<div class="card">
+								<div class="card-header">판매등록내역</div>
+								<div class="card-body">
 									<div id="app">
-									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>구매신청목록</h4>
-									<c:forEach var="no" items="${board_no}" varStatus="status">
+										<h4 class="accordion-toggle" data-toggle="collapse"
+											data-parent="#accordion" href="#collapseThree"
+											style="cursor: pointer"><ion-icon name="clipboard" class="mt-1"></ion-icon>판매물품목록 확인</h4>
+										<div class="table panel-collapse collapse" id="collapseThree">
+											<table>
+												<thead>
+													<th>상품명</th>
+													<th class="cart_item_price text-center">가격</th>
+													<th class="cart_item_qty text-center">수량</th>
+												</thead>
+												<tbody>
+													<c:forEach var="item" items="${pdto}" varStatus="status">
+														<tr>
+															<td>${item.p_name }
+																<td class="text-center">${item.sell_price }원
+													
+															<td class="text-center">${item.sell_count }개
+												
+														</tr>
+											</c:forEach>
+										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan="6" align="right"></td>
+											</tr>
+										</tfoot>
+									</table>
+									</div>
+								</div>
+									<div id="app">
+									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>구매신청명단</h4>
+									<c:forEach var="id" items="${buyerid}" varStatus="status">
 										<div class="cart_content">
 											<table class="table">
 												<thead>
-													<th>판매자ID</th>
+													<th>구매자ID</th>
 													<th>상품명</th>
 													<th class="cart_item_qty">수량</th>
 													<th class="cart_item_price">가격</th>
 													<th class="cart_item_tprice">총가격</th>
+													
 												</thead>
 												<tbody>
 													<c:forEach var="item" items="${bdto}" varStatus="status">
 														<c:choose>
-															<c:when test="${item.board_no == no}">
+															<c:when test="${item.buyer_id == id}">
 																<tr>
-																	<td>${item.seller_id }</td>
+																	<td>${item.buyer_id }</td>
 																	<td>${buyproduct[status.index]}</td>
 																	<td class="cart_item_qty"><input type="text" value="${item.buy_count }" size="3" ; readonly></td>
 																	<td class="cart_item_price">${item.buy_price }</td>
 																	<td class="cart_item_tprice">${item.buy_price * item.buy_count }</td>
+																	<input type="hidden" id="board_seq" value="${item.board_no }">
 																<tr>
 															</c:when>
 														</c:choose>
@@ -332,7 +385,7 @@
 												<tfoot>
 													<tr>
 														
-														<td colspan="6" align="right"><input type="button" value="물품수령완료"  onclick="deliverproduct(this)" class="btn btn-secondary"></td>
+														<td colspan="6" align="right"><input type="button" value="물품배송" onclick="deliverproduct(this)" id="${id}" class="btn btn-secondary"></td>
 													</tr>
 												</tfoot>
 											</table>
@@ -340,81 +393,102 @@
 										</div>
 									</c:forEach>
 								</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-
-
-		<div id="bottomwrapper" class="bg-secondary">
-			<div id="footer">
-				<div class="text-white">
-					<div class="container">
-						<div class="row">
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4 text-white">Auctino GO!</h2>
-								<p class="text-white">A company for whatever you may need,
-									from website prototyping to publishing</p>
-							</div>
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4 text-white">Mapsite</h2>
-								<ul class="list-unstyled">
-									<a href="#" class="text-white">Home</a>
-									<br>
-									<a href="#" class="text-white">About us</a>
-									<br>
-									<a href="#" class="text-white">Our services</a>
-									<br>
-									<a href="#" class="text-white">Stories</a>
-								</ul>
-							</div>
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4">Contact</h2>
-								<p>
-									<a href="tel:+246 - 542 550 5462" class="text-white"> <i
-										class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 -
-										542 550 5462
-									</a>
-								</p>
-								<p>
-									<a href="mailto:info@pingendo.com" class="text-white"> <i
-										class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction
-										Go.com
-									</a>
-								</p>
-								<p>
-									<a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white"
-										target="_blank"> <i
-										class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365
-										Park Street, NY
-									</a>
-								</p>
-							</div>
-							<div class="p-4 col-md-3">
-								<h2 class="mb-4 text-light">Subscribe</h2>
-								<form>
-									<fieldset class="form-group text-white">
-										<label for="exampleInputEmail1">Get our newsletter</label> <input
-											type="email" class="form-control" placeholder="Enter email">
-									</fieldset>
-									<button type="submit" class="btn btn-outline-secondary">Submit</button>
-								</form>
-							</div>
-						</div>
-						<div class="row">
-							<div class="col-md-12 mt-3">
-								<p class="text-center text-white">© Copyright 2017 Pingendo
-									- All rights reserved.</p>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+	</div>
+
+
+	<div id="bottomwrapper" class="bg-secondary">
+		<div id="footer">
+			<div class="text-white">
+				<div class="container">
+					<div class="row">
+						<div class="p-4 col-md-3">
+							<h2 class="mb-4 text-white">Auctino GO!</h2>
+							<p class="text-white">A company for whatever you may need,
+								from website prototyping to publishing</p>
+						</div>
+						<div class="p-4 col-md-3">
+							<h2 class="mb-4 text-white">Mapsite</h2>
+							<ul class="list-unstyled">
+								<a href="#" class="text-white">Home</a>
+								<br>
+								<a href="#" class="text-white">About us</a>
+								<br>
+								<a href="#" class="text-white">Our services</a>
+								<br>
+								<a href="#" class="text-white">Stories</a>
+							</ul>
+						</div>
+						<div class="p-4 col-md-3">
+							<h2 class="mb-4">Contact</h2>
+							<p>
+								<a href="tel:+246 - 542 550 5462" class="text-white"> <i
+											class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542
+									550 5462
+								</a>
+							</p>
+							<p>
+								<a href="mailto:info@pingendo.com" class="text-white"> <i
+											class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction
+									Go.com
+								</a>
+							</p>
+							<p>
+								<a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white"
+											target="_blank"> <i
+											class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365
+									Park Street, NY
+								</a>
+							</p>
+						</div>
+						<div class="p-4 col-md-3">
+							<h2 class="mb-4 text-light">Subscribe</h2>
+							<form>
+								<fieldset class="form-group text-white">
+									<label for="exampleInputEmail1">Get our newsletter</label> <input
+												type="email" class="form-control" placeholder="Enter email">
+								</fieldset>
+								<button type="submit" class="btn btn-outline-secondary">Submit</button>
+							</form>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-12 mt-3">
+							<p class="text-center text-white">© Copyright 2017 Pingendo -
+								All rights reserved.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	</div>
+	<script>
+		function toggleChevron(e) {
+			$(e.target).prev('.panel-heading').find("i.indicator").toggleClass(
+					'glyphicon-chevron-down glyphicon-chevron-up');
+		}
+		$('#accordion').on('hidden.bs.collapse', toggleChevron);
+		$('#accordion').on('shown.bs.collapse', toggleChevron);
+		
+		function deliverproduct(e){
+			
+				var board_seq = $("#board_seq").val();
+				var buyerid = $(e).attr('id');
+				
+				var result = confirm("구매자에게 물품을 배송 하셨습니까 ?")
+				
+				if(result == 1){
+					location.href = "delivery.buy?board_no="+board_seq+"&buyer_id="+buyerid;
+				}
+		}
+	</script>
 
 
 

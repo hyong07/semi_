@@ -48,12 +48,12 @@ public class ProductDAO {
 	   }
      
    public int addProduct(String sell_type, ProductDTO dto) throws Exception{
-      System.out.println("¿©±â·Î¿À³ª¿ä? " + sell_type);
+      System.out.println("ï¿½ï¿½ï¿½ï¿½Î¿ï¿½ï¿½ï¿½ï¿½ï¿½? " + sell_type);
       Connection con = DBUtils.getConnection();
       String sql = null;
       PreparedStatement pstat=null;
    if(sell_type.equals("a")) { 
-      System.out.println("µé¾î¿À³ª¿ä?");
+      System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?");
       System.out.println(dto.getBoard_no() + " : "+ dto.getCategory() + " : " + dto.getDetail_category() + " : " + dto.getSell_price() + " :" + dto.getSell_count() + " : " + dto.getP_name());;
 
       sql = "insert into product values(?,product_seq.nextval,?,?,?,default,'y',?)";
@@ -83,9 +83,9 @@ public class ProductDAO {
    System.out.println(dto.getSell_count());
    System.out.println(dto.getMain_product());
    System.out.println(dto.getP_name());   
-   System.out.println("¹°Ç°ÀÎ¼­Æ® ¿Ö¾Èµé¾î°¡");
+   System.out.println("ï¿½ï¿½Ç°ï¿½Î¼ï¿½Æ® ï¿½Ö¾Èµï¿½î°¡");
    int result = pstat.executeUpdate();
-   System.out.println("¹°Ç°ÀÎ¼­Æ® µ¹¾Æ°¨?");
+   System.out.println("ï¿½ï¿½Ç°ï¿½Î¼ï¿½Æ® ï¿½ï¿½ï¿½Æ°ï¿½?");
    con.commit();
     pstat.close();
     con.close();
@@ -273,4 +273,31 @@ public class ProductDAO {
     	  return result;    	  
       }
 
+       public ProductDTO selectoneproduct(String seq) throws Exception{
+           Connection con = DBUtils.getConnection();
+           String sql = "select * from product where product_seq=?";
+           PreparedStatement pstat = con.prepareStatement(sql);
+           pstat.setString(1, seq);
+
+           ResultSet rs = pstat.executeQuery();
+           ProductDTO dto = new ProductDTO();
+           while(rs.next()) {
+              
+              dto.setBoard_no(rs.getString(1));
+              dto.setProduct_seq(rs.getString(2));
+              dto.setCategory(rs.getString(3));
+              dto.setDetail_category(rs.getString(4));
+              dto.setSell_price(rs.getString(5));
+              dto.setSell_count(rs.getString(6));
+              dto.setMain_product(rs.getString(7));
+              dto.setP_name(rs.getString(8));
+
+           }
+           con.commit();
+           con.close();
+           pstat.close();
+        
+           return dto;
+        }
+      
 }

@@ -11,10 +11,10 @@ import semi.dbutils.DBUtils;
 import semi.dto.MemberDTO;
 
 public class MemberDAO {
-	
+	    
 	public boolean isIdExist(String id) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "SELECT * FROM MEMBERS WHERE ID =?";
+		String sql = "SELECT * FROM MEMBER WHERE ID =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, id);
 		ResultSet rs = pstat.executeQuery();
@@ -49,7 +49,6 @@ public class MemberDAO {
 	}
 	
 	public boolean idpwcheck(String id, String pw) throws Exception {
-		System.out.println(id + " : " + pw);
 		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =? AND PW =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -66,15 +65,16 @@ public class MemberDAO {
 		return result;
 	}
 	
-	public List<MemberDTO> selectMember() throws Exception{
+	public MemberDTO selectMember(String id) throws Exception{
 		Connection con = DBUtils.getConnection();
-		String sql = "SELECT * FROM MEMBER";
+		String sql = "SELECT * FROM MEMBER WHERE ID=?";
 		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, id);
 		ResultSet rs = pstat.executeQuery();
-		List<MemberDTO> list = new ArrayList<>();
+		
+		MemberDTO dto = new MemberDTO();
 		
 		while(rs.next()) {
-			MemberDTO dto = new MemberDTO();
 			dto.setId(rs.getString("id"));
 			dto.setName(rs.getString("name"));
 			dto.setPhone(rs.getString("phone"));
@@ -82,13 +82,97 @@ public class MemberDAO {
 			dto.setAddress(rs.getString("address"));
 			dto.setPoint(rs.getString("point"));
 			
-			list.add(dto);
 		}
-		con.commit();
-		pstat.close();
-		con.close();
-		return list;
+		return dto;
 	}
+	
+	public int modifymember(String id,String name,String email,String phone,String address) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET NAME=?,EMAIL=?,PHONE=?,ADDRESS=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, name);
+		pstat.setString(2, email);
+		pstat.setString(3, phone);
+		pstat.setString(4, address);
+		pstat.setString(5, id);
+		
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	public int changepw(String id,String pw) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "UPDATE MEMBER SET PW=? WHERE ID=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		pstat.setString(1, pw);
+		pstat.setString(2, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	public int leaveMember(String id) throws Exception{
+		Connection con = DBUtils.getConnection();
+		String sql = "delete from member where id=?";
+		PreparedStatement pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, id);
+		
+		int result = pstat.executeUpdate(); 
+		
+		con.commit();
+		con.close();
+		pstat.close();
+		
+		return result;
+	}
+	
+	public int usePoint(String id,String totalPrice) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "update member set point = (select point from member where id=?)-? where id=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, id);
+	      pstat.setString(2, totalPrice);
+	      pstat.setString(3, id);
+	      
+	      int result = pstat.executeUpdate();
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      
+	      return result;
+	      
+	   }
+	   
+	   
+	   public String getContact(String id) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "select phone from member where id=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, id);
+	      ResultSet rs = pstat.executeQuery();
+	      String result = null;
+	      while(rs.next()) {
+	         result = rs.getString(1);
+	      }
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      
+	      return result;
+	   }
+	
+	
 	
 	public int usePoint(String id,String totalPrice) throws Exception{
 		Connection con = DBUtils.getConnection();
