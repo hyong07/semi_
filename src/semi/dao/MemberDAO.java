@@ -11,7 +11,7 @@ import semi.dbutils.DBUtils;
 import semi.dto.MemberDTO;
 
 public class MemberDAO {
-	
+	    
 	public boolean isIdExist(String id) throws Exception{
 		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =?";
@@ -210,7 +210,38 @@ public class MemberDAO {
          pstat.close();
          return result;
       }
-	
-	
-	
+	 
+	 public int usePoint(String id,String totalPrice) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "update member set point = (select point from member where id=?)-? where id=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, id);
+	      pstat.setString(2, totalPrice);
+	      pstat.setString(3, id);
+	      
+	      int result = pstat.executeUpdate();
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      
+	      return result;
+	      
+	   }
+	  public String getContact(String id) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "select phone from member where id=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, id);
+	      ResultSet rs = pstat.executeQuery();
+	      String result = null;
+	      while(rs.next()) {
+	         result = rs.getString(1);
+	      }
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      
+	      return result;
+	   }
+
 }

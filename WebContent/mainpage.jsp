@@ -10,7 +10,6 @@
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -20,8 +19,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-	
-/*   primary: #12bbad, */ 
+   
+/*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
 /*   dark: #151515, */
@@ -30,42 +29,42 @@
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
 
-	body{
-		  
-	}
+   body{
+        
+   }
 
-	div{
-		border: 0px solid black;
+   div{
+      border: 0px solid black;
         box-sizing: border-box;
               
-	}
-	
-	#topnavicontainer{
-		margin: 0px auto;
-		width:100%;
-		
-	}
-	
-	#topnavbar{ 
-/* 	    position: fixed; */
-	 	width: 100%;
-	    height: 40px;
-	    font-size: 20px;   
-	    margin: 0px auto;   
-	    opacity: 0.9;
-	}
-	
-	#allwrapper{
-/* 		opacity: 0.8; */
-		width:100%;
-		height:100%;
-		margin: 0px auto;
-		
-	}
-	#headerwrapper{
-		height:21%;	
-		width:100%;
-	}
+   }
+   
+   #topnavicontainer{
+      margin: 0px auto;
+      width:100%;
+      
+   }
+   
+   #topnavbar{ 
+/*        position: fixed; */
+       width: 100%;
+       height: 40px;
+       font-size: 20px;   
+       margin: 0px auto;   
+       opacity: 0.9;
+   }
+   
+   #allwrapper{
+/*       opacity: 0.8; */
+      width:100%;
+      height:100%;
+      margin: 0px auto;
+      
+   }
+   #headerwrapper{
+      height:21%;   
+      width:100%;
+   }
 
 
 	#header{
@@ -111,66 +110,70 @@
 		margin: 0 20px;
 		outline: none;
   
-	}
-	#centerwrapper{
-		height:64%;
-/* 		height:auto; */
-		width:80%;
-		margin: 0px auto;
-		
-	}
-	
-	#content{
+   }
+   #centerwrapper{
+      height:64%;
+/*       height:auto; */
+      width:80%;
+      margin: 0px auto;
+      
+   }
+   
+   #content{
 
-		height:100%;
-		width:100%;		
-	}
-	
-	#bottomwrapper{
-		height:15%;
-		width:100%;
-	}
-	#footer{
-		height:100%;
-		width:100%;
-		 
-	}
-
+      height:100%;
+      width:100%;
+      background: #f4f4f4;      
+   }
+   
+   #bottomwrapper{
+      height:15%;
+      width:100%;
+   }
+   #footer{
+      height:100%;
+      width:100%;
+      
+   }
+   
 </style>
 
 
 </head>
 <body>
-	<div id="topnavicontainer">
-		<nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
-	     	<div id="logocontainer">
-	      	<a class="navbar-brand" href="#">Auction GO!</a>  
-	</div>
-	   
-	<div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
-	     <ul class="navbar-nav">
-	       <li class="nav-item">
-	         
-	       
-	    <c:choose>
-		<c:when test="${sessionScope.loginid != null}">
-		 <a class="nav-link" href="logout.mem">
-	            <i class="fa fa-user fa-fw" ></i> Logout</a>
-	              </c:when>
-	              <c:otherwise>
-	               <a class="nav-link" href="login.jsp">
-	               <i class="fa fa-user fa-fw" ></i> Login</a>
-	              </c:otherwise>
+<%
+response.setCharacterEncoding("utf8");
+%>
+   <div id="topnavicontainer">
+      <nav class="navbar navbar-expand-md navbar-dark bg-secondary" id="topnavbar" >
+           <div id="logocontainer">
+            <a class="navbar-brand" href="mainpage.jsp">Auction GO!</a>  
+   </div>
+      
+   <div class="collapse navbar-collapse text-center justify-content-end" id="menucontainer">
+        <ul class="navbar-nav">
+          <li class="nav-item">
+            
+          
+       <c:choose>
+      <c:when test="${sessionScope.loginid != null}">
+       <a class="nav-link" href="logout.mem">
+               <i class="fa fa-user fa-fw" ></i> Logout</a>
+                 </c:when>
+                 <c:otherwise>
+                  <a class="nav-link" href="login.jsp">
+                  <i class="fa fa-user fa-fw" ></i> Login</a>
+                 </c:otherwise>
      </c:choose>
-	       </li>
-	       <li class="nav-item">
-	           <a class="nav-link" href="terms_of_use.jsp">
-	            <i class="fa fa-user fa-fw" ></i> Sign up</a>
-	       </li> 
-	     </ul>  
-	        <a class="btn navbar-btn ml-2 btn-secondary text-white" href="mypage.jsp">
-	        <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
-	         <span class="navbar-toggler-icon" ></span>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="join.jsp">
+               <i class="fa fa-user fa-fw" ></i> Sing up</a>
+          </li> 
+        </ul>  
+           <a class="btn navbar-btn ml-2 btn-secondary text-white">
+           <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
+            <span class="navbar-toggler-icon" ></span>
      </div>
    
    </nav>
@@ -330,12 +333,12 @@
       </div>
     </div>
   </div>
-		
+      
 
-		</div>
-	
-	</div>
-	
+      </div>
+   
+   </div>
+   
 </div>
 
 

@@ -143,6 +143,13 @@ public class Board_ProductContoller extends HttpServlet {
 				return;
 			}
 			
+			  else if(command.equals("/checkcount.bo")) {
+		             String product_seq = request.getParameter("product_seq");             
+		             String count = productdao.getproductcount(product_seq);
+		             new Gson().toJson(count, response.getWriter());
+		              return;
+		          }
+			
 			
 			 else if(command.equals("/mainfilename.bo")) {
 		            String board_no = request.getParameter("board_no");
@@ -300,6 +307,14 @@ public class Board_ProductContoller extends HttpServlet {
         new Gson().toJson(main_productName, response.getWriter());
         return;
      }
+			
+    else if(command.equals("/pointCharge.bo")) {
+        String point = request.getParameter("point");
+        System.out.println(point);
+        request.setAttribute("point", point);
+        isRedirect=false;
+        dst = "moneyTest.jsp";
+     }        
 		    
     else if(command.equals("/getEndHour.bo")) {
     	String seq = request.getParameter("seq");
@@ -339,14 +354,17 @@ public class Board_ProductContoller extends HttpServlet {
 				System.out.println(pdto.getDetail_category());
 				List<FileDTO> flist = new ArrayList<>();
 				
-				flist = filedao.selectFile(seq);
+		   		flist = filedao.selectFile(seq);
 				System.out.println(flist.size());
 
+				List<ProductDTO> result = new ArrayList<>();
+	            result = productdao.selectProduct(seq);
+				
 				request.setAttribute("bdto",bdto);
 				System.out.println(bdto.getBidunit() + " dyrjtdl............¸Â¸·.......");
 				request.setAttribute("pdto", pdto);
 				request.setAttribute("flist", flist);
-			
+				 request.setAttribute("result", result);
 				
 				String end = boarddao.getEndHour(seq);
 				request.setAttribute("end", end);

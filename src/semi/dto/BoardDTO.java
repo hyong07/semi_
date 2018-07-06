@@ -17,7 +17,7 @@ public class BoardDTO {
 	public BoardDTO() {
 		super();
 	}
-	
+	   
 	public BoardDTO(String board_seq, String seller_id, String title, String contents, String write_date, String sell_type,
 			String sell_status, String end_date, String viewcount, String bidunit, String bidcnt) {
 		super();

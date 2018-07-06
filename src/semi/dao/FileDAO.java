@@ -19,9 +19,9 @@ public class FileDAO {
 		
 		String sql = null;
 		PreparedStatement pstat = null;
-		System.out.println("file ¿ä±â!!");
+		System.out.println("file å ì™ì˜™å ï¿½!!");
 		if(!(category2==null)) {
-			System.out.println("file ¿ä±â");
+			System.out.println("file å ì™ì˜™å ï¿½");
 			
 			sql =
 					"select f.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (f.main_files='y') ";
@@ -33,7 +33,7 @@ public class FileDAO {
 		}
 
 		else {
-			System.out.println("file ¿ä±â??");
+			System.out.println("file å ì™ì˜™å ï¿½??");
 			sql =
 					"select f.* from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
 			pstat = con.prepareStatement(sql);
@@ -121,7 +121,7 @@ public class FileDAO {
 		}
 		
 		public int updateFile(String board_no, String mainfilename) throws Exception{
-			System.out.println("¾÷µ¥ÀÌÆ®");
+			System.out.println("å ì™ì˜™å ì™ì˜™å ì™ì˜™íŠ¸");
 			
 			Connection con = DBUtils.getConnection();
 			String sql = "update files set main_files = 'y' where board_no = ? and original_file_name=?";
@@ -161,6 +161,27 @@ public class FileDAO {
 				pstat.close();
 				con.close(); 
 			   return list;
+		   }
+		
+		  public List<String> mainFileName(String id) throws Exception{
+			   Connection con = DBUtils.getConnection();
+			   String sql =
+		               "select f.system_file_name from board b, product p, files f where (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') and (b.seller_id = ?) and (b.sell_type = 's')";
+			   PreparedStatement pstat = con.prepareStatement(sql);
+			   pstat.setString(1, id);
+			   ResultSet rs = pstat.executeQuery();
+			   List<String> fdto = new ArrayList<>();
+			   
+			   while(rs.next()) {
+				   
+				   fdto.add(rs.getString(1));
+		
+			   }
+			   con.commit();
+	           con.close();
+	           pstat.close();
+			  
+			   return fdto;
 		   }
 		
 

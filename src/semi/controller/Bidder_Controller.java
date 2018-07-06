@@ -111,7 +111,7 @@ public class Bidder_Controller extends HttpServlet {
 				dst = "returnpoint.mem?id="+buyer_id+"&point="+hold_price;
 
 
-			}
+			} 
 
 			if(command.equals("/endbid.bid")) {
 				String seq = request.getParameter("seq");

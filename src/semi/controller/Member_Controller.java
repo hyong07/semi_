@@ -2,6 +2,8 @@ package semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +15,15 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.dao.BoardDAO;
+import semi.dao.BuyerDAO;
+import semi.dao.FileDAO;
 import semi.dao.MemberDAO;
+import semi.dao.ProductDAO;
+import semi.dto.BoardDTO;
+import semi.dto.BuyerDTO;
 import semi.dto.MemberDTO;
+import semi.dto.ProductDTO;
 
 @WebServlet("*.mem")
 public class Member_Controller extends HttpServlet {
@@ -23,7 +32,7 @@ public class Member_Controller extends HttpServlet {
 		try {
 
 			request.setCharacterEncoding("utf8");
-			response.setCharacterEncoding("utf8");
+   			response.setCharacterEncoding("utf8");
 
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -77,6 +86,46 @@ public class Member_Controller extends HttpServlet {
 				}
 
 			}
+			
+
+			else if(command.equals("/member_modify.mem")) {
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				String address = request.getParameter("address");
+				
+				int result = dao.modifymember(id,name,email,phone,address);
+				
+				MemberDTO dto = dao.selectMember(id);
+				
+				if(result > 0) {
+					request.setAttribute("result", result);
+					request.setAttribute("dto", dto);
+					isRedirect = false;
+					dst = "mypage_info.mem";
+				}else {
+					request.setAttribute("result", result);
+					isRedirect = false;
+					dst = "error.html";
+				}
+			}
+			
+			else if(command.equals("/currentpwcheck.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				response.setCharacterEncoding("utf8");
+				response.setContentType("application/json");
+				
+				new Gson().toJson(result,response.getWriter());
+				
+				return;
+				
+			}
+			
 
 			else if(command.equals("/idCheck.mem")) {
 				String checkId = request.getParameter("checkId");
@@ -90,15 +139,7 @@ public class Member_Controller extends HttpServlet {
 				}
 				return;
 			}
-
-			else if(command.equals("/mypage_modify.mem")) {
-				String loginid = (String) request.getSession().getAttribute("loginid");
-				MemberDTO dto = dao.selectMember(loginid);
-				
-				request.setAttribute("dto", dto);
-				isRedirect = false;
-				dst = "mypage_modify.jsp";
-			}
+		
 			
 			else if(command.equals("/pwcheck.mem")) {
 				System.out.println("pwcheck 들어옴");
@@ -142,42 +183,6 @@ public class Member_Controller extends HttpServlet {
 					dst = "mypage_leave.jsp";
 				}
 			}
-			else if(command.equals("/member_modify.mem")) {
-				String id = request.getParameter("id");
-				String name = request.getParameter("name");
-				String email = request.getParameter("email");
-				String phone = request.getParameter("phone");
-				String address = request.getParameter("address");
-				
-				int result = dao.modifymember(id,name,email,phone,address);
-				
-				MemberDTO dto = dao.selectMember(id);
-				
-				if(result > 0) {
-					request.setAttribute("result", result);
-					request.setAttribute("dto", dto);
-					isRedirect = false;
-					dst = "mypage_info.mem";
-				}else {
-					request.setAttribute("result", result);
-					isRedirect = false;
-					dst = "error.html";
-				}
-			}
-			else if(command.equals("/currentpwcheck.mem")) {
-				String pw = request.getParameter("pw");
-				String loginid = (String)request.getSession().getAttribute("loginid");
-				
-				boolean result = dao.idpwcheck(loginid,pw);
-				
-				response.setCharacterEncoding("utf8");
-				response.setContentType("application/json");
-				
-				new Gson().toJson(result,response.getWriter());
-				
-				return;
-				
-			}
 			
 			else if(command.equals("/pwchange.mem")) {
 				String pw = request.getParameter("pw");
@@ -207,6 +212,91 @@ public class Member_Controller extends HttpServlet {
 					dst = "memberout.jsp";
 				}
 			}
+			
+			else if(command.equals("/mypage.mem")) {
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				BoardDAO bdao = new BoardDAO();
+				FileDAO fdao = new FileDAO();
+				
+				List<BoardDTO> saleboard = new ArrayList<>();
+				saleboard =  bdao.selectBoard(loginid);
+				
+				List<String> mainfile = new ArrayList<>();
+				mainfile = fdao.mainFileName(loginid);
+				List<String> mainfilepath = new ArrayList<>();
+				
+				for( int i = 0 ; i < mainfile.size(); i++) {
+					mainfilepath.add("image/"+saleboard.get(i).getBoard_seq()+"/"+mainfile.get(i));
+				}
+
+				request.setAttribute("saleboard", saleboard);
+				request.setAttribute("mainfilepath", mainfilepath);
+				
+				isRedirect = false;
+				dst = "mypage.jsp";
+			}
+			
+			else if(command.equals("/mypage_sale.mem")) {
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				BoardDAO bdao = new BoardDAO();
+				FileDAO fdao = new FileDAO();
+				
+				List<BoardDTO> result = new ArrayList<>();
+				result =  bdao.selectBoard(loginid);
+				List<String> mainfile = new ArrayList<>();
+				mainfile = fdao.mainFileName(loginid);
+				
+				List<String> mainfilepath = new ArrayList<>();
+						
+				for( int i = 0 ; i < mainfile.size(); i++) {
+					mainfilepath.add("image/"+result.get(i).getBoard_seq()+"/"+mainfile.get(i));
+				}
+			    	
+				request.setAttribute("result", result);
+				request.setAttribute("mainfilepath", mainfilepath);
+				
+				isRedirect = false;
+				dst = "mypage_sale.jsp";
+			}
+			
+			else if(command.equals("/mypage_sale_detail.mem")) {
+				String board_seq = request.getParameter("board_seq");
+				System.out.println("board _seq : " + board_seq);
+				ProductDAO pdao = new ProductDAO();
+				List<ProductDTO> pdto = new ArrayList<>();
+				pdto = pdao.selectProduct(board_seq);
+				
+				BuyerDAO bdao = new BuyerDAO();
+				List<BuyerDTO> bdto = new ArrayList<>();
+				bdto = bdao.selectBuyer(board_seq);
+
+				List<String> buyerid = new ArrayList<>();
+				buyerid = bdao.selectbuyerid(board_seq);
+				
+				List<String> buyproductname = new ArrayList<>();
+				
+				for(BuyerDTO tmp : bdto) {
+					buyproductname.add(bdao.selectbuyproduct(tmp.getProduct_no()));
+				}
+			
+
+				
+				request.setAttribute("buyproduct", buyproductname);
+				request.setAttribute("pdto", pdto);
+				request.setAttribute("bdto", bdto);
+				request.setAttribute("buyerid", buyerid);
+				
+				isRedirect = false;
+				dst = "mypage_sale_detail.jsp";
+			}
+			
+			else if(command.equals("/mypage_purchase.mem")) {
+				String loginid = (String)request.getSession().getAttribute("loginid");
+
+			}
+			
 			
 			else if(command.equals("/getPoint.mem")) {
 				System.out.println("포인트구하자");

@@ -18,7 +18,7 @@ public class BoardDAO {
 			PreparedStatement pstat = null;
 
 			if(!(category2==null)) {
-				System.out.println("����ī�װ����� �ִ°ž�" + category2);
+				System.out.println("占쏙옙占쏙옙카占쌓곤옙占쏙옙 占쌍는거억옙" + category2);
 
 				sql =
 						"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') order by b.board_seq desc";
@@ -29,7 +29,7 @@ public class BoardDAO {
 			}
 
 			else {
-				System.out.println("����ī�װ����� ���°ž�");
+				System.out.println("占쏙옙占쏙옙카占쌓곤옙占쏙옙 占쏙옙占승거억옙");
 
 				sql =
 						"select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y')  and (f.MAIN_FILES = 'y') order by b.board_seq desc";
@@ -59,7 +59,7 @@ public class BoardDAO {
 			con.commit();
 			 con.close();
 			 pstat.close();
-			System.out.println(list.size() + " �׷��� ������;��ϴµ�?"); 
+			System.out.println(list.size() + " 占쌓뤄옙占쏙옙 占쏘개占쏙옙占쏙옙占싶억옙占싹는듸옙?"); 
 			return list;
 			
 		}
@@ -263,7 +263,7 @@ public class BoardDAO {
 		con.commit();
 		pstat.close();
 		con.close();   	
-		System.out.println("����¿�~" + result);
+		System.out.println("占쏙옙占쏙옙쩔占�~" + result);
 		return result;     
                                 
 	}                                                     
@@ -287,6 +287,22 @@ public class BoardDAO {
 		return result;
 	}
 	
+	 public String getSeller_id(String board_no) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "select seller_id from board where board_seq=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, board_no);
+	      ResultSet rs = pstat.executeQuery();
+	      String result = null;
+	      while(rs.next()) {
+	         result = rs.getString(1);
+	      }
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      return result;      
+	   }
+	
 	   public int plusbidcnt(String seq) throws Exception {
 		      Connection con = DBUtils.getConnection();
 		      String sql =  "update board set bidcnt=(select bidcnt from board where board_seq=?)+1 where board_seq=?";
@@ -302,6 +318,39 @@ public class BoardDAO {
 		      
 		      
 		      pstat.close();
+		      return result;
+		   }
+	   
+	   
+	   public List<BoardDTO> selectBoard(String id)throws Exception {
+		      Connection con = DBUtils.getConnection();
+		      String sql = "select b.* from board b, product p, files f where (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') and (b.seller_id = ?) and (b.sell_type = 's')";
+		      
+		      PreparedStatement pstat = con.prepareStatement(sql);
+		      pstat.setString(1, id);
+
+		      ResultSet rs = pstat.executeQuery();
+		      List<BoardDTO> result = new ArrayList<>();
+
+		      while(rs.next()) {
+		         BoardDTO dto = new BoardDTO();
+		         dto.setBoard_seq(rs.getString(1));
+		         dto.setSeller_id(rs.getString(2));
+		         dto.setTitle(rs.getString(3));
+		         dto.setContents(rs.getString(4));
+		         dto.setWrite_date(rs.getString(5));
+		         dto.setSell_type(rs.getString(6));
+		         dto.setSell_status(rs.getString(7));
+		         dto.setEnd_date(rs.getString(8));
+		         dto.setViewcount(rs.getString(9));
+		         
+		         result.add(dto);
+		      }
+		      
+		      con.commit();
+	          con.close();
+	          pstat.close();
+		      
 		      return result;
 		   }
 	   
