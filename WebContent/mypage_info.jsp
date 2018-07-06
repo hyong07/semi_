@@ -143,7 +143,7 @@
 	text-align: right;
 }
 
-#cardbody{
+#cardbody{ 
 	margin-left:200px;
 }
 

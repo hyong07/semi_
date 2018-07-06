@@ -127,7 +127,7 @@
 /* Mypage css*/
 #cardcontainer {
 	width: 80%;
-}
+} 
 
 #productlist{
 	border: 1px solid rgba(0, 0, 0, 0.125);

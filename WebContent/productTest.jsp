@@ -7,9 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<script>
-		alert("탈퇴가 완료되었습니다. 메인페이지로 돌아갑니다.");
-		location.href = "mainpage.jsp";
-	</script>
+	<form action="test.bo" method="get">
+		<input type="radio" name="test" id="1" value="1">
+		<input type="radio" name="test" id="2" value="2">
+		<input type="radio" name="test" id="3" value="3">
+		<input type="submit"> 전송!
+			</form>
 </body>
-</html> 
+</html>
