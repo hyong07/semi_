@@ -239,13 +239,13 @@
                            $("#plusButton").attr("href","#auction_product");
                            $("#type_check").attr("value","a");
                            $("#type_check").text("경매");
-						   $("#sell_typeTest").val(rep);
+                     $("#sell_typeTest").val(rep);
                         }
                         else if(rep == "s"){                           
                            $("#plusButton").attr("href", "#plusproduct");
                            $("#type_check").attr("value","s");
                            $("#type_check").text("일반");
-						   $("#sell_typeTest").val(rep);
+                     $("#sell_typeTest").val(rep);
                         }                        
                      }
                   })
@@ -307,8 +307,8 @@
                     var end_date = $("#productenddate").val();
                  
                     var board_no = $("#board_no").val();
-        			var bidunit = $("#productbidunit").val();
-        			console.log(board_no + "이것좀");  
+                 var bidunit = $("#productbidunit").val();
+                 console.log(board_no + "이것좀");  
                     $.ajax({  
                         url:"auctionproductInfo.bo",
                         type:"get",
@@ -371,14 +371,14 @@
                
             });  
       var board_no = $("#board_no").val();
-     	$.ajax({
-     		url:"fileUpload.bo",
-     		type:"get",
-     		data:{board_no:board_no, sel_files:sel_files},
-     		success:function(rep){
-     			
-     		}
-     	})
+        $.ajax({
+           url:"fileUpload.bo",
+           type:"get",
+           data:{board_no:board_no, sel_files:sel_files},
+           success:function(rep){
+              
+           }
+        })
    }   
 </script>
 </head>
@@ -737,7 +737,7 @@
                 tdArr.push(td.eq(i).text());
              })
              var product_name = tdArr[1];
-           	 var board_no = $("#board_no").val();
+               var board_no = $("#board_no").val();
              $.ajax({
                 url:"productInfoDelete.bo",
                 type:"get",
