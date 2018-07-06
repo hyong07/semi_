@@ -50,7 +50,7 @@ public class Board_ArticleView_Comment extends HttpServlet {
 				dst = "articleView.bo";
 			
 			}else if(command.equals("/CommentDelete.co1")) {
-				System.out.println("�ù߾�");
+				System.out.println("�ù߾�");
 				int comment_seq = Integer.parseInt(request.getParameter("comment_seq"));
 				int result = board_comment.commentdelete(comment_seq);
 				

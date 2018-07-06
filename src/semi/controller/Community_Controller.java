@@ -46,8 +46,7 @@ public class Community_Controller extends HttpServlet {
 
 				request.setAttribute("result", result);
 			 	isRedirect = false;
-//				dst = "communitymain.jsp";
-				dst = "CommunityNavbar.do";
+				dst = "communitymain.jsp";
 
 			
 			}else if(command.equals("/ComunityWrite.do")) {
@@ -133,17 +132,14 @@ public class Community_Controller extends HttpServlet {
 			isRedirect = false;
 			dst = "CommunityArticleView.do";
 	
-		}else if(command.equals("/CommunityNavbar.do")) {
-				
-			int currentPage = 0;
-			String currentPageString = request.getParameter("currentPage");	
-			String search = request.getParameter("search");
+		}
+	
 			
-			if(currentPageString == null){
-				currentPage = 1;
-			}else{
-				currentPage = Integer.parseInt(currentPageString);
-			}
+			
+			
+			
+			if(isRedirect) {
+				response.sendRedirect(dst);
 
 			List<CommunityDTO>result = new ArrayList<>();
 			CommunityDAO dao1 = new CommunityDAO();
