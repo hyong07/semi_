@@ -33,77 +33,75 @@ public class BoardDTO {
 		this.bidunit = bidunit;
 		this.bidcnt = bidcnt;
 	}
-	
-	
-	
-	public String getBidunit() {
-		return bidunit;
-	}
-
-	public void setBidunit(String bidunit) {
-		this.bidunit = bidunit;
-	}
-
-	public String getBidcnt() {
-		return bidcnt;
-	}
-
-	public void setBidcnt(String bidcnt) {
-		this.bidcnt = bidcnt;
-	}
 
 	public String getBoard_seq() {
 		return board_seq;
 	}
+
 	public void setBoard_seq(String board_seq) {
 		this.board_seq = board_seq;
 	}
+
 	public String getSeller_id() {
 		return seller_id;
 	}
+
 	public void setSeller_id(String seller_id) {
 		this.seller_id = seller_id;
 	}
+
 	public String getTitle() {
 		return title;
 	}
+
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	public String getContents() {
 		return contents;
 	}
+
 	public void setContents(String contents) {
 		this.contents = contents;
 	}
+
 	public String getWrite_date() {
 		return write_date;
 	}
+
 	public void setWrite_date(String write_date) {
 		this.write_date = write_date;
 	}
+
 	public String getSell_type() {
 		return sell_type;
 	}
+
 	public void setSell_type(String sell_type) {
 		this.sell_type = sell_type;
 	}
+
 	public String getSell_status() {
 		return sell_status;
 	}
+
 	public void setSell_status(String sell_status) {
 		this.sell_status = sell_status;
 	}
+
 	public String getEnd_date() {
 		return end_date;
 	}
+
 	public void setEnd_date(String end_date) {
 		this.end_date = end_date;
 	}
-	
+
 	public String getViewcount() {
 		return viewcount;
 	}
+
 	public void setViewcount(String viewcount) {
 		this.viewcount = viewcount;
 	}
@@ -123,7 +121,8 @@ public class BoardDTO {
 	public void setBidcnt(String bidcnt) {
 		this.bidcnt = bidcnt;
 	}
-
-	
-	
 }
+	
+	
+	
+	

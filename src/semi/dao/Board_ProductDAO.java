@@ -16,6 +16,7 @@ public class Board_ProductDAO {
 		pstat.setString(2, "s");
 		ResultSet rs = pstat.executeQuery();
 		boolean result = rs.next();
+		con.commit();
 		pstat.close();
 		con.close();		
 		return result;		
@@ -52,7 +53,10 @@ public class Board_ProductDAO {
 		int result = 0;
 		while(rs.next()) {
 			result = rs.getInt(1);
-		}			
+		}
+		con.commit();
+		pstat.close();
+		con.close();
 		return result;
 	}
 	
@@ -66,10 +70,11 @@ public class Board_ProductDAO {
 		pstat.setString(4, contents);
 		pstat.setString(5, sell_type);		
 		int result = pstat.executeUpdate();
+		con.commit();
 		pstat.close();
-		con.close();		
+		con.close();
 		return result;
-	}
+	} 
 	
 	public int addProduct(int board_no, String category, String detail_category, String sell_price, String sell_count, String p_name) throws Exception{
 		Connection con = DBUtils.getConnection();
@@ -82,6 +87,7 @@ public class Board_ProductDAO {
 		pstat.setString(5, sell_count);
 		pstat.setString(6, p_name);
 		int result = pstat.executeUpdate();
+		con.commit();
 		pstat.close();
 		con.close();
 		
