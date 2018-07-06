@@ -63,18 +63,18 @@
 /*   --gray: #6c757d; */
 /*   --gray-dark: #343a40; */
 
-   body{
-        
-   }
+    body{ 
+       font-family: 'Roboto', sans-serif; 
+       font-size: 16px; 
+       line-height: 1.42; 
+    } 
 
-   div{
-      border: 0px solid black;
-      box-sizing: border-box;
+    div{ 
+       border: 0px solid black; 
+       box-sizing: border-box; 
               
-   }
-   
- 
-  
+    } 
+    
    #topnavicontainer{
       margin: 0px auto;
       width:100%;
@@ -139,80 +139,176 @@
   
    }
    
-      #allwrapper{
-
+   #allwrapper{
       width:100%;
       height:auto;
-      margin: 0px auto;
+      margin: 0px auto; 		
+  	  -webkit-filter:blur(0.1px);
+/*    background-color: #715555;  */
       
-      
-      
-     
    	}
 
    #centerwrapper{
-        height:100%;  
-/*      height:auto;   */
-      width:80%;
+      height:100%;  
+      width:60%;
       margin: 0px auto;
-  
-     
-      
    }
-   
-   #card #pcard{
-  overflow: hidden; 
-  text-overflow: ellipsis;
-  white-space: nowrap; 
-  width: 200px;
-  height: 35px;
+   			
+ 	#pcard{ 
+ 	  overflow: hidden;  
+ 	  text-overflow: ellipsis; 
+ 	  white-space: nowrap;  
 
-}
+ 	} 
    
-
-   #footer{
-	background:#7B68EE; 
-      width:100%;
+	  #footer{
+ 		background : #7B68EE;  
+	    width:100%;
   
    }
-   
-th {
-	background: #F0FFFF;
-}
-
-.bg-orange {
-	background: #d8622b;
-	color: #fff !important;
-}
-
-img {
-	width: 100%;
-	max-height: 560px;
-}
-
-a {
-	color: #696969;
-}
-
-
-
-.cover {
-	min-height:100%;
-  display:flex;
-  align-items:center
-}
-
-.card{
-	border-radius:5px;   
-    border: 2px solid #4f70ce;
-  	
-  
-  
-
-}
 
 /*  -----------------------------------------------------------------------------------------------------   */
+	   @import url('https://fonts.googleapis.com/css?family=Roboto'); 
+      { 
+      box-sizing: border-box; 
+     } 
 
+     .card { 
+       position: relative; 
+       float: left; 
+       width: 500px; 
+       height: 450px;
+       overflow: hidden; 
+       margin-top: 8px;     
+       margin-left: 320px;     
+       margin-right: 8px; 
+       margin-bottom: 8px;     
+/* 	   margin : auto;  */
+/*     border-radius: 8px;  */
+       box-shadow: 0 2px 2px rgba(11, 11, 11, 0.28); 
+       opacity : 0.9; 
+       
+	
+       
+     } 
+	
+     #cardheader { 
+       display: block; 
+       width: 100%; 
+       height: 25px; 
+       overflow: hidden; 
+ 	   padding : 1px; 
+/*     border: 2px solid #4f70ce;  */
+/*     border-radius: 6px;  */
+/*     background: rgba(11, 11, 11, 0.04);   */
+       div-shadow: 0 2px 2px rgba(11, 11, 11, 0.28); 
+      
+      
+        
+     } 
+		
+ 	 #carddiv{ 
+/*   	   box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;   */
+/*   	   -webkit-transition-duration: 0.3s;   */
+/*        transition-duration: 0.3s;   */
+      	
+ 	 }	 
+	
+		
+     .card__title { 
+       margin-top: 5px; 
+       margin-left: 70px; 
+       margin-right: 70px; 
+       display: block; 
+       font-size: 1.10rem; 
+       height: 45px; 
+       overflow: hidden; 
+   
+  
+	
+     } 
+
+    .card__content {       
+      
+        margin-left: 10px;  
+        margin-right: 10px;  
+        margin-bottom: 20px;  
+/*      display: block;   */
+        font-size: 1.0rem;  
+        height: 260px;  
+/*      overflow: hidden;   */
+    
+     } 
+	 #contentcard{
+	 	font-size: 1.0rem; 
+	 	height: 250px; 
+	 	
+	 }	
+
+
+     .card__meta { 
+       list-style: none; 
+       margin: 0; 
+       padding: 8px; 
+       display: flex; 
+       flex-direction: row; 
+       flex-wrap: no-wrap; 
+       align-items: center; 
+       justify-content: space-between; 
+/*        background: rgba(11, 11, 11, 0.04);   */
+       border-top: 1px solid rgba(11, 11, 11, 0.16); 
+       color: rgba(11, 11, 11, 0.68); 
+      
+     } 
+     .card__meta1 { 
+       list-style: none; 
+       position: relative; 
+       margin: 0; 
+       padding: 8px; 
+       display: flex; 
+       flex-direction: row; 
+       flex-wrap: no-wrap; 
+       align-items: center; 
+       justify-content: space-between; 
+/*        background: rgba(11, 11, 11, 0.04);  */
+       border-top: 1px solid rgba(11, 11, 11, 0.16); 
+       color: rgba(11, 11, 11, 0.68); 
+       
+     } 
+
+     .card__meta>li.likes::after { 
+       content: "\f004"; 
+       font-family: FontAwesome; 
+     } 
+
+     .card__meta>li.views::after { 
+       content: "\f06e"; 
+       font-family: FontAwesome; 
+     } 
+
+     .more::after { 
+       position: absolute; 
+       display: block; 
+       top: 8px; 
+       right: 16px; 
+       color: rgba(242, 242, 242, 1); 
+     } 
+
+     .more::after { 
+       content: "\f142"; 
+       font-family: FontAwesome; 
+       font-size: 2rem; 
+     } 
+
+
+ 
+
+/*  -------------------------------------------------------------------------------------------------------------------------------------- */
+	
+
+
+ 
+    
 	</style>
 
 	</head>
@@ -321,23 +417,15 @@ a {
    
    </div>   
   
-  
-  
-  
-  
-  
-  
-  
-  
+
   
    <div  id="allwrapper"  >
    	
       <br>
-   
-   <div class="bg-light" id="centerwrapper">
       
-
-        
+   <div class="" id="centerwrapper" >
+      
+  
         					<!-- <body draggable="true" > -->
 				<!-- 	<div class="py-5" > -->
 				<!-- 		<div class="container" id="a"> -->
@@ -416,9 +504,10 @@ a {
 
 
 
-				<div class="row">
 
-					<c:choose>
+		
+			<div class="row" id="carddiv"> 
+				<c:choose> 
 						<c:when test="${result.isEmpty()}">
 							<tr>
 								<td colspan=4 height="300" align=center>표시할내용이없습니다..</td>
@@ -427,41 +516,55 @@ a {
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="item" items="${result}">
-								<div class="p-3 align-self-center col-md-3">
-									<div class="card "  >
-										<div class="card-block p-5 bg-light" id="card">
-									
-												<i class="fa d-inline fa-lg fa-bookmark-o"></i>
-											
-												<h2 class="text-right">No.${item.seq}
-											
-											</h2>
-											
-											<h5 class="text-center " id="pcard"  >
-												<a
-													href="ArticleCount.do?seq=${item.seq}&count=${item.viewcount}">${item.title}</a>
-											</h5>
-											
-											<hr>
-											
-											<p id="pcard">
-											${item.contents}&nbsp;</p>
+					
+					 <div class="card" >
+					    <div id="cardheader" class="bg-white">
+					      <h5 class="text-left bg-white">No.${item.seq}</h5>   
+					        
+					    </div>
+					    <hr />
+					    <span class="card__title bg-white text-center" id="pcard"><a
+                                       href="ArticleCount.do?seq=${item.seq}&count=${item.viewcount}"><b>${item.title}</a> </b></span>
+					    
+					    <div class="card__content">
+<%-- 					      <span class="card__content text-center" ><br>${item.contents}</span> --%>
+							  
+						<textarea rows="50"  cols="1000" class="form-control bg-white" name="contents" id="contentcard"
+									placeholder=${item.contents }  readonly></textarea>	
+					    </div>
+					    <ul class="card__meta">
+					      <li><b> ID : ${item.writer} </b></li>
+					      <li class="views"> ${item.viewcount} </li>
+					    </ul>
+					    <ul class="card__meta1">
+					      <li><b> Date : ${item.writedate} </b></li> 
+					    </ul>
+					   
+					    
+					  </div>
 
-											<p>Id: ${item.writer}</p> <p> Date: ${item.writedate}</p> <p>Count: ${item.viewcount}</p>
 
-
-										</div>
-									</div>
-								</div>
-							
+	
+				
 						</c:forEach>
 					</c:otherwise>
 				</c:choose>
-			</div>
+					
+			</div> 
+			
+			
+			
+			
+ 		 		
 		
-			
-			
 
+			
+				
+				
+				
+				
+				
+				
 				&nbsp;
 				<c:choose>
 					<c:when test="${sessionScope.loginid != null}">
@@ -469,34 +572,31 @@ a {
 
 
 						<div class="col-md-12 text-right">
-
-							<a class="btn text-center text-light btn-secondary"
-								href="communitywrite.jsp">Writing</a>
+							<div align=center>${result1}</div>  
+							<a class="btn text-center  btn btn-light"
+								href="communitywrite.jsp" target="_blank"><i class="fa fa-fw fa-pencil fa-2x text-info"></i></a>
 						</div>
 					</c:when>
 					<c:otherwise>
 
-						<div class="col-md-12 text-right"></div>
+						<div class="col-md-12 text-center">
+						<div align=center>${result1}</div>  
+						</div>
 
 					</c:otherwise>
 				</c:choose>
 
-        	
-        
-       
-			
         
         
        
-        
-        
-        
 
-         
+        
+	    
+        
    </div>
  <br>
 
-   
+
 </div>
 
 
@@ -504,7 +604,7 @@ a {
 
 
       
-      <div id="footer">
+   <div id="footer">
       
 	<div class="text-white " >
     <div class="container">
@@ -559,7 +659,7 @@ a {
   </div>
       
 
-      </div>
+ </div>
    
 
 

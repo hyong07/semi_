@@ -32,7 +32,9 @@
 /*   danger: #dc3545 */
 
    body{
-        
+      font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      line-height: 1.42;  
    }
 
    div{
@@ -40,9 +42,6 @@
       box-sizing: border-box;
               
    }
-   
- 
-   
    
    #topnavicontainer{
       margin: 0px auto;
@@ -108,8 +107,7 @@
   
    }
    
-      #allwrapper{
-
+   #allwrapper{
       width:100%;
       height:auto;
       margin: 0px auto;
@@ -118,15 +116,12 @@
 
    #centerwrapper{
      height:100%;  
-/*      height:auto;   */
-      width:80%;
-      margin: 0px auto;
+     width:80%;
+     margin: 0px auto;
     
       
    }
-   
-   
-   
+ 
    #articlerow{
    		
     	height:100%; 
@@ -292,12 +287,6 @@ response.setCharacterEncoding("utf8");
    <div id="centerwrapper">
       
 
-        
-        
-        
-       
-        
-  
         		<div class="row " id="articlerow">
 					<div class="col-md-6 bg-light " id="articlecol">
 						<hr />
@@ -315,20 +304,20 @@ response.setCharacterEncoding("utf8");
               <div class="panel-body">
 
                 <label>Title : </label>
-                <input type="text" class="form-control w-100" id="title" name="title" placeholder="Title" >
+                <input type="text" class="form-control w-100" id="title" name="title" maxlength="40" placeholder="Title(40자이내)" >
                 <label>Writer : </label>
        
 <!--            <input type="text" class="form-control W-25"/> -->
 		
 
 				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
-				 <label>File : </label>
-				<input type="text" class="form-control w-50" placeholder="File" >
+<!-- 				 <label>File : </label> -->
+<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
        			
       			</div>  					
        
                 <label>Enter Text : </label>
-                <textarea rows="9" class="form-control" name="contents"></textarea>
+                <textarea rows="9" class="form-control" name="contents" maxlength="1000" placeholder="(1000자이내)"></textarea>
                 <hr />
                 
 
@@ -340,7 +329,7 @@ response.setCharacterEncoding("utf8");
          <input type="button" id="cencel"  class="btn btn-primary" value="Cencel"><span class="glyphicon glyphicon-tags text-light"></span>   
          		
          
-              </div>
+       </div>
    
 
               </form>
@@ -391,7 +380,7 @@ response.setCharacterEncoding("utf8");
   <br>
    
 
-       <div id="footer">
+ <div id="footer">
       
 <div class="text-white " >
     <div class="container">
