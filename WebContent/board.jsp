@@ -33,12 +33,16 @@
 <link
    href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
    rel="stylesheet" id="bootstrap-css">
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
 
+@import 'bootstrap-4.0.0';
 body {
    font-family: 'Roboto', sans-serif; 
     font-size: 16px; 
@@ -78,12 +82,6 @@ div {
    height: 100%;
    width: 15%;
 }
-
-#link{
-   text-decoration : none;
-   color : black;
-}
-
 
 #headercenter {
    float: left;
@@ -144,7 +142,7 @@ div {
    text-align: center;
    width: 120px;
 }
-
+   
 #title{
       margin-top: 5px; 
        margin-left: 70px; 
@@ -156,19 +154,29 @@ div {
 
 }
 
+#link{
+   text-decoration : none;
+   color : black;
+}
+
+
 /* ------------------------------------------------------------------------------------------- */
+
+
+    
+
 </style>
 
-<script>
-
-$(document).ready(function(){
-   console.log("qq");
-})
-
-</script>
 </head>
+
+
 <body>
-     <div id="topnavicontainer">
+
+
+  <%
+      response.setCharacterEncoding("utf8");
+      %>
+   <div id="topnavicontainer">
       <nav class="navbar navbar-expand-md navbar-dark bg-primary"
          id="topnavbar">
       <div id="logocontainer">
@@ -203,7 +211,9 @@ $(document).ready(function(){
 
    </div>
 
-    <div id="headerwrapper">
+
+
+      <div id="headerwrapper">
          <div id="header">
             <div id="headerleft"></div>
 
@@ -238,8 +248,6 @@ $(document).ready(function(){
 
 
 
-        
-
          <div id="centernavbar">
             <nav class="nav nav-pills nav-justified">
             <li class="nav-item"><a class="nav-link  text-secondary"
@@ -267,17 +275,33 @@ $(document).ready(function(){
 
       </div>
       
+      
 
-  <div id="allwrapper">
+
+   <div id="allwrapper">
   
      <br>
      
-    
+     
 
-  <div id="centerwrapper">
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+
+      <div id="centerwrapper">
 
    
 
+<!--         <div class="container"> -->
+<!--             <div class="py-5"> -->
              
                   <div class="row">
                      <div class="col-md-12">
@@ -288,8 +312,46 @@ $(document).ready(function(){
                                        <h1 class=" text-primary text-center " >Category</h1>
                                  </div>
                                     <ul id="menu">
+<!--                                     <li class="active"><a href="#"> 패션 <span -->
+<!--                                           class="fa arrow"></span></a> -->
+<!--                                        <ul > -->
+<!--                                           <li><a href="board.bo?ca1=패션&ca2=남성의류">남성의류</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=패션&ca2=여성의류">여성의류</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=패션&ca2=아동의류">아동의류</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=패션&ca2=잡화">잡화</a></li> -->
+<!--                                        </ul></li> -->
+<!--                                     <li><a href="#">전자제품 <span class="glyphicon arrow"></span></a> -->
+<!--                                        <ul> -->
+<!--                                           <li><a href="board.bo?ca1=전자제품&ca2=가전">가전</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=전자제품&ca2=노트북">노트북 </a></li> -->
+     
+<!--                                           <li><a href="board.bo?ca1=전자제품&ca2=컴퓨터">컴퓨터</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=전자제품&ca2=컴퓨터">기타</a></li> -->
+<!--                                        </ul></li> -->
+<!--                                     <li><a href="#">리빙 <span class="glyphicon arrow"></span></a> -->
+<!--                                        <ul> -->
+<!--                                           <li><a href="board.bo?ca1=리빙&ca2=주방">주방</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=리빙&ca2=생활">생활</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=리빙&ca2=욕실">욕실</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=리빙&ca2=기타">기타</a></li> -->
+<!--                                        </ul></li> -->
+<!--                                     <li><a href="#">문화 <span class="glyphicon arrow"></span></a> -->
+<!--                                        <ul> -->
+<!--                                           <li><a href="board.bo?ca1=문화&ca2=스포츠">스포츠</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=문화&ca2=공연,전시">공연,전시 </a></li> -->
 
-                                     
+<!--                                           <li><a href="board.bo?ca1=문화&ca2=도서">도서</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=문화&ca2=기타">기타</a></li> -->
+<!--                                        </ul></li> -->
+<!--                                     <li><a href="#">뷰티 <span class="glyphicon arrow"></span></a> -->
+<!--                                        <ul> -->
+<!--                                           <li><a href="board.bo?ca1=뷰티&ca2=화장품">화장품</a></li> -->
+<!--                                           <li><a href="board.bo?ca1=뷰티&ca2=향수">향수</a></li> -->
+
+<!--                                           <li><a href="board.bo?ca1=뷰티&ca2=기타">기타</a></li> -->
+
+<!--                                        </ul></li> -->
+                                       
                                        <div class="py-5 ">
                                      <div class="container">
                                        <div class="row">
@@ -363,7 +425,7 @@ $(document).ready(function(){
                                                <a href="board.bo?ca1=뷰티&ca2=향수" class="nav-link">&nbsp;향수</a>
                                             </li>                                        
                                              <li class="nav-item">
-                                               <a href="board.bo?ca1=뷰티&ca2=기타" class="nav-link">&nbsp;기타</a>
+                                               <a href="board.bo?ca1=뷰티&ca2=기타" class="nav-link">&nbsp;기타${ca2}</a>
                                              </li>
                                            </ul>
                                          </div>
@@ -376,15 +438,15 @@ $(document).ready(function(){
                                  </ul>
 
 
-                           
+
                               </div>
                            </div>
                            <div class="col-md-4 w-75 col-lg-8">
                               <div class="row py-2">
-                               <c:choose>
+                              <c:choose>
                               <c:when test="${ca2 ne null}">
                                  <div class="btn-group">
-                                    <a href="board.bo?ca1=${ca1}&ca2=${ca2}" class="btn btn-secondary"><i class="fa fa-search "></i>&nbsp;&nbsp;All View</a> &nbsp;&nbsp;
+                                    <a href="board.bo?ca1=${ca1}&ca2=${ca2}" class="btn btn-secondary"> <i class="fa fa-search "></i>&nbsp;&nbsp;All View</a> &nbsp;&nbsp;
                                     <a href="listview.bo?ca1=${ca1}&ca2=${ca2}" class="btn btn-secondary"><i class="fa fa-search "></i>&nbsp;&nbsp;Auction View</a> &nbsp;&nbsp;
                                     <a href="buyitnow.bo?ca1=${ca1}&ca2=${ca2}" class="btn btn-secondary"><i class="fa fa-search "></i>&nbsp;&nbsp;Second Hand View</a>
                                  </div>
@@ -397,14 +459,19 @@ $(document).ready(function(){
                                  </div>
                                  </c:otherwise>
                                  </c:choose>
-                                 <div style="width: 400px"></div>
-
+                                 <div style="width: 430px"></div>
+<!--                                   <select class="mx-2 text-muted"> -->
+<!--                                     <option value="최신순">최신순</option> -->
+<!--                                     <option value="마감순">마감순</option> -->
+<!--                                     <option value="조회순">조회순</option> -->
+<!--                                     <option value="인기순">인기순</option> -->
+<!--                                  </select> -->
                            <div class="btn-group" >
                                <button class="btn btn-outline-secondary dropdown-toggle text-gray"  data-toggle="dropdown"> 정렬방식 </button>
                                <div class="dropdown-menu">
                                  <a class="dropdown-item" href="#">최신순</a>
-                                 <div class="dropdown-divider"></div>
-                                 <a class="dropdown-item" href="#">마감순</a>
+<!--                                  <div class="dropdown-divider"></div> -->
+<!--                                  <a class="dropdown-item" href="#">마감순</a> -->
                                  <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="#">조회순</a>
                                  <div class="dropdown-divider"></div>
@@ -414,84 +481,123 @@ $(document).ready(function(){
                               </div>
                               <div class="row px-8 mb-4">총251개의 게시물</div>
                      
-      
-      
-      
 
-            
-     <c:forEach var="item" items="${boardlist}" varStatus="status"> 
 
-      
-       <div class="row"> 
+
+
+                  <div class="row" >      
+                              <c:forEach var="item" items="${boardlist}" varStatus="status">
+                                           
+                                    <div class="col-md-3 mr-4 mb-3 p-0">
+                                       <div class="card">
+                                       
+                                        <img class="card-img-top"
+                                             src='${path[status.index]}'
+                                             alt="Card image cap"> <a href="ArticleCount.bo?seq=${item.board_seq}&type=${item.sell_type}&count=${item.viewcount}"
+                                             class="card-link text-left m-0 p-3 " id="link"><i class="fa fa-bookmark">&nbsp;&nbsp;${item.title}</i></a>
+                                       
+                                       
+<!--                                           <img class="card-img-top" -->
+<%--                                              src='${path[status.index]}' --%>
+<%--                                              alt="Card image cap"> <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}" --%>
+<%--                                              class="card-link text-left m-0 p-3 " ><i class="fa fa-bookmark">&nbsp;&nbsp;${item.title}</i></a> --%>
+                                             
+                                          <div class="card-body m-0 p-0">
+                                             <ul class="list-group list-group-flush">
+                                                <li
+                                                   class="list-group-item d-flex justify-content-between align-items-center">
+                                                  <i class="fa fa-paperclip">&nbsp;&nbsp;${item.board_seq}</i>
+                                                </li>   
+                                         
+                                             
+                                                  <li
+                                                   class="list-group-item d-flex justify-content-between align-items-center">
+                                                  <i class="fa fa-user">&nbsp;&nbsp;${item.seller_id}</i>
+                                                </li>
+                                                  <li
+                                                   class="list-group-item d-flex justify-content-between align-items-center">
+                                                  <i class="fa fa-credit-card ">&nbsp;&nbsp;${pricelist[status.index]}</i>
+                                                </li>
+                                               
+                                                 
+                                                 
+                                                 <li
+                                                   class="list-group-item d-flex justify-content-between align-items-center">
+                                                  <i class="fa fa-calendar">&nbsp;&nbsp;${item.write_date}</i>
+                                                </li>
+                                                 
+                                                <li
+                                                   class="list-group-item d-flex justify-content-between align-items-center"> 
+                                                   <i class="fa fa-eye">&nbsp;&nbsp;${item.viewcount}</i>
+<%--                                                    <span class=""><i class="fa fa-shopping-cart"></i>${item.sell_status}</span> --%>
+                                                </li>
+                                             </ul>
+                                          </div>
+                                       </div>
+                                    </div>
+                                 
+                           </c:forEach>
+                          </div>
+
+
+                              <div class="row">
+                           
+                              </div>
+                              <div class="row">
+                              
+                              </div>
+                              <div class="row">
+                                 <div class="col-md-3 m-0 p-0">
+                              
+                                 </div>
+                                 <div class="col-md-3 m-0 p-0">
+                              
+                                 </div>
+                                 <div class="col-md-3 m-0 p-0">
+                                 
+                                 </div>
+                                 <div class="col-md-3 m-0 p-0">
+                              
+                              </div>
+                           </div>
+                           <div class="col-md-4 w-25 col-lg-1">
+
+
+                              <div class="floating">
+                                 <p>광고</p>
+                                 <img src="다운로드.gif" width="100" height="200">
+
+                              </div>
+
+
+                              <div class="floating">광고코드</div>
+
+
+                           </div>
+                        </div>
+                        <div class="row"></div>
+                     </div>
+                  </div>
+               </div>
+              </div>  
+
+
+<!--          </div> -->
+
+<!--     </div> -->
+    
+    
+    
+    
+    
 
     
 
-        <div class="col-md-4 order-2 order-md-1 p-2" >
-        
-        <img class="card-img-top" src='${path[status.index]}'
-                            alt="Card image cap"> <a href="ArticleCount.bo?seq=${item.board_seq}&type=${item.sell_type}&count=${item.viewcount}"
-                            class="card-link text-left m-0 p-3 " id="link"><i class="fa fa-bookmark">&nbsp;&nbsp;${item.title}</i></a>
-<%--           <img class="img-fluid d-block px-5 border" src='${path[status.index]}'> </div> --%>
-<!--         <div class="col-md-6 order-1 order-md-2 p-2"> -->
-<!--           <h5 class="text-primary"> -->
-<!--           <i class="fa fa-bookmark">&nbsp;&nbsp; -->
-<%--             <a href="saleView.bo?seq=${item.board_seq}&type=${item.sell_type}">${item.title}</a></i> --%>
-          </h5>
-          <i class="fa fa-calendar">&nbsp;${item.write_date}&nbsp;</i>
-          <div>
-            <br>
-            <row>
-              <div class="col-md-11 ">
-                <table class="table">
-                  <thead>
-                    <tr>
-                      
-                      <td><i class="fa fa-user">&nbsp;&nbsp;${item.seller_id}</i></td>
-                      
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td><i class="fa fa-credit-card ">&nbsp;&nbsp;${pricelist[status.index]}</i></td>
-                      <td><i class="fa fa-credit-card ">&nbsp;&nbsp;${pricelist[status.index]}</i></td>
-                      <td></td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <img src="saram.png" width="18px" height="18px">
-                        <i>1 bid&nbsp;</i>
-                      </td>
-                      <td>
-                        <img src="noon.png" width="20px" height="20px">
-                        <i>31&nbsp;</i>
-                      </td>
-                      <td class="text-right">
-                        <a class="btn btn-secondary" href="#">판매 중 </a>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td></td>
-                      <td></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </row>
-            
-                </div>
-             </div>
-          </div>
-        
-        </c:forEach> 
-        
-              </div>
-            </div>
-           </div>
-         </div>
-      </div>
+    
+   
 
-
-<div id="footer">
+  
+   <div id="footer">
 
       <div class="text-white ">
          <div class="container">

@@ -421,7 +421,7 @@ div {
 
 
 
-
+ 
                       
                             <div class="row"> 
                               <c:forEach var="item" items="${boardlist}" varStatus="status">
