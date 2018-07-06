@@ -33,6 +33,25 @@ public class BoardDTO {
 		this.bidunit = bidunit;
 		this.bidcnt = bidcnt;
 	}
+	
+	
+	
+	public String getBidunit() {
+		return bidunit;
+	}
+
+	public void setBidunit(String bidunit) {
+		this.bidunit = bidunit;
+	}
+
+	public String getBidcnt() {
+		return bidcnt;
+	}
+
+	public void setBidcnt(String bidcnt) {
+		this.bidcnt = bidcnt;
+	}
+
 	public String getBoard_seq() {
 		return board_seq;
 	}

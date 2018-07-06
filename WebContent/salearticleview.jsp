@@ -241,33 +241,23 @@ function buyStart(){
          location.href = "logout.mem";
          }
          
-  function down(e){
-         var td = $(e).parent();
-         var stat =$(td.find("#check")).text();
-         var num = parseInt(stat,10);
-         var product_seq = $(e).parent().parent().attr('id');
-         num--;
-      if(num<=0){
-         alert('더이상 줄일수 없습니다.');
-         num =1;
-       }
-      else{
-         var current = $("#totalPrice").text();
-         $.ajax({
-            url:"totalMinus.buy",
-            type:"get",
-            data:{product_seq:product_seq,current:current},
-            success:function(rep){
-               console.log("플러스 버튼 됨");
-               $("#totalPrice").text(rep);
-            }
-         }) 
-      }
-      $(td.find("#check")).text(num);
-      
-     
-      
-    }
+         $(document).ready(function(){
+            $("#add").click(function(){
+               var product = $("#product option:selected").val();
+               var product_seq = product.split('번')[0];
+               var count = $('#check').text();
+               
+               $.ajax({
+                  url:"productinfo.bo",
+                    type:"get",
+                    data:{product_seq:product_seq},
+                    success:function(rep){
+                      $("#productlist").append("<tr><td>"+ product_seq+ "<td>"+ rep.getP_name() +"<td>"+ rep.getSell_price+ "<td>"+ count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                    }
+               })
+            }) 
+         })
+</script>
 
   function up(e){
         var td = $(e).parent();
@@ -455,8 +445,8 @@ function buyStart(){
                      <!-- Preview Image -->
                      <div .main class="row">
                         <div id='img_div' class="col-md-5">
-                                    <img class="img-fluid rounded"
-                              src="${mainfile}" alt="" id=product_img>
+                           <img class="img-fluid rounded"
+                              src="http://placehold.it/900x300" alt="" id=product_img>
                         </div>
                         <div class="col-md-7" id="main_text">
                            <div>
@@ -466,31 +456,46 @@ function buyStart(){
                                     <thead>
                                        <tr>
                                           <td>상품명 :</td>
-                                          <td>${pdto.p_name}</td>   
+                                          <td>
+                                          <c:forEach var="item" items="${result}">
+                                                <c:choose>
+                                                   <c:when test="${item.main_product == 'y'}">
+                                                      ${item.p_name}
+                                                   </c:when>
+                                                </c:choose>
+                                          </c:forEach>      
+                                          </td>
                                        </tr>
                                     </thead>
                                     <tbody>
                                        <tr>
                                           <td>상품 가격 :</td>
-                                          <td>${pdto.sell_price }</td>
+                                          <td>
+                                    <c:forEach var="item" items="${result}">
+                                                   <c:choose>
+                                                      <c:when test="${item.main_product == 'y'}">
+                                                         ${item.sell_price} 222
+                                                      </c:when>
+                                                   </c:choose>
+                                             </c:forEach>      
+                                </td>
                                        </tr>
                                           <tr>
-                                              <td colspan="2">
+                                              <td>
                                                  <select id="product">
-                                                    <option>상품을 선택해주세요.</option>
                                                     <c:forEach var="item" items="${result}">
-                                                    	<c:choose>
-                                                    		<c:when test="${item.sell_count } == 0">
-                                                    			<option value="${item.product_seq }" readonly>${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
-                                                    		</c:when>
-                                                    		<c:otherwise>
-                                                    			<option value="${item.product_seq }">${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
-                                                    		</c:otherwise>
-                                                    	</c:choose>
+                                                       <option>${item.product_seq }번 . ${item.p_name } - ${item.sell_price }원</option>
                                                  </c:forEach>      
                                                  </select>
                                               </td>
+                                             <td><img src="saram.png" width="18px" height="18px">
+                                                <i id="check">1</i>  <!-- 기본 수량 -->
+                                                <a href="#" id="numUp">▲</a> 
+                                                <a href="#" id="numDown">▼</a></td>
                                           </tr>
+                                       <tr>
+                                          <td class="text-right" colspan="2"><input type="button" id="add" class="btn btn-secondary" value="등록"> </td>
+                                       </tr>
                                     </tbody>
                                  </table>
                                  
@@ -502,7 +507,7 @@ function buyStart(){
                     
                     <div class="col-md-12">
                   <table class="table">
-                     <thead id="tfoot">
+                     <thead>
                         <tr>
                            <th>제품번호</th>                              
                            <th>제품명</th>
@@ -512,6 +517,10 @@ function buyStart(){
                         </tr>
                      </thead>
                       <tbody id="productlist">
+      
+                     </tbody>
+                   </table>
+                   </div>
                      
                      </tbody>
                      <thead>

@@ -67,11 +67,11 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
          }
          else if(command.equals("/getboardseq.bo")) {
-            String board_no = boarddao.checkboardNo();
-            request.setAttribute("board_no", board_no);
-            
-            isRedirect=false;
-            dst = "saleInput.jsp";
+        	 String board_no = boarddao.checkboardNo();
+        	 request.setAttribute("board_no", board_no);
+        	 
+        	 isRedirect=false;
+        	 dst = "saleInput.jsp";
          }
          
          else if(command.equals("/sell_type.bo")) {         
@@ -86,7 +86,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
 
 
          else if(command.equals("/category.bo")) {
-            System.out.println("�뱾�뼱�샂");
+            System.out.println("����");
             String main_category = request.getParameter("test");  
             System.out.println(main_category);
             List<String> result =category_dao.main_categoryGet(main_category);
@@ -246,18 +246,19 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
                String board_no = request.getParameter("board_no");
                System.out.println(main_productName +" : " + board_no);
                int resetMainP = productdao.resetMainP(board_no);
-               int result  = productdao.updateMainP(board_no,main_productName);               
+               int result  = productdao.updateMainP(board_no,main_productName);
                new Gson().toJson(main_productName, response.getWriter());
                return;
             }
          
          else if(command.equals("/pointCharge.bo")) {
-            String point = request.getParameter("point");
-            System.out.println(point);
-            request.setAttribute("point", point);
-            isRedirect=false;
-            dst = "moneyTest.jsp";
-         }        
+        	 String point = request.getParameter("point");
+        	 System.out.println(point);
+        	 request.setAttribute("point", point);
+        	 isRedirect=false;
+        	 dst = "moneyTest.jsp";
+         }
+         
 
          else if(command.equals("/articleView.bo")) { 
             System.out.println("z_z");
