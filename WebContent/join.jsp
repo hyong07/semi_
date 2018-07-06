@@ -1204,7 +1204,7 @@ $("document").ready(function(){
             <input type="text" id="phone" required class="id"  class="final" name="phone" style="width:60%" placeholder="Input Your Phone">
             <div class="wrap-loading display-none">
 
-   			 <div><img src="loading.gif"></div>
+   			 <div><img src="다운로드.gif"></div>
 
 			</div>  
 

@@ -5,21 +5,21 @@ public class BidderDTO {
    private String board_seq;
    private String seller_id;
    private String buyer_id;
-   private String bidder_id;
+  
    private String bidprice;
    private String biddate;
    private String state;
    
    public BidderDTO() {}
    
-   public BidderDTO(String bidder_seq, String board_seq, String seller_id, String buyer_id, String bidder_id,
+   public BidderDTO(String bidder_seq, String board_seq, String seller_id, String buyer_id, 
          String bidprice, String biddate, String state) {
       super();
       this.bidder_seq = bidder_seq;
       this.board_seq = board_seq;
       this.seller_id = seller_id;
       this.buyer_id = buyer_id;
-      this.bidder_id = bidder_id;
+      
       this.bidprice = bidprice;
       this.biddate = biddate;
       this.state = state;
@@ -49,12 +49,7 @@ public class BidderDTO {
    public void setBuyer_id(String buyer_id) {
       this.buyer_id = buyer_id;
    }
-   public String getBidder_id() {
-      return bidder_id;
-   }
-   public void setBidder_id(String bidder_id) {
-      this.bidder_id = bidder_id;
-   }
+   
    public String getBidprice() {
       return bidprice;
    }

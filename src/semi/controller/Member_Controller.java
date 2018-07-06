@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +17,9 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 
 import semi.api.SendMail;
+import semi.dao.BidderDAO;
 import semi.dao.MemberDAO;
+import semi.dto.BidderDTO;
 import semi.dto.MemberDTO;
 
 
@@ -306,7 +309,7 @@ public class Member_Controller extends HttpServlet {
 		               sb1.append((char)((Math.random() * 10)+48)); //�ƽ�Ű��ȣ 48(1) ���� 10�
 		           }
 		 
-
+		           
 		 
 		           pswd = sb1.toString();
 		 
@@ -315,8 +318,7 @@ public class Member_Controller extends HttpServlet {
 		 
 		        String from="33644643087";
 		 
-		        String message = pswd;
-		 
+		        String message = pswd;  
 		        
 		 
 		        String sendUrl = "https://www.proovl.com/api/send.php?user=6394162&token=mZJb0hlGqKxlgbpx4GqNTH4lX0aNAQ04";

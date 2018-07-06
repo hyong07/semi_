@@ -15,8 +15,9 @@ public class BidderDAO {
     
    public List<BidderDTO> bidderSelect(String bodder_seq) throws Exception{
       Connection con = DBUtils.getConnection();
-      String sql = "SELECT * FORM BIDDER WHERE BODDER_SEQ=?";
+      String sql = "SELECT * FroM BIDDER WHERE Board_SEQ=?";
       PreparedStatement pstat = con.prepareStatement(sql);
+      pstat.setString(1, bodder_seq);
       ResultSet rs = pstat.executeQuery();
       
       List<BidderDTO> list = new ArrayList<>();
@@ -26,15 +27,16 @@ public class BidderDAO {
          String board_seq = rs.getString(2);
          String seller_id = rs.getString(3);
          String buyer_id = rs.getString(4);
-         String bidder_id = rs.getString(5);
-         String bidprice = rs.getString(6);
-         String biddate = rs.getString(7);
-         String state = rs.getString(8);
          
-         BidderDTO bidderdto = new BidderDTO(bidder_seq, board_seq, seller_id, buyer_id, bidder_id, bidprice, biddate, state);
+         String bidprice = rs.getString(5);
+         String biddate = rs.getString(6);
+         String state = rs.getString(7);
+         
+         BidderDTO bidderdto = new BidderDTO(bidder_seq, board_seq, seller_id, buyer_id,  bidprice, biddate, state);
          list.add(bidderdto);
       }
       return list;
+      
    }
-   
+  
 }
