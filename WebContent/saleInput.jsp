@@ -207,14 +207,15 @@
             var sell_type;
             $("input[name=sell_type]").click(function(){   
                sell_type = $("input[name=sell_type]:checked").val();
-               
+               alert(sell_type + "요기!");
                var test = $("#main_category option:selected").val();
                $.ajax({
                   url:"category.bo",
                   type:"get",
                   data:{test:test},
                   success:function(rep){
-                     if(rep.length>0){                     
+                     if(rep.length>0){      
+                     
                         $("select[name=sub_category]").empty();
                         for(i=0; i<rep.length;i++){
                            $("select[name=sub_category]").append("<option value="+rep[i]+">"+rep[i]+"</option>");
@@ -230,11 +231,11 @@
                      url:"sell_type.bo",
                      type:"get",
                      data:{sell_type:sell_type},
-                     success:function(rep){
-//                         $("input[name=sell_type]").attr("style","display:none");
-//                         $("#test").text("");
+                     success:function(rep){   
+                        $("input[name=sell_type]").attr("style","display:none");
+                        $("#test").text("");
                         if(rep == "a"){                                     
-                        $("#productheader").append("<tr><th>메인상품</th><th>세부카테고리</th><th>제품명</th><th>가격</th><th>수량</th><th>#</th></tr>");
+                        $("#productheader").append( "<tr><th>DETAIL-CATEGORY</th><th>PRODUCT</th><th>START_PRICE</th><th>UNIT</th><th>TIMELIMIT</th><th>#</th></tr>");
                            $("#plusButton").attr("href","#auction_product");
                            $("#type_check").attr("value","a");
                            $("#type_check").text("경매");
@@ -320,9 +321,8 @@
                                 $("#productstartprice").val("");
                                 $("#productenddate").val("");
                                 $("#productbidunit").val("");
-                                
-                                $("#productlist").append("<tr><td>"+ sub_category1+ "<td>"+ product_name +"<td>"+ sell_price+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
-                    
+                               $("#productlist").append( "<tr><td>"+ sub_category1+ "<td>"+ product_name +"<td>"+ sell_price+ "<td>"+bidunit+"<td>"+end_date+"<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                               
                          } 
                      }) 
                      console.log(category+" : "+sub_category1 + " : " + product_name + " : " + sell_price);
@@ -481,13 +481,13 @@
                         <option value="리빙">리빙</option>
                         <option value="문화">문화</option>
                         <option value="뷰티">뷰티</option>
-                     </select>
-                  </div>
+                     </select>  
+                  </div>    
                   <div class="form-row mb-3">
                      <div class="col-md-2 ">판매 방법 :</div>
                      <div class="col-md-4" id="test">
-                         <input   type="radio"  id="type_sell" name="sell_type"   value="s"> 일반
-                        <input type="radio" name="sell_type" id="type_auction"  value="a"> 경매                        
+                         <input   type="radio"  id="type_sell" name="sell_type" value="s"> 일반
+                        <input type="radio" name="sell_type" id="type_auction" value="a"> 경매                        
                      </div>
                      <h id="type_check"><input type="text" name="sell_type1" value=""></h>
                   </div>
@@ -746,12 +746,14 @@
                               
                    console.log("삭제 완료");
                 }
-             })  
-             tr.remove();
+             })
+             
              console.log(tdArr[1]);
              
              //라인 삭제
-        
+             
+             
+             
           }
        }
 

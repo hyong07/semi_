@@ -176,7 +176,7 @@ public class CommunityDAO {
       rs.next();
 
       int recordTotalCount = rs.getInt("totalcount");//전체 글(레코드) 의 개수를 저장하는 변수
-      int recordCountPage = 10; //페이지 하나에 나오는 게시글 수
+      int recordCountPage = 15; //페이지 하나에 나오는 게시글 수
       int naviCountPerPage = 5; // 페이지 하나에 네이게이터가 몇개로 보이는지
       int pageTotalCount = 0; //전체가 몇페이지로 구성 될 것인지
 

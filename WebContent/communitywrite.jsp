@@ -21,15 +21,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-   
-/*   primary: #12bbad, */
-/*   secondary: #4f70ce, */
-/*   light: #f3f3f3, */
-/*   dark: #151515, */
-/*   info: #ccc, */
-/*   success: #28a745, */
-/*   warning: #ffc107, */
-/*   danger: #dc3545 */
 
    body{
       font-family: 'Roboto', sans-serif;
@@ -119,7 +110,6 @@
      width:80%;
      margin: 0px auto;
     
-      
    }
  
    #articlerow{
@@ -145,8 +135,6 @@
    
    
 /*  -----------------------------------------------------------------------------------------------------   */
-
-
 
 
 </style>
@@ -271,14 +259,7 @@ response.setCharacterEncoding("utf8");
    
    </div>   
   
-  
-  
-  
-  
-  
-  
-  
-  
+
   
    <div id="allwrapper" >
       
@@ -287,17 +268,17 @@ response.setCharacterEncoding("utf8");
    <div id="centerwrapper">
       
 
-        		<div class="row " id="articlerow">
-					<div class="col-md-6 bg-light " id="articlecol">
-						<hr />
-						
-						
-						
-						<div class="Compose-Message">
-							<div class="panel panel-success">
-								<!--               <div class="panel-heading"> -->
-								<!--                 Input New Text -->
-								<!--               </div> -->
+              <div class="row " id="articlerow">
+               <div class="col-md-6 bg-light " id="articlecol">
+                  <hr />
+                  
+                  
+                  
+                  <div class="Compose-Message">
+                     <div class="panel panel-success">
+                        <!--               <div class="panel-heading"> -->
+                        <!--                 Input New Text -->
+                        <!--               </div> -->
 
 
    <form name=write_form action="ComunityWrite.do" method="post"  onSubmit="return check_error()">
@@ -306,15 +287,11 @@ response.setCharacterEncoding("utf8");
                 <label>Title : </label>
                 <input type="text" class="form-control w-100" id="title" name="title" maxlength="40" placeholder="Title(40자이내)" >
                 <label>Writer : </label>
-       
-<!--            <input type="text" class="form-control W-25"/> -->
-      
+    
+            <input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
 
-				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
-<!-- 				 <label>File : </label> -->
-<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
-       			
-      			</div>  					
+                
+               </div>                 
        
                 <label>Enter Text : </label>
                 <textarea rows="9" class="form-control" name="contents" maxlength="1000" placeholder="(1000자이내)"></textarea>

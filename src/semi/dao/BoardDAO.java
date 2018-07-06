@@ -270,8 +270,8 @@ public class BoardDAO {
                        
 	public String getEndHour(String seq) throws Exception {
 		Connection con = DBUtils.getConnection();
-		//String sql = "select (end_date-write_date-1 || 'd ' ) || (17-to_char(sysdate,'HH') ||'h ') || (59 -to_char(sysdate,'MI') ||'m') from board where board_seq = ?";
-		String sql = "select '0d 0h ' || (57-to_char(sysdate,'MI') ||'m') from board where board_seq = ?";
+		String sql = "select (end_date-write_date-1 || 'd ' ) || (17-to_char(sysdate,'HH') ||'h ') || (59 -to_char(sysdate,'MI') ||'m') from board where board_seq = ?";
+		//String sql = "select '0d 0h ' || (57-to_char(sysdate,'MI') ||'m') from board where board_seq = ?";
 		                                      
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, seq);
@@ -354,7 +354,23 @@ public class BoardDAO {
 		      return result;
 		   }
 	   
+	   public void countData(String seq, int count, String sell_type) throws Exception{
+
+		      Connection con = DBUtils.getConnection();
+		      String sql = "update board set viewcount= ? where board_seq = ?";      
+		      PreparedStatement pstat = con.prepareStatement(sql);
+
+		      pstat.setInt(1, ++count);
+		      pstat.setString(2, seq);
+		      
+		      pstat.executeUpdate();
+
+		      System.out.println(seq + " : " + count + " : " + sell_type + " :여기는 boarddao");
+		      con.commit();
+		      pstat.close();   
+		      con.close();
+
+		   }
 	   
-	
 
 }

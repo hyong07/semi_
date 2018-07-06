@@ -19,6 +19,7 @@ import com.google.gson.Gson;
 import com.oreilly.servlet.MultipartRequest;
 import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 
+import semi.dao.BidderDAO;
 import semi.dao.BoardDAO;
 import semi.dao.CategoryDAO;
 import semi.dao.FileDAO;
@@ -29,8 +30,9 @@ import semi.dto.ProductDTO;
 
 @WebServlet("*.bo")
 public class Board_ProductContoller extends HttpServlet {
-HashMap<String, String> mainfileMap = new HashMap<String,String>();
-HashMap<String, String> end_dateMap = new HashMap<String,String>();
+	HashMap<String, String> mainfileMap = new HashMap<String,String>();
+	HashMap<String, String> end_dateMap = new HashMap<String,String>();
+	HashMap<String, String> bidunitMap = new HashMap<String,String>();
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException  {
       try {
@@ -48,24 +50,119 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
          boolean isRedirect = true;
          String dst = null;
          
+      
+         
          if(command.equals("/board.bo")) {
-            String category = request.getParameter("ca1");
-            String category2 = request.getParameter("ca2");
+             String category = request.getParameter("ca1");
+             String category2 = request.getParameter("ca2");
+             String allandsale = request.getParameter("allandsale");
 
-            System.out.println(category + " : " + category2);
-            ArrayList<BoardDTO> boardlist = boarddao.boardForBoard(category, category2);
-            ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
-            ArrayList<String> pricelist = productdao.priceForBoard(category,category2);
-            System.out.println(filelist.size());
-            System.out.println(boardlist.size());
-            System.out.println(pricelist.size());
-            request.setAttribute("filelist", filelist);
-            request.setAttribute("boardlist", boardlist);
-            request.setAttribute("pricelist", pricelist);
-            isRedirect=false;
-            dst = "board.jsp";
+             System.out.println(category + " : " + category2);
+             ArrayList<BoardDTO> boardlist = boarddao.boardForBoard(category, category2);
+             System.out.println(boardlist.size()+ " 갯수!!!");
+             ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
+             ArrayList<String> pricelist = productdao.priceForBoard(category,category2);
+             System.out.println(filelist.size());
+             System.out.println(boardlist.size());
+             System.out.println(pricelist.size());
+             
+             List<String> filespath = new ArrayList<>();
+             for(int i=0; i<filelist.size(); i++) {
+             	String filepath = "image/" + filelist.get(i).getBoard_no() + "/" + filelist.get(i).getSystem_file_name();
+             	System.out.println(filepath + " : " + i);
+             	filespath.add(filepath);
+             }
+            
+             request.setAttribute("path", filespath);
+             
+            
+             request.setAttribute("boardlist", boardlist);
+             request.setAttribute("pricelist", pricelist);
+             isRedirect=false;
+             System.out.println(category + " :111111 " + category2 );
+             request.setAttribute("ca1", category);
+             request.setAttribute("ca2", category2);
+             dst = "board.jsp";
 
-         }
+          }else if(command.equals("/listview.bo")){
+                String category = request.getParameter("ca1");
+                String category2 = request.getParameter("ca2");
+                String allandsale = request.getParameter("allandsale");
+
+                System.out.println(category + " : " + category2);
+                ArrayList<BoardDTO> boardlist = boarddao.listviewForBoard(category, category2);
+                ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
+                ArrayList<String> pricelist = productdao.priceForBoard(category,category2);
+                System.out.println(filelist.size());
+                System.out.println("board size : " + boardlist.size());
+                System.out.println("board  : " + boardlist.get(0).getSeller_id());
+                System.out.println(pricelist.size());
+                List<String> filespath = new ArrayList<>();
+                for(int i=0; i<filelist.size(); i++) {
+                	String filepath = "image/" + filelist.get(i).getBoard_no() + "/" + filelist.get(i).getSystem_file_name();
+                	System.out.println(filepath + " : " + i);
+                	filespath.add(filepath);
+                }
+               
+                request.setAttribute("path", filespath);
+                request.setAttribute("boardlist", boardlist);
+                request.setAttribute("pricelist", pricelist);
+                isRedirect=false;
+                System.out.println(category + " :22222222222 " + category2 );
+                request.setAttribute("ca1", category);
+                request.setAttribute("ca2", category2);
+                dst = "auctionView.jsp";
+          }
+          else if(command.equals("/buyitnow.bo")){
+        	  System.out.println("똑같이보내는데왜안나요");
+                String category = request.getParameter("ca1");
+                String category2 = request.getParameter("ca2");
+                String allandsale = request.getParameter("allandsale");
+
+                System.out.println(category + " : " + category2);
+                ArrayList<BoardDTO> boardlist = boarddao.buyitnowForBoard(category, category2);
+                ArrayList<FileDTO> filelist = filedao.fileForBoard(category, category2);
+                ArrayList<String> pricelist = productdao.priceForBoard(category,category2);
+                System.out.println(filelist.size());
+                System.out.println("board size : " + boardlist.size());
+                System.out.println("board  : " + boardlist.get(0).getSeller_id());
+                System.out.println(pricelist.size());
+                
+                List<String> filespath = new ArrayList<>();
+                
+                for(int i=0; i<filelist.size(); i++) {
+                	String filepath = "image/" + filelist.get(i).getBoard_no() + "/" + filelist.get(i).getSystem_file_name();
+                	System.out.println(filepath + " : " + i);
+                	filespath.add(filepath);
+                }
+               
+                request.setAttribute("path", filespath);
+                request.setAttribute("boardlist", boardlist);
+                request.setAttribute("pricelist", pricelist);
+                isRedirect=false;
+                System.out.println(category + " :3333333 " + category2 );
+                request.setAttribute("ca1", category);
+                request.setAttribute("ca2", category2);
+                dst = "buyitnow.jsp";
+          }
+         
+          else if(command.equals("/main.bo")) {
+        	  BidderDAO bidderdao = new BidderDAO();
+        	  
+        	  List<String> mainp_name = new ArrayList<>();
+        	  mainp_name = productdao.getfastestEnddate();
+        	  
+        	  List<String> maincurrent =  new ArrayList<>();
+        	  maincurrent = bidderdao.getFatestCurrent();
+        	  
+        	  request.setAttribute("mainp_name", mainp_name);
+        	  request.setAttribute("maincurrent", maincurrent);
+        	  
+        	  isRedirect = false;
+        	  dst = "mainpage.jsp";
+        	  
+        	  
+          }
          else if(command.equals("/getboardseq.bo")) {
         	 String board_no = boarddao.checkboardNo();
         	 request.setAttribute("board_no", board_no);
@@ -117,19 +214,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
          }
       
 
-            return;
-         }
-         
-         
-          else if(command.equals("/mainfilename.bo")) {
-                  String board_no = request.getParameter("board_no");
-                 String mainfilename = request.getParameter("name");                        
-                  mainfileMap.put(board_no, mainfilename);
-                  System.out.println(mainfileMap.get(board_no));
-                  return;            
-               }
-      
-
+              
          else if(command.equals("/write.bo")) {
             System.out.println("�씪�씠�듃蹂�!");
             String board_no = request.getParameter("seq");            
@@ -160,6 +245,7 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             String sell_type = mr.getParameter("sell_type");
             System.out.println(board_no+" : " +sell_type);
             String title = mr.getParameter("title");
+            System.out.println(title + " title");
             String contents = mr.getParameter("contents");
             String end_date = null;
             
@@ -215,32 +301,39 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             new Gson().toJson(product_name, response.getWriter());
             return;
          }
-   else if(command.equals("/auctionproductInfo.bo")) {            
-            System.out.println("�슂湲곕룄�뱾�뼱�샂");
-            String board_no = request.getParameter("board_no");
-            String sell_type = request.getParameter("sell_type");
-            String category = request.getParameter("category");
-            String sub_category = request.getParameter("sub_category");
-            String product_name = request.getParameter("product_name");
-            String sell_price = request.getParameter("sell_price");
-            String end_date = request.getParameter("end_date");
-            end_dateMap.put(board_no, end_date);
-            System.out.println(sell_price + " :::" + end_date);
-            
-            ProductDTO product_dto = new ProductDTO();
-            product_dto.setBoard_no(board_no);
-            product_dto.setCategory(category);
-            product_dto.setDetail_category(sub_category);
-            product_dto.setP_name(product_name);
-            product_dto.setSell_price(sell_price);
-            product_dto.setSell_count("");
-            int result = productdao.addProduct(sell_type, product_dto);
-              System.out.println("寃쎈ℓ履쎈룄 �떎 �뱾�뼱媛�寃뚮맖 ");
-            System.out.println(product_dto.getSell_price());
-           
-            new Gson().toJson(product_name, response.getWriter());
-            return;
-         }
+         else if(command.equals("/auctionproductInfo.bo")) {
+				
+				System.out.println("요기도들어옴");
+				 String board_no = request.getParameter("board_no");
+				 System.out.println(board_no);
+				 String sell_type = request.getParameter("sell_type");
+				String category = request.getParameter("category");
+				String sub_category = request.getParameter("sub_category");
+				String product_name = request.getParameter("product_name");
+				String sell_price = request.getParameter("sell_price");
+				String end_date = request.getParameter("end_date");
+				String bidunit = request.getParameter("bidunit");
+				 end_dateMap.put(board_no, end_date);
+				 bidunitMap.put(board_no, bidunit);
+				System.out.println(sell_price + " :::" +end_dateMap.get(board_no));
+			
+				ProductDTO product_dto = new ProductDTO();
+				 product_dto.setBoard_no(board_no);
+				product_dto.setCategory(category);
+				product_dto.setDetail_category(sub_category);
+				product_dto.setP_name(product_name);
+				product_dto.setSell_price(sell_price);
+			
+				product_dto.setSell_count("");
+				  
+				  
+				System.out.println(product_dto.getSell_price());
+				   int result = productdao.addProduct(sell_type, product_dto);
+		              System.out.println("경매쪽도 다 들어가게됨 ");
+		            System.out.println(product_dto.getSell_price());
+				new Gson().toJson(product_name, response.getWriter());
+				return;
+			}
          
 
          else if(command.equals("/productInfoDelete.bo")) {
@@ -330,6 +423,23 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
             }
 
          }
+         
+         else if(command.equals("/ArticleCount.bo")) {
+        	 System.out.println("오긴와용");
+             
+             String board_seq = request.getParameter("seq");   
+             String sell_type =request.getParameter("type");
+             int count = Integer.parseInt(request.getParameter("count"));
+             
+             System.out.println(board_seq + " : " + sell_type + " : " + count);
+             
+             boarddao.countData(board_seq, count, sell_type);
+//             request.setAttribute("seq", board_seq);
+//             request.setAttribute("sell_type", sell_type);
+             isRedirect = false;
+             dst = "articleView.bo?seq="+board_seq+"&sell_type="+sell_type;
+             
+          }   
          
 
          if(isRedirect) {

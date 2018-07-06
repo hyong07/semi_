@@ -151,10 +151,10 @@ public class Community_Controller extends HttpServlet {
          String result1 = dao1.getPageNavi(currentPage);
          
            if(search == null){
-               result = dao1.selectBoardList(currentPage*10-9,currentPage*10);
+               result = dao1.selectBoardList(currentPage*15-14,currentPage*15);
             }
             else{
-               result = dao1.selectBoardList(currentPage*10-9, currentPage*10, search);
+               result = dao1.selectBoardList(currentPage*15-14, currentPage*15, search);
             }
               
               request.setAttribute("result", result);

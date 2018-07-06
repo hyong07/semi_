@@ -13,53 +13,58 @@ import semi.dto.ProductDTO;
 
 public class FileDAO {
  
-	public ArrayList<FileDTO> fileForBoard(String category, String category2) throws Exception{
-		Connection con = DBUtils.getConnection();
-		System.out.println(category2);
-		
-		String sql = null;
-		PreparedStatement pstat = null;
-		System.out.println("file 占쏙옙占�!!");
-		if(!(category2==null)) {
-			System.out.println("file 占쏙옙占�");
-			
-			sql =
-					"select f.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (f.main_files='y') ";
-			
-			pstat = con.prepareStatement(sql);
-			pstat.setString(1, category);
-			pstat.setString(2, category2);
-			
-		}
+	  public ArrayList<FileDTO> fileForBoard(String category, String category2) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      System.out.println(category2);
+	      
+	      String sql = null;
+	      System.out.println(category + " 파일안에서" + category2);
+	   
+	      PreparedStatement pstat = null;
+	      System.out.println("file ���!!");
+	      
+	      if(!(category2==null)) {
+	         System.out.println("file 널이아니양");
+	          
+	         sql =
+	               "select f.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.main_product='y') order by b.board_seq desc";
+	         
+	         pstat = con.prepareStatement(sql);
+	         pstat.setString(1, category);
+	         pstat.setString(2, category2);
+	           
+	      }
 
-		else {
-			System.out.println("file 占쏙옙占�??");
-			sql =
-					"select f.* from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
-			pstat = con.prepareStatement(sql);
-			pstat.setString(1, category);
-		}
+	      else {
+	         System.out.println("file 널이양");
+	         sql =
+	               "select f.* from board b, product p, files f where (p.category =?) and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)  and (p.main_product='y') order by b.board_seq desc ";
+	         pstat = con.prepareStatement(sql);
+	         pstat.setString(1, category);
+	      }
 
-      else {
-         System.out.println("file ���??");
-         sql =
-               "select f.* from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
-         pstat = con.prepareStatement(sql);
-         pstat.setString(1, category);
-      }
+	      ResultSet rs = pstat.executeQuery();
 
-      ResultSet rs = pstat.executeQuery();
+	      ArrayList<FileDTO> list = new ArrayList<>();
 
-      ArrayList<FileDTO> list = new ArrayList<>();
+	      while(rs.next()) {      
+	         String file_seq = rs.getString(1);
+	         String board_no = rs.getString(2);
+	         String original_file_name = rs.getString(3);
+	         String system_file_name = rs.getString(4);
+	         String main_files = rs.getString(5);
+	         FileDTO filedto = new FileDTO(file_seq,board_no,original_file_name,system_file_name,main_files);
+	         list.add(filedto);
 
-		}
-		System.out.println(list.size());
-		con.commit();
-		pstat.close();
-		con.close();   
-		return list;
-	}
-	
+	      }
+	      System.out.println(list.size());
+	      con.commit();
+	       con.close();
+	       pstat.close();
+	       
+	      return list;
+	   }
+
 	   public FileDTO mainFile(String seq) throws Exception{
 		   Connection con = DBUtils.getConnection();
 		   String sql = "select * from files where board_no=? and main_files = 'y'";

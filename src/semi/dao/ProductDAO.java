@@ -19,7 +19,7 @@ public class ProductDAO {
 
       if(!(category2==null)) {
          sql =
-               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
+               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
          
          pstat = con.prepareStatement(sql);
          pstat.setString(1, category);
@@ -29,7 +29,7 @@ public class ProductDAO {
       else {
          
          sql =
-               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
+               "select p.sell_price from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
          pstat = con.prepareStatement(sql);
          pstat.setString(1, category);
          
@@ -47,13 +47,13 @@ public class ProductDAO {
 		return pricelist;
 	}
 	  
-	public int addProduct(String sell_type, ProductDTO dto) throws Exception{
-		System.out.println("占쏙옙占쏙옙恝占쏙옙占쏙옙占�? " + sell_type);
+   public int addProduct(String sell_type, ProductDTO dto) throws Exception{
+		System.out.println("여기로오나요? " + sell_type);
 		Connection con = DBUtils.getConnection();
 		String sql = null;
 		PreparedStatement pstat=null;
 	if(sell_type.equals("a")) { 
-		System.out.println("占쏙옙占쏙옙占쏙옙占쏙옙?");
+		System.out.println("들어오나요?");
 		System.out.println(dto.getBoard_no() + " : "+ dto.getCategory() + " : " + dto.getDetail_category() + " : " + dto.getSell_price() + " :" + dto.getSell_count() + " : " + dto.getP_name());;
 
 		sql = "insert into product values(?,product_seq.nextval,?,?,?,default,'y',?)";
@@ -264,6 +264,25 @@ public class ProductDAO {
        
           return list;
        }
+      
+      public List<String> getfastestEnddate() throws Exception {
+		   Connection con = DBUtils.getConnection();
+		   String sql = "select p.p_name from board b, product p where (b.board_seq = p.board_no) and (sell_type='a') order by b.end_date";
+		   PreparedStatement pstat = con.prepareStatement(sql);
+		   ResultSet rs = pstat.executeQuery();
+		   List<String> list = new ArrayList<>();
+		  
+		   int index = 0;
+		   while(rs.next()) {
+			  String p_name = rs.getString(1);
+			  list.add(p_name);
+			  index++;
+			  if(index == 5 ) {
+				  break;
+			  }
+		   }
+		   
+		   return list;
 
-
+      }
 }

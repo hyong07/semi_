@@ -30,303 +30,303 @@ var pwdCheck = 0;
 var phoneConfirm=0; //문자인증 1일시 인증한 경우임
 //아이디 체크하여 가입버튼 비활성화,중복확인'
 function checkId(){
-	var inputed = $(".id").val();
-	$.ajax({
-		url:"idCheck.mem",
-		type:"post",
-		data:{
-			checkId : inputed
-			},
-		success:function(data){
-			if(inputed=="" && data==0){
-				$("#signUpBtn").prop("disabled", true);
-				$("#signUpBtn").css("background-color","#aaaaaa");
-				$("#id").css("background-color", "#FFCECE");
-				idCheck=0;
-			}else if(data==1){
-				$("#id").css("background-color", "#B0F6AC");
-				idCheck=1;
-				if(idCheck==1 && pwdCheck==1 &&phoneConfirm==1){
-					$("#signUpBtn").prop("disabled", false);
-					$("#signUpBtn").css("background-color","#4CAF50");
-					signupCheck();
-				}
-			}else if(data==0){
-				$("#signUpBtn").prop("disabled", true);
-				$("#signUpBtn").css("background-color","#aaaaaa");
-				$("#id").css("background-color", "#FFCECE");
-				idCheck=0;
-			}else if(inputed==""){
-				$("#id").css("background-color","#fff");
-			}		
-		}
-	});	
-	
+   var inputed = $(".id").val();
+   $.ajax({
+      url:"idCheck.mem",
+      type:"post",
+      data:{
+         checkId : inputed
+         },
+      success:function(data){
+         if(inputed=="" && data==0){
+            $("#signUpBtn").prop("disabled", true);
+            $("#signUpBtn").css("background-color","#aaaaaa");
+            $("#id").css("background-color", "#FFCECE");
+            idCheck=0;
+         }else if(data==1){
+            $("#id").css("background-color", "#B0F6AC");
+            idCheck=1;
+            if(idCheck==1 && pwdCheck==1 &&phoneConfirm==1){
+               $("#signUpBtn").prop("disabled", false);
+               $("#signUpBtn").css("background-color","#4CAF50");
+               signupCheck();
+            }
+         }else if(data==0){
+            $("#signUpBtn").prop("disabled", true);
+            $("#signUpBtn").css("background-color","#aaaaaa");
+            $("#id").css("background-color", "#FFCECE");
+            idCheck=0;
+         }else if(inputed==""){
+            $("#id").css("background-color","#fff");
+         }      
+      }
+   });   
+   
 }
 //재입력 비밀번호 체크하여 가입버튼 비활성화 또는 맞지않음 알림;
 function checkPwd(){
-	var inputed = $(".pass").val();
-	var reinputed = $("#pw2").val();
-	if(reinputed =="" && (inputed !=reinputed || inputed==reinputed)){
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-		$("#pw2").css("background-color", "#FFCECE");
-	}
-	else if(inputed == reinputed){
-		$("#pw2").css("background-color","#B0F6AC");
-		pwdCheck =1;
-		if(idCheck==1 && pwdCheck==1){
-			$("#signUpBtn").prop("disabled",false);
-			$("#signUpBtn").css("background-color","#4CAF50");
-			
-			signupCheck();
-		}
-	}else if(inputed!=reinputed){
-		pwdCheck=0;
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-		$("#pw2").css("background-color","#FFCECE");
-	}
-	if(inputed==""&& reinputed=="" ){
-		$("#pw2").css("background-color","#fff");
-	}	
+   var inputed = $(".pass").val();
+   var reinputed = $("#pw2").val();
+   if(reinputed =="" && (inputed !=reinputed || inputed==reinputed)){
+      $("#signUpBtn").prop("disabled",true);
+      $("#signUpBtn").css("background-color","#aaaaaa");
+      $("#pw2").css("background-color", "#FFCECE");
+   }
+   else if(inputed == reinputed){
+      $("#pw2").css("background-color","#B0F6AC");
+      pwdCheck =1;
+      if(idCheck==1 && pwdCheck==1){
+         $("#signUpBtn").prop("disabled",false);
+         $("#signUpBtn").css("background-color","#4CAF50");
+         
+         signupCheck();
+      }
+   }else if(inputed!=reinputed){
+      pwdCheck=0;
+      $("#signUpBtn").prop("disabled",true);
+      $("#signUpBtn").css("background-color","#aaaaaa");
+      $("#pw2").css("background-color","#FFCECE");
+   }
+   if(inputed==""&& reinputed=="" ){
+      $("#pw2").css("background-color","#fff");
+   }   
 }
 
 
 //이름 이메일 폰 주소를 입력하지 않았을 경우 가입버튼 비활성화
 function signupCheck(){
-	var name = $("#name").val();
-	var email = $("#email").val();
-	var phone = $("#phone").val();
-	var certification = $("#certification").val();
-	var sample6_postcode = $("#sample6_postcode").val();
-	var sample6_address = $("#sample6_address").val();
-	var sample6_address2 = $("#sample6_address2").val();
-	if(name.length<3 || email=="" ||email.replace(/^\s+|\s+$/g,"").length==0 || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2=="" || certification=="" || phoneConfirm==0){
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-	}else{
-		
-	}
-	
+   var name = $("#name").val();
+   var email = $("#email").val();
+   var phone = $("#phone").val();
+   var certification = $("#certification").val();
+   var sample6_postcode = $("#sample6_postcode").val();
+   var sample6_address = $("#sample6_address").val();
+   var sample6_address2 = $("#sample6_address2").val();
+   if(name.length<3 || email=="" ||email.replace(/^\s+|\s+$/g,"").length==0 || phone=="" || sample6_postcode=="" || sample6_address=="" || sample6_address2=="" || certification=="" || phoneConfirm==0){
+      $("#signUpBtn").prop("disabled",true);
+      $("#signUpBtn").css("background-color","#aaaaaa");
+   }else{
+      
+   }
+   
 }
 
 
 
 // 이름 이메일 번호 레겕스
 window.onload = function() {
-	
-	document.getElementById("name").oninput = function() {
-		var text = document.getElementById("name").value;
-		var regex = /[^가-힣]{2,}/;
-		if (regex.test(text)) {
-			var re = text.replace(regex, '');
-			document.getElementById(
-					"name").value = re;
-			console.log(re);
-		}
-	};
+   
+   document.getElementById("name").oninput = function() {
+      var text = document.getElementById("name").value;
+      var regex = /[^가-힣]{2,}/;
+      if (regex.test(text)) {
+         var re = text.replace(regex, '');
+         document.getElementById(
+               "name").value = re;
+         console.log(re);
+      }
+   };
 
 
-};	
+};   
 
 
 
 
 $("document").ready(function(){
-	//cancel버튼 클릭시 모든 인풋창 정보제거
-	
-	$("#cancel").click(function(){
-		$(".id").val(null);
-		$(".pass").val(null);
-		$("#signUpBtn").prop("disabled",true);
-		$("#signUpBtn").css("background-color","#aaaaaa");
-		$("#name").val(null);
-		$("#certification").remove();
-		$("#sample6_postcode").val(null);
-		$("#id").css("background-color","#fff");
-		$("#pw2").css("background-color","#fff");
-	});
-	//id 유효성
-	$("#id").keyup(function(){
-		var id = $("#id").val();
-		if(id==""){
-			$("#id").css("background-color","#fff");
-		}
-	
-	});
-	
-	 //핸드폰 번호 유효성
-	    $("#phone").on('keydown', function(e){
-	       // 숫자만 입력받기
-	        var trans_num = $(this).val().replace(/-/gi,'');
-		var k = e.keyCode;
-					
-		if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
-		{
-	  	    e.preventDefault();
-	  	
-		}
-		
-	    }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
-	        if($(this).val() == '') return;
-	 
-	        // 기존 번호에서 - 를 삭제합니다.
-	        var trans_num = $(this).val().replace(/-/gi,'');
-	      
-	        // 입력값이 있을때만 실행합니다.
-	        if(trans_num != null && trans_num != '')
-	        {
-	            // 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
-	            if(trans_num.length==11 || trans_num.length==10) 
-	            {   
-	                // 유효성 체크
-	               
-	                var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
-	                if(regExp_ctn.test(trans_num))
-	                {
-	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
-	                    trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
-	                    $(this).val(trans_num);
-	                 
-	                }
-	                else
-	                {
-	                    alert("유효하지 않은 전화번호 입니다.");
-	                    $(this).val("");
-	                    $(this).focus();
-	               
-	        			
-	                }
-	            }
-	            else 
-	            {
-	                alert("유효하지 않은 전화번호 입니다.");
-	                $(this).val("");
-	                $(this).focus();
-	      
-	            }
-	      }
-	       
-	  }); 
+   //cancel버튼 클릭시 모든 인풋창 정보제거
+   
+   $("#cancel").click(function(){
+      $(".id").val(null);
+      $(".pass").val(null);
+      $("#signUpBtn").prop("disabled",true);
+      $("#signUpBtn").css("background-color","#aaaaaa");
+      $("#name").val(null);
+      $("#certification").remove();
+      $("#sample6_postcode").val(null);
+      $("#id").css("background-color","#fff");
+      $("#pw2").css("background-color","#fff");
+   });
+   //id 유효성
+   $("#id").keyup(function(){
+      var id = $("#id").val();
+      if(id==""){
+         $("#id").css("background-color","#fff");
+      }
+   
+   });
+   
+    //핸드폰 번호 유효성
+       $("#phone").on('keydown', function(e){
+          // 숫자만 입력받기
+           var trans_num = $(this).val().replace(/-/gi,'');
+      var k = e.keyCode;
+               
+      if(trans_num.length >= 11 && ((k >= 48 && k <=126) || (k >= 12592 && k <= 12687 || k==32 || k==229 || (k>=45032 && k<=55203)) ))
+      {
+            e.preventDefault();
+        
+      }
+      
+       }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+           if($(this).val() == '') return;
+    
+           // 기존 번호에서 - 를 삭제합니다.
+           var trans_num = $(this).val().replace(/-/gi,'');
+         
+           // 입력값이 있을때만 실행합니다.
+           if(trans_num != null && trans_num != '')
+           {
+               // 총 핸드폰 자리수는 11글자이거나, 10자여야 합니다.
+               if(trans_num.length==11 || trans_num.length==10) 
+               {   
+                   // 유효성 체크
+                  
+                   var regExp_ctn = /^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+                   if(regExp_ctn.test(trans_num))
+                   {
+                       // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+                       trans_num = trans_num.replace(/^(01[016789]{1}|02|0[3-9]{1}[0-9]{1})-?([0-9]{3,4})-?([0-9]{4})$/, "$1-$2-$3");                  
+                       $(this).val(trans_num);
+                    
+                   }
+                   else
+                   {
+                       alert("유효하지 않은 전화번호 입니다.");
+                       $(this).val("");
+                       $(this).focus();
+                  
+                    
+                   }
+               }
+               else 
+               {
+                   alert("유효하지 않은 전화번호 입니다.");
+                   $(this).val("");
+                   $(this).focus();
+         
+               }
+         }
+          
+     }); 
 
-	    // 문자인증 ajax
-	   $("#confirm").click(function(){
-		
-		 var phone = $("#phone").val();
-		 if(phone==""){alert("번호를 다시 입력하세요");}
-		 else{
-		 	console.log(phone);		 	
-		 	$.ajax({
-				url:"sms.mem",
-				type:"post",
-				data:{
-					phone : phone
-					},	
-					 beforeSend: function() {
-					  
+       // 문자인증 ajax
+      $("#confirm").click(function(){
+      
+       var phone = $("#phone").val();
+       if(phone==""){alert("번호를 다시 입력하세요");}
+       else{
+          console.log("콜");          
+          $.ajax({
+            url:"sms.mem",
+            type:"post",
+            data:{
+               phone : phone
+               },   
+                beforeSend: function() {
+                 
 
-					        $('.wrap-loading').removeClass('display-none');
+                       $('.wrap-loading').removeClass('display-none');
 
-					    },
-					    complete: function() {
-					
-					        $('.wrap-loading').addClass('display-none');
+                   },
+                   complete: function() {
+               
+                       $('.wrap-loading').addClass('display-none');
 
-					    },
+                   },
 
-				success:function(data){
-					
-					if((!data=="")){
-						alert("인증번호 전송완료");
-						$("input[name=phone]").attr("readonly",true);
-					var start = $("#confirm");
-					start.after("<input type='text' id='certification' name='certification' class='final' placeholder='인증번호를 입력하세요'>");
-						
-						
-					$("#certification").keyup(function(){
-						var insert = $("#certification").val();
-						if(insert==data){
-							$("#certification").css("background-color", "#B0F6AC");
-							 $("input[name=certification]").attr("readonly",true);
+            success:function(data){
+               
+               if((!data=="")){
+                  alert("인증번호 전송완료");
+                  $("input[name=phone]").attr("readonly",true);
+               var start = $("#confirm");
+               start.after("<input type='text' id='certification' name='certification' class='final' placeholder='인증번호를 입력하세요'>");
+                  
+                  
+               $("#certification").keyup(function(){
+                  var insert = $("#certification").val();
+                  if(insert==data){
+                     $("#certification").css("background-color", "#B0F6AC");
+                      $("input[name=certification]").attr("readonly",true);
 
-							phoneConfirm=1;
-							signupCheck();
-						}else if(!(insert==data) && insert==""){
-							$("#certification").css("background-color", "#FFCECE");
-							$("#signUpBtn").prop("disabled",true);
-							$("#signUpBtn").css("background-color","#aaaaaa");
-							phoneConfirm=0;
-						}else if(insert!=data){
-							$("#certification").css("background-color", "#FFCECE");
-							$("#signUpBtn").prop("disabled",true);
-							$("#signUpBtn").css("background-color","#aaaaaa");
-							phoneConfirm=0;
-							}
-						
-						});
-					}	
-				}	
-				
-			});	
-		 }
-	   
+                     phoneConfirm=1;
+                     signupCheck();
+                  }else if(!(insert==data) && insert==""){
+                     $("#certification").css("background-color", "#FFCECE");
+                     $("#signUpBtn").prop("disabled",true);
+                     $("#signUpBtn").css("background-color","#aaaaaa");
+                     phoneConfirm=0;
+                  }else if(insert!=data){
+                     $("#certification").css("background-color", "#FFCECE");
+                     $("#signUpBtn").prop("disabled",true);
+                     $("#signUpBtn").css("background-color","#aaaaaa");
+                     phoneConfirm=0;
+                     }
+                  
+                  });
+               }   
+            }   
+            
+         });   
+       }
+      
 });
 
-	   $("#email").on('keydown', function(e){
-	      
-	    
-		   var email = $("#email").val();
-		var k = e.keyCode;
-					
-		if(email.length >= 30 && email.length<5 && email.replace(/^\s+|\s+$/g,"".length==0))
-		{
-	  	    e.preventDefault();
-	  	
-		}
-		
-	    }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
-	        if($(this).val() == '') return;
-	 
-	        // 기존 번호에서 - 를 삭제합니다.
-	        var email = $(this).val();
-	      
-	        // 입력값이 있을때만 실행합니다.
-	        if(email != null && email != '')
-	        {
-	            
-	               
-	                	     var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
-	                
-	                if(regex.test(email))
-	                {
-	                    // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
-	                                      
-	                    $(this).val(email);
-	                 
-	                }
-	                else
-	                {
-	                    alert("유효하지 않은 이메일 입니다.");
-	                    $(this).val("");
-	                    $(this).focus();
-	               
-	        			
-	                }
-	        }
-	            else 
-	            {
-	                alert("유효하지 않은 이메일 입니다.");
-	                $(this).val("");
-	                $(this).focus();
-	      
-	            }
-	        
-	       
-	  });  
-	  
-		   
-			    
+      $("#email").on('keydown', function(e){
+         
+       
+         var email = $("#email").val();
+      var k = e.keyCode;
+               
+      if(email.length >= 30 && email.length<5 && email.replace(/^\s+|\s+$/g,"".length==0))
+      {
+            e.preventDefault();
+        
+      }
+      
+       }).on('blur', function(){ // 포커스를 잃었을때 실행합니다.
+           if($(this).val() == '') return;
+    
+           // 기존 번호에서 - 를 삭제합니다.
+           var email = $(this).val();
+         
+           // 입력값이 있을때만 실행합니다.
+           if(email != null && email != '')
+           {
+               
+                  
+                           var regex = /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/;
+                   
+                   if(regex.test(email))
+                   {
+                       // 유효성 체크에 성공하면 하이픈을 넣고 값을 바꿔줍니다.
+                                         
+                       $(this).val(email);
+                    
+                   }
+                   else
+                   {
+                       alert("유효하지 않은 이메일 입니다.");
+                       $(this).val("");
+                       $(this).focus();
+                  
+                    
+                   }
+           }
+               else 
+               {
+                   alert("유효하지 않은 이메일 입니다.");
+                   $(this).val("");
+                   $(this).focus();
+         
+               }
+           
+          
+     });  
+     
+         
+             
 }) 
   
 
@@ -1204,9 +1204,9 @@ $("document").ready(function(){
             <input type="text" id="phone" required class="id"  class="final" name="phone" style="width:60%" placeholder="Input Your Phone">
             <div class="wrap-loading display-none">
 
-   			 <div><img src="다운로드.gif"></div>
+             <div><img src="loading.gif"></div>
 
-			</div>  
+         </div>  
 
 
 
@@ -1249,49 +1249,4 @@ $("document").ready(function(){
                   <br>
                   <a href="#" class="text-white">About us</a>
                   <br>
-                  <a href="#" class="text-white">Our services</a>
-                  <br>
-                  <a href="#" class="text-white">Stories</a>
-                </ul>
-              </div>
-              <div class="p-4 col-md-3">
-                <h2 class="mb-4">Contact</h2>
-                <p>
-                  <a href="tel:+246 - 542 550 5462" class="text-white">
-                    <i class="fa d-inline mr-3 text-secondary fa-phone"></i>+246 - 542 550 5462</a>
-                </p>
-                <p>
-                  <a href="mailto:info@pingendo.com" class="text-white">
-                    <i class="fa d-inline mr-3 text-secondary fa-envelope-o"></i>info@Auction Go.com</a>
-                </p>
-                <p>
-                  <a href="https://goo.gl/maps/AUq7b9W7yYJ2" class="text-white" target="_blank">
-                    <i class="fa d-inline mr-3 fa-map-marker text-secondary"></i>365 Park Street, NY</a>
-                </p>
-              </div>
-              <div class="p-4 col-md-3">
-                <h2 class="mb-4 text-light">Subscribe</h2>
-                <form>
-                  <fieldset class="form-group text-white">
-                    <label for="exampleInputEmail1">Get our newsletter</label>
-                    <input type="email" class="form-control" placeholder="Enter email"> </fieldset>
-                  <button type="submit" class="btn btn-outline-secondary">Submit</button>
-                </form>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-12 mt-3">
-                <p class="text-center text-white">ⓒ Copyright 2017 Pingendo - All rights reserved. </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </b>
-  
-  <pingendo onclick="window.open('https://pingendo.com/', '_blank')" style="cursor:pointer;position: fixed;bottom: 10px;right:10px;padding:4px;background-color: #00b0eb;border-radius: 8px; width:250px;display:flex;flex-direction:row;align-items:center;justify-content:center;font-size:14px;color:white">Made with Pingendo Free&nbsp;&nbsp;
-    <img src="https://pingendo.com/site-assets/Pingendo_logo_big.png" class="d-block" alt="Pingendo logo" height="16"> </pingendo>
-</body>
-
-</html>
+                  <a href="#" class="text-white">Our serv

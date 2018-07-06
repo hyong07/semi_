@@ -2,10 +2,19 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
-<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
-<link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> 
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
+	integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
+	crossorigin="anonymous">
+<link
+	href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
+	rel="stylesheet">
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+	type="text/css">
+<link rel="stylesheet"
+	href="https://v40.pingendo.com/assets/4.0.0/default/theme.css"
+	type="text/css">
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
 <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
 <script
@@ -27,7 +36,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-   
+
 /*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
@@ -36,45 +45,19 @@
 /*   success: #28a745, */
 /*   warning: #ffc107, */
 /*   danger: #dc3545 */
+body {
+	
+}
 
-   body{
-   
-        
-   }
+div {
+	border: 0px solid black;
+	box-sizing: border-box;
+}
 
-   div{
-      border: 0px solid black;
-        box-sizing: border-box;
-  
-            
-   }
-   
-   #topnavicontainer{
-      margin: 0px auto;
-      width:100%;
-      
-   }
-   
-   #topnavbar{ 
-/*        position: fixed; */
-       width: 100%;
-       height: 40px;
-       font-size: 20px;   
-       margin: 0px auto;   
-       opacity: 0.9;
-   }
-   
-   #allwrapper{
-/*       opacity: 0.8; */
-      width:100%;
-      height:100%;
-      margin: 0px auto;
-      
-   }
-   #headerwrapper{
-      height:21%;   
-      width:100%;
-   }
+#topnavicontainer {
+	margin: 0px auto;
+	width: 100%;
+}
 
 #topnavbar {
 	/*        position: fixed; */
@@ -92,91 +75,43 @@
 	margin: 0px auto;
 }
 
-   #headercenter{
-      float:left;
-      height:100%;
-      width:65%;
-   }
-   
-   #search{
-      
-      width:100%;
-      height:100%;
-   }
-   
-   #headerright{
-      float:left;
-      height:100%;
-      width:20%;
-   }
-   #centernavbar{
-      height:25%; 
-      width:100%;   
-   }
-        
-   #centernavbar li.nav-item {
-       background:#FFF8DC; 
-   } 
-       
-   #menubtn{
-      background:#FFF8DC; 
-      box-shadow: 0;
-      margin: 0 20px;
-      outline: none;
-  
-   }
-   #centerwrapper{
-      height:auto;
-/*       height:auto; */
-      width:80%;
-      margin: 0px auto;
-      
-   }
-   
-   #content{
+#headerwrapper {
+	height: 21%;
+	width: 100%;
+}
 
-      height:100%;
-      width:100%;      
-   }
-   
-   #bottomwrapper{
-      height:15%;
-      width:100%;
-   }
-   #footer{
-      height:100%;
-      width:100%;
-       
-   }
+#header {
+	height: 75%;
+	width: 100%;
+}
 
-   #img_div {
-   float:left;
-   display : inline-block; 
-   border: 1px solid black ;
-   width : 40%   ;
-   height : 40% ;
-         
-   }             
-     
-   .col-lg-8 {
-   border: 0.1px solid lightgray;
-   margin: 3% 0;
-   padding-top:0;
-   }   
-   
-   .main {
-   display:inline-block;
-   }
-     
-   #main_text {
-   margin-left: 1%;
-   float:left;}
+#headerleft {
+	float: left;
+	height: 100%;
+	width: 15%;
+}
 
-</style>
+#headercenter {
+	float: left;
+	height: 100%;
+	width: 65%;
+}
 
-<script>
+#search {
+	width: 100%;
+	height: 100%;
+}
 
+#headerright {
+	float: left;
+	height: 100%;
+	width: 20%;
+}
 
+#centernavbar {
+	height: 25%;
+	width: 100%;
+}
 
 #centernavbar li.nav-item {
 	background: #FFF8DC;
@@ -239,6 +174,7 @@ text-decoration:none;
 }
 </style>
 
+<script>
 
 
 
@@ -369,12 +305,11 @@ window.onload = function() {
 		</nav>
 	</div>
 
-      </div>
-   
-   </div>
-   
-</div>
+	<div id="allwrapper">
 
+		<div id="headerwrapper">
+			<div id="header">
+				<div id="headerleft"></div>
 
 
 				<div id="headercenter">

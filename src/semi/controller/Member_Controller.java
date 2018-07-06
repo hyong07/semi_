@@ -2,6 +2,8 @@ package semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.api.SendMail;
 import semi.dao.BoardDAO;
 import semi.dao.BuyerDAO;
 import semi.dao.FileDAO;
@@ -25,6 +28,7 @@ import semi.dto.BuyerDTO;
 import semi.dto.MemberDTO;
 import semi.dto.ProductDTO;
 
+
 @WebServlet("*.mem")
 public class Member_Controller extends HttpServlet {
 
@@ -32,7 +36,7 @@ public class Member_Controller extends HttpServlet {
 		try {
 
 			request.setCharacterEncoding("utf8");
-   			response.setCharacterEncoding("utf8");
+			response.setCharacterEncoding("utf8");
 
 			String requestURI = request.getRequestURI();
 			String contextPath = request.getContextPath();
@@ -67,11 +71,11 @@ public class Member_Controller extends HttpServlet {
 				}
 				request.setAttribute("result", result);
 			}
-			else if(command.equals("/logout.mem")) { //�α�
+			else if(command.equals("/logout.mem")) { //占싸깍옙
 				session.invalidate();
 				dst = "mainpage.jsp";
 			}
-			else if(command.equals("/join.mem")) { //����
+			else if(command.equals("/join.mem")) { //占쏙옙占쏙옙
 
 				String id = request.getParameter("id");
 				String pw = request.getParameter("password");
@@ -172,23 +176,23 @@ public class Member_Controller extends HttpServlet {
 		
 			
 			else if(command.equals("/pwcheck.mem")) {
-				System.out.println("pwcheck ����");
+				System.out.println("pwcheck �뱾�뼱�샂");
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				System.out.println(pw + " : " + loginid);		
 				boolean result = dao.idpwcheck(loginid,pw);
-				
+
 				if(result) {
 					isRedirect = false;
 					dst = "mypage_info.mem";
 				}
 				else {
-					
+
 					dst="mypage_pwcheck.jsp";
 				}
-				
-				
-				
+
+
+
 			}
 			else if(command.equals("/member_modify.mem")) {
 				String id = request.getParameter("id");
@@ -196,11 +200,11 @@ public class Member_Controller extends HttpServlet {
 				String email = request.getParameter("email");
 				String phone = request.getParameter("phone");
 				String address = request.getParameter("address");
-				
+
 				int result = dao.modifymember(id,name,email,phone,address);
-				
+
 				MemberDTO dto = dao.selectMember(id);
-				
+
 				if(result > 0) {
 					request.setAttribute("result", result);
 					request.setAttribute("dto", dto);
@@ -215,16 +219,16 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/currentpwcheck.mem")) {
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
-				
+
 				boolean result = dao.idpwcheck(loginid,pw);
-				
+
 				response.setCharacterEncoding("utf8");
 				response.setContentType("application/json");
-				
+
 				new Gson().toJson(result,response.getWriter());
-				
+
 				return;
-				
+
 			}
 			
 			
@@ -253,10 +257,10 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/pwchange.mem")) {
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
-				
+
 				int result = dao.changepw(loginid, pw);
 				MemberDTO dto = dao.selectMember(loginid);
-				
+
 				if(result > 0) {
 					isRedirect = false;
 					dst = "mypage_info.mem";
@@ -264,10 +268,10 @@ public class Member_Controller extends HttpServlet {
 					isRedirect = false;
 					dst = "error.html";
 				}
-				
+
 			}
 			else if(command.equals("/leavemember.mem")) {
-				System.out.println("����");
+				System.out.println("�뱾�뼱�샂");
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				int result = dao.leaveMember(loginid);
 				System.out.println("!");
@@ -278,6 +282,8 @@ public class Member_Controller extends HttpServlet {
 					dst = "memberout.jsp";
 				}
 			}
+
+
 			
 			else if(command.equals("/mypage.mem")) {
 	            String loginid = (String)request.getSession().getAttribute("loginid");
@@ -378,7 +384,7 @@ public class Member_Controller extends HttpServlet {
 		         }
 			
 			else if(command.equals("/getPoint.mem")) {
-				System.out.println("����Ʈ������");
+				System.out.println("占쏙옙占쏙옙트占쏙옙占쏙옙占쏙옙");
 				String mypoint = dao.getPoint(buyer_id);
 
 				new Gson().toJson(mypoint, response.getWriter());
@@ -386,15 +392,15 @@ public class Member_Controller extends HttpServlet {
 			}
 			else if(command.equals("/minuspoint.mem")) {
 				String seq = request.getParameter("seq");
-				System.out.println("���̳ʽ�����Ʈ����");
+				System.out.println("占쏙옙占싱너쏙옙占쏙옙占쏙옙트占쏙옙占쏙옙");
 				String id= request.getParameter("id");
 				String bidprice = request.getParameter("bidprice");
 				System.out.println(id + " : " + bidprice);
 				
 				int result = dao.minusPoint(id,bidprice);
-				//���� ���� ����Ʈ ���ϱ�...
+				//占쏙옙占쏙옙 占쏙옙占쏙옙 占쏙옙占쏙옙트 占쏙옙占싹깍옙...
 				isRedirect=false;
-				System.out.println("����Ʈ����������? " + result);
+				System.out.println("占쏙옙占쏙옙트占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙? " + result);
 				dst = "bidcntplus.bo?seq="+seq;
 				
 			}
@@ -402,7 +408,7 @@ public class Member_Controller extends HttpServlet {
 				String id = request.getParameter("id");
 				String point = request.getParameter("point");
 				int returnpoint = dao.returnPoint(id,point);
-				System.out.println(returnpoint + "����Ʈ���ϵƴ�?");
+				System.out.println(returnpoint + "占쏙옙占쏙옙트占쏙옙占싹됐댐옙?");
 				
 				//dst= mypage.....
 				
@@ -416,6 +422,150 @@ public class Member_Controller extends HttpServlet {
 				
 				
 			}
+			
+			//문자인증 
+	         else if(command.equals("/sms.mem")) {
+	             String  pswd = "";
+	                 StringBuffer sb1 = new StringBuffer();
+	                 // ���� 5���
+	                 for( int i = 0; i<5; i++) {
+	       
+	                     sb1.append((char)((Math.random() * 10)+48)); //�ƽ�Ű��ȣ 48(1) ���� 10�
+	                 }
+
+	                 pswd = sb1.toString();
+
+	              String to = "82"+request.getParameter("phone");
+	              String from="33644643087";
+	              String message = pswd;  
+	              String sendUrl = "https://www.proovl.com/api/send.php?user=6394162&token=mZJb0hlGqKxlgbpx4GqNTH4lX0aNAQ04";
+	       
+	              StringBuilder sb = new StringBuilder();
+	       
+	              sb.append(sendUrl);
+	       
+	              sb.append("&to="+to);
+	       
+	              sb.append("&from="+from);
+	       
+	              sb.append("&text="+message);
+	       
+	              
+	       
+	              System.out.println(sb.toString());
+	       
+	              URL url = new URL(sb.toString());
+	       
+	              HttpURLConnection con = (HttpURLConnection)url.openConnection();
+	       
+	              int result = con.getResponseCode();
+	       
+	              System.out.println(result);
+	       
+	              con.disconnect();
+	       
+	              out.print(message);
+	              
+	              return;
+	       
+	       
+	            }
+			//이메일로 비밀번호 찾기
+	         else if(command.equals("/pwFind.mem")){
+
+	            String email = request.getParameter("email");
+
+	            String id= request.getParameter("id");
+
+	            System.out.println(email);
+
+	            System.out.println(id);
+
+	            String result = dao.findPw(email,id);
+
+
+	            if(result!=null) {
+
+
+
+	               SendMail sendmail = new SendMail(email,result);
+
+	               sendmail.sendmail();
+
+	               request.setAttribute("result", 2);
+
+	            }
+	            
+	          //이메일로 계정찾기
+	            
+	            else if(command.equals("/idFind.mem")){
+
+	               String email1 = request.getParameter("email");
+
+	               String name = request.getParameter("name");
+
+	               System.out.println(email1);
+
+	               System.out.println(name);
+
+	               String result1 = dao.findId(email1, name);
+
+
+
+	               if(!(result1.equals("1"))) {
+
+	                  SendMail sendmail = new SendMail(1,result1,email1);
+
+	                  sendmail.sendmail();
+
+	                  request.setAttribute("result", 1);
+
+	               }else {
+
+	                  request.setAttribute("result", 3);
+
+	               }
+
+
+	     
+	               isRedirect =false;
+
+
+
+	               dst = "find.jsp";
+
+	            }
+	            
+	          //회원가입 아이디 유효성 체크
+	            else if(command.equals("/idCheck.mem")) {
+	               String checkId = request.getParameter("checkId");
+
+	               boolean result1 = dao.isIdExist(checkId);
+
+	               if(result1) {
+	                  out.println("0");
+	               }else {
+	                  out.println("1");
+	               }
+	               return;
+	            }
+
+	            else {
+
+	               request.setAttribute("result", 3);
+
+	            }
+
+	            isRedirect =false;
+
+
+
+	            dst = "find.jsp";
+
+	         }
+			
+			
+			
 			
 
 			if(isRedirect) {
