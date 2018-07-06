@@ -49,7 +49,6 @@ public class MemberDAO {
 	}
 	
 	public boolean idpwcheck(String id, String pw) throws Exception {
-		System.out.println(id + " : " + pw);
 		Connection con = DBUtils.getConnection();
 		String sql = "SELECT * FROM MEMBER WHERE ID =? AND PW =?";
 		PreparedStatement pstat = con.prepareStatement(sql);
@@ -64,27 +63,6 @@ public class MemberDAO {
 		pstat.close();
 		System.out.println(result);
 		return result;
-	}
-	
-	public List<MemberDTO> selectMember() throws Exception{
-		Connection con = DBUtils.getConnection();
-		String sql = "SELECT * FROM MEMBER";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		ResultSet rs = pstat.executeQuery();
-		List<MemberDTO> list = new ArrayList<>();
-		
-		while(rs.next()) {
-			MemberDTO dto = new MemberDTO();
-			dto.setId(rs.getString("id"));
-			dto.setName(rs.getString("name"));
-			dto.setPhone(rs.getString("phone"));
-			dto.setEmail(rs.getString("email"));
-			dto.setAddress(rs.getString("address"));
-			dto.setPoint(rs.getString("point"));
-			
-			list.add(dto);
-		}
-		return list;
 	}
 	
 	public MemberDTO selectMember(String id) throws Exception{

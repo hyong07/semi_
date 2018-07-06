@@ -12,8 +12,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+   href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   rel="stylesheet" id="bootstrap-css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -95,7 +95,7 @@
       width:20%;
    }
    #centernavbar{
-	  height: 30%;
+     height: 30%;
       width:100%;   
    }
    
@@ -112,7 +112,7 @@
       height:auto;
       margin: 0px auto;
       
-   	}
+      }
 
    #centerwrapper{
      height:100%;  
@@ -123,22 +123,22 @@
    }
  
    #articlerow{
-   		
-    	height:100%; 
-     	width:100%; 
+         
+       height:100%; 
+        width:100%; 
    }
    
    #articlecol{
-   	border-radius:10px;
+      border-radius:10px;
     
     border: 2px solid #4f70ce;
-   	margin: auto;
-   	height:85%; 
-   	width:100%;
+      margin: auto;
+      height:85%; 
+      width:100%;
    }
 
    #footer{
-	 background:#7B68EE; 
+    background:#7B68EE; 
       width:100%;
       
    }
@@ -154,14 +154,14 @@
 
 
 <script>
-			window.onload = function() {
-				var deletecount = 1;
-			    document.getElementById("cencel").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-			    
-			    
-			}
+         window.onload = function() {
+            var deletecount = 1;
+             document.getElementById("cencel").onclick = function() {
+                location.href = "CommunityMain.do";
+                }
+             
+             
+         }
 
 
 </script>
@@ -281,7 +281,7 @@ response.setCharacterEncoding("utf8");
   
   
    <div id="allwrapper" >
-   	
+      
       <br>
    
    <div id="centerwrapper">
@@ -300,7 +300,7 @@ response.setCharacterEncoding("utf8");
 								<!--               </div> -->
 
 
-	<form name=write_form action="ComunityWrite.do" method="post"  onSubmit="return check_error()">
+   <form name=write_form action="ComunityWrite.do" method="post"  onSubmit="return check_error()">
               <div class="panel-body">
 
                 <label>Title : </label>
@@ -308,7 +308,7 @@ response.setCharacterEncoding("utf8");
                 <label>Writer : </label>
        
 <!--            <input type="text" class="form-control W-25"/> -->
-		
+      
 
 				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
 <!-- 				 <label>File : </label> -->
@@ -321,13 +321,13 @@ response.setCharacterEncoding("utf8");
                 <hr />
                 
 
-				 
-       	<div class="col-md-12 text-right" >
-       	 <input type="submit" class="btn btn-primary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> 
+             
+          <div class="col-md-12 text-right" >
+           <input type="submit" class="btn btn-primary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> 
 
                
          <input type="button" id="cencel"  class="btn btn-primary" value="Cencel"><span class="glyphicon glyphicon-tags text-light"></span>   
-         		
+               
          
        </div>
    
@@ -344,39 +344,39 @@ response.setCharacterEncoding("utf8");
       </div>
     </div>
   </div>
-							
-							
-	
+                     
+                     
+   
 
 
-		<script>
-			
-			function check_error() {
-			     var form = document.write_form;
-			     if(form.title.value == '') {
-			
-			        alert('제목을 입력하세요');
-			
-			        form.title.focus();
-			
-			        return false;
-			
-			     }
-			     else if(form.contents.value == ''){
-			        alert('내용을 입력하세요');
-			
-			        form.title.focus();
-			
-			        return false;
-			     }
-			
-			     return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
-			   }
+      <script>
+         
+         function check_error() {
+              var form = document.write_form;
+              if(form.title.value == '') {
+         
+                 alert('제목을 입력하세요');
+         
+                 form.title.focus();
+         
+                 return false;
+         
+              }
+              else if(form.contents.value == ''){
+                 alert('내용을 입력하세요');
+         
+                 form.title.focus();
+         
+                 return false;
+              }
+         
+              return true;  // 없어도 문제없지만, 논리적으로는 써주는것이 바람직
+            }
 
-	</script>					
-								
-								
-								
+   </script>               
+                        
+                        
+                        
   <br>
    
 

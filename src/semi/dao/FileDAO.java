@@ -97,14 +97,15 @@ public class FileDAO {
 				dtoTemp.setSystem_file_name(tmp.getName());
 				list.add(dtoTemp);
 			}
-			
+
 			return list;		
 		}
 		
 		public int insertFile(List<FileDTO> dto) throws Exception{
 			Connection con = DBUtils.getConnection();
+			PreparedStatement pstat = null;
 			int result = 0;
-			PreparedStatement pstat=null;
+		
 			for(int i =0; i<dto.size(); i++) {
 				String sql = "insert into files values(file_seq.nextval,?,?,?,default)";
 				 pstat = con.prepareStatement(sql);
@@ -162,7 +163,8 @@ public class FileDAO {
 				con.close(); 
 			   return list;
 		   }
-		
+		  
+	
 		  public List<String> mainFileName(String id) throws Exception{
 			   Connection con = DBUtils.getConnection();
 			   String sql =

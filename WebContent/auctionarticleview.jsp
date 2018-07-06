@@ -31,6 +31,9 @@
 <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+<link href="https://fonts.googleapis.com/css?family=Open+Sans"
+	rel="stylesheet">
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -174,7 +177,6 @@ text-decoration:none;
 }
 </style>
 
-<script>
 
 
 

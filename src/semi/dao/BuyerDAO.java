@@ -14,15 +14,15 @@ public class BuyerDAO {
       Connection con = DBUtils.getConnection();
       String sql = "insert into buyer values(buyer_seq.nextval,?,?,?,?,?,?,?,?,?)";
       PreparedStatement pstat = con.prepareStatement(sql);      
-      pstat.setString(1, dto.getBoard_no());       // º¸µå ±Û¹øÈ£      
-      pstat.setString(2, dto.getProduct_no());      // »óÇ° ¹øÈ£      
-      pstat.setString(3, dto.getSeller_id());      // ÆÇ¸ÅÀÚ ¾ÆÀÌµð      
-      pstat.setString(4, dto.getBuyer_id());      // ±¸¸ÅÀÚ ¾ÆÀÌµð      
-      pstat.setString(5, dto.getBuyer_contact());      // ±¸¸ÅÀÚ ¿¬¶ôÃ³      
-      pstat.setString(6, dto.getBuy_price());      // »ì·Á´Â ¹°Ç° °¡°Ý      
-      pstat.setString(7, dto.getBuy_count());      // »ì·Á´Â ¹°Ç° ¼ö·®      
-      pstat.setString(8, "ÁøÇà");      // ±¸¸Å »óÅÂ      
-      pstat.setString(9, "´ë±â");      // ±¸¸Å ¼º°ø or ½ÇÆÐ      
+      pstat.setString(1, dto.getBoard_no());       // ï¿½ï¿½ï¿½ï¿½ ï¿½Û¹ï¿½È£      
+      pstat.setString(2, dto.getProduct_no());      // ï¿½ï¿½Ç° ï¿½ï¿½È£      
+      pstat.setString(3, dto.getSeller_id());      // ï¿½Ç¸ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½      
+      pstat.setString(4, dto.getBuyer_id());      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Ìµï¿½      
+      pstat.setString(5, dto.getBuyer_contact());      // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Ã³      
+      pstat.setString(6, dto.getBuy_price());      // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½      
+      pstat.setString(7, dto.getBuy_count());      // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ç° ï¿½ï¿½ï¿½ï¿½      
+      pstat.setString(8, "ï¿½ï¿½ï¿½ï¿½");      // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½      
+      pstat.setString(9, "ï¿½ï¿½ï¿½");      // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ or ï¿½ï¿½ï¿½ï¿½      
       int result = pstat.executeUpdate();
       con.commit();
       con.close();
@@ -48,9 +48,7 @@ public class BuyerDAO {
    }
    
    
-   public List<BuyerDTO> buyComplete(String board_no, String buyer_id) throws 
-
-Exception{
+   public List<BuyerDTO> buyComplete(String board_no, String buyer_id) throws Exception{
       Connection con = DBUtils.getConnection();
       String sql = "select * from buyer where board_no=? and buyer_id=?";
       PreparedStatement pstat = con.prepareStatement(sql);
@@ -78,7 +76,7 @@ Exception{
       return result;
    }
    
-   public List<BuyerDTO> selectBuyer(String board_seq) throws Exception{
+   public List<BuyerDTO> selectBuyerList(String board_seq) throws Exception{
 	   Connection con = DBUtils.getConnection();
 	   String sql = "select * from buyer where board_no=?";
 	   PreparedStatement pstat = con.prepareStatement(sql);
@@ -147,9 +145,11 @@ Exception{
 	   
    }
    
+   
+   
    public int productDelivery(String board_no, String buyer_id) throws Exception{
 	      Connection con = DBUtils.getConnection();
-	      String sql = "update buyer set buy_state ='¹è¼ÛÁß' where board_no=? and buyer_id=?";
+	      String sql = "update buyer set buy_state ='ï¿½ï¿½ï¿½ï¿½ï¿½' where board_no=? and buyer_id=?";
 	      PreparedStatement pstat = con.prepareStatement(sql);
 	      pstat.setString(1, board_no);
 	      pstat.setString(2, buyer_id);
@@ -159,7 +159,75 @@ Exception{
 	      pstat.close();
 	      
 	      return result;
-	   }   
+	   }
    
+   public List<BuyerDTO> selectBuyer(String id) throws Exception{
+	   	  Connection con = DBUtils.getConnection();
+	      String sql = "select * from buyer where buyer_id=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      pstat.setString(1, id);
+	      
+	      ResultSet rs = pstat.executeQuery();
+		     
+		   List<BuyerDTO> result = new ArrayList<>();
+		      
+		   while(rs.next()) {
+		      BuyerDTO tmp = new BuyerDTO();
+		      tmp.setBuyer_seq(rs.getInt(1));
+		      tmp.setBoard_no(rs.getString(2));
+		      tmp.setProduct_no(rs.getString(3));
+		      tmp.setSeller_id(rs.getString(4));
+		      tmp.setBuyer_id(rs.getString(5));
+		      tmp.setBuyer_contact(rs.getString(6));
+		      tmp.setBuy_price(rs.getString(7));
+		      tmp.setBuy_count(rs.getString(8));
+		      tmp.setBuy_state(rs.getString(9));
+		      tmp.setBuy_success(rs.getString(10));         
+		      result.add(tmp);
+		   }      
+		   
+		      con.commit();
+		      con.close();
+		      pstat.close();      
+		      return result;
+   }
+   
+   public List<String> selectBoardNo(String id)throws Exception{
+	   Connection con = DBUtils.getConnection();
+	   String sql = "select DISTINCT board_no from buyer where buyer_id=?";
+	   PreparedStatement pstat = con.prepareStatement(sql);
+	   pstat.setString(1, id);
+	   ResultSet rs = pstat.executeQuery();
+	   
+	   List<String> result = new ArrayList<>();
+	   
+	   while(rs.next()) {        
+		      result.add(rs.getString(1));
+		}
+	   con.commit();
+	   con.close();
+	   pstat.close();      
+	   return result;
+   }
+   
+   public String selectproductname(String id) throws Exception{
+	   Connection con = DBUtils.getConnection();
+	   String sql = "select p_name from product where buyer_id=?";
+	   PreparedStatement pstat = con.prepareStatement(sql);
+	   pstat.setString(1, id);
+	   ResultSet rs = pstat.executeQuery();
+	   
+	   String name = null;
+	   
+	   while(rs.next()) {        
+		     name = rs.getString(1);
+		}
+	   
+	   con.commit();
+	   con.close();
+	   pstat.close();      
+	   return name;
+	   
+   }
    
 }

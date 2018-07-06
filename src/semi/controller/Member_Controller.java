@@ -83,6 +83,35 @@ public class Member_Controller extends HttpServlet {
 
 				if(result > 0) {
 					dst = "login.jsp";
+				}				
+			}
+			else if(command.equals("/mypage_info.mem")) {
+				
+				String loginid = (String) request.getSession().getAttribute("loginid");
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				request.setAttribute("dto", dto);
+
+				isRedirect = false;
+				dst = "mypage_info.jsp";
+			}
+			else if(command.equals("/mypage_modify.mem")) {
+				String loginid = (String) request.getSession().getAttribute("loginid");
+				MemberDTO dto = dao.selectMember(loginid);
+				
+				request.setAttribute("dto", dto);
+				isRedirect = false;
+				dst = "mypage_modify.jsp";
+			}
+			else if(command.equals("/pwcheck.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				if(result) {
+					isRedirect = false;
+					dst = "mypage_info.mem";
 				}
 
 			}
@@ -142,7 +171,7 @@ public class Member_Controller extends HttpServlet {
 		
 			
 			else if(command.equals("/pwcheck.mem")) {
-				System.out.println("pwcheck µé¾î¿È");
+				System.out.println("pwcheck ï¿½ï¿½ï¿½ï¿½");
 				String pw = request.getParameter("pw");
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				System.out.println(pw + " : " + loginid);		
@@ -158,6 +187,42 @@ public class Member_Controller extends HttpServlet {
 				}
 				
 				
+				
+			}
+			else if(command.equals("/member_modify.mem")) {
+				String id = request.getParameter("id");
+				String name = request.getParameter("name");
+				String email = request.getParameter("email");
+				String phone = request.getParameter("phone");
+				String address = request.getParameter("address");
+				
+				int result = dao.modifymember(id,name,email,phone,address);
+				
+				MemberDTO dto = dao.selectMember(id);
+				
+				if(result > 0) {
+					request.setAttribute("result", result);
+					request.setAttribute("dto", dto);
+					isRedirect = false;
+					dst = "mypage_info.mem";
+				}else {
+					request.setAttribute("result", result);
+					isRedirect = false;
+					dst = "error.html";
+				}
+			}
+			else if(command.equals("/currentpwcheck.mem")) {
+				String pw = request.getParameter("pw");
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				boolean result = dao.idpwcheck(loginid,pw);
+				
+				response.setCharacterEncoding("utf8");
+				response.setContentType("application/json");
+				
+				new Gson().toJson(result,response.getWriter());
+				
+				return;
 				
 			}
 			
@@ -201,7 +266,7 @@ public class Member_Controller extends HttpServlet {
 				
 			}
 			else if(command.equals("/leavemember.mem")) {
-				System.out.println("µé¾î¿È");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½");
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				int result = dao.leaveMember(loginid);
 				System.out.println("!");
@@ -299,7 +364,7 @@ public class Member_Controller extends HttpServlet {
 			
 			
 			else if(command.equals("/getPoint.mem")) {
-				System.out.println("Æ÷ÀÎÆ®±¸ÇÏÀÚ");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 				String mypoint = dao.getPoint(buyer_id);
 
 				new Gson().toJson(mypoint, response.getWriter());
@@ -307,15 +372,15 @@ public class Member_Controller extends HttpServlet {
 			}
 			else if(command.equals("/minuspoint.mem")) {
 				String seq = request.getParameter("seq");
-				System.out.println("¸¶ÀÌ³Ê½ºÆ÷ÀÎÆ®ÇÏÀÚ");
+				System.out.println("ï¿½ï¿½ï¿½Ì³Ê½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½");
 				String id= request.getParameter("id");
 				String bidprice = request.getParameter("bidprice");
 				System.out.println(id + " : " + bidprice);
 				
 				int result = dao.minusPoint(id,bidprice);
-				//¼­¹ö º¸À¯ Æ÷ÀÎÆ® ´õÇÏ±â...
+				//ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½ï¿½Ï±ï¿½...
 				isRedirect=false;
-				System.out.println("Æ÷ÀÎÆ®ºüÁ®³ª°¬´Ï? " + result);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½? " + result);
 				dst = "bidcntplus.bo?seq="+seq;
 				
 			}
@@ -323,7 +388,7 @@ public class Member_Controller extends HttpServlet {
 				String id = request.getParameter("id");
 				String point = request.getParameter("point");
 				int returnpoint = dao.returnPoint(id,point);
-				System.out.println(returnpoint + "Æ÷ÀÎÆ®¸®ÅÏµÆ´Ï?");
+				System.out.println(returnpoint + "ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ÏµÆ´ï¿½?");
 				
 				//dst= mypage.....
 				

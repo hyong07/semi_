@@ -12,8 +12,8 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 <link
-	href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	rel="stylesheet" id="bootstrap-css">
+   href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+   rel="stylesheet" id="bootstrap-css">
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <html>
@@ -95,7 +95,7 @@
       width:20%;
    }
    #centernavbar{
-	  height: 30%;
+     height: 30%;
       width:100%;   
    }
    
@@ -113,7 +113,7 @@
       height:auto;
       margin: 0px auto;
       
-   	}
+      }
 
    #centerwrapper{
       height:100%;  
@@ -124,21 +124,21 @@
    }
  
    #articlerow{
-   		
-    	height:100%; 
-     	width:100%; 
+         
+       height:100%; 
+        width:100%; 
    }
    
    #articlecol{
    	border-radius:10px;  
     border: 2px solid #4f70ce;
-   	margin: auto;
-   	height:85%; 
-   	width:100%;
+      margin: auto;
+      height:85%; 
+      width:100%;
    }
 
    #footer{
-	background:#7B68EE; 
+   background:#7B68EE; 
       width:100%;
   
    }
@@ -670,14 +670,14 @@
 
 
 <script>
-			window.onload = function() {
-				var deletecount = 1;
-			    document.getElementById("back").onclick = function() {
-			 	   location.href = "CommunityMain.do";
-				    }
-			    
-			    
-			}
+         window.onload = function() {
+            var deletecount = 1;
+             document.getElementById("back").onclick = function() {
+                location.href = "CommunityMain.do";
+                }
+             
+             
+         }
 
 
 </script>
@@ -797,7 +797,7 @@ response.setCharacterEncoding("utf8");
   
   
    <div id="allwrapper" >
-   	
+      
       <br>
    
    <div id="centerwrapper">
@@ -817,14 +817,14 @@ response.setCharacterEncoding("utf8");
 
 
 
-								<div class="panel-body">
+                        <div class="panel-body">
 
 									<label>Title : </label> <input type="text"
 										class="form-control w-100 bg-white" name="title"
 										placeholder=${dto.title } readonly> <label>Writer
 										: </label>
 
-									<!--            <input type="text" class="form-control W-25"/> -->
+                           <!--            <input type="text" class="form-control W-25"/> -->
 
 
 									<input type="text" class="form-control w-50 bg-white"
@@ -833,8 +833,8 @@ response.setCharacterEncoding("utf8");
 									<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
 
 
-									<!-- 				 <label>Count : </label> -->
-									<!--                 <input type="text" class="form-control w-100"   name="viewcount"  placeholder=${dto.viewcount}  readonly> -->
+                           <!--              <label>Count : </label> -->
+                           <!--                 <input type="text" class="form-control w-100"   name="viewcount"  placeholder=${dto.viewcount}  readonly> -->
 
 								</div>
 					
@@ -871,17 +871,17 @@ response.setCharacterEncoding("utf8");
 <!-- 											class="glyphicon glyphicon-tags text-light"></span> -->
 
 
-										</div>
-										<script>
-					              document.getElementById("delete").onclick = function() {
-						        	   location.href = "CommunityDelete.do?seq=<%=request.getParameter("seq")%>";
-						        			   
-						           }
-							    
-							      document.getElementById("modify").onclick = function() {
-						        	   location.href = "ComunityModify.do?seq=<%=request.getParameter("seq")%>";
-								}
-										</script>
+                              </div>
+                              <script>
+                             document.getElementById("delete").onclick = function() {
+                                location.href = "CommunityDelete.do?seq=<%=request.getParameter("seq")%>";
+                                      
+                             }
+                         
+                           document.getElementById("modify").onclick = function() {
+                                location.href = "ComunityModify.do?seq=<%=request.getParameter("seq")%>";
+                        }
+                              </script>
 
 									</c:when>
 									<c:otherwise>
@@ -895,11 +895,11 @@ response.setCharacterEncoding("utf8");
 								</c:choose>
 								
 
-							</div>
-						</div>
-						
-						
-			<c:choose>
+                     </div>
+                  </div>
+                  
+                  
+         <c:choose>
 
 
 					<c:when test="${dto.writer == sessionScope.loginid}">			
@@ -959,7 +959,7 @@ response.setCharacterEncoding("utf8");
 						
 				<c:forEach var="item" items="${result}">
 
-				<c:choose>
+            <c:choose>
 
 
 				<c:when test="${dto.writer == sessionScope.loginid}">
@@ -999,7 +999,7 @@ response.setCharacterEncoding("utf8");
 					              	
  					                     location.href = "CommentDelete.co?comment_seq=${item.comment_seq}&seq=${item.article_no}";}
                   
-							</script> 
+                     </script> 
      
 							 <span id="modifysubmit" > 
 					          <script>
@@ -1094,21 +1094,21 @@ response.setCharacterEncoding("utf8");
 					         
 					      
 
-					
-			</c:otherwise>
-		</c:choose>
-	</c:forEach>
+               
+         </c:otherwise>
+      </c:choose>
+   </c:forEach>
 </c:if>
-					
-					
-					
-				
-					
-										
-		</div>
-									
-	</div>
-			
+               
+               
+               
+            
+               
+                              
+      </div>
+                           
+   </div>
+         
         
         
        

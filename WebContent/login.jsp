@@ -397,6 +397,7 @@ input[type=password]:placeholder {
            <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
      </div>
    </nav>
+   
   </div>
   
    <div id="allwrapper" >

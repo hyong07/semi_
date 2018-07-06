@@ -195,17 +195,17 @@ public class BoardDAO {
 		return result;
 	}
 
-	public BoardDTO selectOneBoard(String seq) throws Exception{
+   public BoardDTO selectOneBoard(String seq) throws Exception{
 
-		Connection con = DBUtils.getConnection();
-		String sql = "select * from board where board_seq=?";
-		PreparedStatement pstat = con.prepareStatement(sql);
-		pstat.setString(1, seq);
+      Connection con = DBUtils.getConnection();
+      String sql = "select * from board where board_seq=?";
+      PreparedStatement pstat = con.prepareStatement(sql);
+      pstat.setString(1, seq);
 
-		ResultSet rs = pstat.executeQuery();
-		BoardDTO dto = new BoardDTO();
+      ResultSet rs = pstat.executeQuery();
+      BoardDTO dto = new BoardDTO();
 
-		while(rs.next()) {
+      while(rs.next()) {
 
 
 			dto.setBoard_seq(seq);
