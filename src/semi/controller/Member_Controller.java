@@ -38,6 +38,7 @@ public class Member_Controller extends HttpServlet {
 			String contextPath = request.getContextPath();
 			String command = requestURI.substring(contextPath.length());
 			MemberDAO dao = new MemberDAO();
+			BuyerDAO buydao = new BuyerDAO();
 			boolean isRedirect = true;
 			String dst = "null";
 
@@ -362,22 +363,26 @@ public class Member_Controller extends HttpServlet {
 			else if(command.equals("/mypage_purchase.mem")) {
 				String loginid = (String)request.getSession().getAttribute("loginid");
 				
-				BuyerDAO bdao = new BuyerDAO();
+				
 				List<BuyerDTO> bdto = new ArrayList<>();
-				bdto = bdao.selectBuyer(loginid);
+				bdto = buydao.selectBuyer(loginid);
 				
 				List<String> board_no = new ArrayList<>();
-				board_no = bdao.selectBoardNo(loginid);
+				board_no = buydao.selectBoardNo(loginid);
 				
 				List<String> buyproductname = new ArrayList<>();
 				
 				for(BuyerDTO tmp : bdto) {
-					buyproductname.add(bdao.selectbuyproduct(tmp.getProduct_no()));
+					buyproductname.add(buydao.selectbuyproduct(tmp.getProduct_no()));
 				}
 				
 				request.setAttribute("buyproduct", buyproductname);
 				request.setAttribute("bdto", bdto);
 				request.setAttribute("board_no", board_no);
+				
+				isRedirect = false;
+				dst = "mypage_purchase.jsp";
+				
 			}
 			
 
