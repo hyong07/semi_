@@ -32,7 +32,9 @@
 /*   danger: #dc3545 */
 
    body{
-        
+       font-family: 'Roboto', sans-serif;
+      font-size: 16px;
+      line-height: 1.42; 
    }
 
    div{
@@ -40,10 +42,7 @@
       box-sizing: border-box;
               
    }
-   
- 
-   
-   
+
    #topnavicontainer{
       margin: 0px auto;
       width:100%;
@@ -117,16 +116,13 @@
    	}
 
    #centerwrapper{
-        height:100%;  
-/*      height:auto;   */
+      height:100%;  
       width:80%;
       margin: 0px auto;
     
       
    }
-   
-   
-   
+ 
    #articlerow{
    		
     	height:100%; 
@@ -134,19 +130,13 @@
    }
    
    #articlecol{
-   	border-radius:10px;
-    
+   	border-radius:10px;  
     border: 2px solid #4f70ce;
    	margin: auto;
    	height:85%; 
    	width:100%;
    }
 
-/*    #bottomwrapper{ */
-	 
-/*       width:100%; */
-/*    } */
-   
    #footer{
 	background:#7B68EE; 
       width:100%;
@@ -479,10 +469,6 @@
   ul {
     list-style-type: none;
   }
-  /*       body {   */
-  /*         font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;   */
-  /*         background: #dee1e3;   */
-  /*      }   */
   .comment-main-level {
     font-family: 'Roboto', Arial, Helvetica, Sans-serif, Verdana;
     background: #dee1e3;
@@ -817,12 +803,6 @@ response.setCharacterEncoding("utf8");
    <div id="centerwrapper">
       
 
-        
-        
-        
-       
-        
-  
         		<div class="row " id="articlerow">
 					<div class="col-md-6 bg-light " id="articlecol">
 						<hr />
@@ -840,14 +820,14 @@ response.setCharacterEncoding("utf8");
 								<div class="panel-body">
 
 									<label>Title : </label> <input type="text"
-										class="form-control w-100" name="title"
+										class="form-control w-100 bg-white" name="title"
 										placeholder=${dto.title } readonly> <label>Writer
 										: </label>
 
 									<!--            <input type="text" class="form-control W-25"/> -->
 
 
-									<input type="text" class="form-control w-50"
+									<input type="text" class="form-control w-50 bg-white"
 										placeholder=${dto.writer } name="loginid" readonly>
 									<!-- 				 <label>File : </label> -->
 									<!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
@@ -858,12 +838,11 @@ response.setCharacterEncoding("utf8");
 
 								</div>
 					
-								<label>Enter Text : </label>
-								<textarea rows="9" class="form-control" name="contents"
+								<label> Text : </label>
+								<textarea rows="9" class="form-control bg-white" name="contents"
 									placeholder=${dto.contents } readonly></textarea>
 								<hr />
 
-								
 								
 								
 									
@@ -872,16 +851,24 @@ response.setCharacterEncoding("utf8");
 
 
 										<div class="col-md-12 text-right">
-											<!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
-											<input type="button" id=back class="btn btn-secondary"
-												value="back"><span
-												class="glyphicon glyphicon-tags text-light"></span> <input
-												type="button" id=delete class="btn btn-secondary"
-												value="delete"><span
-												class="glyphicon glyphicon-tags text-light"></span> <input
-												type="button" id=modify class="btn btn-secondary"
-												value="modify "><span
-												class="glyphicon glyphicon-tags text-light"></span>
+											<!--<input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
+<!-- 										    <input type="button" id=back class="btn btn-primary" -->
+<!-- 											value="back"><span -->
+<!-- 											class="glyphicon glyphicon-tags text-light"></span>  -->
+												<a class="btn text-light  btn btn-light" id=back
+												 target="_blank"><i class="fa fa-fw fa-arrow-left fa-2x text-info"></i></a>
+												<a class="btn text-light  btn btn-light" id=delete
+												 target="_blank"><i class="fa fa-fw fa-trash fa-2x text-info"></i></a>
+								 				<a class="btn text-light  btn btn-light" id=modify
+								 				target="_blank"><i class="fa fa-fw fa-wrench fa-2x text-info"></i></a>
+												
+<!-- 											<input -->
+<!-- 											type="button" id=delete class="btn btn-primary" -->
+<!-- 											value="delete"><span -->
+<!-- 											class="glyphicon glyphicon-tags text-light"></span> <input -->
+<!-- 											type="button" id=modify class="btn btn-primary" -->
+<!-- 											value="modify "><span -->
+<!-- 											class="glyphicon glyphicon-tags text-light"></span> -->
 
 
 										</div>
@@ -900,7 +887,7 @@ response.setCharacterEncoding("utf8");
 									<c:otherwise>
 										<div class="col-md-12 text-right">
 											<!--           <input type="submit"  href="CommunityController.do" class="btn btn-secondary" value="Enter Text" "><span class="glyphicon glyphicon-envelope text-light"></span> </a>  -->
-											<input type="button" id=back class="btn btn-secondary"
+											<input type="button" id=back class="btn btn-primary"
 												value="back"><span
 												class="glyphicon glyphicon-tags text-light"></span>
 										</div>
@@ -921,9 +908,9 @@ response.setCharacterEncoding("utf8");
 					<div class="comments-container bg-light">
 					    <div class="comment-form">
 					      <!-- Comment Avatar -->
-					      <form action="CommentWrite.co" method="get" class="form" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
+					      <form action="CommentWrite.co" method="get" class="form" btn btn-primary"" name="form" ng-submit="form.$valid &amp;&amp; cmntCtrl.addComment()" novalidate="">
 					        <div class="form-row" >
-					          <textarea class="input border border-primary " id="comment_text" name="comment_text" ng-model="cmntCtrl.comment.text" placeholder="Add comment..." required="" ></textarea>
+					          <textarea class="input border border-primary " id="comment_text" name="comment_text" ng-model="cmntCtrl.comment.text" placeholder="Add comment..." required="" maxlength="30"></textarea>
 					          <input type="hidden" name="seq" value="${dto.seq}">
 					        </div>
 					        <div class="form-row">
@@ -933,7 +920,7 @@ response.setCharacterEncoding("utf8");
 					   </div> 
 					    
 					    	</c:when>
-									<c:otherwise>
+							<c:otherwise>
 										
 					<div class="comments-container bg-light">
 					    <div class="comment-form">
@@ -984,20 +971,25 @@ response.setCharacterEncoding("utf8");
 					        <div class="comment-head bg-warning">
 					          <h6 class="comment-name by-author">
 					            <a>No.${item.comment_seq}</a>
+					            <br><br>
 					            <a>ID:${item.writer}</a>
 					          </h6>
-					          <span>Date:${item.writedate}
-					  
+					         
+					          <span> &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					          &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					          Date:${item.writedate}
 					          </span>
 					              
+					    	<br>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+					    	&emsp;
 					    	<span id="delbtn">
 					          <script>
-                  				$("#delbtn:last-child").after("<button id="+num+"  value='${item.comment_seq}'>delete</button>")
+                  				$("#delbtn:last-child").after("<button class='btn btn-outline-info btn-sm ' id="+num+"  value='${item.comment_seq}'>삭제하기</button>")
 					          </script>
 					         </span>  
 					       
 					       
-				
+			
 					    
 					       
 					       
@@ -1009,9 +1001,9 @@ response.setCharacterEncoding("utf8");
                   
 							</script> 
      
-							 <span id="modifysubmit"> 
+							 <span id="modifysubmit" > 
 					          <script>
-                  				$("#modifysubmit:last-child").after("<button id=commentmodifysuccess"+num+" >수정완료</button> ")
+                  				$("#modifysubmit:last-child").after("<button class='btn btn-outline-info btn-sm' id=commentmodifysuccess"+num+" >수정완료</button> ")
 					          </script></span>
 					          
 					          
@@ -1030,9 +1022,9 @@ response.setCharacterEncoding("utf8");
 								
 					    	</script>					      
 					      
-					       <span id="modifybtn1">
+					       <span id="modifybtn1" >
 					       <script>
-					       $("#modifybtn1:last-child").after("<button id=commentmodify"+num+" name=commentmodify type=button>수정</button>");
+					       $("#modifybtn1:last-child").after("<button class='btn btn-outline-info btn-sm' id=commentmodify"+num+" name=commentmodify type=button>수정하기</button>");
 			            	  
 					    	</script>
 						</span>
@@ -1043,7 +1035,7 @@ response.setCharacterEncoding("utf8");
 				 
 				    <div id=modinput>
 						<script>   
-					        $("#modinput:last-child").after("<input type=text class=form-control   id=modify"+num+" name=comment_text2 readonly value=${item.comment_text}>");
+					        $("#modinput:last-child").after("<input type=text class='form-control bg-white'   id=modify"+num+" name=comment_text2 readonly value=${item.comment_text}>");
 					    </script>
 					     
 					     
@@ -1064,7 +1056,9 @@ response.setCharacterEncoding("utf8");
 
 	
 					      </div>
-					    
+					      
+					      
+					     
 				    </div>
 				     
 				</div>
@@ -1092,7 +1086,7 @@ response.setCharacterEncoding("utf8");
 					         
 					         
 					        </div>
-					        <div class="comment-content bg-light">${item.comment_text}</div>
+					        <div class="comment-content bg-light bg-white">${item.comment_text}</div>
 					      </div>
 					    </div>
 					     <br>  

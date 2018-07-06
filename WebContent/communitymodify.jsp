@@ -111,11 +111,15 @@
   
 	}
 	
-	.col-md-6{
-		 background :#FAEBD7;
+	#contentscard{
+		height : 330px;
 	}
 	
+	#articlecol{
+   		border-radius:10px;  
+    	border: 2px solid #4f70ce;
 	
+	}
 	#content{
 		height:100%;
 		width:100%;		
@@ -257,8 +261,8 @@ response.setCharacterEncoding("utf8");
 		
 		<div id="content">
 							
-	<div class="row">
-        <div class="col-md-6">
+	<div class="row" >
+        <div class="col-md-6 " id="articlecol">
           <hr />
           <div class="Compose-Message">
             <div class="panel panel-success">
@@ -280,33 +284,28 @@ response.setCharacterEncoding("utf8");
 <!--            <input type="text" class="form-control W-25"/> -->
 		
 
-				<input type="text" class="form-control w-50" placeholder=${sessionScope.loginid} name="loginid" readonly>
+				<input type="text" class="form-control w-50 bg-white" placeholder=${sessionScope.loginid} name="loginid" readonly>
 <!-- 				 <label>File : </label> -->
 <!-- 				<input type="text" class="form-control w-50" placeholder="File" > -->
        			
       			</div>  					
-       
-                <label>Enter Text : </label>
-                 <textarea rows="9" class="form-control" name="contents" >${dto.contents}</textarea>
+       			 <br>
+                <label>Text : </label>
+                 <textarea rows="9" style="overflow:auto" class="form-control" name="contents" id="contentscard">${dto.contents}</textarea>
                 <hr />
                 
     
                
                <div class="col-md-12 text-right" >
-                <input type="submit" class="btn btn-secondary" value="Modify" "><span class="glyphicon glyphicon-envelope text-light"></span> 
-               
-         
+                <input type="submit" class="btn text-primary btn btn-light" target="_blank" value="Modify"><span class="glyphicon glyphicon-envelope"></span> 
               </div>
-   
-
-              </form>
-              
+       
+          
+												
 
               
                 &nbsp;
-              <div class="panel-footer text-muted">
-                <strong>Note : </strong>Please note that we track all messages so don't send any spams.
-              </div>
+             
                 &nbsp;
             </div>
           </div>
