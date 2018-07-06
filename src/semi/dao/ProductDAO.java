@@ -9,7 +9,7 @@ import java.util.List;
 import semi.dbutils.DBUtils;
 import semi.dto.BoardDTO;
 import semi.dto.ProductDTO;
-
+ 
 public class ProductDAO {
 	public ArrayList<String> priceForBoard(String category, String category2) throws Exception{
 		Connection con = DBUtils.getConnection();

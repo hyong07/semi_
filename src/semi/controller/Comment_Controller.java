@@ -18,7 +18,7 @@ import semi.dto.CommentDTO;
 import semi.dto.CommunityDTO;
 
 
-@WebServlet("*.co1")
+@WebServlet("*.co")
 public class Comment_Controller extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -42,7 +42,7 @@ public class Comment_Controller extends HttpServlet {
 			boolean isRedirect = true;
 			String dst = null;
 			
-			if(command.equals("/CommentWrite.co1")) {
+			if(command.equals("/CommentWrite.co")) {
 				
 				int article_no = Integer.parseInt(request.getParameter("seq"));	
 				String comment_text= request.getParameter("comment_text");
@@ -52,7 +52,6 @@ public class Comment_Controller extends HttpServlet {
 			    
 				int result = dao1.commentInsertData(article_no, comment_text, writer, ip);				
 				
-				
 				if(result>0) {
 				request.setAttribute("result", result);
 				request.setAttribute("seq", article_no);
@@ -61,7 +60,7 @@ public class Comment_Controller extends HttpServlet {
 				
 				}
 			}
-			else if(command.equals("/CommentDelete.co1")) {
+			else if(command.equals("/CommentDelete.co")) {
 					int comment_seq = Integer.parseInt(request.getParameter("comment_seq"));
 					int result = dao1.commentdelete(comment_seq);
 					
@@ -87,21 +86,19 @@ public class Comment_Controller extends HttpServlet {
 //				isRedirect = false;
 //				dst = "commentmodify.jsp";
 //					
-//			}else if(command.equals("/CommentModifyproc.co")) {
-//				
-//				int comment_seq = Integer.parseInt(request.getParameter("comment_seq"));
-//				String comment_text= request.getParameter("comment_text");
-//				
-//				dto.setTitle(comment_text);
-//				
-//				
-//				int result = dao1.commentmodify(dto, comment_seq);
-//				
-//			if(result > 0) {
-//					request.setAttribute("seq", comment_seq);
-//					isRedirect = false;
-//					dst = "CommunityArticleView.do";
-//			}	
+			}else if(command.equals("/CommentModify.co")) {
+				
+				String comment_text= request.getParameter("comment_text");
+				int comment_seq = Integer.parseInt(request.getParameter("comment_seq"));
+				int article_no = Integer.parseInt(request.getParameter("article_no"));
+				
+				
+				int result = dao1.commentmodify(comment_text, comment_seq);
+				
+			if(result > 0) {
+					isRedirect = false;
+					dst = "CommunityArticleView.do?seq="+article_no;
+			}	
 				
 			
 		}

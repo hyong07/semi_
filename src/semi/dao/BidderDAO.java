@@ -10,7 +10,7 @@ import semi.dbutils.DBUtils;
 import semi.dto.BidderDTO;
 
 public class BidderDAO {
-   
+    
    public List<BidderDTO> bidderSelect(String bodder_seq) throws Exception{
       Connection con = DBUtils.getConnection();
       String sql = "SELECT * FORM BIDDER WHERE BODDER_SEQ=?";
@@ -116,6 +116,21 @@ public class BidderDAO {
 	       pstat.close();
 	       return result;
 	   }
-   
+ 
+   public int successBid(String seq, String crrent) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "update bidder set state = case when bidprice = ? then '³«Âû' else '¸¶°¨' end where board_seq=?";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      
+	      pstat.setString(1, seq);
+	      pstat.setString(2, crrent);
+	      
+	      int result = pstat.executeUpdate();
+	      
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      return result;
+	   }
    
 }

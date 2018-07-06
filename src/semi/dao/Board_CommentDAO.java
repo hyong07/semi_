@@ -12,7 +12,7 @@ import semi.dto.Board_CommentDTO;
 
 public class Board_CommentDAO {
 	
-	
+	  
 	
 	public int insertBoard_Comment(String id, String seq, String contents, String ip) throws Exception {
 		  Connection con = DBUtils.getConnection();
@@ -29,23 +29,30 @@ public class Board_CommentDAO {
 	      int result =  pstat.executeUpdate();
 	      System.out.println(result);
 	      
-	  	con.commit();
-		pstat.close();
-		con.close();   
+	      con.commit();   
+	      pstat.close();   
+	      con.close();
+
 	      return result;
 
 		
 	}
 	
 	public List<Board_CommentDTO> selectCommentList(String seq) throws Exception {
+	
+		
 		Connection con = DBUtils.getConnection();
-		 String sql = "select * from board_comment where article_no = ?";
-		 PreparedStatement  pstat = con.prepareStatement(sql);
-		 pstat.setString(1, seq);
+	
+		String sql = "select * from board_comment where article_no = ? order by comment_seq desc";
+	
+		PreparedStatement  pstat = con.prepareStatement(sql);
+		
+		pstat.setString(1, seq);
 		 ResultSet rs =  pstat.executeQuery();
-		 List<Board_CommentDTO> list = new ArrayList<>();
-		 
+		 List<Board_CommentDTO> result = new ArrayList<>();
+		
 		 while(rs.next()) {
+			 
 			 Board_CommentDTO dto = new Board_CommentDTO();
 			 dto.setArticle_no(seq);
 			 dto.setComment_seq(rs.getString(2));
@@ -54,14 +61,54 @@ public class Board_CommentDAO {
 			 dto.setWritedate(rs.getString(5));
 			 dto.setIp(rs.getString(6));
 			
-			 list.add(dto);			 
+			 result.add(dto);			 
 		 }
+		con.commit();
+		 con.close();
+		 pstat.close();
 		 
-			con.commit();
-			pstat.close();
-			con.close();   
-		 return list;
+		 return result;
 		
+	}
+	
+	public int commentdelete(int comment_seq) throws Exception{
+		Connection con = DBUtils.getConnection();
+
+		String sql = "delete from board_comment where comment_seq = ?";
+
+		PreparedStatement pstat = con.prepareStatement(sql);
+
+		pstat.setInt(1, comment_seq);
+
+
+
+		int result = pstat.executeUpdate();
+		con.commit();
+		pstat.close();
+		con.close();
+
+		return result;
+	}
+	
+	public int commentmodify(String comment_contents, int comment_seq ) throws Exception{
+
+		Connection con = DBUtils.getConnection();
+		String sql = "update board_comment set comment_contents = ? where comment_seq = ?";		
+		PreparedStatement pstat = con.prepareStatement(sql);
+
+		pstat.setString(1, comment_contents);
+		pstat.setInt(2, comment_seq);
+	
+		
+
+		int result =  pstat.executeUpdate();
+	
+
+		con.commit();
+		pstat.close();	
+		con.close();
+	
+		return result;
 	}
 
 }

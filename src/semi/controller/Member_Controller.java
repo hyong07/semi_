@@ -238,7 +238,15 @@ public class Member_Controller extends HttpServlet {
 				//dst= mypage.....
 				
 			}
-			
+
+			else if(command.equals("/endbid.mem")) {
+				String plusid = request.getParameter("plusid");
+				String point = request.getParameter("point");
+				
+				int plusSellPoint = dao.returnPoint(plusid,point);
+				
+				
+			}
 			
 
 			if(isRedirect) {

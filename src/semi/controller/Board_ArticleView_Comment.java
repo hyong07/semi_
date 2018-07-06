@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import semi.dao.Board_CommentDAO;
 import semi.dto.Board_CommentDTO;
 
-@WebServlet("*.co")
+@WebServlet("*.co1")
 public class Board_ArticleView_Comment extends HttpServlet {
 	
 	
@@ -34,25 +34,53 @@ public class Board_ArticleView_Comment extends HttpServlet {
 			boolean isRedirect = true;
 			String dst = null;
 
-			if(command.equals("/comment.co")) {
+			if(command.equals("/comment.co1")) {
 				String board_seq = request.getParameter("seq");
 				String contents = request.getParameter("contents");
 				String sell_type = request.getParameter("sell_type");
 				System.out.println(board_seq + " : " + contents + " : " +id + " : " + ip);
 				
-				int result = board_comment.insertBoard_Comment(id, board_seq,contents,ip);
-				System.out.println("결과다~~~" + result);
-				request.setAttribute("seq",board_seq);
-
-				isRedirect = false;
-				List<Board_CommentDTO> commentlist = new ArrayList<>();
-				commentlist = board_comment.selectCommentList(board_seq);
-				System.out.println("결과다~~~코멘트사이즈다~~" );
+		 		int result = board_comment.insertBoard_Comment(id, board_seq,contents,ip);
+				System.out.println("result" + result);
 				
-				dst = "articleView.bo?seq="+board_seq+"&sell_type="+sell_type+"&commentlist="+commentlist;
+				request.setAttribute("result",result);
+				request.setAttribute("seq",board_seq);
+				
+				isRedirect = false;
+				dst = "articleView.bo";
+			
+			}else if(command.equals("/CommentDelete.co1")) {
+				System.out.println("시발아");
+				int comment_seq = Integer.parseInt(request.getParameter("comment_seq"));
+				int result = board_comment.commentdelete(comment_seq);
+				
+				if(result>0) {
+				isRedirect = false;
+				dst = "articleView.bo";
+				}
+			
+			}else if(command.equals("/CommentModify.co1")) {
+				int board_seq = Integer.parseInt(request.getParameter("seq"));
+//				String board_seq = request.getParameter("seq");
+//				int article_no = Integer.parseInt(request.getParameter("article_no"));
+				int comment_seq = Integer.parseInt(request.getParameter("comment_seq"));
+				String sell_type= request.getParameter("sell_type");
+				String comment_contents= request.getParameter("comment_contents");
+					
+				
+				int result = board_comment.commentmodify(comment_contents, comment_seq);
+				
+				if(result > 0) {
+						
+						isRedirect = false;
+						dst = "articleView.bo?seq="+board_seq+"&sell_type="+sell_type;
+				}	
+				
 				
 			}
 			
+			
+		
 			if(isRedirect) {
 				response.sendRedirect(dst);
 

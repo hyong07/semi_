@@ -25,7 +25,7 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 	integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 	crossorigin="anonymous"></script>
-    
+
 <link href="https://fonts.googleapis.com/css?family=Open+Sans"
 	rel="stylesheet">
 <!-- <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script> -->
@@ -36,8 +36,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-    
-/*   primary: #12bbad,  */
+
+/*   primary: #12bbad, */
 /*   secondary: #4f70ce, */
 /*   light: #f3f3f3, */
 /*   dark: #151515, */
@@ -168,12 +168,47 @@ div {
 	margin-left: 1%;
 	float: left;
 }
+
+#bidcnt {
+text-decoration:none;  
+}
 </style>
 
 <script>
 
-window.onload = function() {
+
+
+$(document).ready(function() {
+	var seq = $("#seq").val();
+		var intervalname = setInterval(function() {
+			$.ajax({
+		        url:"getEndHour.bo",
+		        type:"get",
+		        data:{seq:seq},
+		        success:function(rep){
+		        console.log(rep);    
+		        	$("#endhour").text(rep.split("\"")[1],10);
+		        	  console.log((rep.split("\"")[1]));
+		     		if((rep.split("\"")[1]) == '마감'){
+		     			alert("경매가 마감되었습니다!");
+		     			clearInterval(intervalname);
+		     			var current = $("#current").text();
+		     			location.href = "endbid.bid?seq="+seq+"&current="+current;
+		     		}    
+  
+		        }
+		     })    
+			  
+		}, 5000);
 	
+})
+
+</script>
+<script>
+
+window.onload = function() {
+
+
     document.getElementById("bidbtn").onclick = function() {
     	var mybid = document.getElementById("bidaccount");
         document.getElementById("mybid3").value = mybid.value;
@@ -218,6 +253,10 @@ window.onload = function() {
          })  
   	   
     }
+    
+    
+    
+    
 }
 
 </script>
@@ -372,7 +411,8 @@ window.onload = function() {
 										<h3 class="text-primary">
 											<a href="">${pdto.p_name}</a>
 										</h3>
-										<i>${endhour} left (${sysdate})&nbsp;</i>
+<!-- 										<input type=text > -->
+										<i id=endhour>${end}  (${sysdate}) </i>      
 										<div>
 											<br>
 											<row>
@@ -394,9 +434,10 @@ window.onload = function() {
 													<tbody>
 														<tr>
 															<td>current :</td>
-															<td>${currentprice}<img src="saram.png" width="18px"
+															<td id=current>${currentprice}</td>
+															<td><a href="#" id=bidcnt> <img src="saram.png" width="18px"
 																height="18px"> <i> ${bdto.bidcnt} bid&nbsp;</i>
-
+</a>
 															</td>
 														</tr>
 														<tr>
@@ -497,9 +538,13 @@ window.onload = function() {
 															type="button" id="bid3" name="confirm3"
 															value='${num+bdto.bidunit+bdto.bidunit}'
 															style="margin-left: 3%; width: 25%">
-													</div>
+													</div>  
 													<div class="modal-footer">
-														<input id="bidaccount1" type="number" placeholder='${num}'
+				   
+				   
+				   
+				   
+				   										<input id="bidaccount1" type="number" placeholder='${num}'
 															min='${num}' step='${bdto.bidunit}'> <input
 															type="button" id="noconfirm" name="confirm"
 															value="confirm" style="margin-left: 3%; width: 25%">

@@ -8,7 +8,7 @@ import java.util.List;
 
 import semi.dbutils.DBUtils;
 
-
+ 
 public class CategoryDAO {      
    public List<String> main_categoryGet(String choice) throws Exception{
       Connection con = DBUtils.getConnection();

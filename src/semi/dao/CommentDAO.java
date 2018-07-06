@@ -85,25 +85,25 @@ public class CommentDAO {
 		return result;
 	}
 	
-//	public int commentmodify(CommunityDTO dto, int comment_seq) throws Exception{
-//
-//		Connection con = DBUtils.getConnection();
-//		String sql = "update Community_comment set comment_text = ? where comment_seq = ?";		
-//		PreparedStatement pstat = con.prepareStatement(sql);
-//
-//		
-//		pstat.setString(1, dto.getContents());
-//		pstat.setInt(2, comment_seq);
-//
-//		int result =  pstat.executeUpdate();
-//
-//
-//		con.commit();
-//		pstat.close();	
-//		con.close();
-//
-//		return result;
-//	}
+	public int commentmodify(String comment_text, int comment_seq) throws Exception{
+
+		Connection con = DBUtils.getConnection();
+		String sql = "update Community_comment set comment_text = ? where comment_seq = ?";		
+		PreparedStatement pstat = con.prepareStatement(sql);
+
+		
+		pstat.setString(1, comment_text);
+		pstat.setInt(2, comment_seq);
+
+		int result =  pstat.executeUpdate();
+
+
+		con.commit();
+		pstat.close();	
+		con.close();
+
+		return result;
+	}
 	
 	
 }

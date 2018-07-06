@@ -78,7 +78,7 @@
 		height:100%;
 		width:15%;
 	}
-
+ 
 	#headercenter{
 		float:left;
 		height:100%;
@@ -239,7 +239,7 @@
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 뷰티</a>
 				 </li> 
 				 
-			  
+			   
 					 <li class="nav-item">
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					</a>

@@ -30,6 +30,12 @@
 <link href="https://fonts.googleapis.com/css?family=Open+Sans"
    rel="stylesheet">
 <script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
+ <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.11.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.9/summernote-bs4.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
@@ -182,8 +188,10 @@
                success:function(rep){
                   if(rep.length>0){                     
                      $("#sub_category").empty();
+                     $("#sub_category1").empty();
                      for(i=0; i<rep.length;i++){
                         $("#sub_category").append("<option value="+rep[i]+">"+rep[i]+"</option>");
+                        $("#sub_category1").append("<option value="+rep[i]+">"+rep[i]+"</option>");
                         console.log(rep[i]);
                      }
                   }
@@ -226,7 +234,8 @@
                      success:function(rep){
 //                         $("input[name=sell_type]").attr("style","display:none");
 //                         $("#test").text("");
-                        if(rep == "a"){                                               
+                        if(rep == "a"){                                     
+                        $("#productheader").append("<tr><th>메인상품</th><th>세부카테고리</th><th>제품명</th><th>가격</th><th>수량</th><th>#</th></tr>");
                            $("#plusButton").attr("href","#auction_product");
                            $("#type_check").attr("value","a");
                            $("#type_check").text("경매");
@@ -292,7 +301,7 @@
                else if(sell_type=="a")
                { console.log("요기지??0");
                    var category = $("#main_category").val();                            
-                    var sub_category = $("#sub_category").val();
+                    var sub_category1 = $("#sub_category1").val();
                     var product_name = $("#product_name1").val();
                     var sell_price = $("#productstartprice").val();
                     var end_date = $("#productenddate").val();
@@ -303,29 +312,33 @@
                     $.ajax({  
                         url:"auctionproductInfo.bo",
                         type:"get",
-                        data:{board_no:board_no,category:category,sub_category:sub_category,product_name:product_name,sell_price:sell_price,end_date:end_date,sell_type:sell_type,bidunit:bidunit},
+                        data:{board_no:board_no,category:category,sub_category:sub_category1,product_name:product_name,sell_price:sell_price,end_date:end_date,sell_type:sell_type,bidunit:bidunit},
                          success:function(rep){
                               
                         console.log(rep);
-                           $("#sub_category option:selected").prop("selected", false);
+                           $("#sub_category1 option:selected").prop("selected", false);
                                 $("#product_name1").val("");
                                 $("#productstartprice").val("");
                                 $("#productenddate").val("");
                                 $("#productbidunit").val("");
-                                $("#productlist").append("<tr><td>"+ sub_category+ "<td>"+ product_name +"<td>"+ sell_price+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
+                                
+                                $("#productlist").append("<tr><td>"+ sub_category1+ "<td>"+ product_name +"<td>"+ sell_price+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
                     
                          } 
                      }) 
-                     console.log(category+" : "+sub_category + " : " + product_name + " : " + sell_price);
+                     console.log(category+" : "+sub_category1 + " : " + product_name + " : " + sell_price);
                     
                     }
       
                              
-                              })
+                              })  
                            $("#input_imgs").on("change", handleImgFileSelect);      
                })
                
+     
+               
 
+               
    function fileUploadAction() {
       console.log("fileUploadAction");
       $("#input_imgs").trigger('click');      
@@ -526,7 +539,7 @@
                               <div class="panel-body col-md-4">
                                  <div class="form-row mb-3">
                                     <div class="col-md-5">세부 카테고리 :</div>
-                                    <select id="sub_category" name="sub_category" class="col-md-5 ml-1">
+                                    <select id="sub_category1" name="sub_category" class="col-md-5 ml-1">
 
                                     </select>
                                  </div>
@@ -561,17 +574,13 @@
                      </div>
 
                   </div>
+                  <div class="col-md-12"> 
+                   <table class="table">
+                  
                   <div class="col-md-12">
                      <table class="table">
-                        <thead>
-                           <tr>       
-                           <th>메인상품</th>                       
-                              <th>세부카테고리</th>
-                              <th>제품명</th>
-                              <th>가격</th>
-                              <th>수량</th>
-                              <th>#</th>
-                           </tr>
+                        <thead id="productheader">
+                
                         </thead>
                         <tbody id="productlist">
 
@@ -585,6 +594,7 @@
 
                   <div class="form-row mb-3  col-md-12">
                      <div class="col-md-2">내용 :</div>
+
                      <textarea id="textarea" name="contents" class="form-control col-md-8 ml-1"
                         rows="15" style="resize: none;"></textarea>
                   </div>

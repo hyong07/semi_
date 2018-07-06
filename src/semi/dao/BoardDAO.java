@@ -11,51 +11,157 @@ import semi.dto.BoardDTO;
 
 public class BoardDAO { 
 
+ 
+	 public ArrayList<BoardDTO> boardForBoard(String category, String category2) throws Exception{
+			Connection con = DBUtils.getConnection();
+			String sql = null;
+			PreparedStatement pstat = null;
 
-//	public ArrayList<BoardDTO> boardForBoard(String category, String category2) throws Exception{
-//		Connection con = DBUtils.getConnection();
-//		String sql = null;
-//		PreparedStatement pstat = null;
-//
-//		if(!(category2==null)) {
-//
-//			sql =
-//					"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
-//
-//			pstat = con.prepareStatement(sql);
-//			pstat.setString(1, category);
-//			pstat.setString(2, category2);
-//		}
-//
-//		else {
-//
-//			sql =
-//					"select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) order by b.board_seq desc";
-//			pstat = con.prepareStatement(sql);
-//			pstat.setString(1, category);
-//
-//		}
-//
-//		ResultSet rs = pstat.executeQuery();
-//		ArrayList<BoardDTO> list = new ArrayList<>();
-//
-//		while(rs.next()) {		
-//			String board_seq = rs.getString(1);
-//			String seller_id = rs.getString(2);
-//			String title = rs.getString(3);
-//			String contents = rs.getString(4);
-//			String write_date = rs.getString(5);
-//			String sell_type = rs.getString(6);
-//			String sell_status = rs.getString(7);
-//			String end_date = rs.getString(8);
-//			String viewcount = rs.getString(9);
-//
-//			BoardDTO boarddto = new BoardDTO(board_seq, seller_id, title, contents, write_date, sell_type,sell_status ,end_date,viewcount);
-//			list.add(boarddto);
-//
-//		}
-//		return list;
-//	}
+			if(!(category2==null)) {
+				System.out.println("서브카테고리가 있는거야" + category2);
+
+				sql =
+						"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') order by b.board_seq desc";
+
+				pstat = con.prepareStatement(sql);
+				pstat.setString(1, category);
+				pstat.setString(2, category2);
+			}
+
+			else {
+				System.out.println("서브카테고리가 없는거야");
+
+				sql =
+						"select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y')  and (f.MAIN_FILES = 'y') order by b.board_seq desc";
+				pstat = con.prepareStatement(sql);
+				pstat.setString(1, category);
+
+			}
+
+			ResultSet rs = pstat.executeQuery();
+			ArrayList<BoardDTO> list = new ArrayList<>();
+
+			while(rs.next()) {		
+				String board_seq = rs.getString(1);
+				String seller_id = rs.getString(2);
+				String title = rs.getString(3);
+				String contents = rs.getString(4);
+				String write_date = rs.getString(5);
+				String sell_type = rs.getString(6);
+				String sell_status = rs.getString(7);
+				String end_date = rs.getString(8);
+				String viewcount = rs.getString(9);
+
+				BoardDTO boarddto = new BoardDTO(board_seq, seller_id, title, contents, write_date, sell_type,sell_status ,end_date,viewcount,"","");
+				list.add(boarddto);
+
+			}
+			con.commit();
+			 con.close();
+			 pstat.close();
+			System.out.println(list.size() + " 그래서 몇개가나와야하는데?"); 
+			return list;
+			
+		}
+		 
+		 
+		 public ArrayList<BoardDTO> listviewForBoard(String category, String category2) throws Exception{
+				Connection con = DBUtils.getConnection();
+				String sql = null;
+				PreparedStatement pstat = null;
+
+				if(!(category2==null)) {
+
+					sql =
+							"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (sell_type='a') and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') order by b.board_seq desc";
+
+					pstat = con.prepareStatement(sql);
+					pstat.setString(1, category);
+					pstat.setString(2, category2);
+				}
+
+				else {
+
+					sql =
+							"select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (sell_type='a') and (p.MAIN_PRODUCT = 'y')  and (f.MAIN_FILES = 'y') order by b.board_seq desc";
+					pstat = con.prepareStatement(sql);
+					pstat.setString(1, category);
+
+				}
+
+				ResultSet rs = pstat.executeQuery();
+				ArrayList<BoardDTO> list = new ArrayList<>();
+
+				while(rs.next()) {		
+					String board_seq = rs.getString(1);
+					String seller_id = rs.getString(2);
+					String title = rs.getString(3);
+					String contents = rs.getString(4);
+					String write_date = rs.getString(5);
+					String sell_type = rs.getString(6);
+					String sell_status = rs.getString(7);
+					String end_date = rs.getString(8);
+					String viewcount = rs.getString(9);
+
+					BoardDTO boarddto = new BoardDTO(board_seq, seller_id, title, contents, write_date, sell_type,sell_status ,end_date,viewcount,"","");
+					list.add(boarddto);
+
+				}
+				con.commit();
+				 con.close();
+				 pstat.close();
+				 
+				return list;
+			}
+		 
+		 public ArrayList<BoardDTO> buyitnowForBoard(String category, String category2) throws Exception{
+				Connection con = DBUtils.getConnection();
+				String sql = null;
+				PreparedStatement pstat = null;
+
+				if(!(category2==null)) {
+
+					sql =
+							"select b.* from board b, product p, files f where (p.category =?) and (p.DETAIL_CATEGORY=?) and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (sell_type='s') and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') order by b.board_seq desc";
+
+					pstat = con.prepareStatement(sql);
+					pstat.setString(1, category);
+					pstat.setString(2, category2);
+				}
+
+				else {
+
+					sql =
+							"select b.* from board b, product p, files f where (p.category =?)  and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (sell_type='s') and (p.MAIN_PRODUCT = 'y')  and (f.MAIN_FILES = 'y') order by b.board_seq desc";
+					pstat = con.prepareStatement(sql);
+					pstat.setString(1, category);
+
+				}
+
+				ResultSet rs = pstat.executeQuery();
+				ArrayList<BoardDTO> list = new ArrayList<>();
+
+				while(rs.next()) {		
+					String board_seq = rs.getString(1);
+					String seller_id = rs.getString(2);
+					String title = rs.getString(3);
+					String contents = rs.getString(4);
+					String write_date = rs.getString(5);
+					String sell_type = rs.getString(6);
+					String sell_status = rs.getString(7);
+					String end_date = rs.getString(8);
+					String viewcount = rs.getString(9);
+
+					BoardDTO boarddto = new BoardDTO(board_seq, seller_id, title, contents, write_date, sell_type,sell_status ,end_date,viewcount,"","");
+					list.add(boarddto);
+
+				}
+				con.commit();
+				 con.close();
+				 pstat.close();
+				 
+				return list;
+			}
 
 	public String checkboardNo() throws Exception{
 		Connection con = DBUtils.getConnection();
@@ -158,21 +264,23 @@ public class BoardDAO {
 		pstat.close();
 		con.close();   	
 		System.out.println("결과는요~" + result);
-		return result;
-
-	}
-
+		return result;     
+                                
+	}                                                     
+                       
 	public String getEndHour(String seq) throws Exception {
 		Connection con = DBUtils.getConnection();
-		String sql = "select (end_date-write_date || 'd ' ) || (24-to_char(sysdate,'HH') ||'h') from board where board_seq = ?";
+		//String sql = "select (end_date-write_date-1 || 'd ' ) || (17-to_char(sysdate,'HH') ||'h ') || (59 -to_char(sysdate,'MI') ||'m') from board where board_seq = ?";
+		String sql = "select '0d 0h ' || (57-to_char(sysdate,'MI') ||'m') from board where board_seq = ?";
+		                                      
 		PreparedStatement pstat = con.prepareStatement(sql);
 		pstat.setString(1, seq);
 		ResultSet rs = pstat.executeQuery();
 		String result = null;
-
+  
 		if(rs.next()) {
 			result= rs.getString(1);
-		}
+		} 
 		con.commit();
 		pstat.close();
 		con.close();   
@@ -196,6 +304,8 @@ public class BoardDAO {
 		      pstat.close();
 		      return result;
 		   }
+	   
+	   
 	
 
 }

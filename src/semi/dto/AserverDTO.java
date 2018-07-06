@@ -15,7 +15,7 @@ public class AserverDTO {
       this.hold_price = hold_price;
       this.status = status;
    }
-
+ 
    public String getBoard_seq() {
       return board_seq;
    }

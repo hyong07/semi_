@@ -8,7 +8,7 @@ import semi.dbutils.DBUtils;
 import semi.dto.AserverDTO;
 
 public class AserverDAO {
-
+ 
 	public int insertServer(AserverDTO dto) throws Exception {
 		Connection con = DBUtils.getConnection();
 		System.out.println("ÀÔÂûÇÑÀûÀÌÀÖ´ÂÁö °Ë»çÇÒ°Å¿¡¿ä~~~~~");
@@ -91,5 +91,75 @@ public class AserverDAO {
 	       pstat.close();
 	       return result;
 	   }
-
+	 
+	 public int successBid(String seq, String current) throws Exception {
+	      Connection con = DBUtils.getConnection();
+	      String sql ="update aserver set status = case when hold_price = ? then '³«Âû' else 'Ãë¼Ò' end where board_seq=?";
+	       PreparedStatement pstat = con.prepareStatement(sql);
+	       
+	       pstat.setString(1, current);
+	       pstat.setString(2, seq);
+	       
+	       int result = pstat.executeUpdate();
+	       
+	       con.commit();
+	       con.close();
+	       pstat.close();
+	       return result;
+	   }
+	 
+	 public int holdToZero(String seq) throws Exception{
+	      Connection con = DBUtils.getConnection();
+	      String sql = "update aserver set hold_price ='0' where board_seq=? ";
+	      PreparedStatement pstat = con.prepareStatement(sql);
+	      
+	      pstat.setString(1, seq);
+	      
+	      int result = pstat.executeUpdate();
+	      
+	      con.commit();
+	      con.close();
+	      pstat.close();
+	      return result;
+	   }
+	 
+	
+	 public String sellerid(String seq) throws Exception{
+		 Connection con = DBUtils.getConnection();
+		 String sql = "select seller_id from aserver where board_seq = ?";
+  PreparedStatement pstat = con.prepareStatement(sql);
+	      
+	      pstat.setString(1, seq);
+	      
+	      ResultSet rs = pstat.executeQuery();
+	      String id  =  null;
+	      if(rs.next()) {
+	    	  id = rs.getString(1);
+	      }
+	      
+	      return id;
+	      
+		 
+	 }
+	 
+	   public String winnerBuyer(String seq) throws Exception{
+		      Connection con = DBUtils.getConnection();
+		      String sql = "SELECT BUYER_ID WHERE BOARD_SEQ=? and STATUS='³«Âû'";
+		      PreparedStatement pstat = con.prepareStatement(sql);
+		      
+		      pstat.setString(1, seq);
+		      
+		      ResultSet rs = pstat.executeQuery();
+		      String result = null;
+		      
+		      if(rs.next()) {
+		         result = rs.getString(1);
+		      }
+		      
+		      con.commit();
+		      con.close();
+		      pstat.close();
+		      return result;
+		   }
+	 
 }
