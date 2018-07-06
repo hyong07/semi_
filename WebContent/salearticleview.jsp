@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
    pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <link rel="stylesheet"
    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css"
    integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M"
    crossorigin="anonymous">
-<link
+<link   
    href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css"
    rel="stylesheet">
 <link rel="stylesheet"
@@ -15,10 +15,8 @@
 <link rel="stylesheet"
    href="https://v40.pingendo.com/assets/4.0.0/default/theme.css"
    type="text/css">
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-   integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-   crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+
 <script
    src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -29,17 +27,11 @@
    crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans"
    rel="stylesheet">
-<link
-   href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-   rel="stylesheet" id="bootstrap-css">
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
-<html>
+<script src="https://unpkg.com/ionicons@4.2.0/dist/ionicons.js"></script>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 <style>
-@import 'bootstrap-4.0.0';
 
 body {
    
@@ -124,33 +116,219 @@ div {
    background: #7B68EE;
    width: 100%;
 }
+
+/* 여기까지 메인 */
+
+#tfoot{
+   background-color:rgba(0, 0, 0, 0.03);
+}
+
 </style>
 
 <!-- 카카오 로그아웃  -->
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+
 <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
 <script>
-         function kakaoLogout() {
+$(document).ready(function(){
+   $("#product").on('change', function (e) {
+      var count = 0;
+       var product_seq = $("option:selected", this).val();
+      if($("#productlist tr").length){
+         $("#productlist tr").each(function(i){
+            var id = this.id;
+            
+            if(id == product_seq){
+               alert("이미 존재하는 상품입니다.");
+               count++;
+               $("#product option:eq(0)").prop("selected",true);
+               return;
+            }         
+          }); 
+         
+         if(count == 0){
+            var product = $("option:selected",this).text();
+             var product_name = product.split("-")[0];
+             var product_price = product.split("-")[1].split("원")[0];
+             $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><td><ion-icon name='close' onclick='deleteLine(this);' style='cursor: pointer'></ion-icon></tr>");
+         }         
+      }
+      else{
+         var product = $("option:selected",this).text();
+          var product_name = product.split("-")[0];
+          var product_price = product.split("-")[1].split("원")[0];
+          $("#productlist").append("<tr id="+product_seq+"><td>"+ product_seq+ "<td>"+ product_name +"<td>"+ product_price+ "<td><button type='button' onclick='up(this);'>▲</button><i id='check'>1</i><button type='button' onclick='down(this);'>▼</button></td><td><ion-icon name='close' onclick='deleteLine(this);' style='cursor: pointer'></ion-icon></tr>");
+      }
+      
+      var currentPrice = $("#totalPrice").text();
+      $.ajax({
+         url:"totalPrice.buy",
+         type:"get",
+         data:{product_seq:product_seq,currentPrice:currentPrice},
+         success:function(rep){
+            console.log(rep);
+            $("#totalPrice").text(rep);
+         }
+         
+      })
+
+   });
+  
+   $("#okButton").click(function(){
+      var buyProduct = new Array();
+       var productCount = new Array();
+       var board_no = ${bdto.board_seq};
+       var contact = $("#contact").val();
+       $("#productlist tr").each(function(i){
+            var id = this.id;
+            buyProduct.push(id);
+            console.log(buyProduct);   
+       })
+       
+       $("#productlist tr i").each(function(i){
+          productCount.push($(this).text());
+       })
+       
+       jQuery.ajaxSettings.traditional = true;
+       
+      var check = confirm("구매 진행 하시겠습니까 ?");
+      if(check==1){
+         location.href = "buyComplete.buy?product_seq="+buyProduct+"&product_count="+productCount+"&board_no="+board_no+"&contact="+contact;   
+      }      
+   })
+})
+
+
+
+function buyStart(){
+         var buyProduct = new Array();
+         var productCount = new Array();
+         var board_no = ${bdto.board_seq};
+         
+         $("#productlist tr").each(function(i){
+              var id = this.id;
+              buyProduct.push(id);
+              console.log(buyProduct);
+     
+         })
+         
+         $("#productlist tr i").each(function(i){
+            productCount.push($(this).text());
+         })
+         
+         jQuery.ajaxSettings.traditional = true;
+
+         $.ajax({
+               url:"selectbuyproduct.buy",
+               type:"get",
+               data:{buyProduct:buyProduct,productCount:productCount,board_no:board_no},
+               success:function(rep){         
+                  for(var i=0; i<rep.length;i++){
+                       $("#productCheckList").append("<tr><td>"+ rep[i].p_name +"<td>"+ rep[i].sell_price+ "<td>"+ productCount[i] +"</tr>");
+                       $("#buyButton").attr("data-target","#myModal");
+                  }
+                 
+               }
+               
+            })
+           
+      }
+       
+    
+  function kakaoLogout() {
          Kakao.init('c75f8598dbbf710a4383c8032f913119');
          Kakao.Auth.logout();
          location.href = "logout.mem";
          }
          
-         $(document).ready(function(){
-        	 $("#add").click(function(){
-        		 var product = $("#product option:selected").val();
-        		 var product_seq = product.split('번')[0];
-        		 var count = $('#check').text();
-        		 
-        		 $.ajax({
-        			 url:"productinfo.bo",
- 	   				 type:"get",
- 	   				 data:{product_seq:product_seq},
- 	   				 success:function(rep){
- 	   					$("#productlist").append("<tr><td>"+ product_seq+ "<td>"+ rep.getP_name() +"<td>"+ rep.getSell_price+ "<td>"+ count+ "<td><button name='deleteButton' onclick='deleteLine(this);' class='btn btn-secondary' type='button'>삭제</button><tr>");
- 	   				 }
-        		 })
-        	 }) 
-         })
+  function down(e){
+         var td = $(e).parent();
+         var stat =$(td.find("#check")).text();
+         var num = parseInt(stat,10);
+         var product_seq = $(e).parent().parent().attr('id');
+         num--;
+      if(num<=0){
+         alert('더이상 줄일수 없습니다.');
+         num =1;
+       }
+      else{
+         var current = $("#totalPrice").text();
+         $.ajax({
+            url:"totalMinus.buy",
+            type:"get",
+            data:{product_seq:product_seq,current:current},
+            success:function(rep){
+               console.log("플러스 버튼 됨");
+               $("#totalPrice").text(rep);
+            }
+         }) 
+      }
+      $(td.find("#check")).text(num);
+      
+     
+      
+    }
+
+  function up(e){
+        var td = $(e).parent();
+         var stat = $(td.find("#check")).text();
+         var num = parseInt(stat,10);
+         var product_seq = $(e).parent().parent().attr('id');
+         $.ajax({
+             url:"checkcount.bo",
+             type:"get",
+             data:{product_seq:product_seq},
+             success:function(rep){ 
+                var count = parseInt(rep.split("\"")[1],10);
+               
+                if(num>=count){
+                    alert("수량초과로 더이상 늘릴수 없습니다.");
+                 }else{
+                    num++;
+                   
+                    var current = $("#totalPrice").text();
+                     $.ajax({
+                        url:"totalPlus.buy",
+                        type:"get",
+                        data:{product_seq:product_seq,current:current},
+                        success:function(rep){
+                           console.log("플러스 버튼 됨");
+                           $("#totalPrice").text(rep);
+                        }
+                     })  
+                 }
+                
+                $(td.find("#check")).text(num);
+                
+             }
+          })
+        
+    }
+  
+  function deleteLine(e) {          
+      var result = confirm("삭제하시겠습니까 ?");
+      if (result == 1) {
+         var tr = $(e).parent().parent();
+         var stat =tr.find("#check").text();
+         var num = parseInt(stat,10);
+         console.log(num);
+         var product_seq = $(e).parent().parent().attr('id');
+         var current = $("#totalPrice").text();
+         $.ajax({
+            url:"productDelete.buy",
+            type:"get",
+            data:{product_seq:product_seq,num:num,current:current},
+            success:function(rep){
+               $("#totalPrice").text(rep);           
+                console.log("삭제 완료");
+            }
+         })  
+         tr.remove();
+      }
+   }
+     
+         
+        
 </script>
 
 </head>
@@ -245,6 +423,7 @@ div {
       </div>
 
    </div>
+   
 
    <!--         네비바 헤더   (위에코드)           -->
 
@@ -262,22 +441,22 @@ div {
                      <hr>
                      <!-- Author -->
                      <div class="row">
-	                     <div class="col-md-6">
-	                     <p class="lead">
-	                        by <a href="#">${bdto.seller_id}</a>
-	                     </p>
-	                     </div>
+                        <div class="col-md-6">
+                        <p class="lead">
+                           by <a href="#">${bdto.seller_id}</a>
+                        </p>
+                        </div>
                      <!-- Date/Time -->
-	                     <div class="col-md-6">
-	                     <p>Posted on ${bdto.write_date}</p>
-	                     </div>
+                        <div class="col-md-6">
+                        <p>Posted on ${bdto.write_date}</p>
+                        </div>
                      </div>
                      <hr>
                      <!-- Preview Image -->
                      <div .main class="row">
                         <div id='img_div' class="col-md-5">
-                           <img class="img-fluid rounded"
-                              src="http://placehold.it/900x300" alt="" id=product_img>
+                                    <img class="img-fluid rounded"
+                              src="${mainfile}" alt="" id=product_img>
                         </div>
                         <div class="col-md-7" id="main_text">
                            <div>
@@ -287,46 +466,31 @@ div {
                                     <thead>
                                        <tr>
                                           <td>상품명 :</td>
-                                          <td>
-                                          <c:forEach var="item" items="${result}">
-                                          		<c:choose>
-                                          			<c:when test="${item.main_product == 'y'}">
-                                          				${item.p_name}
-                                          			</c:when>
-                                          		</c:choose>
-                                          </c:forEach>      
-                                          </td>
+                                          <td>${pdto.p_name}</td>   
                                        </tr>
                                     </thead>
                                     <tbody>
                                        <tr>
                                           <td>상품 가격 :</td>
-                                          <td>
-												<c:forEach var="item" items="${result}">
-	                                          		<c:choose>
-	                                          			<c:when test="${item.main_product == 'y'}">
-	                                          				${item.sell_price}
-	                                          			</c:when>
-	                                          		</c:choose>
-	                                          </c:forEach>      
-										  </td>
+                                          <td>${pdto.sell_price }</td>
                                        </tr>
                                           <tr>
-                                          	 <td>
-                                          	 	<select id="product">
-                                          	 		<c:forEach var="item" items="${result}">
-			                                          	 <option>${item.product_seq }번 . ${item.p_name } - ${item.sell_price }원</option>
-			                                        </c:forEach>      
-                                          	    </select>
-                                          	 </td>
-                                             <td><img src="saram.png" width="18px" height="18px">
-                                                <i id="check">1</i>  <!-- 기본 수량 -->
-                                                <a href="#" id="numUp">▲</a> 
-                                                <a href="#" id="numDown">▼</a></td>
+                                              <td colspan="2">
+                                                 <select id="product">
+                                                    <option>상품을 선택해주세요.</option>
+                                                    <c:forEach var="item" items="${result}">
+                                                    	<c:choose>
+                                                    		<c:when test="${item.sell_count } == 0">
+                                                    			<option value="${item.product_seq }" readonly>${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
+                                                    		</c:when>
+                                                    		<c:otherwise>
+                                                    			<option value="${item.product_seq }">${item.p_name }-${item.sell_price }원    (수량 : ${item.sell_count })</option>
+                                                    		</c:otherwise>
+                                                    	</c:choose>
+                                                 </c:forEach>      
+                                                 </select>
+                                              </td>
                                           </tr>
-                                       <tr>
-                                          <td class="text-right" colspan="2"><input type="button" id="add" class="btn btn-secondary" value="등록"> </td>
-                                       </tr>
                                     </tbody>
                                  </table>
                                  
@@ -337,57 +501,36 @@ div {
                      </div>
                     
                     <div class="col-md-12">
-						<table class="table">
-							<thead>
-								<tr>
-									<th>제품번호</th>										
-									<th>제품명</th>
-									<th>가격</th>
-									<th>수량</th>
-									<th>#</th>
-								</tr>
-							</thead>
-						    <tbody id="productlist">
-		
-							</tbody>
-					    </table>
-	                </div>
+                  <table class="table">
+                     <thead id="tfoot">
+                        <tr>
+                           <th>제품번호</th>                              
+                           <th>제품명</th>
+                           <th>가격</th>
+                           <th>수량</th>
+                           <th>#</th>
+                        </tr>
+                     </thead>
+                      <tbody id="productlist">
                      
-                     <script>
-                                  $(function(){
-                                     /* 수량 감소 코드 */
-                                     $('#numDown').click(function(e){
-                                        e.preventDefault();
-                                        var stat = $('#check').text();
-                                         var num = parseInt(stat,10);
-                                        num--;
-                                     if(num<=0){
-                                        alert('더이상 줄일수 없습니다.');
-                                        num =1;
-                                      }
-                                     $('#check').text(num);
-                                      });
-                                     
-                                     /* 수량 증가 코드 */
-                                     $('#numUp').click(function(e){
-                                        e.preventDefault();
-                                        var stat = $('#check').text();
-                                        var num = parseInt(stat,10);
-                                        num++;
-                                     /* db에서 해당상품의 수량을 조회해서 변경해야 함  */
-                                    if(num>5){
-                                     alert('더이상 늘릴수 없습니다.');
-                                      return;
-                                     }
-                                    $('#check').text(num);
-                                        });
-                                   });
-                                </script>
+                     </tbody>
+                     <thead>
+                         <th colspan="5" class="text-right" id="tfoot">총 구매 금액  : <span id="totalPrice"></span><button type="button" class="btn btn-secondary ml-4 mr-4" data-toggle="modal" id="buyButton"  onclick="buyStart()" value="구매 신청"></th>
+                      </thead>
+                   </table>
+                   </div>
                                 
                      <hr>
                      <!-- Post Content -->
-                     <p class="lead">${bdto.contents}</p>
-                     <hr>
+
+                     <div id=files>
+                        <c:forEach var="item" items="${path}">
+                           <img class="img-fluid rounded"  alt="" id=product_img src='${item}'><br><br>
+                        </c:forEach>
+                     </div>
+                 <hr>
+            <p class="lead">${bdto.contents}</p>
+         <hr>
                      <!-- Comments Form -->
                      <div class="card my-4">
                         <h5 class="card-header">Leave a Comment:</h5>
@@ -577,6 +720,44 @@ div {
    </div>
 
    <!--      바닥             -->
+
+  <!-- The Modal -->
+  <div class="modal fade" id="myModal">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+      
+        <!-- Modal Header -->
+        <div class="modal-header">
+          <h4 class="modal-title">구매확인</h4>
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+        </div>
+        
+        <!-- Modal body -->
+        <div class="modal-body" id="productModal">
+           <table   class="table">
+              <thead id="tfoot">
+                 <th>제품명</th>
+                 <th>가격</th>
+                 <th>수량</th>
+              </thead>
+              <tbody id="productCheckList">
+                 
+              </tbody>
+           </table>
+           
+           <p>입력하신 번호는 판매자에게 제공됩니다.(-제외하고 입력)</p>
+           <input type="text" value="01033333333" id="contact">
+        </div>
+        
+        <!-- Modal footer -->
+        <div class="modal-footer">
+          <input type="button" class="btn btn-secondary" id = "okButton" value="확인">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
 
 </body>
 </html>

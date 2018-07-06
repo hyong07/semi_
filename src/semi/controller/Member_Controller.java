@@ -2,6 +2,8 @@ package semi.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,8 +15,15 @@ import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 
+import semi.dao.BoardDAO;
+import semi.dao.BuyerDAO;
+import semi.dao.FileDAO;
 import semi.dao.MemberDAO;
+import semi.dao.ProductDAO;
+import semi.dto.BoardDTO;
+import semi.dto.BuyerDTO;
 import semi.dto.MemberDTO;
+import semi.dto.ProductDTO;
 
 @WebServlet("*.mem")
 public class Member_Controller extends HttpServlet {
@@ -271,7 +280,105 @@ public class Member_Controller extends HttpServlet {
 				}
 			}
 			
+			else if(command.equals("/mypage.mem")) {
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				BoardDAO bdao = new BoardDAO();
+				FileDAO fdao = new FileDAO();
+				
+				List<BoardDTO> saleboard = new ArrayList<>();
+				saleboard =  bdao.selectBoard(loginid);
+				
+				List<String> mainfile = new ArrayList<>();
+				mainfile = fdao.mainFileName(loginid);
+				List<String> mainfilepath = new ArrayList<>();
+				
+				for( int i = 0 ; i < mainfile.size(); i++) {
+					mainfilepath.add("image/"+saleboard.get(i).getBoard_seq()+"/"+mainfile.get(i));
+				}
+
+				request.setAttribute("saleboard", saleboard);
+				request.setAttribute("mainfilepath", mainfilepath);
+				
+				isRedirect = false;
+				dst = "mypage.jsp";
+			}
 			
+			else if(command.equals("/mypage_sale.mem")) {
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				BoardDAO bdao = new BoardDAO();
+				FileDAO fdao = new FileDAO();
+				
+				List<BoardDTO> result = new ArrayList<>();
+				result =  bdao.selectBoard(loginid);
+				List<String> mainfile = new ArrayList<>();
+				mainfile = fdao.mainFileName(loginid);
+				
+				List<String> mainfilepath = new ArrayList<>();
+						
+				for( int i = 0 ; i < mainfile.size(); i++) {
+					mainfilepath.add("image/"+result.get(i).getBoard_seq()+"/"+mainfile.get(i));
+				}
+			    	
+				request.setAttribute("result", result);
+				request.setAttribute("mainfilepath", mainfilepath);
+				
+				isRedirect = false;
+				dst = "mypage_sale.jsp";
+			}
+			
+			else if(command.equals("/mypage_sale_detail.mem")) {
+				String board_seq = request.getParameter("board_seq");
+				
+				ProductDAO pdao = new ProductDAO();
+				List<ProductDTO> pdto = new ArrayList<>();
+				pdto = pdao.selectProduct(board_seq);
+				
+				BuyerDAO bdao = new BuyerDAO();
+				List<BuyerDTO> bdto = new ArrayList<>();
+				bdto = bdao.selectBuyerList(board_seq);
+
+				List<String> buyerid = new ArrayList<>();
+				buyerid = bdao.selectbuyerid(board_seq);
+				
+				List<String> buyproductname = new ArrayList<>();
+				
+				for(BuyerDTO tmp : bdto) {
+					buyproductname.add(bdao.selectbuyproduct(tmp.getProduct_no()));
+				}
+			
+
+				
+				request.setAttribute("buyproduct", buyproductname);
+				request.setAttribute("pdto", pdto);
+				request.setAttribute("bdto", bdto);
+				request.setAttribute("buyerid", buyerid);
+				
+				isRedirect = false;
+				dst = "mypage_sale_detail.jsp";
+			}
+			
+			else if(command.equals("/mypage_purchase.mem")) {
+				String loginid = (String)request.getSession().getAttribute("loginid");
+				
+				BuyerDAO bdao = new BuyerDAO();
+				List<BuyerDTO> bdto = new ArrayList<>();
+				bdto = bdao.selectBuyer(loginid);
+				
+				List<String> board_no = new ArrayList<>();
+				board_no = bdao.selectBoardNo(loginid);
+				
+				List<String> buyproductname = new ArrayList<>();
+				
+				for(BuyerDTO tmp : bdto) {
+					buyproductname.add(bdao.selectbuyproduct(tmp.getProduct_no()));
+				}
+				
+				request.setAttribute("buyproduct", buyproductname);
+				request.setAttribute("bdto", bdto);
+				request.setAttribute("board_no", board_no);
+			}
 			
 
 			if(isRedirect) {

@@ -137,6 +137,61 @@
 	background-color:#4f70ce;
 	color : white;
 }
+
+#app {
+	width: 100%;;
+	padding: 15px;
+	margin-top: 15px;
+	background: #fcfcfc;
+	box-shadow: 1px 2px 3px #ccc, 1px 2px 25px #ddd;
+	-webkit-transition-duration: 0.3s;
+	transition-duration: 0.3s;
+}
+
+.table {
+	width: 100%;
+}
+
+.table th, .table td {
+	padding: 0.5em;
+}
+
+.table thead th {
+	border-bottom: 2px solid #abc;
+}
+
+.table td {
+	border-bottom: 1px solid #abc;
+}
+
+.table tbody tr:last-of-type td {
+	border-bottom-width: 2px;
+}
+
+.table .cart_item_img {
+	width: 80px;
+}
+
+.table .cart_item_qty {
+	text-align: center;
+	min-width: 140px;
+	width: 140px;
+}
+
+.table .cart_item_price {
+	text-align: center;
+}
+
+.table .cart_item_tprice {
+	text-align: center;
+}
+
+.table .cart_item_qty input {
+	text-align: center;
+	border-radius: 3px;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 3px #ddd;
+}
 /* Mypage css 끝*/
 </style>
 
@@ -233,12 +288,12 @@
 									class="nav-link text-secondary"> <i
 										class="fa fa-home fa-home"></i>&nbsp;MyPage
 								</a></li>
-								<li class="nav-item"><a href="mypage_purchase.jsp"
+								<li class="nav-item"><a href="mypage_purchase.mem"
 									class="active nav-link btn-secondary">구매신청내역</a></li>
 								<li class="nav-item"><a href="mypage_auction.jsp"
 									class="nav-link text-secondary">경매신청내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
-									href="mypage_sale.jsp">판매등록내역</a></li>
+									href="mypage_sale.mem">판매등록내역</a></li>
 								<li class="nav-item"><a class="nav-link text-secondary"
 									href="mypage_pwcheck.jsp">내 정보</a></li>
 								<li class="nav-item"><a
@@ -246,67 +301,45 @@
 							</ul>
 						</div>
 						<div id="cardcontainer">
-							<div class="card">
-								<div class="card-header">구매신청내역</div>
-								<div class="card-body">
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="cap.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
+	
+									<div id="app">
+									<h4><ion-icon name="clipboard" class="mt-1"></ion-icon>구매신청목록</h4>
+									<c:forEach var="no" items="${board_no}" varStatus="status">
+										<div class="cart_content">
+											<table class="table">
+												<thead>
+													<th>판매자ID</th>
+													<th>상품명</th>
+													<th class="cart_item_qty">수량</th>
+													<th class="cart_item_price">가격</th>
+													<th class="cart_item_tprice">총가격</th>
+												</thead>
+												<tbody>
+													<c:forEach var="item" items="${bdto}" varStatus="status">
+														<c:choose>
+															<c:when test="${item.board_no == no}">
+																<tr>
+																	<td>${item.seller_id }</td>
+																	<td>${buyproduct[status.index]}</td>
+																	<td class="cart_item_qty"><input type="text" value="${item.buy_count }" size="3" ; readonly></td>
+																	<td class="cart_item_price">${item.buy_price }</td>
+																	<td class="cart_item_tprice">${item.buy_price * item.buy_count }</td>
+																<tr>
+															</c:when>
+														</c:choose>
+													</c:forEach>
+												</tbody>
+												<tfoot>
+													<tr>
+														
+														<td colspan="6" align="right"><input type="button" value="물품수령완료"  onclick="deliverproduct(this)" class="btn btn-secondary"></td>
+													</tr>
+												</tfoot>
+											</table>
+												
 										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="dd.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
-									
-									<div class="py-1" id="productlist">
-										<div class="container">
-											<div class="row">
-												<div class="col-md-4">
-													<img class="card-img-top" src="notebook.jpg" alt="Card image cap">
-												</div>
-												<div class="col-md-8">
-													<h5>배트맨 모자</h5>
-													<p>가격 : 10000원</p>
-												</div>
-											</div>
-										</div>
-									</div>
+									</c:forEach>
 								</div>
-								<div class="card-footer text-center">1 2 3 4 5 6 7</div>
-							</div>
 						</div>
 					</div>
 				</div>

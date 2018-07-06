@@ -11,8 +11,6 @@ public class ProductDTO {
 	private String main_product;
 	private String p_name;
 
-
-	
 	
 	public ProductDTO() {
 		super();

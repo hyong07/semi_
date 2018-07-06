@@ -167,7 +167,7 @@ response.setCharacterEncoding("utf8");
                <i class="fa fa-user fa-fw" ></i> Sing up</a>
           </li> 
         </ul>  
-           <a class="btn navbar-btn ml-2 btn-secondary text-white">
+           <a class="btn navbar-btn ml-2 btn-secondary text-white" href="mypage.mem">
            <i class="fa d-inline fa-lg fa-user-circle-o"></i> My Page</a> 
             <span class="navbar-toggler-icon" ></span>
      </div>
@@ -245,7 +245,7 @@ response.setCharacterEncoding("utf8");
 				 </li>   
 			    
 					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="saleInput.jsp" >
+					<a class="nav-link  text-secondary" id="menubtn" href="getboardseq.bo" >
 					 상품등록</a> 
 				 </li>   
 			 
