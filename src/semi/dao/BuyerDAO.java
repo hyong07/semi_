@@ -85,9 +85,10 @@ public class BuyerDAO {
 		int result = pstat.executeUpdate();
 		con.commit();
 		con.close();
-		pstat.close();
-		
+		pstat.close();		
 		return result;
 	}	
+	
+	
 	
 }

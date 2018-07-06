@@ -180,10 +180,11 @@ public class BuyerController extends HttpServlet {
 			System.out.println("판매자가 물품을 배송시켜버려따!~~~ 컨트롤러 들어와버려따!!");
 			String board_no = request.getParameter("board_no");
 			String buyer_id = request.getParameter("buyer_id");
+			boolean buy_state = false;
 			System.out.println(board_no + " : " + buyer_id);
 			int productDelivery = buydao.productDelivery(board_no, buyer_id);
-			System.out.println("완료되버려땅");
 			request.setAttribute("board_seq", board_no);
+			request.setAttribute("productDelivery", productDelivery);
 			isReDirect = false;
 			dst = "mypage_sale_detail.mem";
 		}
