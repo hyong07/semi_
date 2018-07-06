@@ -7,7 +7,10 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="https://v40.pingendo.com/assets/4.0.0/default/theme.css" type="text/css"> 
 <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script
+  src="https://code.jquery.com/jquery-3.3.1.js"
+  integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+  crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
@@ -137,7 +140,7 @@
    }
    
 </style>
-
+<script></script>
 
 </head>
 <body>
@@ -211,34 +214,65 @@ response.setCharacterEncoding("utf8");
 	
 		</div>
 	</div>
-  
-		
-		
-		<div id="centernavbar">
-			<nav class="nav nav-pills nav-justified"> 
-	   
-					 <li class="nav-item">
+	
+	
+
+		<div id="centernavbar" >
+			<nav class="nav nav-pills nav-justified"  > 
+	  		
+					 <li class="nav-item" >
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					</a>
 				 </li>  
-				<li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=패션">
+				
+				<li class="nav-item  dropdown"  >
+					<a class="nav-link  text-secondary dropdown-toggle" id="menubtn" data-toggle="dropdown" href="board.bo?ca1=패션">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 패션</a>
+					 <ul class="dropdown-menu">
+           <li><a href="#">남성의류</a></li>
+           <li><a href="#">여성의류 </a></li>
+           <li><a href="#">아동의류</a></li>
+           <li><a href="#">잡화 </a></li>
+         </ul>
 				</li> 
-					 <li class="nav-item">
-				    <a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=전자제품">
+	
+						<li class="nav-item  dropdown"  >
+					<a class="nav-link  text-secondary dropdown-toggle" id="menubtn" data-toggle="dropdown" href="board.bo?ca1=가전">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 전자제품</a>
+					 <ul class="dropdown-menu">
+					
+    <li><a href="#"> 가전</a></li>
+           <li><a href="#">노트북</a></li>
+           <li><a href="#">컴퓨터</a></li>
+           <li><a href="#">핸드폰 </a></li>
+           <li><a href="#">기타</a></li>
+         </ul>
 				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=리빙">
+					 	<li class="nav-item  dropdown"  >
+					<a class="nav-link  text-secondary dropdown-toggle" id="menubtn" data-toggle="dropdown" href="board.bo?ca1=리빙">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 리빙</a>
+					 <ul class="dropdown-menu">
+ 
+           <li><a href="#">주방 </a></li>
+           <li><a href="#">생활</a></li>
+           <li><a href="#">욕실</a></li>
+           <li><a href="#">기타</a></li>
+
+         </ul>
 				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=문화">
+					 	<li class="nav-item  dropdown"  >
+					<a class="nav-link  text-secondary dropdown-toggle" id="menubtn" data-toggle="dropdown" href="board.bo?ca1=문화">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 문화</a>
+					 <ul class="dropdown-menu">
+           <li><a href="#">스포츠</a></li>
+           <li><a href="#">게임</a></li>
+           <li><a href="#">공연,전시</a></li>
+           <li><a href="#">도서</a></li>
+           <li><a href="#">기타</a></li>
+         </ul>
 				</li> 
-					 <li class="nav-item">
-					<a class="nav-link  text-secondary" id="menubtn" href="board.bo?ca1=뷰티">
+					 	<li class="nav-item  dropdown"  >
+					<a class="nav-link  text-secondary dropdown-toggle" id="menubtn" data-toggle="dropdown" href="board.bo?ca1=뷰티">
 					<i class="fa d-inline fa-lg fa-bookmark-o"></i> 뷰티</a>
 				 </li> 
 				 
@@ -257,13 +291,13 @@ response.setCharacterEncoding("utf8");
 					<a class="nav-link  text-secondary" id="menubtn" href="CommunityMain.do">
 					 커뮤니티</a>
 				 </li> 
-				  
+			
 					 <li class="nav-item">
 					<a class="nav-link  text-secondary" id="menubtn" href="#">
 					</a>
 				 </li> 
 			    
-				  
+				
 			</nav>
 		</div>
 	

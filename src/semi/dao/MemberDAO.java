@@ -155,6 +155,71 @@ public class MemberDAO {
 	      return mypoint;
 	   }
 	
+	 public String findPw(String email, String id) throws Exception{
+		 
+	     Connection con =DBUtils.getConnection();
+	 
+	     String result=null;
+	 
+	     String certification = Integer.toString((int)(Math.random() * 9000 + 1000));               
+	 
+	     String sql = "update member set pw=? where email=? and id=?";
+	 
+	     PreparedStatement pstat = con.prepareStatement(sql);
+	 
+	     pstat.setString(1, certification);
+	 
+	     pstat.setString(2, email);
+	 
+	     pstat.setString(3, id);
+	 
+	     int success = pstat.executeUpdate();     
+	 
+	     if(success > 0) {
+	 
+	       result= certification;            
+	 
+	     } 
+ 
+	     con.commit();
+	 
+	     pstat.close();
+	 
+	     con.close();
+	 
+	     return result;		 
+	   }
+	 //���̵� ã��
+	  public String findId(String email, String name) throws Exception{
+		   Connection con = DBUtils.getConnection();
+		   String sql = "select id from member where email=? and name=?";
+		   
+		     PreparedStatement pstat = con.prepareStatement(sql);
+		     pstat.setString(1, email);
+		     
+		     pstat.setString(2, name);
+		 
+		     ResultSet rs = pstat.executeQuery();
+		     String result = "1";
+		     
+	         while(rs.next()) {
+	 
+	          result=rs.getString(1); 
+	  
+	         }
+	 
+	     con.commit();
+	 
+	     pstat.close();
+	 
+	     con.close();
+	 
+	     return result;
+	 
+	   }
+	 
+	 
+	
 	 public int minusPoint(String id, String bid) throws Exception{
          Connection con = DBUtils.getConnection();
          String sql = "UPDATE MEMBER SET POINT=((SELECT POINT FROM MEMBER WHERE ID=?)-?) WHERE id=?";

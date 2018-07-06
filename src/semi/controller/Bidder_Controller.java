@@ -53,7 +53,7 @@ public class Bidder_Controller extends HttpServlet {
 				int insertbidder = bidderdao.insertBidder(bidderdto);
 				System.out.println(insertbidder);
 				int insertserver = serverdao.insertServer(serverdto);
-				System.out.println(insertserver+"¼­¹ö¿¡ÀÎ¼³Æ®µÆ´Ï~");
+				System.out.println(insertserver+"ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î¼ï¿½Æ®ï¿½Æ´ï¿½~");
 
 
 
@@ -74,7 +74,7 @@ public class Bidder_Controller extends HttpServlet {
 				String resttime = request.getParameter("resttime");
 				int restday = Integer.parseInt(resttime.split("d")[0]);  
 				int resthour = Integer.parseInt(resttime.split("d ")[1].split("h")[0]);
-				System.out.println(restday + " : " + resthour + " : ½Ã°£³ª¿À´Ï.......");
+				System.out.println(restday + " : " + resthour + " : ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½.......");
 				boolean result = true;
 				System.out.println(current + " : " + hold_price);
 				if(current.equals(hold_price)) {
@@ -103,9 +103,9 @@ public class Bidder_Controller extends HttpServlet {
 				String hold_price = serverdao.getHold_price(seq, buyer_id);
 
 				int bidderresult = bidderdao.bidderCancel(seq,buyer_id);
-				System.out.println("ºñ´õ¾÷µ¥ÀÌÆ® Çß´Ï?" + bidderresult);
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ß´ï¿½?" + bidderresult);
 				int serverresult = serverdao.serverCancel(seq,buyer_id);
-				System.out.println("¼­¹ö¾÷µ¥ÀÌÆ®Çß´Ï?");
+				System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ®ï¿½ß´ï¿½?");
 
 				isRedirect = false;
 				dst = "returnpoint.mem?id="+buyer_id+"&point="+hold_price;

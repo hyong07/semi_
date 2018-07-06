@@ -39,9 +39,9 @@ public class BidderDAO {
    }
    
    public String getCurrentPrice(String seq) throws Exception {
-	   System.out.println("Ä¿·±Æ®µé¾î¿Í?");
+	   System.out.println("Ä¿ï¿½ï¿½Æ®ï¿½ï¿½ï¿½ï¿½?");
 	   Connection con = DBUtils.getConnection();
-	      String sql = "SELECT max(to_number(bidprice)) from BIDDER WHERE board_seq=? and state = 'ÀÔÂû' ";
+	      String sql = "SELECT max(to_number(bidprice)) from BIDDER WHERE board_seq=? and state = 'ï¿½ï¿½ï¿½ï¿½' ";
 	      PreparedStatement pstat = con.prepareStatement(sql);
 	      pstat.setString(1, seq);
 	      ResultSet rs = pstat.executeQuery();
@@ -58,7 +58,7 @@ public class BidderDAO {
 	      return result;
    }
    public int insertBidder(BidderDTO dto) throws Exception{
-	   System.out.println("µé¾î¿À´Ï?");
+	   System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½?");
 	      Connection con = DBUtils.getConnection();
 	      String sql = "INSERT INTO BIDDER VALUES(BIDDER_SEQ.NEXTVAL,?,?,?,?,sysdate,DEFAULT)";
 	      PreparedStatement pstat = con.prepareStatement(sql);
@@ -73,7 +73,7 @@ public class BidderDAO {
 	      con.close();
 	      pstat.close();
 	      
-	      System.out.println("¿ä±â±îÁö ÀÎ¼³Æ® ºñ´õ¶ó°í ! " +result);
+	      System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Î¼ï¿½Æ® ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ! " +result);
 	      return result;
 	   }
    
@@ -89,21 +89,21 @@ public class BidderDAO {
 	      
 	      if(rs.next()) {
 	          result = rs.getString(1);
-	          System.out.println(result + " ºñµåÇÑÀûÀÖ´Ï~~ ÀÖÀ¸¸é ÃÖ°íºñµå´Â ¾ó¸¶´Ï");
+	          System.out.println(result + " ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö´ï¿½~~ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ ï¿½ó¸¶´ï¿½");
 	      }
 	      if(result==null){
-	    	  System.out.println("¿©±â´Ï");
+	    	  System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½");
 	         return "0";
 	      }
 	      else {
-	    	  System.out.println("¿ä±â´Ï?");
+	    	  System.out.println("ï¿½ï¿½ï¿½ï¿½?");
 	         return result;
 	      }
 	   }
    
    public int bidderCancel(String seq, String buyer_id) throws Exception{
 	      Connection con = DBUtils.getConnection();
-	      String sql ="UPDATE BIDDER SET STATE='Ãë¼Ò' WHERE BOARD_SEQ=? AND BUYER_ID=?";
+	      String sql ="UPDATE BIDDER SET STATE='ï¿½ï¿½ï¿½' WHERE BOARD_SEQ=? AND BUYER_ID=?";
 	       PreparedStatement pstat = con.prepareStatement(sql);
 	      
 	       pstat.setString(1, seq);
@@ -119,7 +119,7 @@ public class BidderDAO {
  
    public int successBid(String seq, String crrent) throws Exception{
 	      Connection con = DBUtils.getConnection();
-	      String sql = "update bidder set state = case when bidprice = ? then '³«Âû' else '¸¶°¨' end where board_seq=?";
+	      String sql = "update bidder set state = case when bidprice = ? then 'ï¿½ï¿½ï¿½ï¿½' else 'ï¿½ï¿½ï¿½ï¿½' end where board_seq=?";
 	      PreparedStatement pstat = con.prepareStatement(sql);
 	      
 	      pstat.setString(1, seq);

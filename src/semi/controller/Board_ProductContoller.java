@@ -117,6 +117,18 @@ HashMap<String, String> end_dateMap = new HashMap<String,String>();
          }
       
 
+            return;
+         }
+         
+         
+          else if(command.equals("/mainfilename.bo")) {
+                  String board_no = request.getParameter("board_no");
+                 String mainfilename = request.getParameter("name");                        
+                  mainfileMap.put(board_no, mainfilename);
+                  System.out.println(mainfileMap.get(board_no));
+                  return;            
+               }
+      
 
          else if(command.equals("/write.bo")) {
             System.out.println("�씪�씠�듃蹂�!");

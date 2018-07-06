@@ -1,22 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
-<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
-<script>
-	$(document).ready(function(){
-		$("#test").click(function(){
-			var file_no = '72'
-			location.href="fileView.bo?no="+file_no;
-		})
-	})
-</script>
-<body>
-	<button id="test">	����
-	</button>
-</body>
-</html>
+     <html>
+
+    <head>
+        <title>sms - jsp </title>
+      
+    </head>
+
+    <body onload="loadJSON()">
+    <form method="post" name="smsForm" action="smssend.jsp">
+    	<input type="hidden" name"action" value="go">
+        <textarea name="msg" cols="30" rows="10" style="width:455px" placehorder="내용"></textarea>
+     	<br>
+        <input type="text" name="rphone" value="" placeholder="받는 번호">
+        <br>
+        
+        <br>번호 및 이름 삽입(보내는 내용에 이름포함)
+        
+        <input type="text" name="destination" value="" size=80> 
+        <br>
+        <input type="hidden" name="sphone1" value="010">
+        <input type="hidden" name="sphone2" value="6302">
+        <input type="hidden" name="sphone3" value="4563">
+            <input type="submit" value="전송">
+       
+    </form>
+    </body>
+
+    </html>
+            

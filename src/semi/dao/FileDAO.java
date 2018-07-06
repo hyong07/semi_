@@ -40,18 +40,17 @@ public class FileDAO {
 			pstat.setString(1, category);
 		}
 
-		ResultSet rs = pstat.executeQuery();
+      else {
+         System.out.println("file ���??");
+         sql =
+               "select f.* from board b, product p, files f where (p.category =?) and (p.main_product='y') and  (f.main_files='y') and (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq)";
+         pstat = con.prepareStatement(sql);
+         pstat.setString(1, category);
+      }
 
-		ArrayList<FileDTO> list = new ArrayList<>();
+      ResultSet rs = pstat.executeQuery();
 
-		while(rs.next()) {		
-			String file_seq = rs.getString(1);
-			String board_no = rs.getString(2);
-			String original_file_name = rs.getString(3);
-			String system_file_name = rs.getString(4);
-			String main_files = rs.getString(5);
-			FileDTO filedto = new FileDTO(file_seq,board_no,original_file_name,system_file_name,main_files);
-			list.add(filedto);
+      ArrayList<FileDTO> list = new ArrayList<>();
 
 		}
 		System.out.println(list.size());
