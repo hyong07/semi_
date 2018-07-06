@@ -162,6 +162,29 @@ public class FileDAO {
     		con.close();
             return list;
          }
+        
+        public List<String> mainFileName(String id) throws Exception{
+            Connection con = DBUtils.getConnection();
+            String sql =
+                     "select f.system_file_name from board b, product p, files f where (p.BOARD_NO = b.BOARD_SEQ) and (f.BOARD_NO=b.board_seq) and (p.MAIN_PRODUCT = 'y') and (f.MAIN_FILES = 'y') and (b.seller_id = ?) and (b.sell_type = 's')";
+            PreparedStatement pstat = con.prepareStatement(sql);
+            pstat.setString(1, id);
+            ResultSet rs = pstat.executeQuery();
+            List<String> fdto = new ArrayList<>();
+            
+            while(rs.next()) {
+               
+               fdto.add(rs.getString(1));
+      
+            }
+            con.commit();
+              con.close();
+              pstat.close();
+           
+            return fdto;
+         }
+        
+        
       
 
 }
