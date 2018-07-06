@@ -211,7 +211,7 @@ public class MemberDAO {
 	         while(rs.next()) {
 	 
 	          result=rs.getString(1); 
-	 
+	  
 	         }
 	 
 	     con.commit();

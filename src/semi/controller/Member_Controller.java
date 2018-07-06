@@ -248,7 +248,7 @@ public class Member_Controller extends HttpServlet {
 				}
 
 
-
+  
 				isRedirect =false;
 
 

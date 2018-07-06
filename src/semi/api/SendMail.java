@@ -24,7 +24,7 @@ public class SendMail {
 		super();
 	}
 	
-	
+	 
 	public SendMail(int num, String id, String email) {
 		super();// 아이디 찾기
 		this.num = num;
